@@ -8,21 +8,21 @@ export default function Footer() {
           <img  src={require('../images/logo/wolf-sakura-tails.png')} alt='logo SakuraTails'></img>
         </a>
         <ul>
-          <li><a href='#'>SakuraTails Sites</a></li>
-          <li><a href='#'>SakuraTails Market</a></li>
-          <li><a href='#'>SakuraTails Gift Boxes</a></li>
+          <li><a href='/'>SakuraTails Sites</a></li>
+          <li><a href='https://www.figma.com/'>SakuraTails Market</a></li>
+          <li><a href='https://www.figma.com/'>SakuraTails Gift Boxes</a></li>
         </ul>
         <ul>
-          <li><a href='#'>Shop</a></li>
-          <li><a href='#'>Subscribe</a></li>
-          <li><a href='#'>About Us</a></li>
+          <li><a href='https://www.figma.com/'>Shop</a></li>
+          <li><a href='#subcribtion-section'>Subscribe</a></li>
+          <li><a href='https://www.figma.com/'>About Us</a></li>
         </ul>
         <ul>
-          <li><a href='#'>Support</a></li>
-          <li><a href='#'>Privacy Policy</a></li>
-          <li><a href='#'>Terms</a></li>
-          <li><a href='#'>FAQ</a></li>
-          <li><a href='#'>Shipping Policy</a></li>
+          <li><a href='https://www.figma.com/'>Support</a></li>
+          <li><a href='https://www.figma.com/'>Privacy Policy</a></li>
+          <li><a href='https://www.figma.com/'>Terms</a></li>
+          <li><a href='https://www.figma.com/'>FAQ</a></li>
+          <li><a href='https://www.figma.com/'>Shipping Policy</a></li>
         </ul>
         <h3>We accept</h3>
         <img  src={require('../images/pay/amex.png')}></img>
@@ -40,10 +40,14 @@ export default function Footer() {
         <h3>2024 SakuraTails</h3>
         <nav>
           <ul>
-            <li><a href='#'>Instagram</a></li>
-            <li><a href='#'>Twitter</a></li>
-            <li><a href='#'>Facebook</a></li>
-            <li><a href='#'>TikTok</a></li>
+          <img  src={require('../images/socials/instagram.png')}></img>
+            <li><a href='https://www.figma.com/'>Instagram</a></li>
+            <img  src={require('../images/socials/x.png')}></img>
+            <li><a href='https://www.figma.com/'>Twitter</a></li>
+            <img  src={require('../images/socials/facebook.png')}></img>
+            <li><a href='https://www.figma.com/'>Facebook</a></li>
+            <img  src={require('../images/socials/tiktok.png')}></img>
+            <li><a href='https://www.figma.com/'>TikTok</a></li>
           </ul>
         </nav>
     </footer>

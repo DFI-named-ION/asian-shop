@@ -1,2 +1,65 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap');
 
+*{
+    background-color:blueviolet;
+    color: #182531;
+}
+
+ul{
+    list-style-type: none;
+}
+
+/* button */
+
+.subscribe-button{
+    background-color: #951717;
+    color: #EAE5D9;
+    border-radius: 50px;
+    height: 60px;
+    width: 250px;
+    cursor: pointer;
+    border:0px
+}
+
+.subscribe-button:hover{
+    background-color: #EAE5D9;
+    border: 3px solid #182531;
+    color: #182531;
+}
+
+.subcribtion-now-button{
+    background-color: #951717;
+    color: #EAE5D9;
+    border-radius: 70px;
+    width: 840px;
+    height: 70px;
+    cursor: pointer;
+    border:0px
+}
+
+.subcribtion-now-button:hover{
+    background-color: #EAE5D9;
+    border: 3px solid #182531;
+    color: #182531;
+}
+
+.header-link{
+    color: #EAE5D9;
+}
+
+.promocode-banner{
+    background-color: #951717;
+    color: #EAE5D9;
+}
+
+.new-box-title{
+    font-weight: 400;
+    size: 68px;
+    color: #182531;
+    line-height: 70px;
+}
+
+
+
+
+

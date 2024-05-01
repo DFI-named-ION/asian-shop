@@ -1,21 +1,24 @@
 import React from 'react'
+import Logo from '../images/logo/SakuraTails.svg';
+
+function App() {
+  return <Logo />;
+}
 
 export default function Header() {
   return (
     <header>
-      <nav>
-        {/* logo and menu */}
+      <nav className='head-nav'>
         <ul>
-          <li><a href='#'>MARKET</a></li>
-          <li><a href='#'>GIFT</a></li>
+          <li><a className='header-link' href='https://www.figma.com/'>MARKET</a></li>
+          <li><a className='header-link' href='https://www.figma.com/'>GIFT</a></li>
         </ul>
-        <a href='#'>
-          <img  src={require('../images/logo/SakuraTails.png')} alt='food'></img>
+        <a href='/'>
+          <img  src={Logo}></img>
         </a>
         <ul>
-          <li><a href='#'>ABOUT</a></li>
-          <li><a href='#'>PAST</a></li>
-          <li><a href='#'>BOXES</a></li>  
+          <li><a className='header-link' href='https://www.figma.com/'>ABOUT</a></li>
+          <li><a className='header-link' href='https://www.figma.com/'>BOXES</a></li>  
         </ul>
         <a href='#'>
           <img  src={require('../images/icons/basket.png')}></img>
@@ -24,7 +27,6 @@ export default function Header() {
           <img  src={require('../images/icons/profile.png')}></img>
         </a>
       </nav>
-      {/* shopping cart and profile */}
     </header>
   )
 }
