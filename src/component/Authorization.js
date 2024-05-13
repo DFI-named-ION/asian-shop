@@ -23,23 +23,23 @@ export default function Authorization() {
                     </div>
                     <div>
                         <div className='left-auth'>
-                            <h4>Log In</h4>
+                            <h4 className='title-auth'>Log In</h4>
                         </div>
                         <div>
                             <form>
-                            <h5>Email address</h5>
-                            <p><input type='login' name='Email' placeholder='email.example@gmail.com'></input></p>
-                            <h5>Password</h5>
-                            <p><input type='password' name='Password' placeholder='Password'></input></p>
+                            <h5 className='title-line'>Email address</h5>
+                            <p className='text-auth'><input className='text-block' type='login' name='Email' placeholder='email.example@gmail.com'></input></p>
+                            <h5 className='title-line'>Password</h5>
+                            <p className='text-auth'><input className='text-block' type='password' name='Password' placeholder='Password'></input></p>
                             <p>
-                                <a href='#'>Forgot your password?</a>
+                                <a className='text-auth' href='#'>Forgot your password?</a>
                             </p>
                             <a>
                                <input className='login-button' type='button' value='Log In' />
                             </a>
                             </form>
                         </div>
-                        <div>
+                        <div className='right-auth'>
                             <a>
                                <input className='social-button' type='button' value='Log In with Google'/>
                             </a>
@@ -49,9 +49,9 @@ export default function Authorization() {
                         </div>
                     </div>
                     <div className='footer-auth'>
-                        <h4>Don't have an account yet?<a href='#'> Sign up for one</a></h4>
-                        <p>Secure Login with reCAPTCHA subject to 
-                            Google <a href='#'>Terms</a> & <a href='#'>Privacy</a></p>
+                        <h4 className='title-auth-white'>Don't have an account yet?<a href='#' className='title-auth-white'> Sign up for one</a></h4>
+                        <p className='text-auth-white'>Secure Login with reCAPTCHA subject to 
+                            Google <a href='#' className='text-auth-white'>Terms</a> & <a href='#' className='text-auth-white'>Privacy</a></p>
                     </div>
                 </div>
             </div>
