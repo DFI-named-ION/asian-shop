@@ -1,11 +1,12 @@
-import './App.css';
+import HomePage from "./component/HomePage"
+import Authorization from './component/Authorization';
+import Registration from "./component/Registration";
 
 function App() {
     return (
-        <div className="App">
-            {/*		code goes here		*/}
-            <h1 className="text-center text-light bg-dark w-25 mx-auto mt-5">HALO MA FRAND</h1>
-        </div>
+            <HomePage/>
+            // <Authorization/>
+            // <Registration/>
     );
 }
 
