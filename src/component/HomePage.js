@@ -54,16 +54,17 @@ function App() {
     return <Tiktok />;
     return <Qr />;
   }
-  
+
+
 export default function HomePage() {
   return (
+    <body className='homePage-body'>
     <><><header>
           <section className='header-section'>
               <ul>
                   <li><a className='header-link' href='https://www.figma.com/'>MARKET</a></li>
                   <li><a className='header-link' href='https://www.figma.com/'>GIFT</a></li>
               </ul>
-
               <ul>
                   <li><a className='header-link' href='https://www.figma.com/'>MARKET</a></li>
                   <li><a className='header-link' href='https://www.figma.com/'>GIFT</a></li>
@@ -214,6 +215,7 @@ export default function HomePage() {
                   </ul>
                   </nav>
           </footer></>
+          </body>
 
 
   )

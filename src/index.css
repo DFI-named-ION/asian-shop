@@ -1,8 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap');
 
-*{
+.homePage-body{
     background-color:blueviolet;
     color: #182531;
+    font-family: "Montserrat", sans-serif;
+    box-sizing: border-box;
+}
+
+.authorization-body{
     font-family: "Montserrat", sans-serif;
     box-sizing: border-box;
 }
@@ -75,6 +80,10 @@ h1, h2, h3, h4, p{
     background-color: #EAE5D9;
     color: #182531;
     border: solid 3px #182531;
+}
+
+.profile-button{
+    border: 0;
 }
 
 /* Type */
@@ -228,4 +237,57 @@ h1, h2, h3, h4, p{
     padding-left: 150px;
     padding-bottom: 26px;
     padding-right: 150px;
+}
+
+/* Authorization */
+
+.background-div{
+    background-image: url(./images/img/background.png);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: auto;
+}
+
+/* .background-div img{
+        max-width: 100%;
+        height: auto;
+        display: block;
+        margin: 0 auto;
+        border: none;
+} */
+
+.authorization-block-div{
+    background: rgba(255, 255, 255, 0.2); 
+    backdrop-filter: blur(10px); 
+    border-radius: 40px;
+    width: 1200px;
+    height: 900px;
+    margin-top: 90px;
+    margin-bottom: 90px;
+    margin-left: 360px;
+    margin-right: 360px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-left: 130px;
+    padding-right: 130px;
+}
+
+.red-wolf{
+    width: 144px;
+    height: 205px;
+}
+
+.sakuraTails-auth{
+    font-size: 51px bold;
+    color: #951717;
+    font-weight: 700;
+}
+
+.sakuraTails-subtitle-auth{
+    font-size: 23px bold;
+    color: #951717;
+    font-weight: 700;
 }

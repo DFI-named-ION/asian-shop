@@ -1,10 +1,12 @@
 import HomePage from "./component/HomePage"
+import Authorization from './component/Authorization';
+import Registration from "./component/Registration";
 
 function App() {
     return (
-        <div className="wrapper">
-            <HomePage />
-        </div>
+            <HomePage/>
+            // <Authorization/>
+            // <Registration/>
     );
 }
 
