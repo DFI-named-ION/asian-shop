@@ -61,44 +61,64 @@ export default function HomePage() {
     <body className='homePage-body'>
     <><><header>
           <section className='header-section'>
-              <ul>
-                  <li><a className='header-link' href='https://www.figma.com/'>MARKET</a></li>
-                  <li><a className='header-link' href='https://www.figma.com/'>GIFT</a></li>
-              </ul>
-              <ul>
-                  <li><a className='header-link' href='https://www.figma.com/'>MARKET</a></li>
-                  <li><a className='header-link' href='https://www.figma.com/'>GIFT</a></li>
-              </ul>
-              <a href='/'>
-                  <img src={Logo}></img>
-              </a>
-              <ul>
-                  <li><a className='header-link' href='https://www.figma.com/'>ABOUT</a></li>
-                  <li><a className='header-link' href='https://www.figma.com/'>BOXES</a></li>
-              </ul>
-              <a href='#'>
+            <div className='head-div'>
+                <div className='head-left-div'>
+                <div className='head-nav-div'>
+                  <a className='header-link' href='https://www.figma.com/'>MARKET</a>
+                  </div>
+                  <div className='head-nav-div'>
+                  <a className='header-link' href='https://www.figma.com/'>GIFT</a>
+                  </div>
+                  </div>
+              <div className='head-logo-div'>
+              <a className='head-logo' href='/'>SakuraTails</a>
+              </div>
+              <div className='head-right-div'>
+              <div className='head-nav-div'>
+                  <a className='header-link' href='https://www.figma.com/'>ABOUT</a>
+                  </div>
+                  <div className='head-nav-div'>
+                  <a className='header-link' href='https://www.figma.com/'>BOXES</a>
+                  </div>
+              <div className='head-nav-div'>
+              <a href='#' className='icon-head'>
                   <img src={Basket}></img>
               </a>
-              <a href='#'>
+              </div>
+              <div className='head-nav-div'>
+              <a href='#' className='icon-head'>
                   <img src={Profile}></img>
               </a>
+              </div>
+              </div>
+              </div>
           </section>
-
       </header>
 
           <main>
               <section id='new-box-section'>
-
+                <div className='container-div'>
+                <div className='left-box-div'>
+                <div className='subtitle-div'>
                   <h3 className='subtitle'>A NEW BOX FROM SAKURATAILS</h3>
+                  </div>
                   <h2 className='new-box-title'>Enjoy unbelievable snacks & surprises.</h2>
+                  <div className='text-block-div'>
                   <p className='text-basis'>Experience the SakuraTails box, packed with a variety of treats to delight your senses. Subscribe now to enjoy these exceptional offerings while supplies last!</p>
+                  </div>
                   <a href='#subcribtion-section'>
                       <input className='subscribe-button' type='button' value='Subscribe' />
                   </a>
+                  </div>
+                  <div className='right-box-div'>
                   <img src={require('../images/img/tea.jpg')} alt='tea'></img>
+                  </div>
+                  </div>
               </section>
               <section id='promocode-section'>
+                <div className='promocode-div'>
                   <h2 className='promocode-banner'>Use code PICNIC24 to get FREE exclusive gifts!</h2>
+                  </div>
               </section>
               <section id='description-box-section'>
                   <h3 className='subtitle'>EACH BOX IS BURSTING WITH</h3>
@@ -117,33 +137,81 @@ export default function HomePage() {
                   <p className='text-basis'>Enjoy unique treats and items crafted exclusively for SakuraTails members.</p>
               </section>
               <section id='explanation-section'>
-                  <h2 className='title-basis'>How it works?</h2>
+                <div className='explanation-div'>
+                  <div className='title-explanation-div'>
+                  <h2 className='main-title-explanation'>How it works?</h2>
+                  </div>
+                  <div className='container-explanation-div'>
+                  <div className='block-explanation-div'>
+                  <div className='img-explanation-div'>
                   <img src={Click} id='click'></img>
+                  </div>
+                  <div className='subtitle-explanation-div'>
                   <h2 className='title-explanation'>Subscribe</h2>
+                  </div>
+                  <div className='text-explanation-div'>
                   <p className='text-explanation'>and get a box deliverd monthly filled with snakcs, tea, rewards, and more.</p>
+                  </div>
+                  </div>
+                  <div className='block-explanation-div'>
+                  <div className='img-explanation-div'>
                   <img src={Car} id='car'></img>
+                  </div>
+                  <div className='subtitle-explanation-div'>
                   <h2 className='title-explanation'>Recieve</h2>
+                  </div>
+                  <div className='text-explanation-div'>
                   <p className='text-explanation'>authentic treats like cakes, mochi, chips packed with care and delivered to your door.</p>
+                  </div>
+                  </div>
+                  <div className='block-explanation-div'>
+                  <div className='img-explanation-div'>
                   <img src={Box} id='box'></img>
+                  </div>
+                  <div className='subtitle-explanation-div'>
                   <h2 className='title-explanation'>Exparience</h2>
+                  </div>
+                  <div className='text-explanation-div'>
                   <p className='text-explanation'>new curated themes each month around festivals, prefectures, and holidays!</p>
+                  </div>
+                  </div>
+                  </div>
+                  </div>
               </section>
               <section id='woman-section'>
+                <div className='container-div'>
+                    <div className='left-box-div'>
+                    <div className='subtitle-div'>
                   <h3 className='subtitle'>MORE THAN JUST SNACKS</h3>
+                  </div>
                   <h2 className='title-basis'>Experience Asia from Home</h2>
+                  <div className='text-block-div'>
                   <p className='text-basis'>SakuraTails offers a unique way to learn, taste, and experience Asia and its vibrant culture from your home.</p>
+                  </div>
                   <a href='#subcribtion-section'>
                       <input className='subscribe-button' type='button' value='Subscribe' />
                   </a>
-                  <a href='#'>Gift</a>
+                  <div className='gift-div'>
+                  <a className='gift' href='#'>Gift</a>
+                  </div>
+                  </div>
+                  <div className='right-box-div'>
                   <img src={require('../images/img/japanese.jpg')} alt='woman'></img>
+                  </div>
+                  </div>
               </section>
               <section id='partners-section'>
+                <div className='partners-div'>
+                <div className='title-partners-div'>
                   <h2 className='title-basis'>Partners</h2>
+                  </div>
+                  <div className='img-partners-div'>
                   <img src={require('../images/partners/one.jpg')} alt='partners'></img>
                   <img src={require('../images/partners/two.jpg')} alt='partners'></img>
                   <img src={require('../images/partners/three.jpg')} alt='partners'></img>
                   <img src={require('../images/partners/four.jpg')} alt='partners'></img>
+                  </div>
+                  </div>
               </section>
               <section id='goods-section'>
               </section>
