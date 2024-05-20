@@ -9,7 +9,6 @@ import Medal from '../images/icons/medal.svg';
 import Click from '../images/icons/click.svg';
 import Car from '../images/icons/car.svg';
 import Box from '../images/icons/box.svg';
-import LogoFooter from '../images/logo/logo-footer.svg';
 import Amex from '../images/pay/amex.png';
 import Apple from '../images/pay/apple.png';
 import F from '../images/pay/f.png';
@@ -25,6 +24,7 @@ import X from '../images/socials/x.svg';
 import Facebook from '../images/socials/facebook.svg';
 import Tiktok from '../images/socials/tiktok.svg';
 import Qr from '../images/pay/qr.svg';
+import WhiteWolf from '../images/logo/white-wolf.svg'
 
 function App() {
     return <Logo />;
@@ -37,7 +37,7 @@ function App() {
     return <Click />;
     return <Car />;
     return <Box />;
-    return <LogoFooter />;
+    return <WhiteWolf />;
     return <Amex />;
     return <Apple />;
     return <F />;
@@ -121,20 +121,61 @@ export default function HomePage() {
                   </div>
               </section>
               <section id='description-box-section'>
+                <div className='description-div'>
+                    <div className='left-description-div'>
+                    <img src={require('../images/img/karusel1.jpg')} alt='tea'></img>
+                    </div>
+                    <div className='right-description-div'>
+                <div className='subtitle-div'>
                   <h3 className='subtitle'>EACH BOX IS BURSTING WITH</h3>
+                  </div>
+                  <div className='title-description-div'>
                   <h2 className='title-basis'>Snacks, smiles, and more.</h2>
+                  </div>
+                  <div className='block-description-div'>
+                 <div className='left-block-description-div'>
+                    <div className='box-description-div'>
+                    <div className='icon-description-div'>
                   <img src={Noodle} id='noodle'></img>
+                  </div>
+                  <div className='text-block-description-div'>
                   <h4 className='title-description'>13+ SNACKS</h4>
-                  <p className='text-basis'>Taste premium Japanese treats and amazing snacks</p>
-                  <img src={Book} id='book'></img>
-                  <h4 className='title-description'>GUIDE</h4>
-                  <p className='text-basis'>Learn about your snacks with a booklet of stories, allergen info, games, and more.</p>
+                  <p className='text-basis text-description'>Taste premium Japanese treats and amazing snacks.</p>
+                  </div>
+                  </div>
+                  <div className='box-description-div'>
+                  <div className='icon-description-div'>
                   <img src={Group} id='group'></img>
+                  </div>
+                  <div className='text-block-description-div'>
                   <h4 className='title-description'>SAKURATAILS KEEPSAKES</h4>
-                  <p className='text-basis'>Get new items each box, such as cups, coasters, stickers, and more.</p>
+                  <p className='text-basis text-description'>Get new items each box, such as cups, coasters, stickers, and more.</p>
+                  </div>
+                  </div>
+                  </div>
+                  <div className='right-block-description-div'>
+                  <div className='box-description-div'>
+                  <div className='icon-description-div'>
+                  <img src={Book} id='book'></img>
+                  </div>
+                  <div className='text-block-description-div'>
+                  <h4 className='title-description'>GUIDE</h4>
+                  <p className='text-basis text-description'>Learn about your snacks with a booklet of stories, allergen info, games, and more.</p>
+                  </div>
+                  </div>
+                  <div className='box-description-div'>
+                  <div className='icon-description-div'>
                   <img src={Medal} alt='medal'></img>
+                  </div>
+                  <div className='text-block-description-div'>
                   <h4 className='title-description'>SAKURATAILS EXLUSIVES</h4>
-                  <p className='text-basis'>Enjoy unique treats and items crafted exclusively for SakuraTails members.</p>
+                  <p className='text-basis text-description'>Enjoy unique treats and items crafted exclusively for SakuraTails members.</p>
+                  </div>
+                  </div>
+                  </div>
+                  </div>
+                  </div>
+                  </div>
               </section>
               <section id='explanation-section'>
                 <div className='explanation-div'>
@@ -239,20 +280,29 @@ export default function HomePage() {
           </main></>
 
           <footer>
+            <div className='footer-div'>
               <nav>
-                  <a href='#'>
-                      <img src={LogoFooter} alt='logo SakuraTails'></img>
-                  </a>
+                <div className='top-footer-div'>
+                <div className='logo-footer-div'>
+                      <img className='footer-wolf' href='/' src={WhiteWolf} alt='logo SakuraTails'></img>
+                      <a className='head-logo' href='/'>SakuraTails</a>
+                  </div>
+                  <div className='nav-footer-div'>
+                    <div className='left-nav-div'>
                   <ul>
                       <li><a className='section-footer' href='/'>SakuraTails Sites</a></li>
                       <li><a className='section-footer' href='https://www.figma.com/'>SakuraTails Market</a></li>
                       <li><a className='section-footer' href='https://www.figma.com/'>SakuraTails Gift Boxes</a></li>
                   </ul>
+                  </div>
+                  <div className='center-nav-div'>
                   <ul>
                       <li><a className='section-footer' href='https://www.figma.com/'>Shop</a></li>
                       <li><a className='section-footer' href='#subcribtion-section'>Subscribe</a></li>
                       <li><a className='section-footer' href='https://www.figma.com/'>About Us</a></li>
                   </ul>
+                  </div>
+                  <div className='right-nav-div'>
                   <ul>
                       <li><a className='section-footer' href='https://www.figma.com/'>Support</a></li>
                       <li><a className='section-footer' href='https://www.figma.com/'>Privacy Policy</a></li>
@@ -260,28 +310,78 @@ export default function HomePage() {
                       <li><a className='section-footer' href='https://www.figma.com/'>FAQ</a></li>
                       <li><a className='section-footer' href='https://www.figma.com/'>Shipping Policy</a></li>
                   </ul>
+                  </div>
+                  </div>
+                  <div className='pay-footer-div'>
+                    <div className='we-accept-div'>
                   <h3 className='we-accept'>We accept</h3>
+                  </div>
+                    <div className='inline-pay-div'>
+                  <div className='icon-pay-div'>
                   <img src={Amex}></img>
+                  </div>
+                  <div className='icon-pay-div'>
                   <img src={Apple}></img>
+                  </div>
+                  <div className='icon-pay-div'>
                   <img src={F}></img>
+                  </div>
+                  <div className='icon-pay-div'>
                   <img src={Discover}></img>
+                  </div>
+                  <div className='icon-pay-div'>
                   <img src={Google}></img>
+                  </div>
+                  </div>
+                  <div className='inline-pay-div'>
+                  <div className='icon-pay-div'>
                   <img src={Mastercard}></img>
+                  </div>
+                  <div className='icon-pay-div'>
                   <img src={Paypal}></img>
+                  </div>
+                  <div className='icon-pay-div'>
                   <img src={Shop}></img>
+                  </div>
+                  <div className='icon-pay-div'>
                   <img src={V}></img>
+                  </div>
+                  <div className='icon-pay-div'>
                   <img src={Visa}></img>
+                  </div>
+                  </div>
+                  <div className='qr-div'>
+                  <img src={Qr}></img>
+                  </div>
+                  </div>
+                  </div>
               </nav>
-              <img src={Qr}></img>
+              </div>
+              <div className='white-line'></div>
+              <div className='footer-div'>
+              <div className='bottom-footer-div'>
+              
+                <div>
               <h3 className='sakuratails'>2024 SakuraTails</h3>
-              <nav>
+              </div>
                   <ul>
+                  <div className='social-box-div'>
+                      <div className='social-div'>
                       <li><a href='https://www.instagram.com/'><img src={Instagram}></img></a></li>
+                      </div>
+                      <div className='social-div'>
                       <li><a href='https://twitter.com/'><img src={X}></img></a></li>
+                      </div>
+                      <div className='social-div'>
                       <li><a href='https://www.facebook.com/'><img src={Facebook}></img></a></li>
+                      </div>
+                      <div className='social-div'>
                       <li><a href='https://www.tiktok.com/'><img src={Tiktok}></img></a></li>
+                      </div>
+                      </div>
                   </ul>
-                  </nav>
+                  </div>
+                  </div>
           </footer></>
           </body>
 

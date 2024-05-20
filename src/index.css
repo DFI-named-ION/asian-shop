@@ -259,12 +259,9 @@ h1, h2, h3, h4, p{
     color: #EAE5D9;
 }
 
-/* .header-section{
-    padding-top: 26px;
-    padding-left: 150px;
-    padding-bottom: 26px;
-    padding-right: 150px;
-} */
+.footer-wolf{
+    margin-right: 20px;
+}
 
 /* Block */
 
@@ -396,6 +393,108 @@ h1, h2, h3, h4, p{
     display: flex;
     justify-content: space-between;
 }
+
+.description-div{
+    padding-left: 262.5px;
+    padding-right: 262.5px;
+    background-color: #EAE5D9;
+    display: flex;
+    justify-content: space-between;
+}
+
+.left-description-div{
+    padding-top: 60px;
+    padding-bottom: 60px;
+    margin-right: 89px;
+}
+
+.right-description-div{
+    padding-top: 88.5px;
+    padding-bottom: 88.5px;
+    display: block;
+}
+
+.block-description-div{
+    display: flex;
+}
+
+.left-block-description-div{
+    margin-right: 60px;
+   
+}
+
+.box-description-div{
+     display: flex;
+     justify-content: flex-start;
+     margin-top: 25px;
+}
+
+.icon-description-div{
+    margin-right: 30px;
+}
+
+.text-description{
+    line-height: 1.7
+}
+
+.footer-div{
+    background-color: #951717;
+    padding-left: 150px;
+    padding-right: 150px;
+    padding-top: 60px;
+    padding-bottom: 30px;
+}
+
+.top-footer-div{
+    display: flex;
+    justify-content: space-between;
+    
+}
+
+.nav-footer-div{
+    display: flex;
+    justify-content: space-between;
+}
+
+.icon-pay-div{
+    margin-top: 10px;
+    margin-right: 10px;
+}
+
+.inline-pay-div{
+    display: flex;
+}
+
+.qr-div{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+.white-line{
+    height: 1px;
+    background-color: #EAE5D9;
+    width: 100%;
+}
+
+.bottom-footer-div{
+    display: flex;
+    justify-content: space-between;
+    padding-left: 606.5px;
+    padding-right: 606.5px;
+}
+
+.social-box-div{
+    display: flex;
+    justify-content: space-between;
+}
+
+.social-div{
+    margin-right: 20px;
+}
+
+
 /* Authorization and registration*/
 
 .background-div{
