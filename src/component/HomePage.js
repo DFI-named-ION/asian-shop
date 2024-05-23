@@ -123,7 +123,13 @@ export default function HomePage() {
               <section id='description-box-section'>
                 <div className='description-div'>
                     <div className='left-description-div'>
+                      <div className='button-carousel button-left-carousel'><a class="prev-carousel" 
+                      onclick="plusSlides(-1)"></a></div>
+                      <div className='img-carousel'>
                     <img src={require('../images/img/karusel1.jpg')} alt='tea'></img>
+                    </div>
+                    <div className='button-carousel button-right-carousel'> <a class="next-carousel" 
+                      onclick="plusSlides(1)"></a></div>
                     </div>
                     <div className='right-description-div'>
                 <div className='subtitle-div'>
@@ -255,27 +261,179 @@ export default function HomePage() {
                   </div>
               </section>
               <section id='goods-section'>
+                <div className='goods-div'>
+                  <div className='inline-goods-div'>
+                    <div className='img-goods-div'>
+                    <img src={require('../images/img/2.jpg')}></img>
+                    </div>
+                    <div className='img-goods-div'>
+                    <img src={require('../images/img/3.jpg')}></img>
+                    </div>
+                    <div className='img-goods-div'>
+                    <img src={require('../images/img/4.jpg')}></img>
+                    </div>
+                    <div className='img-goods-div'>
+                    <img src={require('../images/img/5.jpg')}></img>
+                    </div>
+                    <div className='img-goods-div'>
+                    <img src={require('../images/img/6.jpg')}></img>
+                    </div>
+                    <div className='img-goods-div'>
+                    <img src={require('../images/img/7.jpg')}></img>
+                    </div>
+                    <div className='img-goods-div'>
+                    <img src={require('../images/img/4.jpg')}></img>
+                    </div>
+
+                    <div className='img-goods-div'>
+                    <img src={require('../images/img/2.jpg')}></img>
+                    </div>
+                    <div className='img-goods-div'>
+                    <img src={require('../images/img/3.jpg')}></img>
+                    </div>
+                    <div className='img-goods-div'>
+                    <img src={require('../images/img/4.jpg')}></img>
+                    </div>
+                    <div className='img-goods-div'>
+                    <img src={require('../images/img/5.jpg')}></img>
+                    </div>
+                    <div className='img-goods-div'>
+                    <img src={require('../images/img/6.jpg')}></img>
+                    </div>
+                    <div className='img-goods-div'>
+                    <img src={require('../images/img/7.jpg')}></img>
+                    </div>
+                    <div className='img-goods-div'>
+                    <img src={require('../images/img/4.jpg')}></img>
+                    </div>
+                  </div>
+                  <div className='inline-goods-div'>
+                    <div className='img-goods-div'>
+                    <img src={require('../images/img/8.jpg')}></img>
+                    </div>
+                    <div className='img-goods-div'>
+                    <img src={require('../images/img/9.jpg')}></img>
+                    </div>
+                    <div className='img-goods-div'>
+                    <img src={require('../images/img/10.jpg')}></img>
+                    </div>
+                    <div className='img-goods-div'>
+                    <img src={require('../images/img/11.jpg')}></img>
+                    </div>
+                    <div className='img-goods-div'>
+                    <img src={require('../images/img/12.jpg')}></img>
+                    </div>
+                    <div className='img-goods-div'>
+                    <img src={require('../images/img/13.jpg')}></img>
+                    </div>
+                    <div className='img-goods-div'>
+                    <img src={require('../images/img/11.jpg')}></img>
+                    </div>
+
+                    <div className='img-goods-div'>
+                    <img src={require('../images/img/8.jpg')}></img>
+                    </div>
+                    <div className='img-goods-div'>
+                    <img src={require('../images/img/9.jpg')}></img>
+                    </div>
+                    <div className='img-goods-div'>
+                    <img src={require('../images/img/10.jpg')}></img>
+                    </div>
+                    <div className='img-goods-div'>
+                    <img src={require('../images/img/11.jpg')}></img>
+                    </div>
+                    <div className='img-goods-div'>
+                    <img src={require('../images/img/12.jpg')}></img>
+                    </div>
+                    <div className='img-goods-div'>
+                    <img src={require('../images/img/13.jpg')}></img>
+                    </div>
+                    <div className='img-goods-div'>
+                    <img src={require('../images/img/11.jpg')}></img>
+                    </div>
+                  </div>
+                </div>
               </section>
               <section id='subcribtion-section'>
-                  <h3 className='subcribtion-subtitle'>Snack On This, Not That</h3>
-                  <h2 className='title-basis'>Choose your subcribtion plan</h2>
+                <div className='subcribtion-div'>
+                  <div className='subtitle-subcribtion-div'>
+                  <h3 className='subcribtion-title'>Snack On This, Not That</h3>
+                  </div>
+                  <div className='title-subcribtion-div'>
+                  <h2 className='title-basis subcribtion-title'>Choose your subcribtion plan</h2>
+                  </div>
+                  <div className='boxes-subcribtion-div'>
+                    <div className='box-subcribtion-div'>
+                    <div className='selected-plan-div'>
+                    <p className='selected-plan'>SELECTED PLAN</p>
+                  </div>
+                    <div className='subbox-subcribtion-div'>
                   <article>
-                      <p className='selected-plan'>SELECTED PLAN</p>
+                    <div className='top-box-div'>
+                      <div>
+                        <div className='month-div'>
                       <h2 className='block-month'>6 - MONTH</h2>
+                      </div>
+                      <div>
                       <h3 className='text-title-block'>RECEIVE 3 BOXES AND SAVE 30$</h3>
+                      </div>
+                      </div>
+                      <div className='best-value-div'>
                       <h2 className='best-value'>BEST VALUE</h2>
+                      </div>
+                      </div>
+                      <div className='price-div'>
                       <h3 className='text-title-block'><span className='price-block'>$49.99</span> USD PER BOX</h3>
+                      </div>
+                      <div className='description-subcribtion-div'>
                       <h4 className='description-subcribtion-block'>You will be billed $149.97 every 6 months.</h4>
+                      </div>
+                      <div className='line-subcribtion-div'></div>
+                      <div className='list-subcribtion-div'>
+                        <p className='line-subcribtion'>✓ Themed box with 13+ products</p>
+                        <p className='line-subcribtion'>✓ Supports family businesses <a className='link-subcribtion' href='#'>ⓘ</a></p>
+                        <p className='line-subcribtion'>✓ Early access to new drops</p>
+                        <p className='line-subcribtion'>✓ Exclusive gift with purchase</p>
+                        <p className='line-subcribtion'>✓ Earlier shipping</p>
+                        <p className='line-subcribtion'>✓ Cancel anytime</p>
+                      </div>
                       <input className='button-subcribtion' type='button' value='SELECT THIS PLAN' />
                   </article>
+                  </div>
+                  </div>
+                  <div className='box-subcribtion-div'>
+                  <div className='selected-plan-div'>
+                    <p className='selected-plan'>SELECTED PLAN</p>
+                  </div>
+                  <div className='subbox-subcribtion-div'>
                   <article>
-                      <p className='selected-plan'>SELECTED PLAN</p>
+                  <div className='month-div'>
                       <h2 className='block-month'>1 - MONTH</h2>
+                      </div>
+                      <div>
                       <h3 className='text-title-block'>PAY PER BOX</h3>
+                      </div>
+                      <div className='price-div'>
                       <h3 className='text-title-block'><span className='price-block'>$59.99</span> USD PER BOX</h3>
+                      </div>
+                      <div className='description-subcribtion-div'>
                       <h4 className='description-subcribtion-block'>You will be billed $59.99 every 6 months.</h4>
+                      </div>
+                      <div className='line-subcribtion-div'></div>
+                      <div className='list-subcribtion-div'>
+                        <p className='line-subcribtion'>✓ Themed box with 13+ products</p>
+                        <p className='line-subcribtion'>✓ Supports family businesses <a className='link-subcribtion' href='#'>ⓘ</a></p>
+                        <p className='line-subcribtion line-through'>✗ Early access to new drops</p>
+                        <p className='line-subcribtion line-through'>✗ Exclusive gift with purchase</p>
+                        <p className='line-subcribtion line-through'>✗ Earlier shipping</p>
+                        <p className='line-subcribtion'>✓ Cancel anytime</p>
+                      </div>
                       <input className='button-subcribtion' type='button' value='SELECT THIS PLAN' />
                   </article>
+                  </div>
+                  </div>
+                  </div>
+                  </div>
               </section>
           </main></>
 

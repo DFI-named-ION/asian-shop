@@ -73,10 +73,6 @@ h1, h2, h3, h4, p{
     font-weight: 400;
 }
 
-.button-subcribtion:hover{
-    background-color: #951717;
-}
-
 .button-subcribtion:active{
     background-color: #EAE5D9;
     color: #182531;
@@ -85,6 +81,11 @@ h1, h2, h3, h4, p{
 
 .profile-button{
     border: 0;
+}
+
+.button-carousel{
+    width: 20px;
+    height: 40px;
 }
 
 /* Type */
@@ -201,43 +202,27 @@ h1, h2, h3, h4, p{
     color: #182531;
 }
 
+.subcribtion-title{
+    color: #951717;
+}
+
 .price-block{
     font-size: 48px;
     font-weight: 400;
     color: #182531;
 }
 
+.best-value{
+    font-size: 14px;
+    text-align: center;
+    letter-spacing: 4px;
+    font-weight: 400;
+}
+
 .description-subcribtion-block{
     font-size: 12px;
     font-weight: 400;
     color: #182531;
-}
-
-.selected-plan{
-    width: 210px;
-    background-color: #EAE5D9;
-    color: #EAE5D9;
-    height: 39px;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    text-align: center;
-    font-size: 12px;
-    font-weight: 900;
-}
-
-.selected-plan:hover{
-    background-color: #951717;
-}
-
-.best-value{
-    width: 82px;
-    height: 42px;
-    text-align: center;
-    border-radius: 10px;
-    background-color: #951717;
-    color: #EAE5D9;
-    font-size: 14px;
-    font-weight: 400;
 }
 
 .section-footer{
@@ -328,8 +313,8 @@ h1, h2, h3, h4, p{
     background-color: #951717;
     padding-top: 60px;
     padding-bottom: 60px;
-    padding-left: 150px;
-    padding-right: 150px;
+    padding-left: 70px;
+    padding-right: 70px;
 }
 
 .title-explanation-div{
@@ -344,12 +329,10 @@ h1, h2, h3, h4, p{
 }
 
 .img-explanation-div{
-    margin-bottom: 30px;
     width: 195px;
     height: 195px;
     display: block;
-    margin-top: auto;
-    margin-bottom: auto;
+    margin-bottom: 30px;
     margin-left: auto;
     margin-right: auto;
 }
@@ -357,7 +340,9 @@ h1, h2, h3, h4, p{
 .subtitle-explanation-div{
     display: flex;
     justify-content: center;
-    margin-bottom: 10px;
+    margin-bottom: 45px;
+    font-weight: 400;
+    font-size: 36px;
 }
 
 .text-explanation-div{
@@ -365,6 +350,8 @@ h1, h2, h3, h4, p{
     justify-content: center;
     text-align: center;
     width: 540px;
+    font-size: 24px;
+    font-weight: 400;
 }
 
 .block-explanation-div{
@@ -494,6 +481,204 @@ h1, h2, h3, h4, p{
     margin-right: 20px;
 }
 
+.goods-div{
+    background-color: #951717;
+    padding-top: 60px;
+    padding-bottom: 36px;
+    overflow: hidden;
+}
+
+.img-goods-div{
+    margin-bottom: 24px;
+    margin-right: 15px;
+}
+
+.inline-goods-div{
+    display: flex;
+    grid-auto-flow: column;
+    grid-auto-columns: 240px;
+    animation: scroll 15s linear infinite;
+}
+
+@keyframes scroll{
+    to{
+        translate: calc(-4 * 240px);
+    }
+}
+
+.left-description-div{
+    display: flex;
+    align-items: center;
+}
+
+.img-carousel{
+    display: flex;
+}
+
+.img-carousel img{
+    object-fit: cover;
+    object-position: center;
+}
+
+.button-carousel:before{
+    position: absolute;
+    content: "";
+    width: 30px;
+    height: 30px;
+    transform: translate(-50%, -50%);
+    border-top:#182531 solid 2px;
+    border-right:#182531 solid 2px;
+    top: 33%;
+    left: 70%;
+} 
+
+ .button-right-carousel{
+    transform: rotate(45deg);
+}
+
+.button-left-carousel{
+    transform: rotate(-135deg);
+}
+
+.subcribtion-div{
+    padding-top: 60px;
+    padding-bottom: 60px;
+    background-color: #EAE5D9;
+}
+
+.subtitle-subcribtion-div{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 11px;
+    
+}
+
+.title-subcribtion-div{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 50px;
+}
+
+.boxes-subcribtion-div{
+    display: flex;
+    justify-content: center;
+}
+
+.box-subcribtion-div{
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+.box-subcribtion-div:hover{
+    .subbox-subcribtion-div{
+        border: solid #951717;
+    }
+
+    .button-subcribtion{
+        background-color: #951717;
+    }
+
+    .selected-plan-div{
+        background-color: #951717;
+        color: #EAE5D9;
+    }
+
+}
+
+.box-subcribtion-div:active{
+    .subbox-subcribtion-div{
+        border: solid #182531;
+    }
+
+    .button-subcribtion{
+        background-color: #EAE5D9;
+        color: #182531;
+        border: solid 3px #182531;
+    }
+
+    .selected-plan-div{
+        background-color: #182531;
+    }
+}
+
+.subbox-subcribtion-div{
+    border-radius: 10px;
+    border: solid #182531;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    margin-right: 20px;
+}
+
+.top-box-div{
+    display: flex;
+}
+
+.month-div{
+    margin-right: 40px;
+    margin-bottom: 10px;
+}
+
+.best-value-div{
+    background-color: #951717;
+    border-radius: 10px;
+    color: #EAE5D9;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    width: 85px;
+    height: 42px;
+}
+
+.price-div{
+    margin-top: 15px;
+    margin-bottom: 22px;
+}
+
+.line-subcribtion-div{
+    height: 1px;
+    background-color: #182531;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.list-subcribtion-div{
+    margin-bottom: 35px;
+}
+
+.line-subcribtion{
+    margin-bottom: 10px;
+    color: #182531;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.line-through{
+    text-decoration: line-through;
+}
+
+.selected-plan-div{
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    width: 210px;
+    height: 39px;
+    margin-left: 70px;
+    padding-left: 52px;
+    padding-top: 12px;
+    color: #EAE5D9;
+}
+
+.selected-plan{
+    font-size: 12px;
+    font-weight: 900;
+}
+
+.link-subcribtion{
+    text-decoration: none;
+    color:#182531;
+}
 
 /* Authorization and registration*/
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import RedWolf from '../images/logo/red-wolf.svg';
 
+
 function App() {
     return <RedWolf />;
 }
