@@ -1,3 +1,4 @@
+using AsianStoreWebAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AsianStoreWebAPI.Controllers

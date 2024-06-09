@@ -1,4 +1,4 @@
-namespace AsianStoreWebAPI
+namespace AsianStoreWebAPI.Models
 {
     public class WeatherForecast
     {
