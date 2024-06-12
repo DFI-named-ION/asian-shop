@@ -56,7 +56,7 @@ export default function Registration() {
                         </div>
                     </div>
                     <div className='footer-auth'>
-                        <h4 className='title-auth-white'>Already have an account?<a className='title-auth-white' href='#'>Log In</a></h4>
+                        <h4 className='title-auth-white'>Already have an account?<a className='title-auth-white' href='/authorization'>Log In</a></h4>
                         <p className='text-auth-white'>Secure Login with reCAPTCHA subject to 
                             Google <a href='#' className='text-auth-white'>Terms</a> & <a href='#' className='text-auth-white'>Privacy</a></p>
                     </div>
