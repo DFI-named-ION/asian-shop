@@ -1,4 +1,3 @@
-using AsianStoreWebAPI.EF;
 using Microsoft.EntityFrameworkCore;
 
 namespace AsianStoreWebAPI
@@ -14,11 +13,6 @@ namespace AsianStoreWebAPI
             builder.Services.AddSwaggerGen();
 
             var app = builder.Build();
-
-            builder.Services.AddDbContext<DBContext>(options =>
-            {
-                options.UseSqlServer(app.Configuration.GetConnectionString("Default"));
-            });
 
             if (app.Environment.IsDevelopment())
             {
