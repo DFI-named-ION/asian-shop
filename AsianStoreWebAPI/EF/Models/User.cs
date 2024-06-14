@@ -19,5 +19,9 @@ namespace AsianStoreWebAPI.EF.Models
         [Required]
         [Column(TypeName = "nvarchar(100)")]
         public string Role { get; set; }
+
+
+        [ForeignKey("InfoId")]
+        public virtual UserInfo UserInfo { get; set; }
     }
 }
