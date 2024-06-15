@@ -1,7 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap');
 
 .homePage-body{
-    background-color:blueviolet;
+    background: rgb(238,196,170);
+    background: radial-gradient(circle, rgba(238,196,170,1) 0%, rgba(245,211,211,1) 100%);
     color: #182531;
     font-family: "Montserrat", sans-serif;
     box-sizing: border-box;
@@ -71,6 +72,7 @@ h1, h2, h3, h4, p{
     cursor: pointer;
     font-size: 20px;
     font-weight: 400;
+    margin-left: 10px;
 }
 
 .button-subcribtion:active{
@@ -101,6 +103,7 @@ h1, h2, h3, h4, p{
     font-size: 28px;
     font-weight: 600;
     text-decoration: none;
+    margin-left: 170px;
 }
 
 .icon-head{
@@ -125,10 +128,8 @@ h1, h2, h3, h4, p{
 
 .new-box-title{
     font-weight: 400;
-    font-size: 68px;
-    size: 68px;
+    font-size: 48px;
     color: #182531;
-    line-height: 70px;
 }
 
 .subtitle{
@@ -164,11 +165,14 @@ h1, h2, h3, h4, p{
 }
 
 .text-explanation{
-    font-size: 24px;
+    font-size: 20px;
     color: #EAE5D9;
     font-weight: 400;
     line-height: 48px;
     letter-spacing: -4%;
+}
+.text-woman{
+    width: 580px;
 }
 
 .title-basis{
@@ -200,10 +204,21 @@ h1, h2, h3, h4, p{
     font-size: 12px;
     font-weight: 400;
     color: #182531;
+    width: 280px;
+}
+
+.text-subtitle-block{
+    width: 200px;
+    height: 30px;
 }
 
 .subcribtion-title{
     color: #951717;
+}
+
+.subcribtion-size-title{
+    font-size: 36px;
+    font-weight: 400;
 }
 
 .price-block{
@@ -215,7 +230,7 @@ h1, h2, h3, h4, p{
 .best-value{
     font-size: 14px;
     text-align: center;
-    letter-spacing: 4px;
+    letter-spacing: 2px;
     font-weight: 400;
 }
 
@@ -223,6 +238,7 @@ h1, h2, h3, h4, p{
     font-size: 12px;
     font-weight: 400;
     color: #182531;
+    width: 290px;
 }
 
 .section-footer{
@@ -265,7 +281,55 @@ h1, h2, h3, h4, p{
 .head-right-div{
     display: flex;
     justify-content: space-between;
-    width: 267px;
+    width: 375px;
+}
+
+.language-div{
+    display: flex;
+    background-color: #EAE5D9;
+    border-radius: 30px;
+    width: 78px;
+    height: 30px;
+    justify-content: space-between;
+    padding-left: 4px;
+    padding-right: 4px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+
+.language-link-right p{
+    font-size: 16px;
+    color: #EAE5D9;
+    font-weight: 400;
+}
+
+.language-link-left p{
+    font-size: 16px;
+    color: #951717;
+    font-weight: 400;
+}
+
+.language-link{
+    text-decoration: none;
+}
+
+.language-left-div{
+    width: 35px;
+    height: 24px;
+    background-color: #EAE5D9;
+    border-radius: 17px;
+    text-align: center;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+.language-right-div{
+    width: 35px;
+    height: 24px;
+    background-color: #951717;
+    border-radius: 17px;
+    text-align: center;
+    cursor: pointer;
 }
 
 .head-left-div{
@@ -275,8 +339,7 @@ h1, h2, h3, h4, p{
 }
 
 .left-box-div{
-    width: 795px;
-    background-color: #EAE5D9;
+    width: 850px;
     padding-left: 150px;
     padding-top: 111.5px;
     padding-bottom: 111.5px;
@@ -286,15 +349,21 @@ h1, h2, h3, h4, p{
     padding-right: 150px;
 }
 
-.container-div{
-    background-color: #EAE5D9;
+.right-box-woman{
+    padding-right: 0px;
+}
+
+.new-box-div{
+    background: rgb(238,196,170);
+    background: radial-gradient(circle, rgba(238,196,170,1) 0%, rgba(245,211,211,1) 100%);
     display: flex;
     justify-content: space-between;
 }
 
 .text-block-div{
-    width: 527px;
+    width: 664px;
     margin-bottom: 20px;
+    margin-top: 20px;
 }
 
 .subtitle-div{
@@ -307,6 +376,7 @@ h1, h2, h3, h4, p{
     background-color: #951717;
     padding-top: 35px;
     padding-bottom: 35px;
+    margin-top: -56px;
 }
 
 .explanation-div{
@@ -315,6 +385,7 @@ h1, h2, h3, h4, p{
     padding-bottom: 60px;
     padding-left: 70px;
     padding-right: 70px;
+    margin-bottom: 0px;
 }
 
 .title-explanation-div{
@@ -363,7 +434,8 @@ h1, h2, h3, h4, p{
 }
 
 .partners-div{
-    background-color: #EAE5D9;
+    background: rgb(255,250,120);
+    background: radial-gradient(circle, rgba(255,250,120,0.3974381989123774) 0%, rgba(186,134,33,0) 100%);
     padding-top: 60px;
     padding-bottom: 60px;
     padding-left: 150px;
@@ -384,7 +456,16 @@ h1, h2, h3, h4, p{
 .description-div{
     padding-left: 262.5px;
     padding-right: 262.5px;
-    background-color: #EAE5D9;
+    background: rgb(255,250,120);
+    background: radial-gradient(circle, rgba(255,250,120,0.3974381989123774) 0%, rgba(186,134,33,0) 100%);
+    display: flex;
+    justify-content: space-between;
+}
+
+.woman-div{
+    background: rgb(255,250,120);
+    background: radial-gradient(circle, rgba(255,250,120,0.3974381989123774) 0%, rgba(186,134,33,0) 100%);
+    padding-right: 0px;
     display: flex;
     justify-content: space-between;
 }
@@ -420,8 +501,21 @@ h1, h2, h3, h4, p{
     margin-right: 30px;
 }
 
+.book-description-div{
+    margin-right: 47px;
+}
+
 .text-description{
-    line-height: 1.7
+    line-height: 1.7;
+    width: 357px;
+}
+
+.text-left-description{
+    width: 310px;
+}
+
+.group-title{
+    margin-top: 30px;
 }
 
 .footer-div{
@@ -543,7 +637,7 @@ h1, h2, h3, h4, p{
 .subcribtion-div{
     padding-top: 60px;
     padding-bottom: 60px;
-    background-color: #EAE5D9;
+    background-image: url(./images/img/background-subcribtion.png);
 }
 
 .subtitle-subcribtion-div{
@@ -602,10 +696,11 @@ h1, h2, h3, h4, p{
 }
 
 .subbox-subcribtion-div{
+    backdrop-filter: blur(14.2px);
     border-radius: 10px;
     border: solid #182531;
     padding-left: 30px;
-    padding-right: 30px;
+    padding-right:30px; 
     padding-top: 30px;
     padding-bottom: 30px;
     margin-right: 20px;
@@ -630,6 +725,8 @@ h1, h2, h3, h4, p{
     padding-bottom: 6px;
     width: 85px;
     height: 42px;
+    margin-left: -30px;
+    margin-top: 11px;
 }
 
 .price-div{
@@ -651,7 +748,7 @@ h1, h2, h3, h4, p{
 .line-subcribtion{
     margin-bottom: 10px;
     color: #182531;
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 400;
 }
 
@@ -667,18 +764,193 @@ h1, h2, h3, h4, p{
     margin-left: 70px;
     padding-left: 52px;
     padding-top: 12px;
-    color: #EAE5D9;
+    color: rgba(0,0,0,0);
 }
 
 .selected-plan{
     font-size: 12px;
     font-weight: 900;
+
 }
 
 .link-subcribtion{
     text-decoration: none;
     color:#182531;
 }
+
+/* Modal goods window */
+
+.modal-goods-div{
+    width: 442px;
+    background-color: #EAE5D9;
+    /* margin-left: 725px;
+    margin-top: 100px; */
+    border-radius: 10px;
+    padding-left: 21px;
+    /* padding-bottom: 21px; */
+    padding-right: 21px;
+    padding-top: 21px;
+}
+
+.background-modal-div{
+    width: 100%;
+    height: 100%;
+    /* background: rgba(18, 25, 31, 0.3); */
+    background-color: rgba(0, 0, 0, 0.25);
+    padding-left: 725px;
+    padding-top: 100px;
+    overlay: none;
+}
+
+.close-modal-button{
+  position: relative;
+  bottom: 0px;
+  left: 445px;
+  border: 0;
+  width: 24px;
+  height: 24px;
+  --weight: 2px;
+  --aa: 1px;
+  --color: #EAE5D9;
+  border-radius: 3px;
+  background:
+    linear-gradient(45deg, transparent calc(50% - var(--weight) - var(--aa)), var(--color) calc(50% - var(--weight)), var(--color) calc(50% + var(--weight)), transparent calc(50% + var(--weight) + var(--aa))),
+    linear-gradient(-45deg, transparent calc(50% - var(--weight) - var(--aa)), var(--color) calc(50% - var(--weight)), var(--color) calc(50% + var(--weight)), transparent calc(50% + var(--weight) + var(--aa)));
+}
+
+.modal-goods-button{
+    width: 250px;
+    height: 250px;
+    border: 0px;
+    background-color: #951717;
+}
+
+.img-modal{
+    border-radius: 10px;
+}
+
+.img-modal-div{
+    width: 400px;
+    height: 400px;
+}
+
+.full-stars{
+    
+}
+
+.full-stars .rating-group {
+    display: flex;
+    margin-top: 20px;
+    width: 430px;
+}
+
+.full-stars input {
+    position: absolute;
+    left: -9999px;
+}
+.full-stars label {
+    margin: 0;
+    cursor: pointer;
+}
+.full-stars label svg {
+    margin: 2px;
+    height: 24px;
+    width: 24px;
+    fill: #182531;
+    transition: fill 0.3s;
+}
+/* .full-stars input:checked ~ label svg {
+    fill: #BFE2FF;
+} */
+.full-stars .rating-group:hover label svg {
+    fill: #182531;
+}
+.full-stars .rating-group input:hover ~ label svg {
+    fill: #647484;
+}
+
+.modal-reviews-text{
+    font-size: 18px;
+    font-weight: 600;
+    color: #182531;
+    line-height: 24px;
+    margin-left: 15px;
+    font-family: "Montserrat", sans-serif;
+}
+
+.spread-button{
+    border: 0px;
+    background-color: #EAE5D9;
+    margin-left: 119px;
+}
+
+.text-modal-goods-div p{
+    font-size: 14px;
+    font-weight: 400;
+    margin-top: 25px;
+    font-family: "Montserrat", sans-serif;
+}
+
+.add-modal-button{
+    width: 253px;
+    height: 48px;
+    border-radius: 50px;
+    border: 0px;
+    background-color: #951717;
+    font-size: 16px;
+    color: #EAE5D9;
+    font-weight: 400 medium;
+    margin-top: 25px;
+    margin-left: 73.5px;
+    font-family: "Montserrat", sans-serif;
+    margin-bottom: 21px;
+}
+
+.add-modal-button:hover{
+    background-color: #EAE5D9;
+    border: 3px solid #182531;
+    color: #182531;
+}
+
+.price-img-div{
+    position: relative;
+    width: 129px;
+    height: 45px;
+    background-color: #EAE5D9;
+    bottom: 45px;
+    left: 251px;
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+    /* padding-top: 1px; */
+    padding-bottom: 8px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.price-img-div p{
+    font-size: 32px;
+    font-weight: 750;
+    font-family: "Montserrat", sans-serif;
+}
+
+.heart-img{
+    color: transparent;
+    -webkit-text-stroke-color: #182531;
+    -webkit-text-stroke-width: 3px;
+    text-align: center;
+    font-size: 50px;
+    position: relative; 
+    bottom: 453px;
+    left: 353px; 
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+}
+
+.heart-img:hover{
+    color: #182531;
+}
+
 
 /* Authorization and registration*/
 
@@ -796,4 +1068,13 @@ h1, h2, h3, h4, p{
     padding-top: 20px;
     padding-bottom: 20px;
     color: #647484;
+}
+
+.modal{
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.4);
+    position: fixed;
+    top: 0;
+    left: 0;
 }
