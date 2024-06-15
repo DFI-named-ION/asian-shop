@@ -83,6 +83,14 @@ namespace AsianStoreWebAPI
                 };
             });
 
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowReactOrigin",
+                    builder => builder.WithOrigins("http://localhost:3000")
+                        .AllowAnyHeader()
+                        .AllowAnyMethod());
+            });
+
             var app = builder.Build();
 
             if (app.Environment.IsDevelopment())
@@ -90,6 +98,8 @@ namespace AsianStoreWebAPI
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+
+            app.UseCors("AllowReactOrigin");
 
             app.UseHttpsRedirection();
 
