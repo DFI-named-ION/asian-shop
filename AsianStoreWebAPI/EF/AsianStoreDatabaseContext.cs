@@ -1,10 +1,11 @@
 ﻿using AsianStoreWebAPI.EF.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace AsianStoreWebAPI.EF
 {
-    public class AsianStoreDatabaseContext : IdentityDbContext<User>
+    public class AsianStoreDatabaseContext : IdentityDbContext<User, IdentityRole<long>, long>
     {
         public AsianStoreDatabaseContext() : base() { }
 
