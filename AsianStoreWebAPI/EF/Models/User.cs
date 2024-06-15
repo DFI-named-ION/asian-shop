@@ -23,5 +23,10 @@ namespace AsianStoreWebAPI.EF.Models
 
         [ForeignKey("InfoId")]
         public virtual UserInfo UserInfo { get; set; }
+
+        public virtual AuthorizationCode AuthorizationCode { get; set; }
+        public virtual AppleToken AppleToken { get; set; }
+        public virtual FacebookToken FacebookToken { get; set; }
+        public virtual GoogleToken GoogleToken { get; set; }
     }
 }

@@ -14,6 +14,10 @@ namespace AsianStoreWebAPI.EF
 
         public DbSet<UserInfo> UserInfos { get; set; }
         public DbSet<UserAddress> UserAddresses { get; set; }
+        public DbSet<AuthorizationCode> AuthorizationCodes { get; set; }
+        public DbSet<FacebookToken> FacebookTokens { get; set; }
+        public DbSet<GoogleToken> GoogleTokens { get; set; }
+        public DbSet<AppleToken> AppleTokens { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -34,6 +38,46 @@ namespace AsianStoreWebAPI.EF
                 .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<User>()
+                .HasOne(u => u.AuthorizationCode)
+                .WithOne(ac => ac.User)
+                .HasForeignKey<AuthorizationCode>(ac => ac.UserId)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<User>()
+                .HasOne(u => u.AppleToken)
+                .WithOne(at => at.User)
+                .HasForeignKey<AppleToken>(at => at.UserId)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<User>()
+                .HasOne(u => u.FacebookToken)
+                .WithOne(ft => ft.User)
+                .HasForeignKey<FacebookToken>(ft => ft.UserId)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<User>()
+                .HasOne(u => u.GoogleToken)
+                .WithOne(gt => gt.User)
+                .HasForeignKey<GoogleToken>(gt => gt.UserId)
+                .IsRequired()
+                .OnDelete((DeleteBehavior.Cascade));
+
+            modelBuilder.Entity<AppleToken>()
+                .HasIndex(at => at.UserId)
+                .IsUnique();
+
+            modelBuilder.Entity<FacebookToken>()
+                .HasIndex(ft => ft.UserId)
+                .IsUnique();
+
+            modelBuilder.Entity<GoogleToken>()
+                .HasIndex(gt => gt.UserId)
+                .IsUnique();
+
+            modelBuilder.Entity<User>()
                 .HasIndex(u => u.InfoId)
                 .IsUnique();
 
@@ -42,5 +86,6 @@ namespace AsianStoreWebAPI.EF
                 .IsUnique();
 
         }
+
     }
 }
