@@ -7,7 +7,7 @@ namespace AsianStoreWebAPI.EF.Models
 {
     [Table("Users")]
     [Index(nameof(InfoId), IsUnique = true)]
-    public class User : IdentityUser
+    public class User : IdentityUser<long>
     {
         [Required]
         [Column(TypeName = "bit")]
