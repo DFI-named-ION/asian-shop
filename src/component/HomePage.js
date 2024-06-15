@@ -291,7 +291,7 @@ const closeModal_28 = () => {
               </a>
               </div>
               <div className='head-nav-div'>
-              <a href='#' className='icon-head'>
+              <a href='/authorization' className='icon-head'>
                   <img src={Profile}></img>
               </a>
               </div>

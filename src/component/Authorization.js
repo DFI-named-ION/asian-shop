@@ -50,7 +50,7 @@ export default function Authorization() {
                         </div>
                     </div>
                     <div className='footer-auth'>
-                        <h4 className='title-auth-white'>Don't have an account yet?<a href='#' className='title-auth-white'> Sign up for one</a></h4>
+                        <h4 className='title-auth-white'>Don't have an account yet?<a href='/registration' className='title-auth-white'> Sign up for one</a></h4>
                         <p className='text-auth-white'>Secure Login with reCAPTCHA subject to 
                             Google <a href='#' className='text-auth-white'>Terms</a> & <a href='#' className='text-auth-white'>Privacy</a></p>
                     </div>

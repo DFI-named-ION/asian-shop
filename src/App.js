@@ -1,12 +1,20 @@
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+
 import HomePage from "./component/HomePage"
-import Authorization from './component/Authorization';
-import Registration from "./component/Registration";
+import AuthorizationPage from './component/Authorization';
+import RegistrationPage from "./component/Registration";
 
 function App() {
     return (
-            <HomePage/>
-            // <Authorization/>
-            // <Registration/>
+        <>
+			<Router>
+				<Routes>
+					<Route path='/' element={ <HomePage/> } />
+					<Route path='/registration' element={ <RegistrationPage/> } />
+					<Route path='/authorization' element={ <AuthorizationPage/> } />
+				</Routes>
+			</Router>
+        </>
     );
 }
 
