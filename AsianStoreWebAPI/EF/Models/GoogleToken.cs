@@ -18,6 +18,10 @@ namespace AsianStoreWebAPI.EF.Models
         public string Token { get; set; }
 
         [Required]
+        [Column(TypeName = "nvarchar(MAX)")]
+        public string AccountId { get; set; }
+
+        [Required]
         [Column(TypeName = "bigint")]
         public long UserId { get; set; }
 

@@ -8,5 +8,6 @@ namespace AsianStoreWebAPI.Repositories
     {
         Task<ServiceResponses.GeneralResponse> RegisterUser(RegisterUserDTO user);
         Task<ServiceResponses.AuthenticationResponse> LoginUser(LoginUserDTO user);
+        Task<ServiceResponses.ThirdPartyResponse> AuthorizeGoogleUser(GoogleUserDTO user);
     }
 }
