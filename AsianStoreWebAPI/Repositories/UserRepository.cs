@@ -3,9 +3,11 @@ using AsianStoreWebAPI.EF.DTO;
 using AsianStoreWebAPI.EF.Models;
 using AsianStoreWebAPI.Responses;
 using AsianStoreWebAPI.Services;
+using Google.Apis.Auth;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Runtime.CompilerServices;
 
 namespace AsianStoreWebAPI.Repositories
 {
@@ -77,6 +79,37 @@ namespace AsianStoreWebAPI.Repositories
 
             var token = IdentityService.GenerateToken(user, _config);
             return new ServiceResponses.AuthenticationResponse("Success", token);
+        }
+
+        public async Task<ServiceResponses.ThirdPartyResponse> AuthorizeGoogleUser(GoogleUserDTO dto)
+        {
+            if (dto is null) return new ServiceResponses.ThirdPartyResponse("Empty credentials", null);
+
+            if (!await IsGoogleTokenValid(dto))
+                return new ServiceResponses.ThirdPartyResponse("Token is invalid", null);
+
+            var user = _context.Users.Where(x => x.Email == dto.Email).FirstOrDefault();
+            if (user is null)
+            {
+                var tempPassword = Guid.NewGuid().ToString() + "A";
+                await RegisterUser(new RegisterUserDTO() { Email = dto.Email, Password = tempPassword, ConfirmPassword = tempPassword });
+                user = _context.Users.Where(x => x.Email == dto.Email).FirstOrDefault();
+            }
+
+            var jwtToken = IdentityService.GenerateToken(user, _config);
+            return new ServiceResponses.ThirdPartyResponse("Success", jwtToken);
+        }
+
+        private async Task<bool> IsGoogleTokenValid(GoogleUserDTO dto)
+        {
+            var payload = await GoogleJsonWebSignature.ValidateAsync(dto.Token);
+
+            var expirationTime = DateTimeOffset.FromUnixTimeSeconds(payload.ExpirationTimeSeconds.Value).UtcDateTime;
+            if (DateTime.UtcNow > expirationTime)
+            {
+                return false;
+            }
+            return payload.Email == dto.Email;
         }
     }
 }

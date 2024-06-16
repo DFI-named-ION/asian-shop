@@ -2,6 +2,7 @@
 using AsianStoreWebAPI.EF.DTO;
 using AsianStoreWebAPI.EF.Models;
 using AsianStoreWebAPI.Repositories;
+using AsianStoreWebAPI.Responses;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -30,6 +31,24 @@ namespace AsianStoreWebAPI.Controllers
         public async Task<IActionResult> Login(LoginUserDTO user)
         {
             var response = await _repo.LoginUser(user);
+            return Ok(response);
+        }
+
+
+        [HttpPost("authorizeGoogleUser")]
+        public async Task<IActionResult> AuthorizeGoogleUser(GoogleUserDTO user)
+        {
+            var response = await _repo.AuthorizeGoogleUser(user);
+            return Ok(response);
+        }
+
+
+        [HttpGet("getWeatherForecast")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> WeatherForecast()
+        {
+            var rand = new Random();
+            var response = new ServiceResponses.GeneralResponse($"Todays temperature will be: {rand.Next(-5, 25)}");
             return Ok(response);
         }
     }
