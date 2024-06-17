@@ -1,61 +1,76 @@
 import React from 'react';
-import RedWolf from '../images/logo/red-wolf.svg';
+import Google from '../images/socials/google-auth.svg'
+import Facebook from '../images/socials/facebook-auth.svg'
+import Apple from '../images/socials/apple-auth.svg'
 
 
 function App() {
-    return <RedWolf />;
+    return <Google />;
+    return <Facebook />;
+    return <Apple />;
 }
 
 export default function Authorization() {
     return (
         <body className='authorization-body'>
             <div className='background-div'>
-                <div className='authorization-block-div'>
-                    <div className='logo-auth'>
-                        <div>
-                        <a href='/'>
-                        <img className='red-wolf' src={RedWolf}></img>
-                        </a>
-                        </div>
-                        <div className='sakura-auth'>
-                            <h1 className='sakuraTails-auth'>SakuraTails</h1>
-                            <h3 className='sakuraTails-subtitle-auth'>Asian Eats, Global Treats</h3>
-                        </div>
-                    </div>
-                    <div>
                         <div className='left-auth'>
-                            <h4 className='title-auth'>Log In</h4>
-                        </div>
-                        <div>
-                            <form>
-                            <h5 className='title-line'>Email address</h5>
-                            <p className='text-auth'><input className='text-block' type='login' name='Email' placeholder='email.example@gmail.com'></input></p>
-                            <h5 className='title-line'>Password</h5>
-                            <p className='text-auth'><input className='text-block' type='password' name='Password' placeholder='Password'></input></p>
-                            <p>
-                                <a className='text-auth' href='#'>Forgot your password?</a>
-                            </p>
-                            <a>
-                               <input className='login-button' type='button' value='Log In' />
-                            </a>
-                            </form>
+                            <h1>Привіт</h1>
                         </div>
                         <div className='right-auth'>
-                            <a>
-                               <input className='social-button' type='button' value='Log In with Google'/>
-                            </a>
-                            <a>
-                               <input className='social-button' type='button' value='Log In with Facebook'/>
-                            </a>
+                            <div className='title-auth-block-div'>
+                        <h4 className='title-auth'>Вхід</h4>
                         </div>
+                        <div>
+                            <form className='form-auth'>
+                            <h5 className='title-line'>Пошта</h5>
+                            <p className='text-auth'><input className='text-block' type='login' name='Email' placeholder='IDK@gmail.com'></input></p>
+                            <h5 className='title-line'>Пароль</h5>
+                            <p className='text-auth'><input className='text-block' type='password' name='Password' placeholder='*********'></input></p>
+                            </form>
+                            <a>
+                               <input className='login-button' type='button' value='Увійти' />
+                            </a>
+                            <p className='forgot-password'>
+                                <a className='text-auth' href='#'>Забули свій пароль?</a>
+                            </p>
+
+                            <div className='lines-or'>
+                                <div className='line-or'></div>
+                                <div className='text-or'>чи</div>
+                                <div className='line-or'></div>
+                            </div>
+
+                            <div className='social-login-text'>
+                                Увійти за допомогою соціальних мереж
+                            </div>
+
+                            <div className='socials-auth-div'>
+                                <div>
+                                <button className='social-button'>
+                                   <img src={Google}></img>
+                                   </button>
+                                </div>
+                                <div>
+                                <button className='social-button'>
+                                    <img src={Facebook}></img>
+                                    </button>
+                                </div>
+                                <div>
+                                <button className='social-button'>
+                                    <img src={Apple}></img>
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div className='footer-auth'>
+                        <h4 className='title-auth-white title-auth-white-auth'>Ще не маєте облікового запису?<a href='/registration' className='title-auth-white'> Зареєструйтеся</a></h4>
+                        <p className='text-auth-white'>Безпечний вхід за допомогою reCAPTCHA з урахуванням
+                            <p className='text-auth-white-plus'> Умови та конфіденційність Google</p></p>
                     </div>
-                    <div className='footer-auth'>
-                        <h4 className='title-auth-white'>Don't have an account yet?<a href='/registration' className='title-auth-white'> Sign up for one</a></h4>
-                        <p className='text-auth-white'>Secure Login with reCAPTCHA subject to 
-                            Google <a href='#' className='text-auth-white'>Terms</a> & <a href='#' className='text-auth-white'>Privacy</a></p>
                     </div>
-                </div>
-            </div>
+                    </div>
         </body>
     )
 }
