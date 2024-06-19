@@ -1,67 +1,80 @@
 import React from 'react';
-import RedWolf from '../images/logo/red-wolf.svg';
+import Google from '../images/socials/google-auth.svg'
+import Facebook from '../images/socials/facebook-auth.svg'
+import Apple from '../images/socials/apple-auth.svg'
 
 function App() {
-    return <RedWolf />;
+    return <Google />;
+    return <Facebook />;
+    return <Apple />;
 }
 
 export default function Registration() {
     return (
         <body className='authorization-body'>
-            <div className='background-div'>
-                <div className='authorization-block-div'>
-                    <div className='logo-auth'>
-                        <div>
-                        <a href='/'>
-                        <img className='red-wolf' src={RedWolf}></img>
-                        </a>
+            <div className='background-div background-div-reg'>
+                        <div className='left-auth-reg'>
+                            <div>
+                            <p className='left-title-auth'>Ласкаво</p>
+                            </div>
+                            <div>
+                            <p className='left-title-auth-plus'>просимо</p>
+                            </div>
                         </div>
-                        <div className='sakura-auth'>
-                            <h1 className='sakuraTails-auth'>SakuraTails</h1>
-                            <h3 className='sakuraTails-subtitle-auth'>Asian Eats, Global Treats</h3>
-                        </div>
-                    </div>
-                    <div>
-                        <div className='left-auth'>
-                            <h4 className='title-auth'>Sing up</h4>
+                        <div className='right-auth right-auth-reg'>
+                            <div className='title-auth-block-div title-auth-block-div-reg'>
+                        <h4 className='title-auth'>Реєстрація</h4>
                         </div>
                         <div>
-                            <form>
-                            <h5 className='title-line'>Email address</h5>
-                            <p className='text-auth'><input className='text-block' type='login' name='Email' placeholder='email.example@gmail.com'></input></p>
-                            <h5 className='title-line'>Password</h5>
-                            <p className='text-auth'><input className='text-block' type='password' name='Password' placeholder='Password'></input></p>
-                            <h5 className='title-line'>Confim password</h5>
-                            <p className='text-auth'><input className='text-block' type='password' name='Confim password' placeholder='Password'></input></p>
-                            <div>
-                            <div>
-                                <input type='checkbox'></input>
-                            </div>
-                            <div>
-                                <p className='title-line'>By creating an account, I agree to our <a href='#' className='title-line'>Terms of use</a> and <a href='#' className='title-line'>Privacy Policy</a></p>
-                            </div>
-                            </div>
-                            <a>
-                               <input className='login-button' type='button' value='Sing up' />
-                            </a>
+                            <form className='form-auth form-auth-reg'>
+                            <h5 className='title-line'>Ім'я</h5>
+                            <p className='text-auth'><input className='text-block' type='text' name='Name' placeholder='Best name'></input></p>
+                            <h5 className='title-line'>Пошта</h5>
+                            <p className='text-auth'><input className='text-block' type='login' name='Email' placeholder='IDK@gmail.com'></input></p>
+                            <h5 className='title-line'>Пароль</h5>
+                            <p className='text-auth'><input className='text-block' type='password' name='Password' placeholder='*********'></input></p>
                             </form>
-                        </div>
-                        <div>
                             <a>
-                               <input className='social-button' type='button' value='Sing up with Google'/>
+                               <input className='login-button' type='button' value='Зареєструватись' />
                             </a>
-                            <a>
-                               <input className='social-button' type='button' value='Sing up with Facebook'/>
-                            </a>
+                            <div className='lines-or lines-or-reg'>
+                                <div className='line-or'></div>
+                                <div className='text-or'>чи</div>
+                                <div className='line-or'></div>
+                            </div>
+
+                            <div className='social-login-text social-login-text-reg'>
+                                Зареєструватись за допомогою соціальних мереж
+                            </div>
+
+                            <div className='socials-auth-div'>
+                                <div>
+                                <button className='social-button'>
+                                   <img src={Google}></img>
+                                   </button>
+                                </div>
+                                <div>
+                                <button className='social-button'>
+                                    <img src={Facebook}></img>
+                                    </button>
+                                </div>
+                                <div>
+                                <button className='social-button'>
+                                    <img src={Apple}></img>
+                                    </button>
+                                </div>
+                            </div>
+
                         </div>
+                        <div className='footer-auth'>
+                        <div className='title-auth-white-div title-auth-white-div-reg'>
+                        <h4 className='title-auth-white'>Вже маєте обліковий запис?<a href='/registration' className='title-auth-white'> Увійдіть</a></h4>
+                        </div>
+                        <p className='text-auth-white'>Безпечний вхід за допомогою reCAPTCHA з урахуванням
+                            <p className='text-auth-white-plus'> Умови та конфіденційність Google</p></p>
                     </div>
-                    <div className='footer-auth'>
-                        <h4 className='title-auth-white'>Already have an account?<a className='title-auth-white' href='/authorization'>Log In</a></h4>
-                        <p className='text-auth-white'>Secure Login with reCAPTCHA subject to 
-                            Google <a href='#' className='text-auth-white'>Terms</a> & <a href='#' className='text-auth-white'>Privacy</a></p>
                     </div>
-                </div>
-            </div>
+                    </div>
         </body>
     )
 }
