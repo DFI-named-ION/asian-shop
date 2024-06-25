@@ -1,12 +1,12 @@
 import React from 'react';
 import Google from '../images/socials/google-auth.svg'
 import Facebook from '../images/socials/facebook-auth.svg'
-import Apple from '../images/socials/apple-auth.svg'
+import Instagram from '../images/socials/instagram-auth.svg'
 
 function App() {
     return <Google />;
     return <Facebook />;
-    return <Apple />;
+    return <Instagram />;
 }
 
 export default function Registration() {
@@ -60,7 +60,7 @@ export default function Registration() {
                                 </div>
                                 <div>
                                 <button className='social-button'>
-                                    <img src={Apple}></img>
+                                    <img src={Instagram}></img>
                                     </button>
                                 </div>
                             </div>
@@ -68,9 +68,9 @@ export default function Registration() {
                         </div>
                         <div className='footer-auth'>
                         <div className='title-auth-white-div title-auth-white-div-reg'>
-                        <h4 className='title-auth-white'>Вже маєте обліковий запис?<a href='/registration' className='title-auth-white'> Увійдіть</a></h4>
+                        <h4 className='title-auth-white'>Вже маєте обліковий запис? <a href='/registration' className='title-auth-white'>Увійдіть</a></h4>
                         </div>
-                        <p className='text-auth-white'>Безпечний вхід за допомогою reCAPTCHA з урахуванням
+                        <p className='text-auth-white bottom-text-auth'>Безпечний вхід за допомогою reCAPTCHA з урахуванням
                             <p className='text-auth-white-plus'> Умови та конфіденційність Google</p></p>
                     </div>
                     </div>
