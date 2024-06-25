@@ -984,7 +984,8 @@ h1, h2, h3, h4, p{
 }
 
 .right-auth{
-    background: rgba(255, 255, 255, 0.2); 
+    /* background: rgba(255, 255, 255, 0.2);  */
+    background: radial-gradient(circle, rgba(186,33,33,0.1) 0%, rgba(255,250,120,0.1) 100%);
     backdrop-filter: blur(10px); 
     border-radius: 40px;
     width: 664px;
@@ -1049,7 +1050,7 @@ h1, h2, h3, h4, p{
 .text-auth-white{
     color: #EAE5D9;
     font-size: 14px;
-    font-weight: 500;
+    font-weight: 500 medium;
 }
 
 .title-auth-white-auth{
@@ -1063,6 +1064,7 @@ h1, h2, h3, h4, p{
 .title-auth-white{
     color: #EAE5D9;
     font-size: 18px;
+    font-weight: 500 medium;
 }
 
 .title-auth-white-div-reg{
@@ -1117,17 +1119,15 @@ h1, h2, h3, h4, p{
 
 .text-block{
     width: 530px;
-    /* height: 56px; */
-    background-color: rgb(0, 0, 0, 0);
-    border: #647484 3px solid;
-    border-top-color: rgb(0, 0, 0, 0);
-    border-right-color: rgb(0, 0, 0, 0);
-    border-left-color: rgb(0, 0, 0, 0);
-    /* padding-top: 10px; */
-    /* padding-bottom: 10px; */
+    background-color: transparent;
+    border-bottom: #647484 3px solid;
+    border-top: none;
+    border-right: none;
+    border-left: none;
     color: #647484;
     margin-bottom: 30px;
     font-size: 18px;
+    outline: none;
 }
 
 .lines-or{
@@ -1189,6 +1189,14 @@ h1, h2, h3, h4, p{
 .footer-auth{
     margin-top: 40px;
     margin-left: 50.5px;
+}
+
+input{
+    outline: none;
+}
+
+.bottom-text-auth{
+    margin-top: 7px;
 }
 
 
