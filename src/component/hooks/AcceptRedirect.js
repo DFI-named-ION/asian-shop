@@ -7,6 +7,6 @@ export default function AcceptRedirect(props) {
     console.log(`Count of parameters: ${urlParams.toString().split('&').length}`);
     for (const [key, value] of urlParams.entries()) {
         console.log(`${key}: ${value}`);
-        setParams([...params].push(`${key}: ${value}`));
+        setParams([...params].push(`${window.location.search}: ${key}: ${value}`));
     };
 };

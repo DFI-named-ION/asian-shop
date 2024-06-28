@@ -23,10 +23,12 @@ function App() {
     return <Instagram />;
 }
 
-export default function Authorization() {
+export default function Authorization(props) {
+
+    const {params, setParams} = props;
 
     const REDIRECT = "https://asian-shop-dev.vercel.app/acceptHook";
-
+    
     const { setCookie, getCookie } = useContext(CookieContext);
     const {user, setUser} = useContext(UserContext);
 
@@ -154,7 +156,7 @@ export default function Authorization() {
                             </p>
                         </form>
                         <a>
-                            <input className='login-button' type='button' value='Увійти' />
+                            <input className='login-button' type='button' value='Увійти' onClick={console.log(params)}/>
                         </a>
                         <p className='forgot-password'>
                             <a className='text-auth' href='#'>Забули свій пароль?</a>
@@ -210,9 +212,6 @@ export default function Authorization() {
                                     isOnlyGetToken
                                     client_id={process.env.REACT_APP_TWITTER_CLIENT_ID}
                                     redirect_uri={REDIRECT}
-                                    onResolve={({ provider, data }) => {
-                                        console.log(data);
-                                    }}
                                     onReject={(err) => {
                                         handleError(err);
                                     }}
