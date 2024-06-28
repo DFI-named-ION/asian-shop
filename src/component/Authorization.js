@@ -209,13 +209,12 @@ export default function Authorization() {
                                     redirect_uri="https://asian-shop-dev.vercel.app"
                                     onResolve={({ provider, data }) => {
                                         console.log(data);
-                                        console.log("ENV_REACT_APP_TWITTER_CLIENT_ID:", process.env.REACT_APP_TWITTER_CLIENT_ID);
                                     }}
                                     onReject={(err) => {
                                         handleError(err);
                                     }}
                                 >
-                                    <button className='social-button'>
+                                    <button className='social-button' onClick={ console.log("ENV_REACT_APP_TWITTER_CLIENT_ID:", process.env.REACT_APP_TWITTER_CLIENT_ID) }>
                                         <img src={Instagram}/>
                                     </button>
                                 </LoginSocialTwitter>
