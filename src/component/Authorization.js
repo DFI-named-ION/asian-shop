@@ -25,7 +25,7 @@ function App() {
 
 export default function Authorization() {
 
-    console.log(new URLSearchParams(window.location.search));
+    const REDIRECT = "https://asian-shop-dev.vercel.app/acceptHook";
 
     const { setCookie, getCookie } = useContext(CookieContext);
     const {user, setUser} = useContext(UserContext);
@@ -174,6 +174,7 @@ export default function Authorization() {
                             <div>
                                 <LoginSocialGoogle
                                     isOnlyGetToken
+                                    redirect_uri={REDIRECT}
                                     client_id={process.env.REACT_APP_GOOGLE_CLIENT_ID}
                                     onResolve={({ provider, data }) => {
                                         handleSuccess(provider, data);
@@ -190,6 +191,7 @@ export default function Authorization() {
                             <div>
                                 <LoginSocialFacebook
                                     isOnlyGetToken
+                                    redirect_uri={REDIRECT}
                                     appId={process.env.REACT_APP_FACEBOOK_CLIENT_ID}
                                     onResolve={({ provider, data }) => {
                                         handleSuccess(provider, data);
@@ -207,23 +209,7 @@ export default function Authorization() {
                                 <LoginSocialTwitter
                                     isOnlyGetToken
                                     client_id={process.env.REACT_APP_TWITTER_CLIENT_ID}
-                                    redirect_uri="https://asian-shop-dev.vercel.app"
-                                    onResolve={({ provider, data }) => {
-                                        console.log(data);
-                                    }}
-                                    onReject={(err) => {
-                                        handleError(err);
-                                    }}
-                                >
-                                    <button className='social-button' onClick={ console.log("ENV_REACT_APP_TWITTER_CLIENT_ID:", process.env.REACT_APP_TWITTER_CLIENT_ID) }>
-                                        <img src={Instagram}/>
-                                    </button>
-                                </LoginSocialTwitter>
-                                {/* <LoginSocialInstagram
-                                    isOnlyGetToken
-                                    client_id={process.env.REACT_APP_INSTAGRAM_CLIENT_ID || ''}
-                                    client_secret={process.env.REACT_APP_INSTAGRAM_CLIENT_SECRET || ''}
-                                    redirect_uri={window.location.href}
+                                    redirect_uri={REDIRECT}
                                     onResolve={({ provider, data }) => {
                                         console.log(data);
                                     }}
@@ -234,7 +220,7 @@ export default function Authorization() {
                                     <button className='social-button'>
                                         <img src={Instagram}/>
                                     </button>
-                                </LoginSocialInstagram> */}
+                                </LoginSocialTwitter>
                                 {/* <LoginSocialTiktok
                                     client_key={process.env.REACT_APP_TIKTOK_CLIENT_KEY}
                                     redirect_uri={window.location.href}

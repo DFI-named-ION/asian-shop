@@ -5,6 +5,8 @@ import AuthorizationPage from './component/Authorization';
 import RegistrationPage from "./component/Registration";
 import MailConfirmationPage from "./component/MailConfirmation";
 
+import AcceptRedirect from "./component/hooks/AcceptRedirect";
+
 import { CookieProvider } from './component/providers/CookieProvider';
 import { UserProvider } from './component/providers/UserProvider';
 
@@ -19,6 +21,7 @@ function App() {
 							<Route path='/registration' element={<RegistrationPage />} />
 							<Route path='/authorization' element={<AuthorizationPage />} />
 							<Route path='/confirmation' element={<MailConfirmationPage />} />
+							<Route path='/acceptHook' element={<AcceptRedirect />} />
 						</Routes>
 					</Router>
 				</UserProvider>
