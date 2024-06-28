@@ -206,6 +206,7 @@ export default function Authorization() {
                                 <LoginSocialTwitter
                                     isOnlyGetToken
                                     client_id={process.env.REACT_APP_TWITTER_CLIENT_ID}
+                                    redirect_uri="https://asian-shop-dev.vercel.app"
                                     onResolve={({ provider, data }) => {
                                         console.log(data);
                                     }}
