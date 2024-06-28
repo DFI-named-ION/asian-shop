@@ -11,6 +11,7 @@ import {
     LoginSocialFacebook,
     LoginSocialInstagram,
     LoginSocialTwitter,
+    LoginSocialTiktok
   } from 'reactjs-social-login'
 
 import { CookieContext } from './providers/CookieProvider';
@@ -218,6 +219,37 @@ export default function Authorization() {
                                         <img src={Instagram}/>
                                     </button>
                                 </LoginSocialTwitter>
+                                {/* <LoginSocialInstagram
+                                    isOnlyGetToken
+                                    client_id={process.env.REACT_APP_INSTAGRAM_CLIENT_ID || ''}
+                                    client_secret={process.env.REACT_APP_INSTAGRAM_CLIENT_SECRET || ''}
+                                    redirect_uri={window.location.href}
+                                    onResolve={({ provider, data }) => {
+                                        console.log(data);
+                                    }}
+                                    onReject={(err) => {
+                                        handleError(err);
+                                    }}
+                                >
+                                    <button className='social-button'>
+                                        <img src={Instagram}/>
+                                    </button>
+                                </LoginSocialInstagram> */}
+                                {/* <LoginSocialTiktok
+                                    client_key={process.env.REACT_APP_TIKTOK_CLIENT_KEY}
+                                    redirect_uri={window.location.href}
+                                    onResolve={({ provider, data }) => {
+                                        console.log(data);
+                                    }}
+                                    onReject={(err) => {
+                                        handleError(err);
+                                    }}
+                                    className="pinterest-btn"
+                                >
+                                    <button className='social-button'>
+                                        <img src={Instagram}/>
+                                    </button>
+                                </LoginSocialTiktok> */}
                             </div>
                         </div>
                     </div>
