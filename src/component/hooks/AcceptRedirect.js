@@ -1,4 +1,4 @@
-export default function MailConfirmation() {
+export default function AcceptRedirect() {
     console.log("Hooked!");
 
     const urlParams = new URLSearchParams(window.location.search);
