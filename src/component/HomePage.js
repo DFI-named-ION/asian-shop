@@ -261,7 +261,30 @@ const closeModal_27 = () => {
 const closeModal_28 = () => {
   setModalIsOpen_28(false);
 };
+let assetsPath = require.context('../images/img', false, /\.(png|jpe?g|svg)$/); 
+const Carousel = ({ items }) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const length = items.length;
+  const handleNext = () => {
+    console.log(items[currentIndex]);
+    setCurrentIndex((prevIndex) => (prevIndex < length - 1 ? prevIndex + 1 : 0));
+  };
   
+  const handlePrev = () => {
+    setCurrentIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : length - 1));
+  };
+  
+  return (
+    <div className='left-description-div'>
+      <div className='button-carousel button-left-carousel' onClick={handlePrev}><a class="prev-carousel"></a></div>
+      <div className='img-carousel'>
+        <img src={assetsPath(items[currentIndex])} alt={`Slide ${currentIndex + 1}`}></img>
+      </div>
+      <div className='button-carousel button-right-carousel' onClick={handleNext}> <a class="next-carousel"></a></div></div>
+  );
+};
+
+
   return (
     <body className='homePage-body'>
     <><><header>
@@ -338,15 +361,7 @@ const closeModal_28 = () => {
               </section>
               <section id='description-box-section'>
                 <div className='description-div'>
-                    <div className='left-description-div'>
-                      <div className='button-carousel button-left-carousel'><a class="prev-carousel" 
-                      onclick="plusSlides(-1)"></a></div>
-                      <div className='img-carousel'>
-                    <img src={require('../images/img/karusel1.jpg')} alt='tea'></img>
-                    </div>
-                    <div className='button-carousel button-right-carousel'> <a class="next-carousel" 
-                      onclick="plusSlides(1)"></a></div>
-                    </div>
+                <Carousel items={['./karusel1.jpg', './karusel2.jpg', './karusel3.jpg', './karusel4.jpg', './karusel5.jpg']}/>
                     <div className='right-description-div'>
                 <div className='subtitle-div'>
                   <h3 className='subtitle'>КОЖНА КОРОБКА РОЗРИВАЄТЬСЯ З</h3>
