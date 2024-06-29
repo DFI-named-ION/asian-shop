@@ -352,12 +352,12 @@ const closeModal_28 = () => {
                   <h3 className='subtitle'>КОЖНА КОРОБКА РОЗРИВАЄТЬСЯ З</h3>
                   </div>
                   <div className='title-description-div'>
-                  <h2 className='title-basis'>Закуски, посмішки та багато іншого.</h2>
+                  <h2 className='title-basis title-desc'>Закуски, посмішки та багато іншого.</h2>
                   </div>
                   <div className='block-description-div'>
                  <div className='left-block-description-div'>
                     <div className='box-description-div'>
-                    <div className='icon-description-div'>
+                    <div className='icon-description-div noodle-description-div'>
                   <img src={Noodle} id='noodle'></img>
                   </div>
                   <div className='text-block-description-div'>
@@ -367,7 +367,7 @@ const closeModal_28 = () => {
                   </div>
                   <div className='box-description-div'>
                   <div className='icon-description-div group-title'>
-                  <img src={Group} id='group'></img>
+                  <img className='group-description-div' src={Group} id='group'></img>
                   </div>
                   <div className='text-block-description-div'>
                   <h4 className='title-description group-title'>КЕПСЕКИ SAKURATAILS</h4>
@@ -387,7 +387,7 @@ const closeModal_28 = () => {
                   </div>
                   </div>
                   <div className='box-description-div'>
-                  <div className='icon-description-div'>
+                  <div className='icon-description-div medal-description-div'>
                   <img src={Medal} alt='medal'></img>
                   </div>
                   <div className='text-block-description-div'>
@@ -397,6 +397,12 @@ const closeModal_28 = () => {
                   </div>
                   </div>
                   </div>
+                  </div>
+                  <a href='#subcribtion-section'>
+                      <input className='subcribtion-now-button' type='button' value='SUBSCRIBE NOW' />
+                  </a>
+                  <div className='gift-div gift-right-div'>
+                  <a className='gift' href='#'>Gift</a>
                   </div>
                   </div>
                   </div>
@@ -2320,7 +2326,7 @@ const closeModal_28 = () => {
                 <div className='top-footer-div'>
                 <div className='logo-footer-div'>
                       <img className='footer-wolf' href='/' src={WhiteWolf} alt='logo SakuraTails'></img>
-                      <a className='head-logo' href='/'>SakuraTails</a>
+                      <a className='head-logo footer-logo' href='/'>SakuraTails</a>
                   </div>
                   <div className='nav-footer-div'>
                     <div className='left-nav-div'>
