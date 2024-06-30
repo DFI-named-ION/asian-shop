@@ -2,17 +2,11 @@ import React, { useState, useEffect, useContext } from 'react';
 
 import Google from '../images/socials/google-auth.svg'
 import Facebook from '../images/socials/facebook-auth.svg'
-import Instagram from '../images/socials/instagram-auth.svg'
+import Twitter from '../images/socials/twitter-auth.svg';
 
+import { auth, facebook, google, twitter } from "./../firebaseConfig";
+import { signInWithPopup, signInWithEmailAndPassword } from "firebase/auth";
 import axios from 'axios';
-import { jwtDecode } from "jwt-decode";
-import {
-    LoginSocialGoogle,
-    LoginSocialFacebook,
-    LoginSocialInstagram,
-    LoginSocialTwitter,
-    LoginSocialTiktok
-  } from 'reactjs-social-login'
 
 import { CookieContext } from './providers/CookieProvider';
 import { UserContext } from './providers/UserProvider';
@@ -20,118 +14,93 @@ import { UserContext } from './providers/UserProvider';
 function App() {
     return <Google />;
     return <Facebook />;
-    return <Instagram />;
+    return <Twitter />;
 }
 
-export default function Authorization(props) {
-
-    const {params, setParams} = props;
-
-    const REDIRECT = "https://asian-shop-dev.vercel.app/acceptHook";
+export default function Authorization() {
     
     const { setCookie, getCookie } = useContext(CookieContext);
     const {user, setUser} = useContext(UserContext);
 
     useEffect(() => {
         if (user) {
-            window.location = "/";
-        }
-    }, []);
+            if (user.emailVerified) {
+                window.location = "/";
+            }
+            window.location = "/confirmation";
+        };
+    });
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
     const handleEmailChange = async (e) => {
         setEmail(e.target.value);
-    }
+    };
+
     const handlePasswordChange = async (e) => {
         setPassword(e.target.value);
-    }
-    const handleLoginClick = async (e) => {
-        e.preventDefault();
-        let inf = {
-            email: email,
-            password: password
+    };
+
+    const handleThirdPartyLogin = async (user) => {
+        let dto = {
+            accessToken: user.stsTokenManager.accessToken,
         };
-        axios.post(process.env.REACT_APP_WEB_API_BASE_URL + '/Users/login', inf)
-        .then(response => {
-            let newUser = {};
-            newUser.token = response.data.token;
-            let decoded = jwtDecode(response.data.token);
-            newUser.role = decoded.role;
-            newUser.email = decoded.email;
-            newUser.providerUserId = decoded.providerUserId;
-            newUser.provider = decoded.provider;
-            newUser.userId = decoded.userId;
-            setCookie("cookieUser", newUser, 1/24);
-            setUser(newUser);
-            //window.location = "/";
+
+        axios.post(process.env.REACT_APP_WEB_API_BASE_URL + "/Auth/handleNewUser", dto)
+        .then((response) => {
+            if (response.data.status === "Success") {
+                setUser((prevUser) => {
+                    const updatedUser = {
+                        ...prevUser,
+                        role: response.data.role
+                    };
+                    return updatedUser;
+                });
+            } else {
+                handleError(response.data.status);
+            };
         })
-        .catch(err => {
-            // diplay error!
+        .catch((err) => {
+            handleError(err);
         });
     };
 
-    const handleSuccess = (provider, data) => {
-        let newUser = {};
-        switch (provider) {
-            case "google":
-                if (data.Kq) {
-                    newUser.accessToken = data.access_token;
-                    axios.post(process.env.REACT_APP_WEB_API_BASE_URL + "/Users/authorizeGoogleUser", newUser)
-                    .then((response) => {
-                        newUser = {};
-                        newUser.token = response.data.token;
-                        let decoded = jwtDecode(response.data.token);
-                        newUser.role = decoded.role;
-                        newUser.email = decoded.email;
-                        newUser.providerUserId = decoded.providerUserId;
-                        newUser.provider = decoded.provider;
-                        newUser.userId = decoded.userId;
-                        setCookie("cookieUser", newUser, 1/24);
-                        setUser(newUser);
-                        //window.location = "/";
-                    })
-                    .catch((error) => {
-                        alert(error);
-                        // some where to display error
-                    });
-                } else {
-                    // display error: Popup closed!
-                }
-                break;
-            case "facebook":
-                if (data !== "unknown") {
-                    newUser.accessToken = data.accessToken;
-                    axios.post(process.env.REACT_APP_WEB_API_BASE_URL + "/Users/authorizeFacebookUser", newUser)
-                    .then((response) => {
-                        newUser = {};
-                        newUser.token = response.data.token;
-                        let decoded = jwtDecode(response.data.token);
-                        newUser.role = decoded.role;
-                        newUser.email = decoded.email;
-                        newUser.providerUserId = decoded.providerUserId;
-                        newUser.provider = decoded.provider;
-                        newUser.userId = decoded.userId;
-                        setCookie("cookieUser", newUser, 1/24);
-                        setUser(newUser);
-                        //window.location = "/";
-                    })
-                    .catch((error) => {
-                        // some where to display error
-                    });
-                } else {
-                    // display text error!
-                    // Authentication failed. If you have two-step verification enabled, please complete the process. Otherwise, try logging in again.
-                }
-                break;
-            case "instagram":
-                console.log(data);
+    const login = async (provider) => {
+        try {
+            const result = await signInWithPopup(auth, provider);
+            console.log(result.user);
+            setUser(result.user);
+            //handleThirdPartyLogin(result.user);
+        } catch (err) {
+            handleError(err);
         };
     };
 
+    const handleLoginClick = async (e) => {
+        e.preventDefault();
+        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        const passRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,64}$/;
+        if (!emailRegex.test(email)) {
+            handleError("Invalid email format");
+            return;
+        }
+        if (!passRegex.test(password)) {
+            handleError("Invalid password format:\nYour password must be between 6 and 64 characters long\nYour password must include at least one letter (uppercase or lowercase)\nYour password must include at least one special character from the following set: @, $, !, %, *, ?, &");
+            return;
+        }
+        try {
+            const result = await signInWithEmailAndPassword(auth, email, password);
+            setUser(result.user);
+            window.location = "/confirmation";
+            // store user!
+        } catch (err) {
+            handleError(err.message);
+        }
+    };
+
     const handleError = (error) => {
-        console.log(error);
+        console.log(`${error}`);
     };
 
     return (
@@ -148,15 +117,15 @@ export default function Authorization(props) {
                         <form className='form-auth'>
                             <h5 className='title-line'>Пошта</h5>
                             <p className='text-auth'>
-                                <input className='text-block' type='login' name='Email' placeholder='IDK@gmail.com'/>
+                                <input className='text-block' type='login' name='Email' value={email} onChange={handleEmailChange} placeholder='IDK@gmail.com' required/>
                             </p>
                             <h5 className='title-line'>Пароль</h5>
                             <p className='text-auth'>
-                                <input className='text-block' type='password' name='Password' placeholder='*********'/>
+                                <input className='text-block' type='password' name='Password' value={password} onChange={handlePasswordChange} placeholder='*********' required/>
                             </p>
                         </form>
                         <a>
-                            <input className='login-button' type='button' value='Увійти' onClick={console.log(params)}/>
+                            <input className='login-button' type='submit' value='Увійти' onClick={handleLoginClick}/>
                         </a>
                         <p className='forgot-password'>
                             <a className='text-auth' href='#'>Забули свій пароль?</a>
@@ -174,67 +143,19 @@ export default function Authorization(props) {
 
                         <div className='socials-auth-div'>
                             <div>
-                                <LoginSocialGoogle
-                                    isOnlyGetToken
-                                    redirect_uri={REDIRECT}
-                                    client_id={process.env.REACT_APP_GOOGLE_CLIENT_ID}
-                                    onResolve={({ provider, data }) => {
-                                        handleSuccess(provider, data);
-                                    }}
-                                    onReject={(err) => {
-                                        handleError(err);
-                                    }}
-                                >
-                                    <button className='social-button'>
-                                        <img src={Google}/>
-                                    </button>
-                                </LoginSocialGoogle>
+                                <button className='social-button' onClick={() => login(google)}>
+                                    <img src={Google}/>
+                                </button>
                             </div>
                             <div>
-                                <LoginSocialFacebook
-                                    isOnlyGetToken
-                                    redirect_uri={REDIRECT}
-                                    appId={process.env.REACT_APP_FACEBOOK_CLIENT_ID}
-                                    onResolve={({ provider, data }) => {
-                                        handleSuccess(provider, data);
-                                    }}
-                                    onReject={(err) => {
-                                        handleError(err);
-                                    }}
-                                >
-                                    <button className='social-button'>
-                                        <img src={Facebook}/>
-                                    </button>
-                                </LoginSocialFacebook>
+                                <button className='social-button' onClick={() => login(facebook)}>
+                                    <img src={Facebook}/>
+                                </button>
                             </div>
                             <div>
-                                <LoginSocialTwitter
-                                    isOnlyGetToken
-                                    client_id={process.env.REACT_APP_TWITTER_CLIENT_ID}
-                                    redirect_uri={REDIRECT}
-                                    onReject={(err) => {
-                                        handleError(err);
-                                    }}
-                                >
-                                    <button className='social-button'>
-                                        <img src={Instagram}/>
-                                    </button>
-                                </LoginSocialTwitter>
-                                {/* <LoginSocialTiktok
-                                    client_key={process.env.REACT_APP_TIKTOK_CLIENT_KEY}
-                                    redirect_uri={window.location.href}
-                                    onResolve={({ provider, data }) => {
-                                        console.log(data);
-                                    }}
-                                    onReject={(err) => {
-                                        handleError(err);
-                                    }}
-                                    className="pinterest-btn"
-                                >
-                                    <button className='social-button'>
-                                        <img src={Instagram}/>
-                                    </button>
-                                </LoginSocialTiktok> */}
+                                <button className='social-button' onClick={() => login(twitter)}>
+                                    <img src={Twitter}/>
+                                </button>
                             </div>
                         </div>
                     </div>
