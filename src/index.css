@@ -21,6 +21,8 @@
     box-sizing: border-box;
     max-width: 5000px;
     min-width: 1900px;
+    max-height: 5100px;
+    background-size: cover;
 }
 
 ul{
@@ -528,20 +530,11 @@ h1, h2, h3, h4, p{
 }
 
 .book-description-div{
-    margin-right: 30px;
-    margin-top: 25px;
-}
-
-.noodle-description-div{
-    margin-top: 10px;
-}
-
-.group-description-div{
-    margin-top: 25px;
+    margin-right: 25px;
+    margin-top: 5px;
 }
 
 .medal-description-div{
-    margin-top: 30px;
     margin-right: 15px;
 }
 
