@@ -102,7 +102,7 @@ export default function Registration() {
                             <h5 className='title-line'>Ім'я</h5>
                             <p className='text-auth'><input className='text-block' type='text' name='Name' value={name} onChange={handleNameChange} placeholder='Best name'></input></p>
                             <h5 className='title-line'>Пошта</h5>
-                            <p className='text-auth'><input className='text-block' type='login' name='Email' value={email} onChange={handleEmailChange} placeholder='IDK@gmail.com' required></input></p>
+                            <p className='text-auth'><input className='text-block' type='login' name='Email' value={email} onChange={handleEmailChange} placeholder='email@gmail.com' required></input></p>
                             <h5 className='title-line'>Пароль</h5>
                             <p className='text-auth'><input className='text-block' type='password' name='Password' value={password} onChange={handlePasswordChange} placeholder='*********' required></input></p>
                         </form>

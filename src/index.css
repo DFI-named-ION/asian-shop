@@ -21,6 +21,8 @@
     box-sizing: border-box;
     max-width: 5000px;
     min-width: 1900px;
+    max-height: 5100px;
+    background-size: cover;
 }
 
 ul{
@@ -528,20 +530,11 @@ h1, h2, h3, h4, p{
 }
 
 .book-description-div{
-    margin-right: 30px;
-    margin-top: 25px;
-}
-
-.noodle-description-div{
-    margin-top: 10px;
-}
-
-.group-description-div{
-    margin-top: 25px;
+    margin-right: 25px;
+    margin-top: 5px;
 }
 
 .medal-description-div{
-    margin-top: 30px;
     margin-right: 15px;
 }
 
@@ -833,6 +826,10 @@ h1, h2, h3, h4, p{
     /* padding-bottom: 21px; */
     padding-right: 21px;
     padding-top: 21px;
+    position: absolute;
+    left: 43%;
+    top: 15%;
+    right: -50%;
 }
 
 .background-modal-div{
@@ -840,15 +837,15 @@ h1, h2, h3, h4, p{
     height: 100%;
     /* background: rgba(18, 25, 31, 0.3); */
     background-color: rgba(0, 0, 0, 0.25);
-    padding-left: 725px;
-    padding-top: 100px;
+    /* padding-left: 725px;
+    padding-top: 100px; */
     overlay: none;
 }
 
 .close-modal-button{
-  position: relative;
-  bottom: 0px;
-  left: 445px;
+  position: absolute;
+  top: 120px;
+  left: 1260px;
   border: 0;
   width: 24px;
   height: 24px;
@@ -1167,7 +1164,7 @@ h1, h2, h3, h4, p{
     border-top: none;
     border-right: none;
     border-left: none;
-    color: #647484;
+    color: #182531;
     margin-bottom: 30px;
     font-size: 18px;
     outline: none;
@@ -1329,3 +1326,53 @@ input{
     margin-top: 40px;
 }
 
+/* Password change */
+
+.left-pas{
+    margin-left: 62px;
+    margin-top: 414px;
+    margin-right: 65px;
+}
+
+.left-pas h1{
+    font-size: 146px;
+    font-weight: 700;
+    color: #EAE5D9;
+    width: 963px;
+}
+
+.right-pas{
+    background: radial-gradient(circle, rgba(186,33,33,0.1) 0%, rgba(255,250,120,0.1) 100%);
+    backdrop-filter: blur(10px); 
+    border-radius: 40px;
+    width: 680px;
+    margin-top: 304px;
+    margin-right: 150px;
+    padding-top: 62px;
+    padding-bottom: 62px;
+    padding-left: 75px;
+    padding-right: 75px;
+}
+
+.left-arrow{
+    position: absolute;
+    top: 30px;
+    left: 35px;
+    cursor: pointer;
+}
+
+.text-pas-div{
+    color: #182531;
+    font-size: 20px;
+    font-weight: 400;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+.title-pas-div{
+    margin-bottom: 20px;
+}
+
+.form-pas-plus{
+    margin-bottom: -15px;
+}

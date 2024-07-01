@@ -117,7 +117,7 @@ export default function Authorization() {
                         <form className='form-auth'>
                             <h5 className='title-line'>Пошта</h5>
                             <p className='text-auth'>
-                                <input className='text-block' type='login' name='Email' value={email} onChange={handleEmailChange} placeholder='IDK@gmail.com' required/>
+                                <input className='text-block' type='login' name='Email' value={email} onChange={handleEmailChange} placeholder='email@gmail.com' required/>
                             </p>
                             <h5 className='title-line'>Пароль</h5>
                             <p className='text-auth'>
