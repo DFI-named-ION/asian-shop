@@ -108,7 +108,14 @@ h1, h2, h3, h4, p{
     color: #EAE5D9;
     text-decoration: none;
     background-color: #951717;
-}  
+    font-size: 16px;
+    font-weight: 600;
+    font-family: "Montserrat", sans-serif;
+} 
+
+.header-link-market{
+    margin-right: 30px;
+}
 
 .head-logo{
     background-color: #951717;
@@ -1375,4 +1382,160 @@ input{
 
 .form-pas-plus{
     margin-bottom: -15px;
+}
+
+/* Profile page */
+
+.title-profile{
+    position:fixed;
+    top: 70px
+}
+
+.title-profile h1{
+    font-size: 181px;
+    font-weight: 600;
+    color: rgba(64, 74, 84, 0.4);
+    background-color: transparent;
+}
+
+.profile-section{
+    padding-left: 150px;
+    padding-right: 150px;
+    background-color: transparent;
+}
+
+.top-block-div{
+    width: 1620px;
+    padding-top: 60px;
+    padding-right: 60px;
+    padding-left: 70px;
+    padding-bottom: 20px;
+    margin-top: 105px;
+    background: linear-gradient(90deg, rgba(186,134,33,0.4) 0%, rgba(255,250,120,0) 100%);
+    display: flex;
+    color: #647484;
+    backdrop-filter: blur(5px);
+    border-radius: 10px;
+}
+
+.ProfilePage-body h2{
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.ProfilePage-body{
+    background-color: #EAE5D9;
+    font-family: "Montserrat", sans-serif;
+    max-width: 5000px;
+    min-width: 1900px;
+}
+
+.top-left-block-div{
+    margin-right: 230px;
+}
+
+.columns-profile-div{
+    display: flex;
+    justify-content: space-between;
+    width: 677px;
+    margin-top: 45px;
+    height: 148px;
+}
+
+.column-profile-div h4{
+    font-size: 15px;
+    color: #647484;
+    font-weight: 400;
+    margin-bottom: 8px;
+}
+
+.column-profile-div p{
+    font-size: 14px;
+    color: #182531;
+    font-weight: 400;
+    margin-bottom: 12px;
+}
+
+.edit-profile-button{
+    width: 116px;
+    height: 40px;
+    background-color: #951717;
+    color: #EAE5D9;
+    border-radius: 8px;
+    border: none;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.edit-profile-button:hover{
+    background-color: transparent;
+    color: #182531;
+    border: 2px #182531 solid;
+}
+
+.druk-paper{
+    width: 309px;
+}
+
+.medium-block-div{
+    width: 1620px;
+    padding-top: 25px;
+    padding-right: 60px;
+    padding-left: 70px;
+    padding-bottom: 25px;
+    margin-top: 20px;
+    background: linear-gradient(90deg, rgba(186,134,33,0.4) 0%, rgba(255,250,120,0) 100%);
+    display: flex;
+    color: #647484;
+    backdrop-filter: blur(5px);
+    border-radius: 10px;
+}
+
+.medium-block-div h2{
+    margin-bottom: 20px;
+}
+
+.medium-block-div p{
+    margin-bottom: 20px;
+}
+
+.bottom-block-div{
+    width: 1620px;
+    padding-top: 50px;
+    padding-right: 60px;
+    padding-left: 70px;
+    padding-bottom: 20px;
+    margin-top: 20px;
+    background: linear-gradient(90deg, rgba(186,134,33,0.4) 0%, rgba(255,250,120,0) 100%);
+    display: flex;
+    color: #647484;
+    backdrop-filter: blur(5px);
+    border-radius: 10px;
+}
+
+.bottom-block-div h2{
+    margin-bottom: 20px;
+}
+
+.bottom-block-div .column-profile-div{
+    margin-bottom: 20px;
+}
+
+.exit-profile{
+    margin-top: 20px;
+}
+
+.footer-profile-div{
+    margin-top: 20px;
+    margin-bottom: 60px;
+}
+
+.footer-profile-div h3{
+    font-size: 15px;
+    font-weight: 400;
+    color: #647484;
+}
+
+.footer-profile-div a{
+    text-decoration: none;
 }
