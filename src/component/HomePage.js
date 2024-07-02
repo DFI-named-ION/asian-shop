@@ -292,10 +292,10 @@ const Carousel = ({ items }) => {
             <div className='head-div'>
                 <div className='head-left-div'>
                 <div className='head-nav-div'>
-                  <a className='header-link' href='https://www.figma.com/'>MARKET</a>
+                  <a className='header-link header-link-market' href='https://www.figma.com/'>Каталог</a>
                   </div>
                   <div className='head-nav-div'>
-                  <a className='header-link' href='https://www.figma.com/'>GIFT</a>
+                  <a className='header-link' href='https://www.figma.com/'>Подарунки</a>
                   </div>
                   </div>
               <div className='head-logo-div'>
@@ -303,10 +303,10 @@ const Carousel = ({ items }) => {
               </div>
               <div className='head-right-div'>
               <div className='head-nav-div'>
-                  <a className='header-link' href='https://www.figma.com/'>ABOUT</a>
+                  <a className='header-link' href='https://www.figma.com/'>Про нас</a>
                   </div>
                   <div className='head-nav-div'>
-                  <a className='header-link' href='https://www.figma.com/'>BOXES</a>
+                  <a className='header-link' href='https://www.figma.com/'>Коробки</a>
                   </div>
               <div className='head-nav-div'>
               <a href='#' className='icon-head'>
