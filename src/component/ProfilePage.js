@@ -125,6 +125,7 @@ export default function ProfilePage() {
                   <div className='title-profile'>
                     <h1>Профіль</h1>
                   </div>
+                  {/* FIRST PART */}
                   <div className='top-block-div'>
                     <div className='top-left-block-div'>
                       <h2 className='title-profile-block'>
@@ -152,26 +153,87 @@ export default function ProfilePage() {
                       </div>
                       <input className='edit-profile-button' type='button' value='Редагувати' />
                     </div>
+                    </div>
+
+                    {/* SECOND PART */}
+                    {/* <div className='top-block-div'>
+                    <div className='top-left-block-div'>
+                      <h2 className='title-profile-block title-black-profile-block'>
+                        Особисті дані
+                      </h2>
+                      <div className='columns-profile-div columns-top-profile-div'>
+                        <div className='column-profile-div'>
+                          <h4>Прізвище</h4>
+                          <p className='input-profile'>
+                                <input className='line-profile' type='text' name='first name' required/>
+                            </p>
+                          <h4 className='top-margin-profile-title'>Дата народження</h4>
+                          <p className='input-profile'>
+                                <input className='date-profile' type='date' name='date' required/>
+                            </p>
+                        </div>
+                        <div className='column-profile-div'>
+                        <h4>Ім'я</h4>
+                        <p className='input-profile'>
+                                <input className='line-profile' type='text' name='last name' required/>
+                            </p>
+                        <h4 className='top-margin-profile-title'>Стать</h4>
+                        <select className='select-profile'>
+                        <option>Чоловік</option>
+                        <option>Жінка</option>
+                        </select>
+                        </div>
+                        <div className='column-profile-div'>
+                        <h4>По батькові</h4>
+                        <p className='input-profile'>
+                                <input className='line-profile' type='text' name='father name' required/>
+                            </p>
+                        <h4 className='top-margin-profile-title'>Мова спілкування</h4>
+                        <p className='input-profile'>
+                                <input className='line-profile' type='text' name='language' required/>
+                            </p>
+                        </div>
+                      </div>
+                      <div className='button-profile-div'>
+                      <input className='save-profile-button button-top-profile-div' type='button' value='Зберегти' />
+                      <input className='cancel-profile-button button-top-profile-div' type='button' value='Скасувати' />
+                      </div>
+                    </div>
                     <div className='top-right-block-div'>
-                    <h2 className='title-profile-block'>
+                    <h2 className='title-profile-block title-black-profile-block'>
                         Контакти
                       </h2>
                       <div className='columns-profile-div'>
                         <div className='column-profile-div'>
                           <h4>Підтверджений телефон</h4>
-                          <p>+380 66 000 00 00</p>
+                          <p className='input-profile'>
+                                <input className='line-profile' type='tel' name='telephone' required/>
+                            </p>
+                            <a className='add-info-profile' href='#'>
+                            <p>Додати ще номер</p>
+                            </a>
                         </div>
                         <div className='column-profile-div'>
                         <h4>Електронна пошта</h4>
-                        <p>email@gmail.com</p>
+                        <p className='input-profile'>
+                                <input className='line-profile' type='email' name='email' placeholder='email@gmail.com' required/>
+                            </p>
+                            <div className='checkbox-profile-div'>
+                            <p className='input-profile'>
+                                <input className='checkbox-profile' type='checkbox' name='checkbox' required/>
+                            </p>
                         <h4 className='druk-paper'>Не друкувати паперові чеки та гарантійні талони</h4>
-                          <p>Так</p>
+                        </div>
                         </div>
                       </div>
-                      <input className='edit-profile-button' type='button' value='Редагувати' />
+                      <div className='button-profile-div'>
+                      <input className='save-profile-button button-top-profile-div' type='button' value='Зберегти' />
+                      <input className='cancel-profile-button button-top-profile-div' type='button' value='Скасувати' />
+                      </div>
                     </div>
-                  </div>
+                  </div> */}
 
+                  {/* FIRST PART */}
                   <div className='medium-block-div'>
                     <div className='top-left-block-div'>
                       <h2 className='title-profile-block'>
@@ -184,6 +246,49 @@ export default function ProfilePage() {
                     </div>
                   </div>
 
+                  {/* SECOND PART */}
+                  {/* <div className='medium-block-div'>
+                    <div className='top-left-block-div'>
+                      <h2 className='title-profile-block title-black-profile-block'>
+                        Адреса доставки
+                      </h2>
+                      <div className='columns-profile-div columns-medium-profile-div'>
+                        <div className='column-profile-div'>
+                        <h4>Місто</h4>
+                          <p className='input-profile'>
+                                <input className='line-profile' type='text' name='city' required/>
+                            </p>
+                            <a className='add-info-profile' href='#'>
+                            <p>Додати ще адресу</p>
+                            </a>
+                      </div>
+                      <div className='column-profile-div'>
+                        <h4>Вулиця</h4>
+                          <p className='input-profile'>
+                                <input className='line-profile' type='address' name='street' required/>
+                            </p>
+                      </div>
+                      <div className='column-profile-div'>
+                        <h4>Будинок</h4>
+                          <p className='input-profile'>
+                                <input className='line-profile line-small-profile' type='text' name='house' required/>
+                            </p>
+                      </div>
+                      <div className='column-profile-div'>
+                        <h4>Квартира</h4>
+                          <p className='input-profile'>
+                                <input className='line-profile line-small-profile' type='text' name='apartment' required/>
+                            </p>
+                      </div>
+                      </div>
+                      <div className='button-profile-div button-medium-profile-div'>
+                      <input className='save-profile-button' type='button' value='Зберегти' />
+                      <input className='cancel-profile-button' type='button' value='Скасувати' />
+                      </div>
+                    </div>
+                  </div> */}
+
+                  {/* FIRST PART */}
                   <div className='bottom-block-div'>
                     <div className='top-left-block-div'>
                       <h2 className='title-profile-block'>
@@ -196,6 +301,58 @@ export default function ProfilePage() {
                       <input className='edit-profile-button' type='button' value='Редагувати' />
                     </div>
                   </div>
+
+                  {/* SECONT PART */}
+                  {/* <div className='bottom-block-div'>
+                    <div className='top-left-block-div'>
+                      <h2 className='title-profile-block title-black-profile-block'>
+                        Мої отримувачі замовлень
+                      </h2>
+                        <div className='column-profile-div'>
+                        <h4>Отримувач (за замовчуванням)</h4>
+                        <p className='input-profile'>
+                                <input className='line-profile' type='text' name='text' required/>
+                            </p>
+                      </div>
+
+                      <p className='title-bottom-profile'>
+                        Отримувач замовлень
+                      </p>
+                      <div className='columns-profile-div columns-bottom-profile-div'>
+                      <div className='column-profile-div'>
+                        <h4>Прізвище</h4>
+                          <p className='input-profile'>
+                                <input className='line-profile' type='text' name='first name' required/>
+                            </p>
+                            <a className='add-info-profile' href='#'>
+                            <p>Додати ще отримувача</p>
+                            </a>
+                      </div>
+                      <div className='column-profile-div'>
+                        <h4>Ім'я</h4>
+                          <p className='input-profile'>
+                                <input className='line-profile' type='text' name='last name' required/>
+                            </p>
+                      </div>
+                      <div className='column-profile-div'>
+                        <h4>По батькові</h4>
+                          <p className='input-profile'>
+                                <input className='line-profile' type='text' name='father name' required/>
+                            </p>
+                      </div>
+                      <div className='column-profile-div'>
+                        <h4>Мобільний телефон</h4>
+                          <p className='input-profile'>
+                                <input className='line-profile' type='tel' name='tel' required/>
+                            </p>
+                      </div>
+                      </div>
+                      <div className='button-profile-div button-medium-profile-div'>
+                      <input className='save-profile-button' type='button' value='Зберегти' />
+                      <input className='cancel-profile-button' type='button' value='Скасувати' />
+                      </div>
+                    </div>
+                  </div> */}
 
                   <div className='footer-profile-div'>
                     <a href='#'>

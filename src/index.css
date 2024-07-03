@@ -1539,3 +1539,146 @@ input{
 .footer-profile-div a{
     text-decoration: none;
 }
+
+.line-profile{
+    width: 210px;
+    height: 40px;
+    border-radius: 5px;
+    border: 1px solid #647484;
+    color: #182531;
+    font-size: 16px;
+    font-weight: 400;
+    background-color: transparent;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.date-profile{
+    width: 155px;
+    height: 40px;
+    border-radius: 5px;
+    border: 1px solid #647484;
+    color: #182531;
+    font-size: 16px;
+    font-weight: 400;
+    background-color: transparent;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.select-profile{
+    width: 210px;
+    height: 40px;
+    border-radius: 5px;
+    border: 1px solid #647484;
+    color: #182531;
+    font-size: 16px;
+    font-weight: 400;
+    background-color: transparent;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.checkbox-profile{
+    width: 18px;
+    height: 18px;
+    color: transparent;
+    margin-right: 13px;
+    margin-top: 10px;
+}
+
+.checkbox-profile-div{
+    display: flex;
+    margin-top: 40px;
+}
+
+.button-profile-div{
+    width: 210px;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 41px;
+}
+
+.save-profile-button{
+    width: 101px;
+    height: 40px;
+    background-color: #647484;
+    color: #EAE5D9;
+    border-radius: 8px;
+    border: 0px;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.save-profile-button:hover{
+    background-color: transparent;
+    border: #647484 solid 2px;
+    color: #647484;
+}
+
+.cancel-profile-button{
+    width: 101px;
+    height: 40px;
+    background-color: transparent;
+    color: #951717;
+    border-radius: 8px;
+    border: 0px;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.cancel-profile-button:hover{
+    color: #647484;
+}
+
+.add-info-profile p{
+    font-size: 15px;
+    font-weight: 400;
+    color: #647484;
+}
+
+.add-info-profile{
+    text-decoration: none;
+}
+
+.columns-medium-profile-div{
+    width: 808px;
+}
+
+.line-small-profile{
+    width: 134px;
+}
+
+.button-medium-profile-div{
+    margin-top: -20px;
+}
+
+.title-bottom-profile{
+    font-size: 20px;
+    font-weight: 400;
+    color: #647484;
+    margin-top: 40px;
+}
+
+.title-black-profile-block{
+    color: #182531;
+}
+
+.columns-bottom-profile-div{
+    width: 937px;
+    margin-top: 25px;
+}
+
+.top-margin-profile-title{
+    margin-top: 41px;
+}
+
+.button-top-profile-div{
+    margin-top: 41px;
+}
