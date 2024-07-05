@@ -1,9 +1,9 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
-import HomePage from "./component/HomePage"
+import HomePage from "./component/PasswordChange"
 import AuthorizationPage from './component/Authorization';
 import RegistrationPage from "./component/Registration";
-import MailConfirmationPage from "./component/MailConfirmation";
+import MailConfirmationPage from "./component/PasswordChange";
 import ProfilePage from './component/ProfilePage';
 
 import { CookieProvider } from './component/providers/CookieProvider';

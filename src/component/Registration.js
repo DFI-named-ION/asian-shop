@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-
+import Arrow from '../images/icons/arrowLeft.svg';
 import Google from '../images/socials/google-auth.svg';
 import Facebook from '../images/socials/facebook-auth.svg';
 import Twitter from '../images/socials/twitter-auth.svg';
@@ -15,6 +15,7 @@ function App() {
     return <Google />;
     return <Facebook />;
     return <Twitter />;
+    return <Arrow />;
 }
 
 export default function Registration() {
@@ -84,8 +85,7 @@ export default function Registration() {
 
     return (
         <body className='authorization-body'>
-            <div className='background-div background-div-reg'>
-                <div className='left-auth-reg'>
+                <div className='left-auth-reg' id='parallax'>
                     <div>
                         <p className='left-title-auth'>Ласкаво</p>
                     </div>
@@ -93,7 +93,10 @@ export default function Registration() {
                         <p className='left-title-auth-plus'>просимо</p>
                     </div>
                 </div>
-                <div className='right-auth right-auth-reg'>
+                <div className='right-auth-reg'>
+                <div className='left-arrow'>
+                    <img src={Arrow} id='arrow'></img>
+                    </div>
                     <div className='title-auth-block-div title-auth-block-div-reg'>
                         <h4 className='title-auth'>Реєстрація</h4>
                     </div>
@@ -101,10 +104,13 @@ export default function Registration() {
                         <form className='form-auth form-auth-reg'>
                             <h5 className='title-line'>Ім'я</h5>
                             <p className='text-auth'><input className='text-block' type='text' name='Name' value={name} onChange={handleNameChange} placeholder='Best name'></input></p>
+                            <div className='line-text-block'></div>
                             <h5 className='title-line'>Пошта</h5>
                             <p className='text-auth'><input className='text-block' type='login' name='Email' value={email} onChange={handleEmailChange} placeholder='email@gmail.com' required></input></p>
+                            <div className='line-text-block'></div>
                             <h5 className='title-line'>Пароль</h5>
                             <p className='text-auth'><input className='text-block' type='password' name='Password' value={password} onChange={handlePasswordChange} placeholder='*********' required></input></p>
+                            <div className='line-text-block'></div>
                         </form>
                         <a>
                             <input className='login-button' type='submit' onClick={handleRegisterClick} value='Зареєструватись' />
@@ -144,7 +150,6 @@ export default function Registration() {
                         </p>
                     </div>
                 </div>
-            </div>
         </body>
     )
 }

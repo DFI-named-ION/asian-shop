@@ -34,6 +34,7 @@ export default function MailConfirmation() {
                             <h5 className='title-line'>Пошта</h5>
                             <p className='text-auth'>
                                 <input className='text-block' type='login' name='Email' placeholder='email@gmail.com' required/>
+                                <div className='line-text-block'></div>
                             </p>
                         </form>
 

@@ -1,8 +1,13 @@
 import React, { useEffect, useState, useContext, useRef } from 'react';
+import Arrow from '../images/icons/arrowLeft.svg';
 
 import axios from 'axios';
 
 import { UserContext } from './providers/UserProvider';
+
+function App() {
+    return <Arrow />;
+}
 
 export default function MailConfirmation() {
     
@@ -133,6 +138,9 @@ export default function MailConfirmation() {
                     Ще трохи...
                 </div>
                 <div className='right-mail'>
+                <div className='left-arrow'>
+                    <img src={Arrow} id='arrow'></img>
+                    </div>
                     <div className='title-mail-div'>
                         <h1>
                             Підтвердіть пошту
