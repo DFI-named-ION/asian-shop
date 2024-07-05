@@ -19,10 +19,20 @@
 .authorization-body{
     font-family: "Montserrat", sans-serif;
     box-sizing: border-box;
-    max-width: 5000px;
-    min-width: 1900px;
-    max-height: 5100px;
+    max-width: 1920px;
+    min-width: 900px;
+    max-height: 1080px;
+    min-height: 900px;
+    background-image: url(./images/img/background.png);
     background-size: cover;
+    /* width: 2560px;
+    height: 1440px; */
+    width: 1920px;
+    height: 1080px;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: space-around;
+    padding-bottom: 92px;
 }
 
 ul{
@@ -654,6 +664,8 @@ h1, h2, h3, h4, p{
     object-position: center;
     width: 410px;
     height: 410px;
+    background-color: transparent;
+    border-radius: 15px;
 }
 
 .button-carousel:before{
@@ -826,15 +838,12 @@ h1, h2, h3, h4, p{
 .modal-goods-div{
     width: 442px;
     background-color: #EAE5D9;
-    /* margin-left: 725px;
-    margin-top: 100px; */
     border-radius: 10px;
     padding-left: 21px;
-    /* padding-bottom: 21px; */
     padding-right: 21px;
     padding-top: 21px;
     position: absolute;
-    left: 43%;
+    left: 41%;
     top: 15%;
     right: -50%;
 }
@@ -851,8 +860,8 @@ h1, h2, h3, h4, p{
 
 .close-modal-button{
   position: absolute;
-  top: 120px;
-  left: 1260px;
+  top: -3px;
+  left: 452px;
   border: 0;
   width: 24px;
   height: 24px;
@@ -913,7 +922,7 @@ h1, h2, h3, h4, p{
     fill: #182531;
 }
 .full-stars .rating-group input:hover ~ label svg {
-    fill: #647484;
+    fill: transparent;
 }
 
 .modal-reviews-text{
@@ -1009,7 +1018,7 @@ h1, h2, h3, h4, p{
 
 /* Authorization and registration*/
 
-.background-div{
+/* .background-div{
     background-image: url(./images/img/background.png);
     background-size: cover;
     width: 100%;
@@ -1018,7 +1027,7 @@ h1, h2, h3, h4, p{
     display: flex;
     justify-content: space-around;
     padding-bottom: 92px;
-}
+} */
 
 .background-div-reg{
     padding-bottom: 90px;
@@ -1036,8 +1045,10 @@ h1, h2, h3, h4, p{
     backdrop-filter: blur(10px); 
     border-radius: 40px;
     width: 664px;
-    margin-top: 163px;
-    margin-right: 150px;
+    height: 825px;
+    position: relative;
+    top: 165px;
+    left: 45px;
     padding-top: 77px;
     padding-bottom: 77px;
     padding-left: 67px;
@@ -1045,19 +1056,31 @@ h1, h2, h3, h4, p{
 }
 
 .right-auth-reg{
-    margin-top: 127px;
+    background: radial-gradient(circle, rgba(186,33,33,0.1) 0%, rgba(255,250,120,0.1) 100%);
+    backdrop-filter: blur(10px); 
+    border-radius: 40px;
+    width: 664px;
+    height: 840px;
+    position: relative;
+    top: 110px;
+    left: -90px;
+    padding-top: 77px;
+    padding-bottom: 77px;
+    padding-left: 67px;
+    padding-right: 67px;
 }
 
 .left-auth h1{
     font-size: 146px;
     font-weight: 700;
     color: #EAE5D9;
-    margin-left: 423px;
-    margin-top: 428px;
-    margin-right: 146px;
+    top: 450px;
+    left: 240px;
+    position: relative;
 }
 
 .left-auth-reg{
+    position: relative;
     margin-top: 305px;
     font-size: 146px;
     font-weight: 700;
@@ -1066,6 +1089,7 @@ h1, h2, h3, h4, p{
 }
 
 .left-title-auth{
+    position: relative;
     margin-left: 102px;
 }
 
@@ -1167,7 +1191,7 @@ h1, h2, h3, h4, p{
 .text-block{
     width: 530px;
     background-color: transparent;
-    border-bottom: #647484 3px solid;
+    border-bottom: none;
     border-top: none;
     border-right: none;
     border-left: none;
@@ -1175,6 +1199,14 @@ h1, h2, h3, h4, p{
     margin-bottom: 30px;
     font-size: 18px;
     outline: none;
+}
+
+.line-text-block{
+    height: 3px;
+    background-color: #647484;
+    border-radius: 5px;
+    position: relative;
+    bottom: 27px;
 }
 
 .lines-or{
@@ -1193,6 +1225,7 @@ h1, h2, h3, h4, p{
     background-color: #647484;
     top: 10px;
     position: relative;
+    border-radius: 5px;
 }
 
 .social-login-text{
@@ -1273,6 +1306,7 @@ input{
     backdrop-filter: blur(10px); 
     border-radius: 40px;
     width: 680px;
+    height: 471px;
     margin-top: 304px;
     margin-right: 150px;
     padding-top: 60px;
@@ -1353,6 +1387,7 @@ input{
     backdrop-filter: blur(10px); 
     border-radius: 40px;
     width: 680px;
+    height: 471px;
     margin-top: 304px;
     margin-right: 150px;
     padding-top: 62px;

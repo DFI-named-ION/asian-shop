@@ -28,10 +28,12 @@ export default function MailConfirmation() {
                             <h5 className='title-line'>Новий пароль</h5>
                             <p className='text-auth'>
                                 <input className='text-block' type='password' name='Password' placeholder='*********' required/>
+                                <div className='line-text-block'></div>
                             </p>
                             <h5 className='title-line'>Пароль</h5>
                             <p className='text-auth'>
                                 <input className='text-block' type='password' name='Password' placeholder='*********' required/>
+                                <div className='line-text-block'></div>
                             </p>
                         </form>
 

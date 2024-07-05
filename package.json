@@ -9,9 +9,13 @@
     "axios": "^1.6.8",
     "dotenv": "^16.4.5",
     "firebase": "^10.12.2",
+    "gsap": "^3.12.5",
+    "jquery": "^3.7.1",
     "react": "^18.3.0",
     "react-dom": "^18.3.0",
     "react-modal": "^3.16.1",
+    "react-parallax": "^3.5.1",
+    "react-parallax-mouse": "^2.1.0",
     "react-router-dom": "^6.23.1",
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
