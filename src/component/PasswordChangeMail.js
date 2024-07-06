@@ -34,7 +34,7 @@ export default function MailConfirmation() {
         e.preventDefault();
         // return to page where user were before
         //navigate("/authorization");
-        console.log(document); // check on dev
+        console.log(document.referrer); // check on dev
     };
 
     const handleSendEmailClick = async (e) => {
