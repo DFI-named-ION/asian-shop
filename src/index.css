@@ -1075,10 +1075,21 @@ h1, h2, h3, h4, p{
     bottom: 80px;
 }
 
-.title-line{
+.title-line, .title-line-error, .title-line-error-zero-margin {
     font-size: 14px;
     color: #647484;
     font-weight: 600;
+}
+
+.title-line-error, .title-line-error-zero-margin {
+    text-align: right;
+    color: #951717;
+    margin-top: 2px;
+    margin-bottom: 30px;
+}
+
+.title-line-error-zero-margin {
+    margin: 0px;
 }
 
 .text-auth{
@@ -1164,7 +1175,7 @@ h1, h2, h3, h4, p{
     margin-left: 156px;
 }
 
-.text-block{
+.text-block, .text-block-margin-zero {
     width: 530px;
     background-color: transparent;
     border-bottom: #647484 3px solid;
@@ -1175,6 +1186,10 @@ h1, h2, h3, h4, p{
     margin-bottom: 30px;
     font-size: 18px;
     outline: none;
+}
+
+.text-block-margin-zero {
+    margin: 0px;
 }
 
 .lines-or{

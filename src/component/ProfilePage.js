@@ -1,10 +1,10 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 import { auth } from "./../firebaseConfig";
 import { signOut } from "firebase/auth";
 import axios from 'axios';
 
-import { UserContext } from './providers/UserProvider';
+import { AuthContext } from './providers/AuthProvider';
 
 import Basket from '../images/icons/basket.svg';
 import Profile from '../images/icons/profile.svg';
@@ -48,23 +48,15 @@ function App() {
 
 export default function ProfilePage() {
 
-    const {user, setUser} = useContext(UserContext);
+    const {user, setUser} = useContext(AuthContext);
 
-    const handleRequest = async (event) => {
-        event.preventDefault();
+    useEffect(() => {
         console.log(user);
-    };
+    }, []);
 
-
-    const handleLogout = async () => {
-        try {
-            await signOut(auth);
-            setUser(null);
-        } catch (err) {
-            handleError(err);
-        };
-
-        window.location = "/";
+    const handleLogOutClick = async (e) => {
+        e.preventDefault();
+        signOut(auth);
     };
 
     const handleError = (error) => {
@@ -123,7 +115,7 @@ export default function ProfilePage() {
               <main>
                 <section className='profile-section'>
                   <div className='title-profile'>
-                    <h1>Профіль</h1>
+                    <h1>{user?.role}</h1>
                   </div>
                   {/* FIRST PART */}
                   <div className='top-block-div'>
@@ -358,7 +350,7 @@ export default function ProfilePage() {
                     <a href='#'>
                     <h3>Змінити пароль</h3>
                     </a>
-                    <a href='#'>
+                    <a href='#' onClick={handleLogOutClick}>
                     <h3 className='exit-profile'>Вихід</h3>
                     </a>
                   </div>
