@@ -91,7 +91,7 @@ export default function Registration() {
 
     const handleBack = (e) => {
         e.preventDefault();
-        navigate("/authorization");
+        navigate(document.referrer);
     };
 
     const handleError = (error) => {

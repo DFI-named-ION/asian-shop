@@ -351,7 +351,7 @@ export default function ProfilePage() {
                   </div> */}
 
                   <div className='footer-profile-div'>
-                    <a href='#'>
+                    <a href='#' onClick={handleResetPassword}>
                     <h3>Змінити пароль</h3>
                     </a>
                     <a href='#' onClick={handleLogOutClick}>

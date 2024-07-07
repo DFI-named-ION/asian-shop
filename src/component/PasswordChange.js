@@ -74,6 +74,11 @@ export default function MailConfirmation() {
         });
     };
 
+    const handleBack = (e) => {
+        e.preventDefault();
+        navigate(document.referrer);
+    };
+
     const handleError = (error) => {
         switch (error) {
             case "Failure: Jwt is not valid.":
@@ -92,11 +97,6 @@ export default function MailConfirmation() {
                 // console.log(error); display Internal error.???
                 break;
         }
-    };
-
-    const handleBack = (e) => {
-        e.preventDefault();
-        navigate("/reset-password-verification");
     };
 
     return (
