@@ -24,7 +24,7 @@ export default function MailConfirmation() {
             setEmail(user.email);
             return;
         }
-    }, [user, navigate]);
+    }, [user]);
 
     const handleEmailChange = (e) => {
         setEmail(e.target.value);
@@ -32,9 +32,7 @@ export default function MailConfirmation() {
 
     const handleBack = (e) => {
         e.preventDefault();
-        // return to page where user were before
-        //navigate("/authorization");
-        console.log(document.referrer); // check on dev
+        navigate("/authorization");
     };
 
     const handleSendEmailClick = async (e) => {
@@ -51,13 +49,13 @@ export default function MailConfirmation() {
         };
         await axios.post(process.env.REACT_APP_WEB_API_BASE_URL + "/Auth/sendResetUrl", dto)
         .then((response) => {
-            if (response.data !== "Success") {
-                handleError(response.data);
+            if (response.data.message !== "Success") {
+                handleError(response.data.message);
             }
         })
         .catch((error) => {
             // axios is trash
-            console.log(error);
+            // console.log(error);
         });
     };
 

@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { useParams, navigate } from 'react-router-dom';
 
 import { auth } from "./../firebaseConfig";
 import { signOut } from "firebase/auth";
@@ -25,6 +26,7 @@ import Facebook from '../images/socials/facebook.svg';
 import Tiktok from '../images/socials/tiktok.svg';
 import Qr from '../images/pay/qr.svg';
 
+
 function App() {
     return <Basket />;
     return <Profile />;
@@ -49,10 +51,6 @@ function App() {
 export default function ProfilePage() {
 
     const {user, setUser} = useContext(AuthContext);
-
-    useEffect(() => {
-        console.log(user);
-    }, []);
 
     const handleLogOutClick = async (e) => {
         e.preventDefault();

@@ -4,12 +4,15 @@ import './index.css';
 import App from './App';
 
 import { AuthProvider } from './component/providers/AuthProvider';
+import { JwtProvider } from './component/providers/JwtProvider';
 
 ReactDOM.render(
     <React.StrictMode>
-        <AuthProvider>
-            <App />
-        </AuthProvider>
+        <JwtProvider>
+            <AuthProvider>
+                <App />
+            </AuthProvider>
+        </JwtProvider>
     </React.StrictMode>,
     document.getElementById('root')
 );
