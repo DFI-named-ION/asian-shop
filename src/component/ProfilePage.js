@@ -113,7 +113,7 @@ export default function ProfilePage() {
               <main>
                 <section className='profile-section'>
                   <div className='title-profile'>
-                    <h1>{user?.role}</h1>
+                    <h1>Профіль</h1>
                   </div>
                   {/* FIRST PART */}
                   <div className='top-block-div'>

@@ -125,6 +125,11 @@ export default function MailConfirmation() {
         }
     };
 
+    const handleBack = (e) => {
+        e.preventDefault();
+        navigate("/authorization");
+    };
+
     const handleError = (error) => {
         switch (error) {
             case "Failure: User is already verified.":
@@ -146,7 +151,7 @@ export default function MailConfirmation() {
                     Ще трохи...
                 </div>
                 <div className='right-mail'>
-                <div className='left-arrow'>
+                <div className='left-arrow' onClick={handleBack}>
                     <img src={Arrow} id='arrow'></img>
                     </div>
                     <div className='title-mail-div'>

@@ -120,18 +120,16 @@ export default function Authorization() {
                         <form className='form-auth'>
                             <h5 className='title-line'>Пошта</h5>
                             <p className='text-auth'>
-                                <input 
-                                    className='text-block-margin-zero' type='login' name='Email' value={email} onChange={handleEmailChange} placeholder='email@gmail.com' required 
-                                />
+                                <input className='text-block-margin-zero' type='login' name='Email' value={email} onChange={handleEmailChange} placeholder='email@gmail.com' required />
+                                <div className='line-text-block'></div>
                             </p>
                             <p className='title-line-error'>
                                 {emailError}
                             </p>
                             <h5 className='title-line'>Пароль</h5>
                             <p className='text-auth'>
-                                <input 
-                                    className='text-block-margin-zero' type='password' name='Password' value={password} onChange={handlePasswordChange} placeholder='*********' required 
-                                />
+                                <input className='text-block-margin-zero' type='password' name='Password' value={password} onChange={handlePasswordChange} placeholder='*********' required />
+                                <div className='line-text-block'></div>
                             </p>
                             <p className='title-line-error'>
                                 {passwordError.split('\n').map((line) => (
