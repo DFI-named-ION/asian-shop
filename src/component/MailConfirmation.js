@@ -32,19 +32,17 @@ export default function MailConfirmation() {
         let dto = {
             accessToken: user.stsTokenManager.accessToken,
         };
-        try {
-            const response = await axios.post(process.env.REACT_APP_WEB_API_BASE_URL + "/Auth/sendVerificationCode", dto);
-            if (response.data === "Success") {
-                // alert("Код надіслано!");
-            } else {
-                // alert("Під час надсилання трапилася помилка!");
-                setSendError("Під час надсилання трапилася помилка!");
-                handleError(response.data);
+        axios.post(process.env.REACT_APP_WEB_API_BASE_URL + "/Auth/sendVerificationCode", dto) // change to JWT
+        .then((response) => {
+            if (response.data.message === "Success") {
+                // hmmm
+                return;
             }
-        } catch (err) {
+            handleError(response.data.message);
+        })
+        .catch((err) => {
             handleError(err);
-            setSendError("Під час надсилання трапилася помилка!");
-        }
+        });
     };
 
     useEffect(() => {
@@ -76,24 +74,22 @@ export default function MailConfirmation() {
                 accessToken: user.stsTokenManager.accessToken,
                 code: codeStr,
             };
-            try {
-                const response = await axios.post(process.env.REACT_APP_WEB_API_BASE_URL + "/Auth/checkVerificationCode", dto);
-                if (response.data === "Success") {
+            axios.post(process.env.REACT_APP_WEB_API_BASE_URL + "/Auth/checkVerificationCode", dto)
+            .then((response) => {
+                if (response.data.message === "Success") {
                     setUser((prevUser) => ({
                         ...prevUser,
                         emailVerified: true
                     }));
                     navigate("/profile");
-                } else {
-                    setSendError("Під час надсилання трапилася помилка!");
-                    handleError(response.data);
                 }
-            } catch (err) {
-                handleError(err);
-            }
+                handleError(response.data.message);
+            })
+            .catch((error) => {
+                handleError(error);
+            });
         } else {
-            // alert("Код введений не повністю!");
-            setSendError("Код введений не повністю!");
+            setSendError("Code is not full.");
         }
     };
 
@@ -124,10 +120,17 @@ export default function MailConfirmation() {
     };
 
     const handleError = (error) => {
-        if (error === "Failure: Code is not valid") {
-            setSendError("Код не дійсний!");
-        }
-        // console.log(`${error}`);
+        switch (error) {
+            case "Failure: User is already verified.":
+                setSendError("User is already verified.")
+                break;
+            case "Failure: Code is not valid.":
+                setSendError("Code is not valid.");
+                break;
+            default:
+                // console.log(error);
+                break;
+        };
     };
 
     return (
