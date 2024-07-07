@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { useParams, navigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 import { auth } from "./../firebaseConfig";
 import { signOut } from "firebase/auth";
@@ -51,10 +51,16 @@ function App() {
 export default function ProfilePage() {
 
     const {user, setUser} = useContext(AuthContext);
+    const navigate = useNavigate();
 
     const handleLogOutClick = async (e) => {
         e.preventDefault();
         signOut(auth);
+    };
+
+    const handleResetPassword = (e) => {
+      e.preventDefault();
+      navigate("/reset-password-verification");
     };
 
     const handleError = (error) => {
