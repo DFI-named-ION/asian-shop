@@ -1212,8 +1212,9 @@ h1, h2, h3, h4, p{
     outline: none;
 }
 
-.text-block-margin-zero {
-    margin: 0px;
+/* Not working with margin-bottom: 0px */
+.text-block-margin-zero { 
+    margin-bottom: 0px;
 }
 
 .line-text-block{

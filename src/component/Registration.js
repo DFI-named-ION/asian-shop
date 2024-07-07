@@ -89,6 +89,11 @@ export default function Registration() {
         }
     };
 
+    const handleBack = (e) => {
+        e.preventDefault();
+        navigate("/authorization");
+    };
+
     const handleError = (error) => {
         let text = "";
         if (error?.code) {
@@ -124,7 +129,7 @@ export default function Registration() {
                     </div>
                 </div>
                 <div className='right-auth-reg'>
-                <div className='left-arrow'>
+                <div className='left-arrow' onClick={handleBack}>
                     <img src={Arrow} id='arrow'></img>
                     </div>
                     <div className='title-auth-block-div title-auth-block-div-reg'>
@@ -136,12 +141,12 @@ export default function Registration() {
                             <p className='text-auth'><input className='text-block' type='text' name='Name' value={name} onChange={handleNameChange} placeholder='Best name'></input></p>
                             <div className='line-text-block'></div>
                             <h5 className='title-line'>Пошта</h5>
-                            <p className='text-auth'><input className='text-block-margin-zero' type='login' name='Email' value={email} onChange={handleEmailChange} placeholder='email@gmail.com' required></input></p>
+                            <p className='text-auth'><input className='text-block-margin-zero' type='login' name='Email' value={email} onChange={handleEmailChange} placeholder='email@gmail.com' required></input><div className='line-text-block'></div></p>
                             <p className='title-line-error'>
                                 {emailError}
                             </p>
                             <h5 className='title-line'>Пароль</h5>
-                            <p className='text-auth'><input className='text-block-margin-zero' type='password' name='Password' value={password} onChange={handlePasswordChange} placeholder='*********' required></input></p>
+                            <p className='text-auth'><input className='text-block-margin-zero' type='password' name='Password' value={password} onChange={handlePasswordChange} placeholder='*********' required></input><div className='line-text-block'></div></p>
                             <p className='title-line-error'>
                                 {passwordError.split('\n').map((line) => (
                                     <>
