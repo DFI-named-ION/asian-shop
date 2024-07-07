@@ -1,4 +1,6 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext } from "react";
+import { useNavigate } from 'react-router-dom';
+
 import Arrow from '../images/icons/arrowLeft.svg';
 import Google from '../images/socials/google-auth.svg'
 import Facebook from '../images/socials/facebook-auth.svg'
@@ -6,10 +8,8 @@ import Twitter from '../images/socials/twitter-auth.svg';
 
 import { auth, facebook, google, twitter } from "./../firebaseConfig";
 import { signInWithPopup, signInWithEmailAndPassword } from "firebase/auth";
-import axios from 'axios';
 
-import { CookieContext } from './providers/CookieProvider';
-import { UserContext } from './providers/UserProvider';
+import { AuthContext } from './providers/AuthProvider';
 
 function App() {
     return <Google />;
@@ -20,88 +20,88 @@ function App() {
 
 export default function Authorization() {
     
-    const { setCookie, getCookie } = useContext(CookieContext);
-    const {user, setUser} = useContext(UserContext);
+    const { user, setUser } = useContext(AuthContext);
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (user) {
             if (user.emailVerified) {
-                window.location = "/";
+                navigate("/profile");
+            } else {
+                navigate("/confirmation");
             }
-            window.location = "/confirmation";
-        };
-    });
+        }
+    }, [user, navigate]);
 
     const [email, setEmail] = useState("");
+    const [emailError, setEmailError] = useState("");
     const [password, setPassword] = useState("");
+    const [passwordError, setPasswordError] = useState("");
 
-    const handleEmailChange = async (e) => {
+    const handleEmailChange = (e) => {
         setEmail(e.target.value);
     };
 
-    const handlePasswordChange = async (e) => {
+    const handlePasswordChange = (e) => {
         setPassword(e.target.value);
-    };
-
-    const handleThirdPartyLogin = async (user) => {
-        let dto = {
-            accessToken: user.stsTokenManager.accessToken,
-        };
-
-        axios.post(process.env.REACT_APP_WEB_API_BASE_URL + "/Auth/handleNewUser", dto)
-        .then((response) => {
-            if (response.data.status === "Success") {
-                setUser((prevUser) => {
-                    const updatedUser = {
-                        ...prevUser,
-                        role: response.data.role
-                    };
-                    return updatedUser;
-                });
-            } else {
-                handleError(response.data.status);
-            };
-        })
-        .catch((err) => {
-            handleError(err);
-        });
     };
 
     const login = async (provider) => {
         try {
             const result = await signInWithPopup(auth, provider);
-            console.log(result.user);
             setUser(result.user);
-            //handleThirdPartyLogin(result.user);
         } catch (err) {
-            handleError(err);
-        };
+            handleError(err.code);
+        }
     };
 
     const handleLoginClick = async (e) => {
         e.preventDefault();
         const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-        const passRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,64}$/;
+        const passRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,64}$/;
+
         if (!emailRegex.test(email)) {
-            handleError("Invalid email format");
+            handleError("email-format-error");
             return;
         }
+        setEmailError("");
+
         if (!passRegex.test(password)) {
-            handleError("Invalid password format:\nYour password must be between 6 and 64 characters long\nYour password must include at least one letter (uppercase or lowercase)\nYour password must include at least one special character from the following set: @, $, !, %, *, ?, &");
+            handleError("password-format-error");
             return;
         }
+        setPasswordError("");
+
         try {
             const result = await signInWithEmailAndPassword(auth, email, password);
             setUser(result.user);
-            window.location = "/confirmation";
-            // store user!
         } catch (err) {
-            handleError(err.message);
+            handleError(err.code);
         }
     };
 
     const handleError = (error) => {
-        console.log(`${error}`);
+        let text = "";
+        switch (error) {
+            case "auth/invalid-credential":
+                text = "Invalid credentials.";
+                setEmailError(text);
+                setPasswordError(text);
+                break;
+            case "auth/too-many-requests":
+                text = "Too many requests. Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later.";
+                setPasswordError(text);
+                break;
+            case "email-format-error":
+                setEmailError("Invalid email format.");
+                break;
+            case "password-format-error":
+                setPasswordError("Invalid password format:\nPassword length: 6-64 characters\nAt least one uppercase letter\nAt least one lowercase letter\nAt least one digit\nAt least one special character: @, $, !, %, *, ?, &");
+                break;
+            default:
+                console.log(error);
+                break;
+        };
     };
 
     return (
@@ -120,20 +120,33 @@ export default function Authorization() {
                         <form className='form-auth'>
                             <h5 className='title-line'>Пошта</h5>
                             <p className='text-auth'>
-                                <input className='text-block' type='login' name='Email' value={email} onChange={handleEmailChange} placeholder='email@gmail.com' required/>
-                                <div className='line-text-block'></div>
+                                <input 
+                                    className='text-block-margin-zero' type='login' name='Email' value={email} onChange={handleEmailChange} placeholder='email@gmail.com' required 
+                                />
+                            </p>
+                            <p className='title-line-error'>
+                                {emailError}
                             </p>
                             <h5 className='title-line'>Пароль</h5>
                             <p className='text-auth'>
-                                <input className='text-block' type='password' name='Password' value={password} onChange={handlePasswordChange} placeholder='*********' required/>
-                                <div className='line-text-block'></div>
+                                <input 
+                                    className='text-block-margin-zero' type='password' name='Password' value={password} onChange={handlePasswordChange} placeholder='*********' required 
+                                />
+                            </p>
+                            <p className='title-line-error'>
+                                {passwordError.split('\n').map((line) => (
+                                    <>
+                                        {line}
+                                        <br />
+                                    </>
+                                ))}
                             </p>
                         </form>
                         <a>
                             <input className='login-button' type='submit' value='Увійти' onClick={handleLoginClick}/>
                         </a>
                         <p className='forgot-password'>
-                            <a className='text-auth' href='#'>Забули свій пароль?</a>
+                            <a className='text-auth' href='/reset-password-verification'>Забули свій пароль?</a>
                         </p>
 
                         <div className='lines-or'>

@@ -1,9 +1,11 @@
 import React, { useEffect, useState, useContext, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import Arrow from '../images/icons/arrowLeft.svg';
 
 import axios from 'axios';
 
-import { UserContext } from './providers/UserProvider';
+import { AuthContext } from './providers/AuthProvider';
 
 function App() {
     return <Arrow />;
@@ -11,40 +13,41 @@ function App() {
 
 export default function MailConfirmation() {
     
-    const {user, setUser} = useContext(UserContext);
+    const {user, setUser} = useContext(AuthContext);
+    const navigate = useNavigate();
     const [isDisabled, setIsDisabled] = useState(false);
     const [timeLeft, setTimeLeft] = useState(0);
+    const [sendError, setSendError] = useState("");
     const [code, setCode] = useState(['', '', '', '', '', '']);
     const inputsRef = useRef([]);
 
     useEffect(() => {
         if (!user) {
-            window.location = "/registration";
+            navigate("/registration");
+            return;
         }
         if (user.emailVerified) {
-            window.location = "/profile";
+            navigate("/profile");
+            return;
         }
         
         sendEmail();
-        //console.log(user);
-    }, []);
+    }, [user, navigate]);
 
     const sendEmail = () => {
         let dto = {
             accessToken: user.stsTokenManager.accessToken,
         };
-        axios.post(process.env.REACT_APP_WEB_API_BASE_URL + "/Auth/sendVerificationCode", dto)
+        axios.post(process.env.REACT_APP_WEB_API_BASE_URL + "/Auth/sendVerificationCode", dto) // change to JWT
         .then((response) => {
-            if (response.data === "Success") {
-                alert("Код надіслано!");
-            } else {
-                alert("Під час надсилання трапилася помилка!");
-                handleError(response.data);
+            if (response.data.message === "Success") {
+                // hmmm
+                return;
             }
+            handleError(response.data.message);
         })
         .catch((err) => {
             handleError(err);
-            alert("Під час надсилання трапилася помилка!");
         });
     };
 
@@ -63,41 +66,38 @@ export default function MailConfirmation() {
 
     const handleResendClick = (e) => {
         e.preventDefault();
+        setSendError("");
         setIsDisabled(true);
         sendEmail();
         setTimeLeft(59);
     };
 
-    const handleSubmitCode = (e) => {
+    const handleSubmitCode = async (e) => {
         e.preventDefault();
         let codeStr = code.join('');
         if (codeStr.length === 6) {
             let dto = {
-                accessToken:  user.stsTokenManager.accessToken,
+                accessToken: user.stsTokenManager.accessToken,
                 code: codeStr,
             };
-            axios.post(process.env.REACT_APP_WEB_API_BASE_URL + "/Auth/checkVerificationCode", dto)
+            axios.post(process.env.REACT_APP_WEB_API_BASE_URL + "/Auth/checkVerificationCode", dto) // change to JWT
             .then((response) => {
-                if (response.data === "Success") {
+                if (response.data.message === "Success") {
                     setUser((prevUser) => ({
                         ...prevUser,
                         emailVerified: true
                     }));
-                    window.location = "/profile";
-                } else {
-                    alert("Під час надсилання трапилася помилка!");
-                    handleError(response.data);
+                    navigate("/profile");
                 }
+                handleError(response.data.message);
             })
-            .catch((err) => {
-                handleError(err);
+            .catch((error) => {
+                handleError(error);
             });
         } else {
-            alert("Код введений не повністю!");
-        };
+            setSendError("Code is not full.");
+        }
     };
-
-
 
     const handleInputChange = (e, index) => {
         const value = e.target.value;
@@ -125,10 +125,18 @@ export default function MailConfirmation() {
         }
     };
 
-
-
     const handleError = (error) => {
-        console.log(`${error}`);
+        switch (error) {
+            case "Failure: User is already verified.":
+                setSendError("User is already verified.")
+                break;
+            case "Failure: Code is not valid.":
+                setSendError("Code is not valid.");
+                break;
+            default:
+                // console.log(error);
+                break;
+        };
     };
 
     return (
@@ -148,7 +156,7 @@ export default function MailConfirmation() {
                     </div>
 
                     <div className='text-mail-div'>
-                        <p>Впишіть 6-ти значний код, який ми відправили вам на <span className='email-span'>{user.email}</span></p>
+                        <p>Впишіть 6-ти значний код, який ми відправили вам на <span className='email-span'>{user?.email}</span></p>
                     </div>
 
                     <div className='input-mail-div'>
@@ -184,6 +192,10 @@ export default function MailConfirmation() {
                             {isDisabled && <span> {timeLeft} сек</span>}
                         </p>
                     </div>
+                    
+                    <p className='title-line-error-zero-margin'>
+                        {sendError}
+                    </p>
 
                     <input className='login-button mail-button' type='button' value='Підтвердити' onClick={handleSubmitCode} />
                 </div>
