@@ -56,12 +56,7 @@ export default function MailConfirmation() {
 
     const handleBack = (e) => {
         e.preventDefault();
-        const referrerURL = new URL(document.referrer);
-        if (referrerURL.origin === window.location.origin) {
-            navigate(referrerURL.pathname + referrerURL.search);
-        } else {
-            window.location.href = document.referrer;
-        }
+        navigate("/authorization");
     };
 
     const handleError = (error) => {

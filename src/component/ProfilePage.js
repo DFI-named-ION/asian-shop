@@ -96,7 +96,7 @@ export default function ProfilePage() {
                   </a>
                   </div>
                   <div className='head-nav-div'>
-                  <a href='/authorization' className='icon-head'>
+                  <a href='/profile' className='icon-head'>
                       <img src={Profile}></img>
                   </a>
                   </div>

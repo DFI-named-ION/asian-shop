@@ -1,4 +1,5 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
+
 import Logo from '../images/logo/SakuraTails.svg';
 import Basket from '../images/icons/basket.svg';
 import Profile from '../images/icons/profile.svg';
@@ -28,6 +29,8 @@ import WhiteWolf from '../images/logo/white-wolf.svg';
 import BackgroundSubcribtion from '../images/img/fon-subscribe.svg';
 import Modal from 'react-modal';
 import Spread from '../images/icons/spread.svg';
+
+import { AuthContext } from './providers/AuthProvider';
 
 function App() {
     return <Logo />;
@@ -61,6 +64,8 @@ function App() {
   }
 
 export default function HomePage() {
+
+    const {user, setUser} = useContext(AuthContext);
 
 const [modalIsOpen_1, setModalIsOpen_1] = useState(false);
 const [modalIsOpen_2, setModalIsOpen_2] = useState(false);
@@ -314,7 +319,7 @@ const Carousel = ({ items }) => {
               </a>
               </div>
               <div className='head-nav-div'>
-              <a href='/authorization' className='icon-head'>
+              <a href={user ? "/profile" : "/authorization"} className='icon-head'>
                   <img src={Profile}></img>
               </a>
               </div>
