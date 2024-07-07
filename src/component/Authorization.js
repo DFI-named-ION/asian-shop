@@ -82,7 +82,12 @@ export default function Authorization() {
 
     const handleBack = (e) => {
         e.preventDefault();
-        navigate(document.referrer);
+        const referrerURL = new URL(document.referrer);
+        if (referrerURL.origin === window.location.origin) {
+            navigate(referrerURL.pathname + referrerURL.search);
+        } else {
+            window.location.href = document.referrer;
+        }
     };
 
     const handleError = (error) => {
