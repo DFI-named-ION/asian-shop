@@ -74,6 +74,16 @@ export default function MailConfirmation() {
         });
     };
 
+    const handleBack = (e) => {
+        e.preventDefault();
+        const referrerURL = new URL(document.referrer);
+        if (referrerURL.origin === window.location.origin) {
+            navigate(referrerURL.pathname + referrerURL.search);
+        } else {
+            window.location.href = document.referrer;
+        }
+    };
+
     const handleError = (error) => {
         switch (error) {
             case "Failure: Jwt is not valid.":
@@ -92,11 +102,6 @@ export default function MailConfirmation() {
                 // console.log(error); display Internal error.???
                 break;
         }
-    };
-
-    const handleBack = (e) => {
-        e.preventDefault();
-        navigate("/reset-password-verification");
     };
 
     return (
