@@ -1222,6 +1222,10 @@ h1, h2, h3, h4, p{
     background-color: #647484;
     border-radius: 5px;
     position: relative;
+    /* bottom: 27px; */
+}
+
+.line-text-block_plus{
     bottom: 27px;
 }
 
