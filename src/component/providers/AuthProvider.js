@@ -9,30 +9,36 @@ export const AuthProvider = ({ children }) => {
     const [pending, setPending] = useState(true);
 
     useEffect(() => {
-        const unsubscribe = auth.onAuthStateChanged(async (loadedUser) => {
-            if (loadedUser && !loadedUser?.role) {
-                const token = await loadedUser.getIdToken();
-                try {
-                    const response = await axios.post(process.env.REACT_APP_WEB_API_BASE_URL + "/Auth/handleUserRoleCreation", {
-                        accessToken: token,
-                    });
-                    if (response.data.message === "Success") {
-                        const role = response.data.data;
-                        setUser({ ...loadedUser, role: role });
-                    } else {
-                        // Handle error response
-                    }
-                } catch (error) {
-                    // Handle axios error
-                }
+        auth.onAuthStateChanged(async (loadedUser) => {
+            if (loadedUser) {
+                // const token = await loadedUser.getIdToken();
+                // axios.post(process.env.REACT_APP_WEB_API_BASE_URL + "/Auth/handleUserRoleCreation", { accessToken: token })
+                // .then((response) => {
+                //     if (response.data.message === "Success") {
+                //         const role = response.data.data;
+                //         setUser({ ...loadedUser, role: role });
+                //         return;
+                //     }
+                //     handleError(response.data.message);
+                // })
+                // .catch((err) => {
+                //     handleError(err);
+                // });
+                setUser(loadedUser); // BOOM!
             } else {
                 setUser(null);
             }
             setPending(false);
         });
+    });
 
-        return () => unsubscribe();
-    }, []);
+    const handleError = (error) => {
+        console.log(error);
+        switch (error) {
+            case "":
+                break;
+        };
+    };
 
     return (
         <AuthContext.Provider value={{ user, setUser, pending }}>

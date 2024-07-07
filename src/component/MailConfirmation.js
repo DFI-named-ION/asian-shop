@@ -28,7 +28,7 @@ export default function MailConfirmation() {
         sendEmail();
     }, [user, navigate]);
 
-    const sendEmail = async () => {
+    const sendEmail = () => {
         let dto = {
             accessToken: user.stsTokenManager.accessToken,
         };
@@ -74,7 +74,7 @@ export default function MailConfirmation() {
                 accessToken: user.stsTokenManager.accessToken,
                 code: codeStr,
             };
-            axios.post(process.env.REACT_APP_WEB_API_BASE_URL + "/Auth/checkVerificationCode", dto)
+            axios.post(process.env.REACT_APP_WEB_API_BASE_URL + "/Auth/checkVerificationCode", dto) // change to JWT
             .then((response) => {
                 if (response.data.message === "Success") {
                     setUser((prevUser) => ({

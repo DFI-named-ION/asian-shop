@@ -7,7 +7,6 @@ import Twitter from '../images/socials/twitter-auth.svg';
 
 import { auth, facebook, google, twitter } from "./../firebaseConfig";
 import { signInWithPopup, signInWithEmailAndPassword } from "firebase/auth";
-import axios from 'axios';
 
 import { AuthContext } from './providers/AuthProvider';
 
@@ -50,7 +49,7 @@ export default function Authorization() {
             const result = await signInWithPopup(auth, provider);
             setUser(result.user);
         } catch (err) {
-            handleError(err);
+            handleError(err.code);
         }
     };
 
@@ -60,15 +59,13 @@ export default function Authorization() {
         const passRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,64}$/;
 
         if (!emailRegex.test(email)) {
-            // handleError("Invalid email format.");
-            setEmailError("Invalid email format.");
+            handleError("email-format-error");
             return;
         }
         setEmailError("");
 
         if (!passRegex.test(password)) {
-            // handleError("Invalid password format:\nPassword length: 6-64 characters\nAt least one uppercase letter\nAt least one lowercase letter\nAt least one digit\nAt least one special character: @, $, !, %, *, ?, &");
-            setPasswordError("Invalid password format:\nPassword length: 6-64 characters\nAt least one uppercase letter\nAt least one lowercase letter\nAt least one digit\nAt least one special character: @, $, !, %, *, ?, &");
+            handleError("password-format-error");
             return;
         }
         setPasswordError("");
@@ -77,28 +74,32 @@ export default function Authorization() {
             const result = await signInWithEmailAndPassword(auth, email, password);
             setUser(result.user);
         } catch (err) {
-            handleError(err);
+            handleError(err.code);
         }
     };
 
     const handleError = (error) => {
         let text = "";
-        if (error?.code) {
-            switch (error.code) {
-                case "auth/invalid-credential":
-                    text = "Invalid credentials.";
-                    setEmailError(text);
-                    setPasswordError(text);
-                    break;
-                case "auth/too-many-requests":
-                    text = "Too many requests. Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later.";
-                    setPasswordError(text);
-                    break;
-                default:
-                    text = error.message;
-            }
-        }
-        // console.log(error);
+        switch (error) {
+            case "auth/invalid-credential":
+                text = "Invalid credentials.";
+                setEmailError(text);
+                setPasswordError(text);
+                break;
+            case "auth/too-many-requests":
+                text = "Too many requests. Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later.";
+                setPasswordError(text);
+                break;
+            case "email-format-error":
+                setEmailError("Invalid email format.");
+                break;
+            case "password-format-error":
+                setPasswordError("Invalid password format:\nPassword length: 6-64 characters\nAt least one uppercase letter\nAt least one lowercase letter\nAt least one digit\nAt least one special character: @, $, !, %, *, ?, &");
+                break;
+            default:
+                console.log(error);
+                break;
+        };
     };
 
     return (
