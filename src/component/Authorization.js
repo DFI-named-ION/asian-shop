@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from 'react-router-dom';
 
+import Arrow from '../images/icons/arrowLeft.svg';
 import Google from '../images/socials/google-auth.svg'
 import Facebook from '../images/socials/facebook-auth.svg'
 import Twitter from '../images/socials/twitter-auth.svg';
@@ -14,6 +15,7 @@ function App() {
     return <Google />;
     return <Facebook />;
     return <Twitter />;
+    return <Arrow />;
 }
 
 export default function Authorization() {
@@ -104,11 +106,13 @@ export default function Authorization() {
 
     return (
         <body className='authorization-body'>
-            <div className='background-div'>
                 <div className='left-auth'>
                     <h1>Привіт</h1>
                 </div>
                 <div className='right-auth'>
+                <div className='left-arrow'>
+                    <img src={Arrow} id='arrow'></img>
+                    </div>
                     <div className='title-auth-block-div'>
                         <h4 className='title-auth'>Вхід</h4>
                     </div>
@@ -183,7 +187,6 @@ export default function Authorization() {
                         </p>
                     </div>
                 </div>
-            </div>
         </body>
     )
 }
