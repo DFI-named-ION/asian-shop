@@ -97,6 +97,7 @@ export default function MailConfirmation() {
                         <p className='text-auth'>
                             <input className='text-block-margin-zero' type='login' name='Email' placeholder='email@gmail.com' value={email} onChange={handleEmailChange} required/>
                         </p>
+                        <div className='line-text-block'></div>
                         <p className='title-line-error'>
                             {emailError}
                         </p>

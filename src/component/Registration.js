@@ -144,7 +144,7 @@ export default function Registration() {
                         <form className='form-auth form-auth-reg'>
                             <h5 className='title-line'>Ім'я</h5>
                             <p className='text-auth'><input className='text-block' type='text' name='Name' value={name} onChange={handleNameChange} placeholder='Best name'></input></p>
-                            <div className='line-text-block'></div>
+                            <div className='line-text-block line-text-block_plus'></div>
                             <h5 className='title-line'>Пошта</h5>
                             <p className='text-auth'><input className='text-block-margin-zero' type='login' name='Email' value={email} onChange={handleEmailChange} placeholder='email@gmail.com' required></input><div className='line-text-block'></div></p>
                             <p className='title-line-error'>

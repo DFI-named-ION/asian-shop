@@ -127,10 +127,12 @@ export default function MailConfirmation() {
                         <p className='text-auth'>
                             <input className='text-block' type='password' name='Password' placeholder='*********' value={newPassword} onChange={handleNewPasswordChange} required/>
                         </p>
+                        <div className='line-text-block'></div>
                         <h5 className='title-line'>Пароль</h5>
                         <p className='text-auth'>
                             <input className='text-block' type='password' name='Password' placeholder='*********' value={newPasswordRepeat} onChange={handleNewPasswordRepeatChange} required/>
                         </p>
+                        <div className='line-text-block'></div>
                     </form>
 
                     <p className='title-line-error'>
