@@ -41,7 +41,6 @@ export default function MailConfirmation() {
         const passRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,64}$/;
 
         if (!passRegex.test(newPassword)) {
-            // handleError("Invalid password format:\nPassword length: 6-64 characters\nAt least one uppercase letter\nAt least one lowercase letter\nAt least one digit\nAt least one special character: @, $, !, %, *, ?, &");
             setResetError("Invalid password format:\nPassword length: 6-64 characters\nAt least one uppercase letter\nAt least one lowercase letter\nAt least one digit\nAt least one special character: @, $, !, %, *, ?, &");
             return;
         }
@@ -65,13 +64,34 @@ export default function MailConfirmation() {
             axios.post(process.env.REACT_APP_WEB_API_BASE_URL + "/Auth/resetPassword", dto)
             .then((response) => {
                 if (response.data.message === "Success"){
-                    navigate("/profile");
+                    navigate("/authorization");
                 }
+                handleError(response.data.message);
             })
             .catch((err) => {
-
+                handleError(err);
             });
         });
+    };
+
+    const handleError = (error) => {
+        switch (error) {
+            case "Failure: Jwt is not valid.":
+                setResetError("Url is not valid.");
+                break;
+            case "Failure: User is not found.":
+                setResetError("Url is not valid.");
+                break;
+            case "Failure: Code is not valid.":
+                setResetError("Url is not valid.");
+                break;
+            case "Failure: Passwords are different.":
+                setResetError("Passwords are different.");
+                break;
+            default:
+                // console.log(error); display Internal error.???
+                break;
+        }
     };
 
     const handleBack = (e) => {
@@ -88,7 +108,7 @@ export default function MailConfirmation() {
                     </h1>
                 </div>
                 <div className='right-pas'>
-                    <div className='left-arrow'>
+                    <div className='left-arrow' onClick={handleBack}>
                     <img src={Arrow} id='arrow'></img>
                     </div>
                     <div className='title-mail-div title-pas-div'>
