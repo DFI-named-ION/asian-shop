@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
+import Modal from 'react-modal';
 import { useParams, navigate } from 'react-router-dom';
 
 import { auth } from "./../firebaseConfig";
@@ -49,6 +50,16 @@ function App() {
   }
 
 export default function ProfilePage() {
+
+  const [modalIsOpenProfilePassword, setModalIsOpenProfilePassword] = useState(false);
+
+  const openModalProfilePassword = () => {
+    setModalIsOpenProfilePassword(true);
+  };
+
+  const closeModalProfilePassword = () => {
+    setModalIsOpenProfilePassword(false);
+  };
 
     const {user, setUser} = useContext(AuthContext);
 
@@ -113,7 +124,7 @@ export default function ProfilePage() {
               <main>
                 <section className='profile-section'>
                   <div className='title-profile'>
-                    <h1>Профіль</h1>
+                    <h1>Налаштування</h1>
                   </div>
                   {/* FIRST PART */}
                   <div className='top-block-div'>
@@ -143,7 +154,25 @@ export default function ProfilePage() {
                       </div>
                       <input className='edit-profile-button' type='button' value='Редагувати' />
                     </div>
+                    <div className='top-right-block-div'>
+                      <h2 className='title-profile-block'>
+                        Контакти
+                      </h2>
+                      <div className='columns-profile-div'>
+                        <div className='column-profile-div'>
+                          <h4>Підтверджений телефон</h4>
+                          <p>+380 66 000 00 00</p>
+                        </div>
+                        <div className='column-profile-div'>
+                        <h4>Електронна пошта</h4>
+                        <p>email@gmail.com</p>
+                        <h4>Не друкувати чеки та гарантійні талони</h4>
+                          <p>Так</p>
+                        </div>
+                      </div>
+                      <input className='edit-profile-button' type='button' value='Редагувати' />
                     </div>
+                        </div>
 
                     {/* SECOND PART */}
                     {/* <div className='top-block-div'>
@@ -345,9 +374,33 @@ export default function ProfilePage() {
                   </div> */}
 
                   <div className='footer-profile-div'>
-                    <a href='#'>
+                    <a href='#' onClick={openModalProfilePassword}>
                     <h3>Змінити пароль</h3>
                     </a>
+                    <Modal isOpen={modalIsOpenProfilePassword} onRequestClose={closeModalProfilePassword} className='background-modal-div'>
+                    <div className='modal-profile-password-div'> 
+                    <button onClick={closeModalProfilePassword} className='close-modal-button close-modal-profile-button'></button>
+                    <h2 className='title-profile-modal'>
+                        Зміна паролю
+                      </h2>
+                      <p className='subtitle-modal-profile'>Старий пароль</p>
+                      <p className='input-profile'>
+                                <input className='line-profile-modal' type='password' name='modal-password' required/>
+                      </p>
+                      <p className='subtitle-modal-profile'>Новий пароль</p>
+                      <p className='input-profile'>
+                                <input className='line-profile-modal' type='password' name='modal-password' required/>
+                      </p>
+                      <p className='subtitle-modal-profile'>Повторіть новий пароль</p>
+                      <p className='input-profile'>
+                                <input className='line-profile-modal' type='password' name='modal-password' required/>
+                      </p>
+                      <div className='button-profile-div button-profile-modal-div'>
+                      <input className='save-profile-button' type='button' value='Зберегти' />
+                      <input className='cancel-profile-button' type='button' value='Скасувати' />
+                      </div>
+                    </div>
+                    </Modal>
                     <a href='#' onClick={handleLogOutClick}>
                     <h3 className='exit-profile'>Вихід</h3>
                     </a>
