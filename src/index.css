@@ -1443,7 +1443,8 @@ input{
 
 .title-profile{
     position:fixed;
-    top: 70px
+    top: 70px;
+    cursor: default;
 }
 
 .title-profile h1{
@@ -1737,3 +1738,52 @@ input{
 .button-top-profile-div{
     margin-top: 41px;
 }
+
+.modal-profile-password-div{
+    background-color: #EAE5D9;
+    width: 555px;
+    padding-top: 50px;
+    padding-bottom: 45px;
+    padding-left: 70px;
+    padding-right: 70px;
+    border-radius: 10px;
+    position: absolute;
+    left:35%;
+    top: 30%
+}
+
+.title-profile-modal{
+    color: #647484;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.close-modal-profile-button{
+    left: 560px;
+    top: -30px
+}
+
+.subtitle-modal-profile{
+    font-size: 15px;
+    font-weight: 400;
+    color: #647484;
+}
+
+.line-profile-modal{
+    width: 415px;
+    height: 40px;
+    color: #182531;
+    border: #647484 solid 1px;
+    border-radius: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: transparent;
+    padding-left: 27px;
+    padding-right: 27px;
+}
+
+.button-profile-modal-div{
+    margin-top: 20px;
+}
+

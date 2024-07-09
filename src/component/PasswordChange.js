@@ -121,12 +121,12 @@ export default function MailConfirmation() {
                         <h5 className='title-line'>Новий пароль</h5>
                         <p className='text-auth'>
                             <input className='text-block' type='password' name='Password' placeholder='*********' value={newPassword} onChange={handleNewPasswordChange} required/>
-                            <div className='line-text-block'></div>
+                            <div className='line-text-block line-text-block_plus'></div>
                         </p>
                         <h5 className='title-line'>Підтвердіть новий пароль</h5>
                         <p className='text-auth'>
                             <input className='text-block' type='password' name='Password' placeholder='*********' value={newPasswordRepeat} onChange={handleNewPasswordRepeatChange} required/>
-                            <div className='line-text-block'></div>
+                            <div className='line-text-block line-text-block_plus'></div>
                         </p>
                     </form>
 
