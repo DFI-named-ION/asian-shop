@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import Modal from 'react-modal';
-import { useParams, navigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 import { auth } from "./../firebaseConfig";
 import { signOut } from "firebase/auth";
@@ -62,10 +62,16 @@ export default function ProfilePage() {
   };
 
     const {user, setUser} = useContext(AuthContext);
+    const navigate = useNavigate();
 
     const handleLogOutClick = async (e) => {
         e.preventDefault();
         signOut(auth);
+    };
+
+    const handleResetPassword = (e) => {
+      e.preventDefault();
+      navigate("/reset-password-verification");
     };
 
     const handleError = (error) => {
@@ -101,7 +107,7 @@ export default function ProfilePage() {
                   </a>
                   </div>
                   <div className='head-nav-div'>
-                  <a href='/authorization' className='icon-head'>
+                  <a href='/profile' className='icon-head'>
                       <img src={Profile}></img>
                   </a>
                   </div>

@@ -101,6 +101,11 @@ export default function Authorization() {
         }
     };
 
+    const handleBack = (e) => {
+        e.preventDefault();
+        navigate("/");
+    };
+
     const handleError = (error) => {
         let text = "";
         switch (error) {
@@ -131,7 +136,7 @@ export default function Authorization() {
                     <h1>Привіт</h1>
                 </div>
                 <div className='right-auth'>
-                <div className='left-arrow'>
+                <div className='left-arrow' onClick={handleBack}>
                     <img src={Arrow} id='arrow'></img>
                     </div>
                     <div className='title-auth-block-div'>
