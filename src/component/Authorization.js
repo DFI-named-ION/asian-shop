@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from 'react-router-dom';
+import Modal from 'react-modal';
 
 import Arrow from '../images/icons/arrowLeft.svg';
 import Google from '../images/socials/google-auth.svg'
@@ -19,6 +20,26 @@ function App() {
 }
 
 export default function Authorization() {
+
+    const [modalIsOpenErrorAuth, setModalIsOpenErrorAuth] = useState(false);
+
+  const openModalErrorAuth = () => {
+    setModalIsOpenErrorAuth(true);
+  };
+
+  const closeModalProfilePassword = () => {
+    setModalIsOpenErrorAuth(false);
+  };
+
+  const [modalIsOpenErrorAuth_1, setModalIsOpenErrorAuth_1] = useState(false);
+
+  const openModalErrorAuth_1 = () => {
+    setModalIsOpenErrorAuth_1(true);
+  };
+
+  const closeModalProfilePassword_1 = () => {
+    setModalIsOpenErrorAuth_1(false);
+  };
     
     const { user, setUser } = useContext(AuthContext);
     const navigate = useNavigate();
@@ -125,6 +146,13 @@ export default function Authorization() {
                             </p>
                             <p className='title-line-error'>
                                 {emailError}
+                                {/* <a className='link-line-error' href='#' onClick={openModalErrorAuth_1}>ⓘ</a>
+                                        <Modal isOpen={modalIsOpenErrorAuth_1} onRequestClose={closeModalProfilePassword_1} className='background-modal-div'>
+                    <div className='modal-link-error-div'> 
+                    <button onClick={closeModalProfilePassword_1} className='close-modal-button close-link-error-button'></button>
+                     <p>Користувача не знайдено. Сервер зіткнувся з неочікуваною помилкою при спробі обробити запит. Невірні облікові дані.</p>
+                    </div>
+                    </Modal> */}
                             </p>
                             <h5 className='title-line'>Пароль</h5>
                             <p className='text-auth'>
@@ -134,7 +162,24 @@ export default function Authorization() {
                             <p className='title-line-error'>
                                 {passwordError.split('\n').map((line) => (
                                     <>
-                                        {line}
+                                        {line} 
+                                        {/* <a className='link-line-error' href='#' onClick={openModalErrorAuth}>ⓘ</a>
+                                        <Modal isOpen={modalIsOpenErrorAuth} onRequestClose={closeModalProfilePassword} className='background-modal-div'>
+                    <div className='modal-link-error-div'> 
+                    <button onClick={closeModalProfilePassword} className='close-modal-button close-link-error-button'></button>
+                     <p>Неправильний формат пароля:</p>
+                     <ol>
+                        <li>Довжина пароля повинна бути від 6 до 64 символів.</li>
+                        <li>Пароль повинен містити:</li>
+                    </ol>
+                    <ul>
+                        <li>одну велику літеру.</li>
+                        <li>одну малу літеру.</li>
+                        <li>одну цифру.</li>
+                        <li>один спеціальний символ: @, $, !, %, *, ?, &..</li>
+                    </ul>
+                    </div>
+                    </Modal> */}
                                         <br />
                                     </>
                                 ))}

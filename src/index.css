@@ -833,6 +833,12 @@ h1, h2, h3, h4, p{
     color:#182531;
 }
 
+.link-line-error{
+    text-decoration: none;
+    color:#951717;
+    margin-left: 5px;
+}
+
 /* Modal goods window */
 
 .modal-goods-div{
@@ -1028,6 +1034,40 @@ h1, h2, h3, h4, p{
     justify-content: space-around;
     padding-bottom: 92px;
 } */
+
+.modal-link-error-div{
+    width: 628px;
+    border-radius: 10px;
+    padding-left: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-right: 20px;
+    background-color: #EAE5D9;
+    position: relative;
+    left: 35%;
+    top: 35%
+}
+
+.modal-link-error-div p{
+    font-size: 18px;
+    color: #647484;
+    font-weight: 400;
+}
+
+.modal-link-error-div li{
+    font-size: 18px;
+    color: #647484;
+    font-weight: 400;
+}
+
+.modal-link-error-div ul{
+    list-style-type:disc;
+}
+
+.close-link-error-button{
+    left: 630px;
+    top: -25px
+}
 
 .background-div-reg{
     padding-bottom: 90px;
