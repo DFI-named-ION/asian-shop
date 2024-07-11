@@ -1,4 +1,5 @@
 import React, {useContext, useState} from 'react';
+import {Collapse} from 'react-collapse';
 
 import Logo from '../images/logo/SakuraTails.svg';
 import Basket from '../images/icons/basket.svg';
@@ -29,6 +30,16 @@ import WhiteWolf from '../images/logo/white-wolf.svg';
 import BackgroundSubcribtion from '../images/img/fon-subscribe.svg';
 import Modal from 'react-modal';
 import Spread from '../images/icons/spread.svg';
+import HelloEmoji from '../images/icons/hello-emoji.svg';
+import AddPlus from '../images/icons/add-plus.svg';
+import Exit from '../images/icons/exit.svg';
+import History from '../images/icons/history.svg';
+import Transfer from '../images/icons/transfer.svg';
+import Like from '../images/icons/like.svg';
+import Pen from '../images/icons/pen.svg';
+import Wallet from '../images/icons/wallet.svg';
+import Procent from '../images/icons/procent.svg';
+import Case from '../images/icons/case.svg';
 
 import { AuthContext } from './providers/AuthProvider';
 
@@ -61,6 +72,16 @@ function App() {
     return <Facebook />;
     return <Tiktok />;
     return <Qr />;
+    return <HelloEmoji />;
+    return <AddPlus />;
+    return <Exit />;
+    return <History />;
+    return <Transfer />;
+    return <Like />;
+    return <Pen />;
+    return <Wallet />;
+    return <Procent />;
+    return <Case />;
   }
 
 export default function HomePage() {
@@ -289,7 +310,6 @@ const Carousel = ({ items }) => {
   );
 };
 
-
   return (
     <body className='homePage-body'>
     <><><header>
@@ -318,10 +338,59 @@ const Carousel = ({ items }) => {
                   <img src={Basket}></img>
               </a>
               </div>
-              <div className='head-nav-div'>
+              <div className='head-nav-div dropdown-header'>
               <a href={user ? "/profile" : "/authorization"} className='icon-head'>
                   <img src={Profile}></img>
               </a>
+              <div class="dropdown-content-header">
+                <div>
+                  <p className='head-email-dropdown'>IDK@gmail.com</p>
+                </div>
+                <div>
+                  <p className='hello-dropdown'>Вітаємо, <span className='name-dropdown'>(Ім'я)</span> <img src={HelloEmoji}></img></p>
+                </div>
+               <div>
+               <details className='dropdown-details'>
+               <summary>Показати більше акаунтів</summary>
+               <div>
+               <button className='dropdown-button'><img src={AddPlus}></img>Додати інший акаунт</button>
+               </div>
+               <div>
+               <button className='dropdown-border-bottom-button'><img src={Exit}></img>Вийти зі всіх акаунтів</button>
+               </div>
+               </details>
+               </div>
+                <div>
+               <button className='dropdown-border-top-button'><img src={History}></img>Історія замовлень</button>
+               </div>
+               <div>
+               <button className='dropdown-button'><img src={Transfer}></img>Відстеження замовлення</button>
+               </div>
+               <div>
+               <button className='dropdown-button'><img src={Like}></img>Обране</button>
+               </div>
+               <div>
+               <button className='dropdown-button'><img src={Pen}></img>Мої відгуки</button>
+               </div>
+               <div>
+               <button className='dropdown-button'><img src={Wallet}></img>Мій гаманець</button>
+               </div>
+               <div>
+               <button className='dropdown-border-bottom-button'><img src={Procent}></img>Знижки та бонуси</button>
+               </div>
+               <div>
+               <button className='dropdown-border-left-button'>Налаштування</button>
+               <button className='dropdown-border-right-button'>Довідка</button>
+               </div>
+               <div>
+               <button className='dropdown-border-bottom-button'><img src={Case}></img>Кабінет продавця</button>
+               </div>
+               <div>
+                <p className='bottom-dropdown'>
+                  <a href=''>Privacy Policy</a><span className='slash-dropdown'>/</span><a href=''> Terms of Service</a>
+                </p>
+               </div>
+              </div>
               </div>
               <div className='language-div'>
                 <div className='language-left-div'>
