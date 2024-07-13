@@ -118,6 +118,24 @@ export default function Registration() {
         // console.log(error);
     };
 
+    document.addEventListener('mousemove', function(e) {
+        const textBlock = document.getElementById('parallax');
+        const rect = textBlock.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+        const mouseX = e.clientX;
+        const mouseY = e.clientY;
+        const moveX = (mouseX - centerX) * -0.05;
+        const moveY = (mouseY - centerY) * -0.05;
+    
+        const limit = 10;
+        const limitedMoveX = Math.max(Math.min(moveX, limit), -limit);
+        const limitedMoveY = Math.max(Math.min(moveY, limit), -limit);
+    
+        textBlock.style.transform = `translate(${limitedMoveX}px, ${limitedMoveY}px)`;
+    });
+
+
     return (
         <body className='authorization-body'>
                 <div className='left-auth-reg' id='parallax'>
