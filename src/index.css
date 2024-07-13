@@ -2093,3 +2093,203 @@ input{
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
   }
+
+  /* Seller */
+
+  .seller-body{
+    background-color: #EAE5D9;
+    color: #182531;
+    font-family: "Montserrat", sans-serif;
+    max-width: 5000px;
+    min-width: 1900px;
+  }
+
+  .left-seller{
+    width: 364px;
+    height: 1080px;
+    background-color: #951717;
+    padding-top: 20px;
+  }
+
+  .logo-seller{
+    font-size: 24px;
+    color: #EAE5D9;
+    font-weight: 600;
+    text-align: center;
+  }
+
+  .name-id-seller{
+    margin-top: 20px;
+    padding-left: 28px;
+  }
+  
+  .name-id-seller h3{
+    font-size: 20px;
+    color: #FFFFFF;
+    font-weight: 400;
+    margin-bottom: 10px;
+  }
+
+  .name-id-seller p{
+    font-size: 14px;
+    font-weight: 400;
+    color: #FFFFFF;
+    opacity: .7;
+  }
+
+  .seller-search{
+    background-color: #751313;
+    border: 0px;
+    border-radius: 10px;
+    width: 316px;
+    height: 40px;
+    color: #EAE5D9;
+    margin-left: 28px;
+    margin-top: 20px;
+    padding-left: 40px;
+    padding-top: 11.5px;
+    padding-bottom: 11.5px;
+    padding-right: 20px;
+    font-size: 14px;
+    font-weight: 400;
+  }
+
+  .seller-search-div{
+    position: relative;
+    &::before{
+            content: '';
+            position: absolute;
+            content: url(../src/component/seller_comp/img_seller/search-seller.svg);
+            top: 30px;
+            left: 38px;
+            cursor: pointer;
+    }
+  }
+
+  .seller-search[type="search"]::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+    content: url(./component/seller_comp/img_seller/smallX.svg);
+    cursor: pointer;
+  }
+  
+  .seller-search::placeholder{
+    color: #EAE5D9;
+  }
+
+  .seller-buttons-div{
+    margin-top: 20px;
+  }
+
+  .left-seller-button{
+    width: 100%;
+    background-color: transparent;
+    border: 0px;
+    font-size: 20px;
+    font-weight: 400;
+    color: #EAE5D9;
+    text-align: start;
+    padding-left: 30px;
+    padding-top: 7.5px;
+    padding-bottom: 7.5px;
+  }
+
+  .left-seller-button:hover{
+    background: linear-gradient(111deg, rgba(186,33,33,0.5) 0%, rgba(255,250,120,0.5) 100%);
+  }
+
+  .img-seller-left{
+    margin-right: 13px;
+    margin-bottom: 3px;
+  }
+
+  .seller-details summary{
+    width: 100%;
+    background-color: transparent;
+    border: 0px;
+    font-size: 20px;
+    font-weight: 400;
+    color: #EAE5D9;
+    text-align: start;
+    padding-left: 30px;
+    padding-top: 7.5px;
+    padding-bottom: 7.5px;
+  }
+
+  .seller-details summary:hover{
+    background: linear-gradient(111deg, rgba(186,33,33,0.5) 0%, rgba(255,250,120,0.5) 100%);
+  }
+
+  .seller-details[open] > summary {
+    background: linear-gradient(111deg, rgba(186,33,33,0.5) 0%, rgba(255,250,120,0.5) 100%);
+  }
+
+  .left-seller-subbutton{
+    width: 100%;
+    background-color: transparent;
+    border: 0px;
+    font-size: 17px;
+    font-weight: 400;
+    color: #EAE5D9;
+    text-align: start;
+    padding-left: 66px;
+    padding-top: 7.5px;
+    padding-bottom: 7.5px;
+  }
+
+  .left-seller-subbutton:hover{
+    background: linear-gradient(111deg, rgba(186,33,33,0.3) 0%, rgba(255,250,120,0.3) 100%);
+  }
+
+  .wolf-seller-div{
+    position: absolute;
+    top: 183px;
+    left: 107px;
+  }
+
+  .seller-div{
+    display: flex;
+  }
+
+  .head-seller{
+    width: 1556px;
+    height: 84px;
+    background-color: #AA4A47;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-right: 72px;
+    padding-left: 35px;
+    display: flex;
+  }
+
+  .head-seller img{
+    margin-top: 10px;
+  }
+
+  .head-seller p{
+    margin-top: 11px;
+    font-weight: 600;
+    font-size: 24px;
+    color: #EAE5D9;
+    margin-left: 20px;
+  }
+  
+  .save-seller-button{
+    padding-bottom: 12px;
+    padding-top: 13px;
+    width: 190px;
+    background-color: #951717;
+    color: #EAE5D9;
+    border-radius: 10px;
+    border: 0px;
+    margin-left: 1030px;
+    font-size: 16px;
+    font-weight: 600;
+    border: #951717 3px solid;
+  }
+
+  .save-seller-button:hover{
+    border: #182531 3px solid;
+    color: #182531;
+    background-color: transparent;
+    background: linear-gradient(111deg, rgba(186,33,33,0.1) 0%, rgba(255,250,120,0.1) 100%);
+  }
