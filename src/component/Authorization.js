@@ -7,6 +7,8 @@ import Google from '../images/socials/google-auth.svg'
 import Facebook from '../images/socials/facebook-auth.svg'
 import Twitter from '../images/socials/twitter-auth.svg';
 
+import ReCaptcha from 'react-google-recaptcha';
+
 import { auth, facebook, google, twitter } from "./../firebaseConfig";
 import { signInWithPopup, signInWithEmailAndPassword } from "firebase/auth";
 
@@ -189,6 +191,9 @@ export default function Authorization() {
                                     </>
                                 ))}
                             </p>
+                            <ReCaptcha className="Captcha"
+                                sitekey="6Le0QA8qAAAAAHq5xgAIIBAuZfy7oNG1bDazdwQF"
+                                onChange={(token) => {console.log('reCAPTCHA token:', token);}}/>
                         </form>
                         <a>
                             <input className='login-button' type='submit' value='Увійти' onClick={handleLoginClick}/>
