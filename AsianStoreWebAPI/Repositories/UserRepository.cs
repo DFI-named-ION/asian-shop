@@ -1,115 +1,248 @@
-﻿using AsianStoreWebAPI.EF;
-using AsianStoreWebAPI.EF.DTO;
+﻿using AsianStoreWebAPI.EF.DTO;
 using AsianStoreWebAPI.EF.Models;
 using AsianStoreWebAPI.Responses;
 using AsianStoreWebAPI.Services;
-using Google.Apis.Auth;
-using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using System.Runtime.CompilerServices;
+using FirebaseAdmin.Auth;
+using Google.Rpc;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 
 namespace AsianStoreWebAPI.Repositories
 {
     public class UserRepository : IUserRepository
     {
-        private bool _disposed = false;
-        private AsianStoreDatabaseContext _context;
-        private UserManager<User> _userManager;
-        private RoleManager<IdentityRole<long>> _roleManager;
-        private IConfiguration _config;
+        private readonly FirebaseAuthService _firebaseAuthService;
+        private readonly FirestoreService _firestoreService;
+        private readonly JwtService _jwtService;
+        private readonly IRoleRepository _roleRepo;
 
-        public UserRepository(AsianStoreDatabaseContext context, UserManager<User> userManager, RoleManager<IdentityRole<long>> roleManager, IConfiguration config) 
-        { 
-            _context = context;
-            _userManager = userManager;
-            _roleManager = roleManager;
-            _config = config;
+        public UserRepository(FirebaseAuthService fas, FirestoreService fs, JwtService js, IRoleRepository roleRepo)
+        { _firebaseAuthService = fas; _firestoreService = fs; _jwtService = js; _roleRepo = roleRepo; }
+
+
+
+        private async Task<string> GenerateVerificationCodeAsync(string userId)
+        {
+            var collection = "verificationCodes";
+            var rand = new Random();
+            string newCode;
+            bool isUnique = false;
+            VerificationCode verfCode = null!;
+
+            var existingUserCodes = await _firestoreService.GetRecordsByFieldAsync<VerificationCode>(collection, "IssuedTo", userId);
+            var validUserCode = existingUserCodes.FirstOrDefault(code => code.ExpiresIn > DateTime.UtcNow);
+
+            if (validUserCode != null)
+            {
+                return validUserCode.Code;
+            }
+
+            while (!isUnique)
+            {
+                newCode = rand.Next(100000, 1000000).ToString();
+
+                var existingCodes = await _firestoreService.GetRecordsByFieldAsync<VerificationCode>(collection, "Code", newCode);
+                var notExpiredCode = existingCodes.FirstOrDefault(code => code.ExpiresIn > DateTime.UtcNow);
+
+                if (notExpiredCode == null)
+                {
+                    verfCode = new VerificationCode()
+                    {
+                        Code = newCode,
+                        ExpiresIn = DateTime.UtcNow.AddHours(1),
+                        CreatedAt = DateTime.UtcNow,
+                        IssuedTo = userId
+                    };
+                    isUnique = true;
+                }
+            }
+
+            await _firestoreService.AddRecordAsync(collection, verfCode);
+            return verfCode!.Code;
         }
 
-        public async Task<ServiceResponses.GeneralResponse> RegisterUser(RegisterUserDTO dto)
-        {
-            if (dto is null) 
-                return new ServiceResponses.GeneralResponse("User is null");
-            if (dto.Password != dto.ConfirmPassword) 
-                return new ServiceResponses.GeneralResponse("User passwords do not match");
-            if (await _userManager.FindByEmailAsync(dto.Email) is not null) 
-                return new ServiceResponses.GeneralResponse("User is registered already");
 
-            var newUser = new User
+
+        public async Task ResetPasswordAsync(string token)
+        {
+            if (!_jwtService.IsJwtValid(_jwtService.DecodeJwt(token)))
+                throw new Exception("Jwt is not valid");
+
+            var data = _jwtService.DecryptJwtToken(token, ["code", "user_id", "new_password", "new_password_repeat"]);
+
+            var user = await _firebaseAuthService.GetUserByIdAsync(data["user_id"].ToString());
+            if (user is null)
+                throw new Exception("User not found");
+
+            var codes = await _firestoreService.GetRecordsByFieldAsync<VerificationCode>("verificationCodes", "IssuedTo", user.Uid);
+            var code = codes.FirstOrDefault(x => x.ExpiresIn > DateTime.UtcNow && x.Code == data["code"].ToString());
+            if (code is null)
+                throw new Exception("Code is not valid");
+
+            if (data["new_password"].ToString() != data["new_password_repeat"].ToString())
+                throw new Exception("Passwords are different");
+
+            await _firebaseAuthService.UpdateUserPassword(user.Uid, data["new_password"].ToString());
+
+            await _firestoreService.DeleteRecordAsync("verificationCodes", code.Id);
+        }
+
+
+        public async Task SendForgotUrlAsync(string email)
+        {
+            var user = await _firebaseAuthService.GetUserByEmailAsync(email);
+            if (user is null)
+                throw new Exception("User not found");
+
+            var code = await GenerateVerificationCodeAsync(user.Uid);
+
+            var data = new Dictionary<string, object>()
             {
-                Email = dto.Email,
-                UserName = dto.Email,
-                PasswordHash = dto.Password,
-                Role = "User"
+                { "code", code },
+                { "user_id", user.Uid }
             };
 
-            var result = await _userManager.CreateAsync(newUser, dto.Password);
-            if (!result.Succeeded)
-                return new ServiceResponses.GeneralResponse($"Error occurred: {string.Join(", ", result.Errors.Select(e => e.Description))}");
-
-            if (await _roleManager.FindByNameAsync("User") is null)
-                await _roleManager.CreateAsync(new IdentityRole<long>() { Name = "User" });
-            await _userManager.AddToRoleAsync(newUser, "User");
-
-            if (await _roleManager.FindByNameAsync("Admin") is null)
-            {
-                await _roleManager.CreateAsync(new IdentityRole<long>() { Name = "Admin" });
-                await _userManager.AddToRoleAsync(newUser, "Admin");
-                newUser.Role = "Admin";
-                if (!(await _userManager.UpdateAsync(newUser)).Succeeded)
-                    return new ServiceResponses.GeneralResponse($"Error occurred while update: {string.Join(", ", result.Errors.Select(e => e.Description))}");
-            }
-
-            return new ServiceResponses.GeneralResponse("Success");
+            var jwt = _jwtService.GenerateJwtToken(data);
+            await _firebaseAuthService.SendResetUrlAsync(user.Uid, jwt);
         }
 
-        public async Task<ServiceResponses.AuthenticationResponse> LoginUser(LoginUserDTO dto)
+
+        public async Task SendVerificatoinCodeAsync(string sessionId)
         {
-            if (dto is null)
-                return new ServiceResponses.AuthenticationResponse("Empty credentials", null);
-            
-            var user = await _userManager.FindByEmailAsync(dto.Email);
+            if (sessionId is null)
+                throw new Exception("Session Id is null");
+
+            var session = await _firestoreService.GetRecordAsync<Session>("sessions", sessionId);
+            if (session is null)
+                throw new Exception("Session is null");
+
+            var user = await _firebaseAuthService.GetUserByIdAsync(session.IssuedTo);
             if (user is null)
-                return new ServiceResponses.AuthenticationResponse("User not found", null);
+                throw new Exception("User not found");
 
-            bool checkPassword = await _userManager.CheckPasswordAsync(user, dto.Password);
-            if (!checkPassword)
-                return new ServiceResponses.AuthenticationResponse("Invalid credentials", null);
+            if (user.EmailVerified)
+                throw new Exception("User is already verified");
 
-            var token = IdentityService.GenerateToken(user, _config);
-            return new ServiceResponses.AuthenticationResponse("Success", token);
+            var code = await GenerateVerificationCodeAsync(user.Uid);
+
+            await _firebaseAuthService.SendVerificationCodeAsync(user.Uid, code);
         }
 
-        public async Task<ServiceResponses.ThirdPartyResponse> AuthorizeGoogleUser(GoogleUserDTO dto)
+
+        public async Task CheckVerificationCodeAsync(string sessionId, string code)
         {
-            if (dto is null) return new ServiceResponses.ThirdPartyResponse("Empty credentials", null);
+            if (sessionId is null)
+                throw new Exception("Session Id is null");
 
-            if (!await IsGoogleTokenValid(dto))
-                return new ServiceResponses.ThirdPartyResponse("Token is invalid", null);
+            var session = await _firestoreService.GetRecordAsync<Session>("sessions", sessionId);
+            if (session is null)
+                throw new Exception("Session is null");
 
-            var user = _context.Users.Where(x => x.Email == dto.Email).FirstOrDefault();
+            var user = await _firebaseAuthService.GetUserByIdAsync(session.IssuedTo);
             if (user is null)
-            {
-                var tempPassword = Guid.NewGuid().ToString() + "A";
-                await RegisterUser(new RegisterUserDTO() { Email = dto.Email, Password = tempPassword, ConfirmPassword = tempPassword });
-                user = _context.Users.Where(x => x.Email == dto.Email).FirstOrDefault();
-            }
+                throw new Exception("User not found");
 
-            var jwtToken = IdentityService.GenerateToken(user, _config);
-            return new ServiceResponses.ThirdPartyResponse("Success", jwtToken);
+            var existingUserCodes = await _firestoreService.GetRecordsByFieldAsync<VerificationCode>("verificationCodes", "IssuedTo", user.Uid);
+            var validUserCode = existingUserCodes.FirstOrDefault(x => x.ExpiresIn > DateTime.UtcNow && x.Code == code);
+
+            if (validUserCode is null)
+                throw new Exception("Code is not valid");
+
+            if (user.EmailVerified)
+                throw new Exception("User is already verified");
+
+            await _firebaseAuthService.SetUserEmailVerified(user.Uid);
+
+            await _firestoreService.DeleteRecordAsync("verificationCodes", validUserCode.Id);
         }
 
-        private async Task<bool> IsGoogleTokenValid(GoogleUserDTO dto)
-        {
-            var payload = await GoogleJsonWebSignature.ValidateAsync(dto.Token);
 
-            var expirationTime = DateTimeOffset.FromUnixTimeSeconds(payload.ExpirationTimeSeconds.Value).UtcDateTime;
-            if (DateTime.UtcNow > expirationTime)
+
+        public async Task<Session> LoginAsync(string accessToken)
+        {
+            var userId = _jwtService.GetJwtClaim(accessToken, "user_id").Value;
+            if (!_jwtService.IsJwtValid(_jwtService.DecodeJwt(accessToken)))
+                throw new Exception("Jwt is not valid");
+
+            var user = await _firebaseAuthService.GetUserByIdAsync(userId);
+            if (user is null)
+                throw new Exception("User is null");
+
+            var existingSessions = await _firestoreService.GetRecordsByFieldAsync<Session>("sessions", "IssuedTo", user.Uid);
+
+            if (existingSessions != null && existingSessions.Any())
             {
-                return false;
+                var existingSession = existingSessions.OrderByDescending(s => s.CreatedAt).First();
+                return existingSession;
             }
-            return payload.Email == dto.Email;
+
+            var session = new Session()
+            {
+                IssuedTo = user.Uid,
+                CreatedAt = DateTime.UtcNow,
+                ExpiresIn = DateTime.UtcNow.AddDays(3)
+            };
+            session.Id = await _firestoreService.AddRecordAsync<Session>("sessions", session);
+
+            return session;
+        }
+
+
+        public async Task<object> FetchDataAsync(string sessionId, string fields)
+        {
+            if (sessionId is null)
+                throw new Exception("Session Id is null");
+
+            var session = await _firestoreService.GetRecordAsync<Session>("sessions", sessionId);
+            if (session is null)
+                throw new Exception("Session is null");
+
+            var user = await _firebaseAuthService.GetUserByIdAsync(session.IssuedTo);
+            if (user is null)
+                throw new Exception("User is null");
+
+            var requestedFields = fields.Split(';', StringSplitOptions.RemoveEmptyEntries);
+
+            var data = new Dictionary<string, object>();
+
+            foreach (var field in requestedFields)
+            {
+                switch (field.Trim())
+                {
+                    case "email":
+                        data.Add("email", user.Email);
+                        break;
+                    case "isVerified":
+                        data.Add("isVerified", user.EmailVerified);
+                        break;
+                    case "displayName":
+                        data.Add("displayName", user.DisplayName);
+                        break;
+                    case "fullName":
+                        data.Add("fullName", user.DisplayName);
+                        break;
+                    case "phone":
+                        data.Add("phone", user.PhoneNumber);
+                        break;
+                    case "id":
+                        data.Add("id", user.Uid);
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            return data;
+        }
+
+
+
+
+        public async Task<(string, List<UserRecord>)> GetAllUsersAsync()
+        {
+            var users = await _firebaseAuthService.GetAllUsersAsync();
+            return ("Success", users);
         }
     }
 }
