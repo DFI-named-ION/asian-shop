@@ -60,6 +60,7 @@ export default function Authorization() {
     const [emailError, setEmailError] = useState("");
     const [password, setPassword] = useState("");
     const [passwordError, setPasswordError] = useState("");
+    const [token, setToken] = useState(false);
 
     const handleEmailChange = (e) => {
         setEmail(e.target.value);
@@ -69,6 +70,9 @@ export default function Authorization() {
         setPassword(e.target.value);
     };
 
+    const handleTokenChange = (e) => {
+        setToken(true);
+    };
     const login = async (provider) => {
         try {
             const result = await signInWithPopup(auth, provider);
@@ -94,6 +98,10 @@ export default function Authorization() {
             return;
         }
         setPasswordError("");
+        if(!token){
+            handleError("recaptcha-error");
+            return;
+        }
 
         try {
             const result = await signInWithEmailAndPassword(auth, email, password);
@@ -125,6 +133,9 @@ export default function Authorization() {
                 break;
             case "password-format-error":
                 setPasswordError("Invalid password format:\nPassword length: 6-64 characters\nAt least one uppercase letter\nAt least one lowercase letter\nAt least one digit\nAt least one special character: @, $, !, %, *, ?, &");
+                break;
+            case "recaptcha-error":
+                setPasswordError("Invalid recaptcha.");
                 break;
             default:
                 console.log(error);
@@ -193,7 +204,7 @@ export default function Authorization() {
                             </p>
                             <ReCaptcha className="Captcha"
                                 sitekey="6Le0QA8qAAAAAHq5xgAIIBAuZfy7oNG1bDazdwQF"
-                                onChange={(token) => {console.log('reCAPTCHA token:', token);}}/>
+                                onChange={handleTokenChange}/>
                         </form>
                         <a>
                             <input className='login-button' type='submit' value='Увійти' onClick={handleLoginClick}/>
