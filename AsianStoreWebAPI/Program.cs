@@ -1,11 +1,17 @@
 using AsianStoreWebAPI.EF;
 using AsianStoreWebAPI.EF.Models;
 using AsianStoreWebAPI.Repositories;
+using AsianStoreWebAPI.Services;
+using FirebaseAdmin;
+using Google.Api;
+using Google.Apis.Auth.OAuth2;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json;
 using Swashbuckle.AspNetCore.Filters;
 using System.Text;
 
@@ -17,78 +23,32 @@ namespace AsianStoreWebAPI
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            // Add services to the container.
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
+            builder.Services.AddSwaggerGen();
 
-            // Auth in swagger
-            builder.Services.AddSwaggerGen(options =>
+            // Firebase + Services
+            FirebaseApp.Create(new AppOptions()
             {
-                options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-                {
-                    Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
-                    Name = "Authorization",
-                    In = ParameterLocation.Header,
-                    Type = SecuritySchemeType.ApiKey,
-                    Scheme = "Bearer"
-                });
-
-                options.AddSecurityRequirement(new OpenApiSecurityRequirement()
-                {
-                    {
-                        new OpenApiSecurityScheme
-                        {
-                            Reference = new OpenApiReference
-                            {
-                                Type = ReferenceType.SecurityScheme,
-                                Id = "Bearer"
-                            },
-                            Scheme = "oauth2",
-                            Name = "Bearer",
-                            In = ParameterLocation.Header,
-
-                        },
-                        new List<string>()
-                    }
-                });
+                Credential = GoogleCredential.FromFile(Directory.GetCurrentDirectory() + "/service.json"),
             });
+            builder.Services.AddSingleton<JwtService>();
+            builder.Services.AddSingleton<FirestoreService>();
+            builder.Services.AddSingleton<FirebaseAuthService>();
+
+            // Scopes
             builder.Services.AddScoped<IUserRepository, UserRepository>();
-
-            // DbContext
-            builder.Services.AddDbContext<AsianStoreDatabaseContext>(options =>
-                options.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
-
-            // Identity
-            builder.Services.AddIdentity<User, IdentityRole<long>>()
-                .AddEntityFrameworkStores<AsianStoreDatabaseContext>()
-                .AddSignInManager()
-                .AddRoles<IdentityRole<long>>();
-                //.AddDefaultTokenProviders();
-
-            // JWT
-            builder.Services.AddAuthentication(options =>
-            {
-                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(options =>
-            {
-                options.TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidateIssuer = true,
-                    ValidateAudience = true,
-                    ValidateIssuerSigningKey = true,
-                    ValidateLifetime = true,
-                    ValidIssuer = builder.Configuration["Jwt:Issuer"],
-                    ValidAudiences = builder.Configuration.GetSection("Jwt:Audience").Get<List<string>>(),
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]!))
-                };
-            });
+            builder.Services.AddScoped<IRoleRepository, RoleRepository>();
 
             builder.Services.AddCors(options =>
             {
-                options.AddPolicy("AllowReactOrigin",
-                    builder => builder.WithOrigins("http://localhost:3000")
+                options.AddPolicy("CorsPolicy",
+                    builder => builder
+                        .WithOrigins("http://localhost:3000", "https://localhost:3000", "https://asian-shop.vercel.app/", "https://asian-shop-dev.vercel.app/") // Replace with your React app's URL
+                        .AllowAnyMethod()
                         .AllowAnyHeader()
-                        .AllowAnyMethod());
+                        .AllowCredentials());
             });
 
             var app = builder.Build();
@@ -99,14 +59,11 @@ namespace AsianStoreWebAPI
                 app.UseSwaggerUI();
             }
 
-            app.UseCors("AllowReactOrigin");
-
             app.UseHttpsRedirection();
-
-            app.UseAuthentication();
 
             app.UseAuthorization();
 
+            app.UseCors("CorsPolicy");
 
             app.MapControllers();
 

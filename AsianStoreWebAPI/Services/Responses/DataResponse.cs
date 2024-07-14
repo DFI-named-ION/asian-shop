@@ -2,6 +2,6 @@
 {
     public partial class ServiceResponses
     {
-        public record class ThirdPartyResponse(string message, string token);
+        public record class DataResponse(string message, object data);
     }
 }
