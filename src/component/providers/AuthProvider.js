@@ -69,7 +69,7 @@ export const AuthProvider = ({ children }) => {
         if (error.response) {
             setAxiosError({short: "Server error", long: "Internal server error occurred. Please try again later."});
         } else if (error.request) {
-            setAxiosError({short: "Network error", long: "Network error. Please check your internet connection."});
+            // setAxiosError({short: "Network error", long: "Network error. Please check your internet connection."});
         } else {
             setAxiosError({short: "Unexpected error", long: "An unexpected error occurred. Please try again."});
         }
