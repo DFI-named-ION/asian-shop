@@ -13,7 +13,7 @@ function App() {
 
 export default function MailConfirmation() {
     
-    const {user, setUser} = useContext(AuthContext);
+    const {user, logout, axiosError} = useContext(AuthContext);
     const navigate = useNavigate();
     const [isDisabled, setIsDisabled] = useState(false);
     const [timeLeft, setTimeLeft] = useState(0);
@@ -23,31 +23,24 @@ export default function MailConfirmation() {
 
     useEffect(() => {
         if (!user) {
-            navigate("/registration");
-            return;
+            navigate("/authorization");
         }
-        if (user.emailVerified) {
-            navigate("/profile");
-            return;
+        if (user.isVerified) {
+            navigate("/profile-settings");
         }
         
         sendEmail();
     }, [user, navigate]);
 
     const sendEmail = () => {
-        let dto = {
-            accessToken: user.stsTokenManager.accessToken,
-        };
-        axios.post(process.env.REACT_APP_WEB_API_BASE_URL + "/Auth/sendVerificationCode", dto) // change to JWT
+        axios.get(process.env.REACT_APP_WEB_API_BASE_URL + "/Auth/sendVerificationCode")
         .then((response) => {
-            if (response.data.message === "Success") {
-                // hmmm
-                return;
+            if (response.data !== "Success") {
+                handleError(response.data);
             }
-            handleError(response.data.message);
         })
         .catch((err) => {
-            handleError(err);
+            handleError(err.code);
         });
     };
 
@@ -75,28 +68,21 @@ export default function MailConfirmation() {
     const handleSubmitCode = async (e) => {
         e.preventDefault();
         let codeStr = code.join('');
-        if (codeStr.length === 6) {
-            let dto = {
-                accessToken: user.stsTokenManager.accessToken,
-                code: codeStr,
-            };
-            axios.post(process.env.REACT_APP_WEB_API_BASE_URL + "/Auth/checkVerificationCode", dto) // change to JWT
-            .then((response) => {
-                if (response.data.message === "Success") {
-                    setUser((prevUser) => ({
-                        ...prevUser,
-                        emailVerified: true
-                    }));
-                    navigate("/profile");
-                }
-                handleError(response.data.message);
-            })
-            .catch((error) => {
-                handleError(error);
-            });
-        } else {
-            setSendError("Code is not full.");
+        if (codeStr.length !== 6) {
+            handleError("not-full-code");
+            return;
         }
+
+        axios.post(process.env.REACT_APP_WEB_API_BASE_URL + "/Auth/checkVerificationCode", { code: codeStr })
+        .then((response) => {
+            if (response.data === "Success") {
+                navigate("/profile");
+            }
+            handleError(response.data);
+        })
+        .catch((error) => {
+            handleError(error.code);
+        });
     };
 
     const handleInputChange = (e, index) => {
@@ -127,20 +113,30 @@ export default function MailConfirmation() {
 
     const handleBack = (e) => {
         e.preventDefault();
-        const referrerURL = new URL(document.referrer);
-        if (referrerURL.origin === window.location.origin) {
-            navigate(referrerURL.pathname + referrerURL.search);
-        } else {
-            window.location.href = document.referrer;
-        }
+        navigate("/authorization");
     };
+
+    useEffect(() => {
+        if (axiosError) {
+            setSendError(axiosError.short);
+        }
+    }, [axiosError]);
 
     const handleError = (error) => {
         switch (error) {
-            case "Failure: User is already verified.":
+            case "Session Id is null":
+                logout(); // switch to clearUser?
+                break;
+            case "not-full-code":
+                setSendError("Code is not full.");
+                break;
+            case "User not found":
+                setSendError("Code is not valid.");
+                break;
+            case "User is already verified":
                 setSendError("User is already verified.")
                 break;
-            case "Failure: Code is not valid.":
+            case "Code is not valid":
                 setSendError("Code is not valid.");
                 break;
             default:
