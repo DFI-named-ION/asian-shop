@@ -2293,3 +2293,8 @@ input{
     background-color: transparent;
     background: linear-gradient(111deg, rgba(186,33,33,0.1) 0%, rgba(255,250,120,0.1) 100%);
   }
+
+  .Captcha{
+    justify-self: center;
+    margin-left: 110px;
+  }
