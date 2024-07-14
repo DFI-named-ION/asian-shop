@@ -41,6 +41,7 @@ export default function Authorization() {
     const [emailShortError, setEmailShortError] = useState("");
     const [emailLongError, setEmailLongError] = useState("");
     const [password, setPassword] = useState("");
+    const [token, setToken] = useState(false);
     const [passwordShortError, setPasswordShortError] = useState("");
     const [passwordLongError, setPasswordLongError] = useState("");
 
@@ -60,6 +61,10 @@ export default function Authorization() {
         setPassword(e.target.value);
     };
 
+    const handleTokenChange = (e) => {
+        setToken(true);
+    };
+
     const handleAuth = async (providerOrEvent) => {
         if (providerOrEvent.preventDefault) {
             providerOrEvent.preventDefault();
@@ -73,6 +78,11 @@ export default function Authorization() {
 
             if (!passRegex.test(password)) {
                 handleError("password-format-error");
+                return;
+            }
+
+            if(!token){
+                handleError("recaptcha-error");
                 return;
             }
     
@@ -135,6 +145,12 @@ export default function Authorization() {
                 setEmailLongError("");
                 setPasswordShortError("Invalid password format");
                 setPasswordLongError("password-format-error");
+                break;
+            case "recaptcha-error":
+                setEmailShortError("");
+                setEmailLongError("");
+                setPasswordShortError("Invalid recaptcha.");
+                setPasswordLongError("");
                 break;
             default:
                 // console.log(error); // for debug
@@ -213,7 +229,7 @@ export default function Authorization() {
                             </p>
                             <ReCaptcha className="Captcha"
                                 sitekey="6Le0QA8qAAAAAHq5xgAIIBAuZfy7oNG1bDazdwQF"
-                                onChange={(token) => {console.log('reCAPTCHA token:', token);}}/>
+                                onChange={handleTokenChange}/>
                         </form>
                         <a>
                             <input className='login-button' type='submit' value='Увійти' onClick={handleAuth}/>
