@@ -65,10 +65,10 @@ export default function MailConfirmation() {
                 setSendShortError("User not found");
                 setSendLongError("User with this email not found.");
                 break;
-            case "ERR_NETWORK":
-                setSendShortError("Network error");
-                setSendLongError("Network error. Please check your internet connection.");
-                break;
+            // case "ERR_NETWORK":
+            //     setSendShortError("Network error");
+            //     setSendLongError("Network error. Please check your internet connection.");
+            //     break;
             case `Failed to get user with email: ${email}`:
                 setSendShortError("User not found");
                 setSendLongError("User with this email not found.");

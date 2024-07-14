@@ -103,10 +103,8 @@ export default function Registration() {
 
     useEffect(() => {
         if (axiosError) {
-            if (axiosError.short !== "a") {
-                setEmailShortError(axiosError.short);
-                setEmailLongError(axiosError.long);
-            }
+            setEmailShortError(axiosError.short);
+            setEmailLongError(axiosError.long);
         }
     }, [axiosError]);
 
