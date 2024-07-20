@@ -1842,9 +1842,9 @@ input{
     padding: 20px 20px 20px 20px;
   }
 
-  .dropdown-header:hover .dropdown-content-header {
+  /* .dropdown-header:hover .dropdown-content-header {
     display: block;
-  }
+  } */
 
   .dropdown-border-top-button{
     border-top-left-radius: 30px;
@@ -2097,18 +2097,19 @@ input{
   /* Seller */
 
   .seller-body{
-    background-color: #EAE5D9;
+    background: radial-gradient(circle, rgba(240,207,202,1) 0%, rgba(255,253,221,1) 100%);
     color: #182531;
     font-family: "Montserrat", sans-serif;
     max-width: 5000px;
     min-width: 1900px;
+    min-height: 1080px;
   }
 
   .left-seller{
     width: 364px;
-    height: 1080px;
     background-color: #951717;
     padding-top: 20px;
+    min-height: 1080px;
   }
 
   .logo-seller{
@@ -2146,6 +2147,7 @@ input{
     color: #EAE5D9;
     margin-left: 28px;
     margin-top: 20px;
+    margin-right: 20px;
     padding-left: 40px;
     padding-top: 11.5px;
     padding-bottom: 11.5px;
@@ -2178,6 +2180,7 @@ input{
 
   .seller-buttons-div{
     margin-top: 20px;
+
   }
 
   .left-seller-button{
@@ -2236,6 +2239,10 @@ input{
     padding-bottom: 7.5px;
   }
 
+  .left-seller-subbutton-open{
+    background: linear-gradient(111deg, rgba(186,33,33,0.3) 0%, rgba(255,250,120,0.3) 100%);
+  }
+
   .left-seller-subbutton:hover{
     background: linear-gradient(111deg, rgba(186,33,33,0.3) 0%, rgba(255,250,120,0.3) 100%);
   }
@@ -2251,7 +2258,7 @@ input{
   }
 
   .head-seller{
-    width: 1556px;
+    width: 1540px;
     height: 84px;
     background-color: #AA4A47;
     padding-top: 15px;
@@ -2293,6 +2300,323 @@ input{
     background-color: transparent;
     background: linear-gradient(111deg, rgba(186,33,33,0.1) 0%, rgba(255,250,120,0.1) 100%);
   }
+
+  .text-cabinet-seller h1{
+    font-size: 150px;
+    font-weight: 600;
+    color: rgba(64, 74, 84, 0.4);
+    background-color: transparent;
+    margin-top: 200px;
+    text-align: center;
+  }
+
+  .top-option-company{
+    padding-top: 28px;
+    padding-left: 30px;
+    padding-right: 70px;
+    display: flex;
+  }
+
+  .description-seller-option{
+    width: 260px;
+  }
+
+  .description-seller-option h3{
+    font-size: 20px;
+    color: #647484;
+    font-weight: 600;
+  }
+
+  .description-seller-option p{
+    font-size: 16px;
+    color: #647484;
+    font-weight: 400;
+    margin-top: 8px;
+    margin-left: 30px;
+  }
+
+  .information-option{
+    backdrop-filter: blur(5px);
+    width: 1174px;
+    border-radius: 10px;
+    border: solid 3px rgba(64,74,84,0.1);
+    margin-left: 30px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+
+  .text-input-seller{
+    font-size: 18px;
+    color: #182531;
+    font-weight: 400;
+    text-decoration: none;
+  }
+
+  .text-input-seller input{
+    width: 1114px;
+    background-color: transparent;
+    border: 0px;
+  }
+
+  .name-input-seller{
+    font-size: 16px;
+    color: #647484;
+    font-weight: 400;
+  }
+
+  .name-input-seller span{
+    color: #951717;
+  }
+
+  .long-line-seller{
+    height: 3px;
+    border-radius: 10px;
+    border: 0px;
+    background-color: rgba(64,74,84,0.3);
+    margin-top: 5px;
+  }
+
+  .short-line-seller{
+    height: 3px;
+    width: 532px;
+    border-radius: 10px;
+    border: 0px;
+    background-color: rgba(64,74,84,0.3);
+    margin-top: 5px;
+  }
+
+  .block-input-seller{
+    margin-top: 30px;
+  }
+
+  .text-input-short-seller input{
+    width: 532px;
+  }
+
+  .top-bottom-box-seller{
+    display: flex;
+  }
+
+  .top-bottom-left-box-seller{
+    margin-right: 50px;
+  }
+
+  .big-textarea-seller{
+    width: 1115px;
+    height: 260px;
+    background-color: transparent;
+    border: 0px;
+    outline:none;
+  }
+
+  .option-seller-save-button{
+    margin-left: 320px;
+    margin-top: 15px;
+    margin-bottom: 102px;
+  }
+
+  .select-seller-option-long{
+    width: 1114px;
+    height: 30px;
+    border: 0px;
+    background-color: transparent;
+  }
+
+  select:required:invalid {
+    color: #647484;
+  }
+
+ .select-seller-option-short{
+    width: 532px;
+ }
+
+ .information-option-display{
+    display: flex;
+    justify-content: space-between;
+ }
+
+ .name-link-seller{
+    margin-top: 17.5px;
+    margin-bottom: 15px;
+    color: #647484;
+    font-size: 16px;
+    font-weight: 400;
+ }
+
+ .link-seller-option{
+    font-size: 17px;
+ }
+
+ .del-seller-button{
+    color: #647484;
+    background-color: #EAE5D9;
+    border: #EAE5D9 solid 3px;
+    margin-left: 10px;
+ }
+
+ .del-seller-button:hover{
+    color: #647484;
+    border: #647484 solid 3px;
+ }
+
+ .buttons-save-del-seller{
+    display: flex;
+ }
+
+ .sakura-seller{
+    top: 198px;
+    right: -31px;
+ }
+
+ .sakura-seller-div{
+    position: absolute;
+ }
+
+ /* .right-seller{
+    background-image: url(./component/seller_comp/img_seller/sakura-seller.svg);
+    height: 2000px;
+ } */
+
+ .modal-link-option-profile-seller-div{
+    padding-top: 42px;
+    padding-bottom: 42px;
+    padding-left: 70px;
+    padding-right: 70px;
+    
+ }
+
+ .modal-link-option-profile-seller-div h4{
+    color: #647484;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 15px;
+ }
+
+ .subtitle-option-profile-seller{
+    color: #647484;
+    font-size: 16px;
+    font-weight: 400;
+    margin-bottom: 15px;
+ }
+
+ .title-line-option-profile-seller{
+    color: #647484;
+    font-size: 15px;
+    font-weight: 400;
+    margin-bottom: 10px;
+ }
+
+ .line-option-profile-seller{
+    width: 415px;
+ }
+
+ .buttons-option-profile-seller{
+    margin-top: -15px;
+ }
+
+ .input-option-profile-seller-enter{
+    margin-bottom: 10px;
+ }
+
+ .title-head-seller-width{
+    width: 500px;
+ }
+
+ .save-seller-button-div-width{
+    margin-left: -200px;
+ }
+
+ .text-input-small-seller{
+    width: 250px;
+ }
+
+ .small-line-seller{
+    height: 3px;
+    width: 250px;
+    border-radius: 10px;
+    border: 0px;
+    background-color: rgba(64,74,84,0.3);
+    margin-top: 5px;
+ }
+
+ .block-input-small-seller{
+    display: flex;
+ }
+
+ .block-input-small-seller-margin{
+    margin-left: 30px;
+ }
+
+ .generation-seller-button{
+    padding-bottom: 12px;
+    padding-top: 13px;
+    width: 190px;
+    background-color: #EAE5D9;
+    color: #647484;
+    border-radius: 10px;
+    border: 0px;
+    font-size: 16px;
+    font-weight: 600;
+    border: #EAE5D9 3px solid;
+    margin-top: 30px;
+ }
+
+ .generation-seller-button:hover{
+    background-color: transparent;
+    background: linear-gradient(111deg, rgba(186,33,33,0.1) 0%, rgba(255,250,120,0.1) 100%);
+    border: #647484 3px solid;
+ }
+
+ .title-radio-checkbox-promotion-seller{
+    font-size: 16px;
+    color: #647484;
+    font-weight: 600;
+    margin-top: 50px;
+ }
+
+ .title-radio-checkbox-promotion-seller span{
+    color: #951717;
+ }
+
+ .radio-goods-seller-div{
+    display: flex;
+    margin-top: 20px;
+ }
+
+ .radio-goods-seller{
+    width: 20px;
+    margin-right: 21px;
+    cursor: pointer;
+ }
+
+ .radio-goods-seller-text{
+    font-size: 18px;
+    font-weight: 400;
+    color: #647484;
+ }
+
+ .subtitle-promotion-seller{
+    font-size: 16px;
+    font-weight: 400;
+    color: #647484;
+    margin-top: 20px;
+ }
+
+ .input-date-promotion{
+    width: 153px;
+    height: 42px;
+    text-align: center;
+    border-radius: 5px;
+    border: #647484 solid 1px;
+    background-color: transparent;
+    color: #647484;
+    font-size: 18px;
+    font-weight: 400;
+    margin-top: 20px;
+    cursor: pointer;
+ }
 
   .Captcha{
     justify-self: center;
