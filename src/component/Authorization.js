@@ -41,6 +41,7 @@ export default function Authorization() {
     const [emailShortError, setEmailShortError] = useState("");
     const [emailLongError, setEmailLongError] = useState("");
     const [password, setPassword] = useState("");
+    const [passwordError, setPasswordError] = useState("");
     const [token, setToken] = useState(false);
     const [passwordShortError, setPasswordShortError] = useState("");
     const [passwordLongError, setPasswordLongError] = useState("");
@@ -64,6 +65,14 @@ export default function Authorization() {
     const handleTokenChange = (e) => {
         setToken(true);
     };
+    const login = async (provider) => {
+        try {
+            const result = await signInWithPopup(auth, provider);
+            setUser(result.user);
+        } catch (err) {
+            handleError(err.code);
+        }
+    };
 
     const handleAuth = async (providerOrEvent) => {
         if (providerOrEvent.preventDefault) {
@@ -80,7 +89,7 @@ export default function Authorization() {
                 handleError("password-format-error");
                 return;
             }
-
+            setPasswordError("");
             if(!token){
                 handleError("recaptcha-error");
                 return;
@@ -151,6 +160,9 @@ export default function Authorization() {
                 setEmailLongError("");
                 setPasswordShortError("Invalid recaptcha.");
                 setPasswordLongError("");
+                break;
+            case "recaptcha-error":
+                setPasswordError("Invalid recaptcha.");
                 break;
             default:
                 // console.log(error); // for debug
