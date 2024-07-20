@@ -41,6 +41,7 @@ export default function Authorization() {
     const [isErrorModalOpen, setIsErrorModalOpen] = useState(false);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [token, setToken] = useState(false);
 
     const openErrorModal = () => {
         setIsErrorModalOpen(true);
@@ -58,6 +59,18 @@ export default function Authorization() {
         setPassword(e.target.value);
     };
 
+    const handleTokenChange = (e) => {
+        setToken(true);
+    };
+    const login = async (provider) => {
+        try {
+            const result = await signInWithPopup(auth, provider);
+            setUser(result.user);
+        } catch (err) {
+            handleError(err.code);
+        }
+    };
+
     const handleAuth = async (providerOrEvent) => {
         await handleMethod(() => {
             if (providerOrEvent.preventDefault) {
@@ -66,7 +79,8 @@ export default function Authorization() {
                 if (!emailRegex.test(email)) throw "email-format-error";
                 const passRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,64}$/;
                 if (!passRegex.test(password)) throw "password-format-error";
-        
+                if(!token) throw "recaptcha-error";
+              
                 loginWithEmailAndPassword(email, password);
             } else {
                 loginWithPopup(providerOrEvent);
@@ -81,7 +95,7 @@ export default function Authorization() {
 
     return (
         <body className='authorization-body'>
-                <div className='left-auth'>
+                <div className='left-auth' id="parallax">
                     <h1>Привіт</h1>
                 </div>
                 <div className='right-auth'>
@@ -145,9 +159,10 @@ export default function Authorization() {
                                     <></>
                                 )}
                             </p>
-                            {/* <ReCaptcha className="Captcha"
+                            <ReCaptcha className="Captcha"
                                 sitekey="6Le0QA8qAAAAAHq5xgAIIBAuZfy7oNG1bDazdwQF"
-                                onChange={(token) => {console.log('reCAPTCHA token:', token);}}/> */}
+                                onChange={handleTokenChange}
+                            />
                         </form>
                         <a>
                             <input className='login-button' type='submit' value='Увійти' onClick={handleAuth}/>
