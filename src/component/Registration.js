@@ -140,7 +140,7 @@ export default function Registration() {
         <body className='authorization-body'>
                 <div className='left-auth-reg' id='parallax'>
                     <div>
-                        <p className='left-title-auth'>Ласкаво</p>
+                        <p className='left-title-auth'>Ласкаво</p>  
                     </div>
                     <div>
                         <p className='left-title-auth-plus'>просимо</p>
