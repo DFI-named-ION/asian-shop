@@ -6,6 +6,7 @@ import Arrow from '../images/icons/arrowLeft.svg';
 
 import axios from 'axios';
 import { JwtContext } from './providers/JwtProvider';
+import { useErrors } from './providers/ErrorProvider';
 
 function App() {
     return <Arrow />;
@@ -15,12 +16,11 @@ export default function MailConfirmation() {
 
     const [code, setCode] = useState("");
     const [userId, setUserId] = useState("");
+    const {handleMethod, catchedError} = useErrors();
     const navigate = useNavigate();
     const [isErrorModalOpen, setIsErrorModalOpen] = useState(false);
     const [newPassword, setNewPassword] = useState("");
     const [newPasswordRepeat, setNewPasswordRepeat] = useState("");
-    const [resetShortError, setResetShortError] = useState("");
-    const [resetLongError, setResetLongError] = useState("");
     const secret = new URLSearchParams(useLocation().search).get('secret');
     const {encryptJwtToken, decryptJwtToken} = useContext(JwtContext);
 
@@ -33,9 +33,11 @@ export default function MailConfirmation() {
     };
 
     useEffect(() => {
-        const data = decryptJwtToken(secret);
-        setCode(data.code);
-        setUserId(data.userId);
+        handleMethod(async () => {
+            const data = decryptJwtToken(secret);
+            setCode(data.code);
+            setUserId(data.userId);
+        });
     }, [secret]);
 
     const handleNewPasswordChange = (e) => {
@@ -46,37 +48,21 @@ export default function MailConfirmation() {
         setNewPasswordRepeat(e.target.value);
     };
 
-    const handleResetPassword = (e) => {
+    const handleResetPassword = async (e) => {
         e.preventDefault();
-        const passRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,64}$/;
-        if (!passRegex.test(newPassword)) {
-            handleError("password-format-error");
-            return;
-        }
-        if (newPassword !== newPasswordRepeat) {
-            handleError("not-same-error");
-            return;
-        }
-        let data = {
-            code,
-            user_id: userId,
-            new_password: newPassword,
-            new_password_repeat: newPasswordRepeat
-        };
-        encryptJwtToken(data).then(token => {
-            let dto = {
-                token
+        handleMethod(async () => {
+            const passRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,64}$/;
+            if (!passRegex.test(newPassword)) throw "password-format-error";
+            if (newPassword !== newPasswordRepeat) throw "not-same-error";
+            let data = {
+                code,
+                user_id: userId,
+                new_password: newPassword,
+                new_password_repeat: newPasswordRepeat
             };
-            axios.post(process.env.REACT_APP_WEB_API_BASE_URL + "/Auth/resetPassword", dto)
-            .then((response) => {
-                if (response.data === "Success"){
-                    console.log("Success");
-                    // navigate("/authorization");
-                }
-                handleError(response.data);
-            })
-            .catch((err) => {
-                handleError(err.code);
+            await encryptJwtToken(data).then(async token => {
+                await axios.post(process.env.REACT_APP_WEB_API_BASE_URL + "/Auth/resetPassword", { token });
+                navigate("/authorization");
             });
         });
     };
@@ -84,34 +70,6 @@ export default function MailConfirmation() {
     const handleBack = (e) => {
         e.preventDefault();
         navigate("/reset-password-verification");
-    };
-
-    const handleError = (error) => {
-        switch (error) {
-            case "Jwt is not valid":
-                setResetShortError("Url is not valid");
-                setResetLongError("This url is no longer valid. Try again.");
-                break;
-            case "User not found":
-                setResetShortError("Url is not valid");
-                setResetLongError("This url is no longer valid. Try again.");
-                break;
-            case "Code is not valid":
-                setResetShortError("Url is not valid");
-                setResetLongError("This url is no longer valid. Try again.");
-                break;
-            case "password-format-error":
-                setResetShortError("Password format error");
-                setResetLongError("password-format-error");
-                break;
-            case "not-same-error":
-                setResetShortError("Passwords are not same");
-                setResetLongError("Passwords are not same. Please enter same password.");
-                break;
-            default:
-                // console.log(error); display Internal error.???
-                break;
-        }
     };
 
     return (
@@ -137,7 +95,7 @@ export default function MailConfirmation() {
                             <div className='modal-link-error-div'> 
                                 <button onClick={closeErrorModal} className='close-modal-button close-link-error-button'></button>
                                 <p>
-                                    {resetLongError === "password-format-error" ? (
+                                    {catchedError.long === "password-format-error" ? (
                                         <>
                                             <p>Неправильний формат пароля:</p>
                                             <ol>
@@ -151,7 +109,7 @@ export default function MailConfirmation() {
                                                 <li>один спеціальний символ: @, $, !, %, *, ?, &.</li>
                                             </ul>
                                         </>
-                                    ) : (resetLongError) }
+                                    ) : (catchedError.long) }
                                 </p>
                             </div>
                         </Modal>
@@ -168,9 +126,9 @@ export default function MailConfirmation() {
                     </form>
 
                     <p className='title-line-error'>
-                        {resetShortError.length > 0 ? (
+                        {catchedError.tags.includes("password-field") ? (
                             <>
-                                {resetShortError}
+                                {catchedError.short}
                                 <a className='link-line-error' href='#' onClick={openErrorModal}>ⓘ</a>
                             </>
                         ) : (

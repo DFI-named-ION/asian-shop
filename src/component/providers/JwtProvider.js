@@ -25,8 +25,7 @@ export const JwtProvider = ({ children }) => {
             );
             return decrypted.toString(CryptoJS.enc.Utf8);
         } catch (error) {
-            // console.error("Decryption error:", error);
-            return "";
+            throw "jwt-decrypt-error"; // ?
         }
     };
 
@@ -48,41 +47,44 @@ export const JwtProvider = ({ children }) => {
             );
             return cipherText;
         } catch (error) {
-            // console.error("Encryption error:", error);
-            return "";
+            throw "jwt-encrypt-error";
         }
     };
 
     const decryptJwtToken = (token) => {
-        const decoded = jwtDecode(token);
-        // console.log("Decoded JWT:", decoded);
+        try {
+            const decoded = jwtDecode(token);
 
-        const encryptedCode = decoded.code;
-        const encryptedUserId = decoded.user_id;
+            const encryptedCode = decoded.code;
+            const encryptedUserId = decoded.user_id;
 
-        const code = decryptString(encryptedCode, secretKey);
-        const userId = decryptString(encryptedUserId, secretKey);
+            const code = decryptString(encryptedCode, secretKey);
+            const userId = decryptString(encryptedUserId, secretKey);
 
-        // console.log("Decrypted Code:", code);
-        // console.log("Decrypted User ID:", userId);
-
-        return { code, userId };
+            return { code, userId };
+        } catch (error) {
+            throw "jwt-decrypt-error";
+        }
     };
 
     const encryptJwtToken = async (data) => {
-        const encryptedPayload = {};
+        try {
+            const encryptedPayload = {};
 
-        Object.keys(data).forEach((key) => {
-            encryptedPayload[key] = encryptString(data[key], secretKey);
-        });
+            Object.keys(data).forEach((key) => {
+                encryptedPayload[key] = encryptString(data[key], secretKey);
+            });
 
-        const secret = new TextEncoder().encode(secretKey);
-        const token = await new SignJWT(encryptedPayload)
-            .setProtectedHeader({ alg: "HS256" })
-            .setExpirationTime("30m")
-            .sign(secret);
+            const secret = new TextEncoder().encode(secretKey);
+            const token = await new SignJWT(encryptedPayload)
+                .setProtectedHeader({ alg: "HS256" })
+                .setExpirationTime("30m")
+                .sign(secret);
 
-        return token;
+            return token;
+        } catch (error) {
+            throw "jwt-encrypt-error";
+        }
     };
 
     return (

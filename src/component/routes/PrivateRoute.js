@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import { Navigate, Outlet } from 'react-router-dom';
-import { AuthContext } from "../providers/AuthProvider";
+import { useAuth } from "../providers/AuthProvider";
 
 const PrivateRoute = () => {
-    const { user, pending } = useContext(AuthContext);
+    const { user, pending } = useAuth;
 
     if (pending) {
         return null;

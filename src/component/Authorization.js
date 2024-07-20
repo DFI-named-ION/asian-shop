@@ -12,7 +12,8 @@ import ReCaptcha from 'react-google-recaptcha';
 import { auth, facebook, google, twitter } from "./../firebaseConfig";
 import { signInWithPopup, signInWithEmailAndPassword } from "firebase/auth";
 
-import { AuthContext } from './providers/AuthProvider';
+import { useAuth } from './providers/AuthProvider';
+import { useErrors } from './providers/ErrorProvider';
 
 function App() {
     return <Google />;
@@ -23,7 +24,8 @@ function App() {
 
 export default function Authorization() {
 
-    const { user, login, axiosError } = useContext(AuthContext);
+    const { catchedError, handleMethod } = useErrors();
+    const { user, loginWithEmailAndPassword, loginWithPopup } = useAuth();
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -38,13 +40,8 @@ export default function Authorization() {
 
     const [isErrorModalOpen, setIsErrorModalOpen] = useState(false);
     const [email, setEmail] = useState("");
-    const [emailShortError, setEmailShortError] = useState("");
-    const [emailLongError, setEmailLongError] = useState("");
     const [password, setPassword] = useState("");
-    const [passwordError, setPasswordError] = useState("");
     const [token, setToken] = useState(false);
-    const [passwordShortError, setPasswordShortError] = useState("");
-    const [passwordLongError, setPasswordLongError] = useState("");
 
     const openErrorModal = () => {
         setIsErrorModalOpen(true);
@@ -75,117 +72,26 @@ export default function Authorization() {
     };
 
     const handleAuth = async (providerOrEvent) => {
-        if (providerOrEvent.preventDefault) {
-            providerOrEvent.preventDefault();
-            const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-            const passRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,64}$/;
-    
-            if (!emailRegex.test(email)) {
-                handleError("email-format-error");
-                return;
+        await handleMethod(() => {
+            if (providerOrEvent.preventDefault) {
+                providerOrEvent.preventDefault();
+                const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+                if (!emailRegex.test(email)) throw "email-format-error";
+                const passRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,64}$/;
+                if (!passRegex.test(password)) throw "password-format-error";
+                if(!token) throw "recaptcha-error";
+              
+                loginWithEmailAndPassword(email, password);
+            } else {
+                loginWithPopup(providerOrEvent);
             }
-
-            if (!passRegex.test(password)) {
-                handleError("password-format-error");
-                return;
-            }
-            setPasswordError("");
-            if(!token){
-                handleError("recaptcha-error");
-                return;
-            }
-    
-            try {
-                const result = await signInWithEmailAndPassword(auth, email, password);
-                await login(await result.user.getIdToken());
-            } catch (err) {
-                handleError(err.code);
-            }
-        } else {
-            try {
-                const result = await signInWithPopup(auth, providerOrEvent);
-                await login(await result.user.getIdToken());
-            } catch (err) {
-                handleError(err.code);
-            }
-        }
+        });
     };
 
     const handleBack = (e) => {
         e.preventDefault();
         navigate("/");
     };
-
-    useEffect(() => {
-        if (axiosError) {
-            setEmailShortError(axiosError.short);
-            setEmailLongError(axiosError.long);
-        }
-    }, [axiosError]);
-
-    const handleError = (error) => {
-        switch (error) {
-            case "auth/popup-closed-by-user":
-                setEmailShortError("Popup was closed");
-                setEmailLongError("You accidantly closed popup. Try again.");
-                setPasswordShortError("");
-                setPasswordLongError("");
-                break;
-            case "auth/invalid-credential":
-                setEmailShortError("Invalid credentials");
-                setEmailLongError("Probably you entered wrong email or password.");
-                setPasswordShortError("Invalid credentials");
-                setPasswordLongError("");
-                break;
-            case "auth/too-many-requests":
-                setEmailShortError("Too much requests");
-                setEmailLongError("Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later.")
-                setPasswordShortError("");
-                setPasswordLongError("");
-                break;
-            case "email-format-error":
-                setEmailShortError("Invalid email format");
-                setEmailLongError("Correct email look like this: user@example.com.");
-                setPasswordShortError("");
-                setPasswordLongError("");
-                break;
-            case "password-format-error":
-                setEmailShortError("");
-                setEmailLongError("");
-                setPasswordShortError("Invalid password format");
-                setPasswordLongError("password-format-error");
-                break;
-            case "recaptcha-error":
-                setEmailShortError("");
-                setEmailLongError("");
-                setPasswordShortError("Invalid recaptcha.");
-                setPasswordLongError("");
-                break;
-            case "recaptcha-error":
-                setPasswordError("Invalid recaptcha.");
-                break;
-            default:
-                // console.log(error); // for debug
-                break;
-        };
-    };
-
-    document.addEventListener('mousemove', function(e) {
-        const textBlock = document.getElementById('parallax');
-        const rect = textBlock.getBoundingClientRect();
-        const centerX = rect.left + rect.width / 2;
-        const centerY = rect.top + rect.height / 2;
-        const mouseX = e.clientX;
-        const mouseY = e.clientY;
-        const moveX = (mouseX - centerX) * -0.05;
-        const moveY = (mouseY - centerY) * -0.05;
-    
-        const limit = 10;
-        const limitedMoveX = Math.max(Math.min(moveX, limit), -limit);
-        const limitedMoveY = Math.max(Math.min(moveY, limit), -limit);
-    
-        textBlock.style.transform = `translate(${limitedMoveX}px, ${limitedMoveY}px)`;
-    });
 
     return (
         <body className='authorization-body'>
@@ -205,8 +111,7 @@ export default function Authorization() {
                                 <div className='modal-link-error-div'> 
                                     <button onClick={closeErrorModal} className='close-modal-button close-link-error-button'></button>
                                     <p>
-                                        {emailLongError}
-                                        {passwordLongError === "password-format-error" ? (
+                                        {catchedError.code === "password-format-error" ? (
                                             <>
                                                 <p>Неправильний формат пароля:</p>
                                                 <ol>
@@ -220,9 +125,7 @@ export default function Authorization() {
                                                     <li>один спеціальний символ: @, $, !, %, *, ?, &.</li>
                                                 </ul>
                                             </>
-                                        ) : (
-                                            passwordLongError
-                                        )}
+                                        ) : (catchedError.long)}
                                     </p>
                                 </div>
                             </Modal>
@@ -232,9 +135,9 @@ export default function Authorization() {
                                 <div className='line-text-block'></div>
                             </p>
                             <p className='title-line-error'>
-                                {emailShortError.length > 0 ? (
+                                {catchedError.tags.includes("email-field") ? (
                                     <>
-                                        {emailShortError}
+                                        {catchedError.short}
                                         <a className='link-line-error' href='#' onClick={openErrorModal}>ⓘ</a>
                                     </>
                                 ) : (
@@ -247,9 +150,9 @@ export default function Authorization() {
                                 <div className='line-text-block'></div>
                             </p>
                             <p className='title-line-error'>
-                                {passwordShortError.length > 0 ? (
+                                {catchedError.tags.includes("password-field") ? (
                                     <>
-                                        {passwordShortError}
+                                        {catchedError.short}
                                         <a className='link-line-error' href='#' onClick={openErrorModal}>ⓘ</a>
                                     </>
                                 ) : (
@@ -258,7 +161,8 @@ export default function Authorization() {
                             </p>
                             <ReCaptcha className="Captcha"
                                 sitekey="6Le0QA8qAAAAAHq5xgAIIBAuZfy7oNG1bDazdwQF"
-                                onChange={handleTokenChange}/>
+                                onChange={handleTokenChange}
+                            />
                         </form>
                         <a>
                             <input className='login-button' type='submit' value='Увійти' onClick={handleAuth}/>
