@@ -42,7 +42,7 @@ import Wallet from '../images/icons/wallet.svg';
 import Procent from '../images/icons/procent.svg';
 import Case from '../images/icons/case.svg';
 
-import { AuthContext } from './providers/AuthProvider';
+import { useAuth } from './providers/AuthProvider';
 
 function App() {
     return <Logo />;
@@ -87,7 +87,7 @@ function App() {
 
 export default function HomePage() {
 
-    const {user} = useContext(AuthContext);
+    const {user} = useAuth();
     const navigate = useNavigate();
     const [isProfileModalOpen, setIsProfileModalOpen] = useState("");
 
@@ -361,10 +361,10 @@ const Carousel = ({ items }) => {
                     {user && (
                         <div className="dropdown-content-header" style={{ display: isProfileModalOpen ? "block" : "none" }}>
                             <div>
-                                <p className='head-email-dropdown'>IDK@gmail.com</p>
+                                <p className='head-email-dropdown'>{user.email}</p>
                             </div>
                             <div>
-                                <p className='hello-dropdown'>Вітаємо, <span className='name-dropdown'>(Ім'я)</span> <img src={HelloEmoji} alt="Hello Emoji" /></p>
+                                <p className='hello-dropdown'>Вітаємо, <span className='name-dropdown'>{user.displayName}</span> <img src={HelloEmoji} alt="Hello Emoji" /></p>
                             </div>
                             <div>
                                 <details className='dropdown-details'>

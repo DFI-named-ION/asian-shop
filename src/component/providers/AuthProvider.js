@@ -1,83 +1,92 @@
-import React, { useEffect, useState } from "react";
-import axios from 'axios';
+import React, { createContext, useContext, useEffect, useState } from "react";
+import axios from "axios";
+import { auth } from "../../firebaseConfig";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import { useErrors } from "./ErrorProvider";
 
-export const AuthContext = React.createContext();
+const AuthContext = createContext();
+
+export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
+    const { handleMethod } = useErrors();
     const [user, setUser] = useState(null);
     const [pending, setPending] = useState(true);
-    const [axiosError, setAxiosError] = useState({short: "", long: ""});
 
-    const fetchUserData = async (fields) => {
-        setPending(true);
+    useEffect(() => {
+        handleMethod(fetchUserData);
+    }, []);
+
+    const fetchUserData = async () => {
         try {
-            const response = await axios.get(`${process.env.REACT_APP_WEB_API_BASE_URL}/Auth/fetchData?fields=${fields}`);
+            const response = await axios.get(`${process.env.REACT_APP_WEB_API_BASE_URL}/Auth/fetchData?fields=displayName;isVerified;email;`);
             setUser(response.data.data);
-        } catch (err) {
-            if (err.response && err.response.data && err.response.data === "Session Id is null") {
-                setUser(null);
-            } else {
-                handleError(err);
-            }
+        } catch (error) {
+            setUser(null);
         } finally {
             setPending(false);
         }
     };
 
-    useEffect(() => {
-        fetchUserData("displayName;isVerified;email;");
-    }, []);
+    const updateUser = (data) => {
+        setUser((prevUser) => ({ ...prevUser, ...data }));
+    };
 
     const login = async (token) => {
-        setPending(true);
         try {
-            setAxiosError({short: "", long: ""});
+            setPending(true);
             await axios.post(`${process.env.REACT_APP_WEB_API_BASE_URL}/Auth/login`, { accessToken: token });
-            await fetchUserData("displayName;isVerified;email;");
-        } catch (err) {
-            handleError(err);
-        }
-        finally {
+            await fetchUserData();
+        } catch (error) {
+            throw error;
+        } finally {
             setPending(false);
         }
+    };
+
+    const loginWithEmailAndPassword = async (email, password) => {
+        handleMethod(async () => {
+            try {
+                const result = await signInWithEmailAndPassword(auth, email, password);
+                await login(await result.user.getIdToken());
+            } catch (error) {
+                throw error;
+            }
+        });
+    };
+
+    const loginWithPopup = async (provider) => {
+        handleMethod(async () => {
+            try {
+                const result = await signInWithPopup(auth, provider);
+                await login(await result.user.getIdToken());
+            } catch (error) {
+                throw error;
+            }
+        });
+    };
+
+    const registerWithEmailAndPassword = async (email, password) => {
+        handleMethod(async () => {
+            try {
+                const result = await createUserWithEmailAndPassword(auth, email, password);
+                await login(await result.user.getIdToken());
+            } catch (error) {
+                throw error;
+            }
+        });
     };
 
     const logout = async () => {
         setPending(true);
-        try {
-            setAxiosError({short: "", long: ""});
-            await axios.get(`${process.env.REACT_APP_WEB_API_BASE_URL}/Auth/logout`);
-            setUser(null);
-        } catch (err) {
-            handleError(err);
-        } finally {
-            setPending(false);
-        }
-    };
-
-    const requestData = async (fields) => {
-        try {
-            setAxiosError({short: "", long: ""});
-            const response = await axios.get(`${process.env.REACT_APP_WEB_API_BASE_URL}/Auth/fetchData?fields=${fields}`);
-            setUser(prevUser => ({ ...prevUser, ...response.data.data }));
-        } catch (err) {
-            handleError(err);
-        }
-    };
-
-    const handleError = (error) => {
-        // if (error.response) {
-        //     setAxiosError({short: "Server error", long: "Internal server error occurred. Please try again later."});
-        // } else if (error.request) {
-        //     // setAxiosError({short: "Network error", long: "Network error. Please check your internet connection."});
-        // } else {
-        //     setAxiosError({short: "Unexpected error", long: "An unexpected error occurred. Please try again."});
-        // }
+        setUser(null);
+        await axios.get(`${process.env.REACT_APP_WEB_API_BASE_URL}/Auth/logout`);
+        setPending(false);
     };
 
     return (
-        <AuthContext.Provider value={{ user, pending, login, logout, requestData, axiosError }}>
-            {pending ? <div className="text-center m-5 h-100">Loading...</div> : children}
+        <AuthContext.Provider value={{ user, pending, loginWithEmailAndPassword, loginWithPopup, registerWithEmailAndPassword, logout, updateUser }}>
+            {children}
         </AuthContext.Provider>
     );
 };

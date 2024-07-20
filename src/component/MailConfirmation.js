@@ -1,11 +1,13 @@
 import React, { useEffect, useState, useContext, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Modal from 'react-modal';
 
 import Arrow from '../images/icons/arrowLeft.svg';
 
 import axios from 'axios';
 
-import { AuthContext } from './providers/AuthProvider';
+import { useAuth } from './providers/AuthProvider';
+import { useErrors } from './providers/ErrorProvider';
 
 function App() {
     return <Arrow />;
@@ -13,13 +15,22 @@ function App() {
 
 export default function MailConfirmation() {
     
-    const {user, logout, axiosError} = useContext(AuthContext);
+    const {user} = useAuth();
+    const {handleMethod, catchedError} = useErrors();
     const navigate = useNavigate();
     const [isDisabled, setIsDisabled] = useState(false);
+    const [isErrorModalOpen, setIsErrorModalOpen] = useState(false);
     const [timeLeft, setTimeLeft] = useState(0);
-    const [sendError, setSendError] = useState("");
     const [code, setCode] = useState(['', '', '', '', '', '']);
     const inputsRef = useRef([]);
+
+    const openErrorModal = () => {
+        setIsErrorModalOpen(true);
+    };
+
+    const closeErrorModal = () => {
+        setIsErrorModalOpen(false);
+    };
 
     useEffect(() => {
         if (!user) {
@@ -29,19 +40,15 @@ export default function MailConfirmation() {
             navigate("/profile-settings");
         }
         
-        sendEmail();
+        handleMethod(sendEmail);
     }, [user, navigate]);
 
-    const sendEmail = () => {
-        axios.get(process.env.REACT_APP_WEB_API_BASE_URL + "/Auth/sendVerificationCode")
-        .then((response) => {
-            if (response.data !== "Success") {
-                handleError(response.data);
-            }
-        })
-        .catch((err) => {
-            handleError(err.code);
-        });
+    const sendEmail = async () => {
+        try {
+            await axios.get(process.env.REACT_APP_WEB_API_BASE_URL + "/Auth/sendVerificationCode");
+        } catch (error) {
+            throw error;
+        }
     };
 
     useEffect(() => {
@@ -59,29 +66,23 @@ export default function MailConfirmation() {
 
     const handleResendClick = (e) => {
         e.preventDefault();
-        setSendError("");
         setIsDisabled(true);
-        sendEmail();
+        handleMethod(sendEmail);
         setTimeLeft(59);
     };
 
     const handleSubmitCode = async (e) => {
         e.preventDefault();
-        let codeStr = code.join('');
-        if (codeStr.length !== 6) {
-            handleError("not-full-code");
-            return;
-        }
+        handleMethod(async () => {
+            let codeStr = code.join('');
+            if (codeStr.length !== 6) throw "not-full-code";
 
-        axios.post(process.env.REACT_APP_WEB_API_BASE_URL + "/Auth/checkVerificationCode", { code: codeStr })
-        .then((response) => {
-            if (response.data === "Success") {
-                navigate("/profile");
+            try {
+                await axios.post(process.env.REACT_APP_WEB_API_BASE_URL + "/Auth/checkVerificationCode", { code: codeStr });
+                navigate("/profile-settings");
+            } catch (error) {
+                throw error;
             }
-            handleError(response.data);
-        })
-        .catch((error) => {
-            handleError(error.code);
         });
     };
 
@@ -116,35 +117,6 @@ export default function MailConfirmation() {
         navigate("/authorization");
     };
 
-    useEffect(() => {
-        if (axiosError) {
-            setSendError(axiosError.short);
-        }
-    }, [axiosError]);
-
-    const handleError = (error) => {
-        switch (error) {
-            case "Session Id is null":
-                logout(); // switch to clearUser?
-                break;
-            case "not-full-code":
-                setSendError("Code is not full.");
-                break;
-            case "User not found":
-                setSendError("Code is not valid.");
-                break;
-            case "User is already verified":
-                setSendError("User is already verified.")
-                break;
-            case "Code is not valid":
-                setSendError("Code is not valid.");
-                break;
-            default:
-                // console.log(error);
-                break;
-        };
-    };
-
     return (
         <body className='authorization-body'>
             <div className='background-mail-div'>
@@ -152,14 +124,23 @@ export default function MailConfirmation() {
                     Ще трохи...
                 </div>
                 <div className='right-mail'>
-                <div className='left-arrow' onClick={handleBack}>
-                    <img src={Arrow} id='arrow'></img>
+                    <div className='left-arrow' onClick={handleBack}>
+                        <img src={Arrow} id='arrow'></img>
                     </div>
                     <div className='title-mail-div'>
                         <h1>
                             Підтвердіть пошту
                         </h1>
                     </div>
+
+                    <Modal isOpen={isErrorModalOpen} onRequestClose={closeErrorModal} className='background-modal-div'>
+                        <div className='modal-link-error-div'> 
+                            <button onClick={closeErrorModal} className='close-modal-button close-link-error-button'></button>
+                            <p>
+                                {catchedError.long}
+                            </p>
+                        </div>
+                    </Modal>
 
                     <div className='text-mail-div'>
                         <p>Впишіть 6-ти значний код, який ми відправили вам на <span className='email-span'>{user?.email}</span></p>
@@ -200,7 +181,14 @@ export default function MailConfirmation() {
                     </div>
                     
                     <p className='title-line-error-zero-margin'>
-                        {sendError}
+                        {catchedError.tags.includes("code-field") ? (
+                            <>
+                                {catchedError.short}
+                                <a className='link-line-error' href='#' onClick={openErrorModal}>ⓘ</a>
+                            </>
+                        ) : (
+                            <></>
+                        )}
                     </p>
 
                     <input className='login-button mail-button' type='button' value='Підтвердити' onClick={handleSubmitCode} />
