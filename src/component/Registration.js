@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from 'react-router-dom';
+import Modal from 'react-modal';
 
 import Arrow from '../images/icons/arrowLeft.svg';
 import Google from '../images/socials/google-auth.svg';
@@ -21,13 +22,13 @@ function App() {
 
 export default function Registration() {
 
-    const { user, setUser } = useContext(AuthContext);
+    const { user, login, axiosError } = useContext(AuthContext);
     const navigate = useNavigate();
 
     useEffect(() => {
         if (user) {
-            if (user.emailVerified) {
-                navigate("/profile");
+            if (user.isVerified) {
+                navigate("/profile-settings");
             } else {
                 navigate("/confirmation");
             }
@@ -35,10 +36,21 @@ export default function Registration() {
     }, [user, navigate]);
 
     const [name, setName] = useState("");
+    const [isErrorModalOpen, setIsErrorModalOpen] = useState(false);
     const [email, setEmail] = useState("");
-    const [emailError, setEmailError] = useState("");
+    const [emailShortError, setEmailShortError] = useState("");
+    const [emailLongError, setEmailLongError] = useState("");
     const [password, setPassword] = useState("");
-    const [passwordError, setPasswordError] = useState("");
+    const [passwordShortError, setPasswordShortError] = useState("");
+    const [passwordLongError, setPasswordLongError] = useState("");
+    
+    const openErrorModal = () => {
+        setIsErrorModalOpen(true);
+    };
+
+    const closeErrorModal = () => {
+        setIsErrorModalOpen(false);
+    };
 
     const handleNameChange = (e) => {
         setName(e.target.value);
@@ -52,40 +64,35 @@ export default function Registration() {
         setPassword(e.target.value);
     };
 
-    const login = async (provider) => {
-        try {
-            const result = await signInWithPopup(auth, provider);
-            setUser(result.user);
-        } catch (err) {
-            handleError(err);
-        }
-    };
+    const handleAuth = async (providerOrEvent) => {
+        if (providerOrEvent.preventDefault) {
+            providerOrEvent.preventDefault();
+            const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            const passRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,64}$/;
+    
+            if (!emailRegex.test(email)) {
+                handleError("email-format-error");
+                return;
+            }
 
-    const handleRegisterClick = async (e) => {
-        e.preventDefault();
-        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-        const passRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,64}$/;
-
-        if (!emailRegex.test(email)) {
-            // handleError("Invalid email format.");
-            setEmailError("Invalid email format.");
-            return;
-        }
-        setEmailError("");
-
-        if (!passRegex.test(password)) {
-            // handleError("Invalid password format:\nPassword length: 6-64 characters\nAt least one uppercase letter\nAt least one lowercase letter\nAt least one digit\nAt least one special character: @, $, !, %, *, ?, &");
-            setPasswordError("Invalid password format:\nPassword length: 6-64 characters\nAt least one uppercase letter\nAt least one lowercase letter\nAt least one digit\nAt least one special character: @, $, !, %, *, ?, &");
-            return;
-        }
-        setPasswordError("");
-
-        try {
-            const result = await createUserWithEmailAndPassword(auth, email, password);
-            await updateProfile(auth.currentUser, { displayName: name });
-            setUser(result.user);
-        } catch (err) {
-            handleError(err);
+            if (!passRegex.test(password)) {
+                handleError("password-format-error");
+                return;
+            }
+    
+            try {
+                const result = await createUserWithEmailAndPassword(auth, email, password);
+                await login(await result.user.getIdToken());
+            } catch (err) {
+                handleError(err.code);
+            }
+        } else {
+            try {
+                const result = await signInWithPopup(auth, providerOrEvent);
+                await login(await result.user.getIdToken());
+            } catch (err) {
+                handleError(err.code);
+            }
         }
     };
 
@@ -94,28 +101,55 @@ export default function Registration() {
         navigate("/");
     };
 
-    const handleError = (error) => {
-        let text = "";
-        if (error?.code) {
-            switch (error.code) {
-                case "auth/invalid-credential":
-                    text = "Invalid credentials.";
-                    setEmailError(text);
-                    setPasswordError(text);
-                    break;
-                case "auth/too-many-requests":
-                    text = "Too many requests. Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later.";
-                    setPasswordError(text);
-                    break;
-                case "auth/email-already-in-use":
-                    text = "This email is already in use."
-                    setEmailError(text);
-                    break;
-                default:
-                    text = error.message;
-            }
+    useEffect(() => {
+        if (axiosError) {
+            setEmailShortError(axiosError.short);
+            setEmailLongError(axiosError.long);
         }
-        // console.log(error);
+    }, [axiosError]);
+
+    const handleError = (error) => {
+        switch (error) {
+            case "auth/popup-closed-by-user":
+                setEmailShortError("Popup was closed");
+                setEmailLongError("You accidantly closed popup. Try again.");
+                setPasswordShortError("");
+                setPasswordLongError("");
+                break;
+            case "auth/invalid-credential":
+                setEmailShortError("Invalid credentials");
+                setEmailLongError("Probably you entered wrong email or password.");
+                setPasswordShortError("Invalid credentials");
+                setPasswordLongError("");
+                break;
+            case "auth/too-many-requests":
+                setEmailShortError("Too much requests");
+                setEmailLongError("Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later.")
+                setPasswordShortError("");
+                setPasswordLongError("");
+                break;
+            case "auth/email-already-in-use":
+                setEmailShortError("Email is already in use");
+                setEmailLongError(`User with this email "${email}" already exists.`)
+                setPasswordShortError("");
+                setPasswordLongError("");
+                break;
+            case "email-format-error":
+                setEmailShortError("Invalid email format");
+                setEmailLongError("Correct email look like this: user@example.com.");
+                setPasswordShortError("");
+                setPasswordLongError("");
+                break;
+            case "password-format-error":
+                setEmailShortError("");
+                setEmailLongError("");
+                setPasswordShortError("Invalid password format");
+                setPasswordLongError("password-format-error");
+                break;
+            default:
+                // console.log(error);
+                break;
+        };
     };
 
     document.addEventListener('mousemove', function(e) {
@@ -155,27 +189,61 @@ export default function Registration() {
                     </div>
                     <div>
                         <form className='form-auth form-auth-reg'>
+                        <Modal isOpen={isErrorModalOpen} onRequestClose={closeErrorModal} className='background-modal-div'>
+                                <div className='modal-link-error-div'> 
+                                    <button onClick={closeErrorModal} className='close-modal-button close-link-error-button'></button>
+                                    <p>
+                                        {emailLongError}
+                                        {passwordLongError === "password-format-error" ? (
+                                            <>
+                                                <p>Неправильний формат пароля:</p>
+                                                <ol>
+                                                    <li>Довжина пароля повинна бути від 6 до 64 символів.</li>
+                                                    <li>Пароль повинен містити:</li>
+                                                </ol>
+                                                <ul>
+                                                    <li>одну велику літеру.</li>
+                                                    <li>одну малу літеру.</li>
+                                                    <li>одну цифру.</li>
+                                                    <li>один спеціальний символ: @, $, !, %, *, ?, &.</li>
+                                                </ul>
+                                            </>
+                                        ) : (
+                                            passwordLongError
+                                        )}
+                                    </p>
+                                </div>
+                            </Modal>
                             <h5 className='title-line'>Ім'я</h5>
                             <p className='text-auth'><input className='text-block' type='text' name='Name' value={name} onChange={handleNameChange} placeholder='Best name'></input></p>
                             <div className='line-text-block line-text-block_plus'></div>
                             <h5 className='title-line'>Пошта</h5>
                             <p className='text-auth'><input className='text-block-margin-zero' type='login' name='Email' value={email} onChange={handleEmailChange} placeholder='email@gmail.com' required></input><div className='line-text-block'></div></p>
                             <p className='title-line-error'>
-                                {emailError}
+                                {emailShortError.length > 0 ? (
+                                    <>
+                                        {emailShortError}
+                                        <a className='link-line-error' href='#' onClick={openErrorModal}>ⓘ</a>
+                                    </>
+                                ) : (
+                                    <></>
+                                )}
                             </p>
                             <h5 className='title-line'>Пароль</h5>
                             <p className='text-auth'><input className='text-block-margin-zero' type='password' name='Password' value={password} onChange={handlePasswordChange} placeholder='*********' required></input><div className='line-text-block'></div></p>
                             <p className='title-line-error'>
-                                {passwordError.split('\n').map((line) => (
+                                {passwordShortError.length > 0 ? (
                                     <>
-                                        {line}
-                                        <br />
+                                        {passwordShortError}
+                                        <a className='link-line-error' href='#' onClick={openErrorModal}>ⓘ</a>
                                     </>
-                                ))}
+                                ) : (
+                                    <></>
+                                )}
                             </p>
                         </form>
                         <a>
-                            <input className='login-button' type='submit' onClick={handleRegisterClick} value='Зареєструватись' />
+                            <input className='login-button' type='submit' onClick={handleAuth} value='Зареєструватись' />
                         </a>
                         <div className='lines-or lines-or-reg'>
                             <div className='line-or'></div>
@@ -187,17 +255,17 @@ export default function Registration() {
                         </div>
                         <div className='socials-auth-div'>
                             <div>
-                                <button className='social-button' onClick={() => login(google)}>
+                                <button className='social-button' onClick={() => handleAuth(google)}>
                                     <img src={Google}/>
                                 </button>
                             </div>
                             <div>
-                                <button className='social-button' onClick={() => login(facebook)}>
+                                <button className='social-button' onClick={() => handleAuth(facebook)}>
                                     <img src={Facebook}/>
                                 </button>
                             </div>
                             <div>
-                                <button className='social-button' onClick={() => login(twitter)}>
+                                <button className='social-button' onClick={() => handleAuth(twitter)}>
                                     <img src={Twitter}/>
                                 </button>
                             </div>

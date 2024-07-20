@@ -2,10 +2,6 @@ import React, { useContext, useEffect, useState } from 'react';
 import Modal from 'react-modal';
 import { useParams, useNavigate } from 'react-router-dom';
 
-import { auth } from "./../firebaseConfig";
-import { signOut } from "firebase/auth";
-import axios from 'axios';
-
 import { AuthContext } from './providers/AuthProvider';
 
 import Basket from '../images/icons/basket.svg';
@@ -61,21 +57,17 @@ export default function ProfilePage() {
     setModalIsOpenProfilePassword(false);
   };
 
-    const {user, setUser} = useContext(AuthContext);
+    const {user, logout} = useContext(AuthContext);
     const navigate = useNavigate();
 
     const handleLogOutClick = async (e) => {
         e.preventDefault();
-        signOut(auth);
+        logout();
     };
 
     const handleResetPassword = (e) => {
       e.preventDefault();
       navigate("/reset-password-verification");
-    };
-
-    const handleError = (error) => {
-        console.log(`${error}`);
     };
 
     return (
@@ -107,7 +99,7 @@ export default function ProfilePage() {
                   </a>
                   </div>
                   <div className='head-nav-div'>
-                  <a href='/profile' className='icon-head'>
+                  <a href='/profile-settings' className='icon-head'>
                       <img src={Profile}></img>
                   </a>
                   </div>

@@ -1842,9 +1842,9 @@ input{
     padding: 20px 20px 20px 20px;
   }
 
-  .dropdown-header:hover .dropdown-content-header {
+  /* .dropdown-header:hover .dropdown-content-header {
     display: block;
-  }
+  } */
 
   .dropdown-border-top-button{
     border-top-left-radius: 30px;
@@ -2617,3 +2617,8 @@ input{
     margin-top: 20px;
     cursor: pointer;
  }
+
+  .Captcha{
+    justify-self: center;
+    margin-left: 110px;
+  }
