@@ -9,8 +9,7 @@ import Twitter from '../images/socials/twitter-auth.svg';
 
 import ReCaptcha from 'react-google-recaptcha';
 
-import { auth, facebook, google, twitter } from "./../firebaseConfig";
-import { signInWithPopup, signInWithEmailAndPassword } from "firebase/auth";
+import { facebook, google, twitter } from "./../firebaseConfig";
 
 import { useAuth } from './providers/AuthProvider';
 import { useErrors } from './providers/ErrorProvider';
@@ -61,14 +60,6 @@ export default function Authorization() {
 
     const handleTokenChange = (e) => {
         setToken(true);
-    };
-    const login = async (provider) => {
-        try {
-            const result = await signInWithPopup(auth, provider);
-            setUser(result.user);
-        } catch (err) {
-            handleError(err.code);
-        }
     };
 
     const handleAuth = async (providerOrEvent) => {

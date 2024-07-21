@@ -34,8 +34,6 @@ export const ErrorProvider = ({ children }) => {
         let isForUser = false;
         let tags = [];
 
-        console.log(error);
-
         switch (error) {
             case "ERR_NETWORK":
                 short = "Network error";
@@ -151,6 +149,13 @@ export const ErrorProvider = ({ children }) => {
                 origin = "custom";
                 isForUser = true;
                 tags.push("code-field");
+                break;
+            case "recaptcha-error":
+                short = "Captcha is not complete";
+                long = "Captcha verification is not complete."
+                origin = "custom";
+                isForUser = true;
+                tags.push("email-field");
                 break;
             default:
                 short = "Unexpected error";
