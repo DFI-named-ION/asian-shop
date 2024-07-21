@@ -7,8 +7,7 @@ import Google from '../images/socials/google-auth.svg';
 import Facebook from '../images/socials/facebook-auth.svg';
 import Twitter from '../images/socials/twitter-auth.svg';
 
-import { auth, facebook, google, twitter } from "./../firebaseConfig";
-import axios from 'axios';
+import { facebook, google, twitter } from "./../firebaseConfig";
 
 import { useAuth } from './providers/AuthProvider';
 import { useErrors } from "./providers/ErrorProvider";
