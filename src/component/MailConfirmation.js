@@ -1,11 +1,13 @@
 import React, { useEffect, useState, useContext, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Modal from 'react-modal';
 
 import Arrow from '../images/icons/arrowLeft.svg';
 
 import axios from 'axios';
 
-import { AuthContext } from './providers/AuthProvider';
+import { useAuth } from './providers/AuthProvider';
+import { useErrors } from './providers/ErrorProvider';
 
 function App() {
     return <Arrow />;
@@ -13,42 +15,40 @@ function App() {
 
 export default function MailConfirmation() {
     
-    const {user, setUser} = useContext(AuthContext);
+    const {user} = useAuth();
+    const {handleMethod, catchedError} = useErrors();
     const navigate = useNavigate();
     const [isDisabled, setIsDisabled] = useState(false);
+    const [isErrorModalOpen, setIsErrorModalOpen] = useState(false);
     const [timeLeft, setTimeLeft] = useState(0);
-    const [sendError, setSendError] = useState("");
     const [code, setCode] = useState(['', '', '', '', '', '']);
     const inputsRef = useRef([]);
 
+    const openErrorModal = () => {
+        setIsErrorModalOpen(true);
+    };
+
+    const closeErrorModal = () => {
+        setIsErrorModalOpen(false);
+    };
+
     useEffect(() => {
         if (!user) {
-            navigate("/registration");
-            return;
+            navigate("/authorization");
         }
-        if (user.emailVerified) {
-            navigate("/profile");
-            return;
+        if (user.isVerified) {
+            navigate("/profile-settings");
         }
         
-        sendEmail();
+        handleMethod(sendEmail);
     }, [user, navigate]);
 
-    const sendEmail = () => {
-        let dto = {
-            accessToken: user.stsTokenManager.accessToken,
-        };
-        axios.post(process.env.REACT_APP_WEB_API_BASE_URL + "/Auth/sendVerificationCode", dto) // change to JWT
-        .then((response) => {
-            if (response.data.message === "Success") {
-                // hmmm
-                return;
-            }
-            handleError(response.data.message);
-        })
-        .catch((err) => {
-            handleError(err);
-        });
+    const sendEmail = async () => {
+        try {
+            await axios.get(process.env.REACT_APP_WEB_API_BASE_URL + "/Auth/sendVerificationCode");
+        } catch (error) {
+            throw error;
+        }
     };
 
     useEffect(() => {
@@ -66,37 +66,24 @@ export default function MailConfirmation() {
 
     const handleResendClick = (e) => {
         e.preventDefault();
-        setSendError("");
         setIsDisabled(true);
-        sendEmail();
+        handleMethod(sendEmail);
         setTimeLeft(59);
     };
 
     const handleSubmitCode = async (e) => {
         e.preventDefault();
-        let codeStr = code.join('');
-        if (codeStr.length === 6) {
-            let dto = {
-                accessToken: user.stsTokenManager.accessToken,
-                code: codeStr,
-            };
-            axios.post(process.env.REACT_APP_WEB_API_BASE_URL + "/Auth/checkVerificationCode", dto) // change to JWT
-            .then((response) => {
-                if (response.data.message === "Success") {
-                    setUser((prevUser) => ({
-                        ...prevUser,
-                        emailVerified: true
-                    }));
-                    navigate("/profile");
-                }
-                handleError(response.data.message);
-            })
-            .catch((error) => {
-                handleError(error);
-            });
-        } else {
-            setSendError("Code is not full.");
-        }
+        handleMethod(async () => {
+            let codeStr = code.join('');
+            if (codeStr.length !== 6) throw "not-full-code";
+
+            try {
+                await axios.post(process.env.REACT_APP_WEB_API_BASE_URL + "/Auth/checkVerificationCode", { code: codeStr });
+                navigate("/profile-settings");
+            } catch (error) {
+                throw error;
+            }
+        });
     };
 
     const handleInputChange = (e, index) => {
@@ -127,26 +114,7 @@ export default function MailConfirmation() {
 
     const handleBack = (e) => {
         e.preventDefault();
-        const referrerURL = new URL(document.referrer);
-        if (referrerURL.origin === window.location.origin) {
-            navigate(referrerURL.pathname + referrerURL.search);
-        } else {
-            window.location.href = document.referrer;
-        }
-    };
-
-    const handleError = (error) => {
-        switch (error) {
-            case "Failure: User is already verified.":
-                setSendError("User is already verified.")
-                break;
-            case "Failure: Code is not valid.":
-                setSendError("Code is not valid.");
-                break;
-            default:
-                // console.log(error);
-                break;
-        };
+        navigate("/authorization");
     };
 
     return (
@@ -156,14 +124,23 @@ export default function MailConfirmation() {
                     Ще трохи...
                 </div>
                 <div className='right-mail'>
-                <div className='left-arrow' onClick={handleBack}>
-                    <img src={Arrow} id='arrow'></img>
+                    <div className='left-arrow' onClick={handleBack}>
+                        <img src={Arrow} id='arrow'></img>
                     </div>
                     <div className='title-mail-div'>
                         <h1>
                             Підтвердіть пошту
                         </h1>
                     </div>
+
+                    <Modal isOpen={isErrorModalOpen} onRequestClose={closeErrorModal} className='background-modal-div'>
+                        <div className='modal-link-error-div'> 
+                            <button onClick={closeErrorModal} className='close-modal-button close-link-error-button'></button>
+                            <p>
+                                {catchedError.long}
+                            </p>
+                        </div>
+                    </Modal>
 
                     <div className='text-mail-div'>
                         <p>Впишіть 6-ти значний код, який ми відправили вам на <span className='email-span'>{user?.email}</span></p>
@@ -204,7 +181,14 @@ export default function MailConfirmation() {
                     </div>
                     
                     <p className='title-line-error-zero-margin'>
-                        {sendError}
+                        {catchedError.tags.includes("code-field") ? (
+                            <>
+                                {catchedError.short}
+                                <a className='link-line-error' href='#' onClick={openErrorModal}>ⓘ</a>
+                            </>
+                        ) : (
+                            <></>
+                        )}
                     </p>
 
                     <input className='login-button mail-button' type='button' value='Підтвердити' onClick={handleSubmitCode} />

@@ -1,12 +1,12 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Navigate, Outlet } from 'react-router-dom';
-import { AuthContext } from "../providers/AuthProvider";
+import { useAuth } from "../providers/AuthProvider";
 
 const NotVerifiedRoute = () => {
-    const { user, pending } = useContext(AuthContext);
+    const { user, pending } = useAuth();
 
     if (pending) {
-        return null;
+        return <div>Loading...</div>;
     }
 
     return user ? <Outlet /> : <Navigate to="/authorization" />;

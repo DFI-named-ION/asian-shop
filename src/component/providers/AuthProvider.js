@@ -1,47 +1,91 @@
-import React, { useEffect, useState } from "react";
-import axios from 'axios';
-import { auth } from "./../../firebaseConfig";
+import React, { createContext, useContext, useEffect, useState } from "react";
+import axios from "axios";
+import { auth } from "../../firebaseConfig";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import { useErrors } from "./ErrorProvider";
 
-export const AuthContext = React.createContext();
+const AuthContext = createContext();
+
+export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
+    const { handleMethod } = useErrors();
     const [user, setUser] = useState(null);
     const [pending, setPending] = useState(true);
 
     useEffect(() => {
-        auth.onAuthStateChanged(async (loadedUser) => {
-            if (loadedUser) {
-                // const token = await loadedUser.getIdToken();
-                // axios.post(process.env.REACT_APP_WEB_API_BASE_URL + "/Auth/handleUserRoleCreation", { accessToken: token })
-                // .then((response) => {
-                //     if (response.data.message === "Success") {
-                //         const role = response.data.data;
-                //         setUser({ ...loadedUser, role: role });
-                //         return;
-                //     }
-                //     handleError(response.data.message);
-                // })
-                // .catch((err) => {
-                //     handleError(err);
-                // });
-                setUser(loadedUser); // BOOM!
-            } else {
-                setUser(null);
-            }
-            setPending(false);
-        });
-    });
+        handleMethod(fetchUserData);
+    }, []);
 
-    const handleError = (error) => {
-        console.log(error);
-        switch (error) {
-            case "":
-                break;
-        };
+    const fetchUserData = async () => {
+        try {
+            const response = await axios.get(`${process.env.REACT_APP_WEB_API_BASE_URL}/Auth/fetchData?fields=displayName;isVerified;email;`);
+            setUser(response.data.data);
+        } catch (error) {
+            setUser(null);
+        } finally {
+            setPending(false);
+        }
+    };
+
+    const updateUser = (data) => {
+        setUser((prevUser) => ({ ...prevUser, ...data }));
+    };
+
+    const login = async (token) => {
+        try {
+            setPending(true);
+            await axios.post(`${process.env.REACT_APP_WEB_API_BASE_URL}/Auth/login`, { accessToken: token });
+            await fetchUserData();
+        } catch (error) {
+            throw error;
+        } finally {
+            setPending(false);
+        }
+    };
+
+    const loginWithEmailAndPassword = async (email, password) => {
+        handleMethod(async () => {
+            try {
+                const result = await signInWithEmailAndPassword(auth, email, password);
+                await login(await result.user.getIdToken());
+            } catch (error) {
+                throw error;
+            }
+        });
+    };
+
+    const loginWithPopup = async (provider) => {
+        handleMethod(async () => {
+            try {
+                const result = await signInWithPopup(auth, provider);
+                await login(await result.user.getIdToken());
+            } catch (error) {
+                throw error;
+            }
+        });
+    };
+
+    const registerWithEmailAndPassword = async (email, password) => {
+        handleMethod(async () => {
+            try {
+                const result = await createUserWithEmailAndPassword(auth, email, password);
+                await login(await result.user.getIdToken());
+            } catch (error) {
+                throw error;
+            }
+        });
+    };
+
+    const logout = async () => {
+        setPending(true);
+        setUser(null);
+        await axios.get(`${process.env.REACT_APP_WEB_API_BASE_URL}/Auth/logout`);
+        setPending(false);
     };
 
     return (
-        <AuthContext.Provider value={{ user, setUser, pending }}>
+        <AuthContext.Provider value={{ user, pending, loginWithEmailAndPassword, loginWithPopup, registerWithEmailAndPassword, logout, updateUser }}>
             {children}
         </AuthContext.Provider>
     );

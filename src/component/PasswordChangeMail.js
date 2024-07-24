@@ -1,11 +1,12 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import Modal from 'react-modal';
 
 import Arrow from '../images/icons/arrowLeft.svg';
 
 import axios from 'axios';
 
-import { AuthContext } from './providers/AuthProvider';
+import { useErrors } from './providers/ErrorProvider';
 
 function App() {
     return <Arrow />;
@@ -13,18 +14,18 @@ function App() {
 
 export default function MailConfirmation() {
 
-    const {user} = useContext(AuthContext);
+    const {handleMethod, catchedError} = useErrors();
     const navigate = useNavigate();
+    const [isErrorModalOpen, setIsErrorModalOpen] = useState(false);
     const [email, setEmail] = useState("");
-    const [emailError, setEmailError] = useState("");
-    const [sendError, setSendError] = useState("");
 
-    useEffect(() => {
-        if (user) {
-            setEmail(user.email);
-            return;
-        }
-    }, [user]);
+    const openErrorModal = () => {
+        setIsErrorModalOpen(true);
+    };
+
+    const closeErrorModal = () => {
+        setIsErrorModalOpen(false);
+    };
 
     const handleEmailChange = (e) => {
         setEmail(e.target.value);
@@ -32,37 +33,20 @@ export default function MailConfirmation() {
 
     const handleSendEmailClick = async (e) => {
         e.preventDefault();
-        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-        if (!emailRegex.test(email)) {
-            // handleError("Invalid email format.");
-            setEmailError("Invalid email format.");
-            return;
-        }
-        setEmailError("");
-        let dto = {
-            email: email
-        };
-        await axios.post(process.env.REACT_APP_WEB_API_BASE_URL + "/Auth/sendResetUrl", dto)
-        .then((response) => {
-            if (response.data.message !== "Success") {
-                handleError(response.data.message);
+        handleMethod(async () => {
+            const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            if (!emailRegex.test(email)) throw "email-format-error";
+            try {
+                await axios.post(process.env.REACT_APP_WEB_API_BASE_URL + "/Auth/sendResetUrl", {email});
+            } catch (error) {
+                throw error;
             }
-        })
-        .catch((error) => {
-            // axios is trash
-            // console.log(error);
         });
     };
 
     const handleBack = (e) => {
         e.preventDefault();
         navigate("/authorization");
-    };
-
-    const handleError = (error) => {
-        if (error === "Failure: User not found") {
-            setEmailError("User with this email is not found.")
-        }
     };
 
     return (
@@ -88,16 +72,28 @@ export default function MailConfirmation() {
                     </div>
 
                     <form className='form-pas'>
+                        <Modal isOpen={isErrorModalOpen} onRequestClose={closeErrorModal} className='background-modal-div'>
+                            <div className='modal-link-error-div'> 
+                                <button onClick={closeErrorModal} className='close-modal-button close-link-error-button'></button>
+                                <p>
+                                    {catchedError.long}
+                                </p>
+                            </div>
+                        </Modal>
                         <h5 className='title-line'>Пошта</h5>
                         <p className='text-auth'>
                             <input className='text-block-margin-zero' type='login' name='Email' placeholder='email@gmail.com' value={email} onChange={handleEmailChange} required/>
                         </p>
                         <div className='line-text-block'></div>
                         <p className='title-line-error'>
-                            {emailError}
-                        </p>
-                        <p className='title-line-error-zero-margin'>
-                            {sendError}
+                            {catchedError.tags.includes("email-field") ? (
+                                <>
+                                    {catchedError.short}
+                                    <a className='link-line-error' href='#' onClick={openErrorModal}>ⓘ</a>
+                                </>
+                            ) : (
+                                <></>
+                            )}
                         </p>
                     </form>
 
