@@ -9,7 +9,7 @@ import Twitter from '../images/socials/twitter-auth.svg';
 
 import ReCaptcha from 'react-google-recaptcha';
 
-import { auth, facebook, google, twitter } from "./../firebaseConfig";
+import { auth, facebook, google, twitter } from "../firebaseConfig";
 import { signInWithPopup, signInWithEmailAndPassword } from "firebase/auth";
 
 import { AuthContext } from './providers/AuthProvider';
@@ -21,7 +21,7 @@ function App() {
     return <Arrow />;
 }
 
-export default function Authorization() {
+export default function ShopAuthorization() {
 
     const [modalIsOpenErrorAuth, setModalIsOpenErrorAuth] = useState(false);
 
@@ -145,10 +145,15 @@ export default function Authorization() {
 
     return (
         <body className='authorization-body'>
-                <div className='left-auth'>
-                    <h1>Привіт</h1>
+                <div className='left-auth-reg' id='parallax'>
+                    <div>
+                        <p className='left-title-shop-auth'>Раді вас</p>
+                    </div>
+                    <div>
+                        <p className='left-title-shop-auth-plus'>бачити</p>
+                    </div>
                 </div>
-                <div className='right-auth'>
+                <div className='right-auth right-shop-auth'>
                 <div className='left-arrow' onClick={handleBack}>
                     <img src={Arrow} id='arrow'></img>
                     </div>
@@ -157,7 +162,7 @@ export default function Authorization() {
                     </div>
                     <div>
                         <form className='form-auth'>
-                            <h5 className='title-line'>Пошта</h5>
+                            <h5 className='title-line'>Корпоративна пошта</h5>
                             <p className='text-auth'>
                                 <input className='text-block-margin-zero' type='login' name='Email' value={email} onChange={handleEmailChange} placeholder='email@gmail.com' required />
                                 <div className='line-text-block'></div>
@@ -216,33 +221,7 @@ export default function Authorization() {
                             <a className='text-auth' href='/reset-password-verification'>Забули свій пароль?</a>
                         </p>
 
-                        <div className='lines-or'>
-                            <div className='line-or'></div>
-                            <div className='text-or'>чи</div>
-                            <div className='line-or'></div>
-                        </div>
-
-                        <div className='social-login-text'>
-                            Увійти за допомогою соціальних мереж
-                        </div>
-
-                        <div className='socials-auth-div'>
-                            <div>
-                                <button className='social-button' onClick={() => login(google)}>
-                                    <img src={Google}/>
-                                </button>
-                            </div>
-                            <div>
-                                <button className='social-button' onClick={() => login(facebook)}>
-                                    <img src={Facebook}/>
-                                </button>
-                            </div>
-                            <div>
-                                <button className='social-button' onClick={() => login(twitter)}>
-                                    <img src={Twitter}/>
-                                </button>
-                            </div>
-                        </div>
+                        
                     </div>
                     <div className='footer-auth'>
                         <h4 className='title-auth-white title-auth-white-auth'>Ще не маєте облікового запису? <a href='/registration' className='title-auth-white'>Зареєструйтеся</a></h4>

@@ -6,7 +6,7 @@ import Google from '../images/socials/google-auth.svg';
 import Facebook from '../images/socials/facebook-auth.svg';
 import Twitter from '../images/socials/twitter-auth.svg';
 
-import { auth, facebook, google, twitter } from "./../firebaseConfig";
+import { auth, facebook, google, twitter } from "../firebaseConfig";
 import { signInWithPopup, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import axios from 'axios';
 
@@ -19,7 +19,7 @@ function App() {
     return <Arrow />;
 }
 
-export default function Registration() {
+export default function ShopRegistration() {
 
     const { user, setUser } = useContext(AuthContext);
     const navigate = useNavigate();
@@ -37,6 +37,7 @@ export default function Registration() {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [emailError, setEmailError] = useState("");
+    const [cname, setCName] = useState("");
     const [password, setPassword] = useState("");
     const [passwordError, setPasswordError] = useState("");
 
@@ -50,6 +51,10 @@ export default function Registration() {
 
     const handlePasswordChange = (e) => {
         setPassword(e.target.value);
+    };
+
+    const handleCNameChange = (e) => {
+        setName(e.target.value);
     };
 
     const login = async (provider) => {
@@ -122,10 +127,10 @@ export default function Registration() {
         <body className='authorization-body'>
                 <div className='left-auth-reg' id='parallax'>
                     <div>
-                        <p className='left-title-auth'>Ласкаво</p>
+                        <p className='left-title-shop-auth'>Так ви</p>
                     </div>
                     <div>
-                        <p className='left-title-auth-plus'>просимо</p>
+                        <p className='left-title-shop-auth-plus'>продавець</p>
                     </div>
                 </div>
                 <div className='right-auth-reg'>
@@ -133,15 +138,16 @@ export default function Registration() {
                     <img src={Arrow} id='arrow'></img>
                     </div>
                     <div className='title-auth-block-div title-auth-block-div-reg'>
-                        <h4 className='title-auth'>Реєстрація</h4>
+                        <h4 className='title-auth'>Реєстрація продавця</h4>
                     </div>
                     <div>
                         <form className='form-auth form-auth-reg'>
                             <h5 className='title-line'>Ім'я</h5>
-                            <p className='text-auth'><input className='text-block' type='text' name='Name' value={name} onChange={handleNameChange} placeholder='Best name'></input></p>
+                            <p className='text-auth'><input className='text-block' type='text' name='Name' value={name} onChange={handleNameChange} placeholder="Ім'я та прізвище"></input></p>
                             <div className='line-text-block line-text-block_plus'></div>
-                            <h5 className='title-line'>Пошта</h5>
-                            <p className='text-auth'><input className='text-block-margin-zero' type='login' name='Email' value={email} onChange={handleEmailChange} placeholder='email@gmail.com' required></input><div className='line-text-block'></div></p>
+                            <h5 className='title-line'>Корпоративна пошта</h5>
+                            <p className='text-auth'><input className='text-block-margin-zero' type='login' name='Email' value={email} onChange={handleEmailChange} placeholder='IDK@gmail.com' required></input>
+                            <div className='line-text-block'></div></p>
                             <p className='title-line-error'>
                                 {emailError}
                             </p>
@@ -155,35 +161,17 @@ export default function Registration() {
                                     </>
                                 ))}
                             </p>
+                            <h5 className='title-line'>Назва компанії</h5>
+                            <p className='text-auth'><input className='text-block-margin-zero' type='text' name='CompanyName' value={cname} onChange={handleCNameChange} placeholder='Компанія' required></input>
+                            <div className='line-text-block'></div></p>
+                            <p className='title-line-error'>
+                                {emailError}
+                            </p>
                         </form>
                         <a>
                             <input className='login-button' type='submit' onClick={handleRegisterClick} value='Зареєструватись' />
                         </a>
-                        <div className='lines-or'>
-                            <div className='line-or'></div>
-                            <div className='text-or'>чи</div>
-                            <div className='line-or'></div>
-                        </div>
-                        <div className='social-login-text'>
-                            Зареєструватись за допомогою соціальних мереж
-                        </div>
-                        <div className='socials-auth-div'>
-                            <div>
-                                <button className='social-button' onClick={() => login(google)}>
-                                    <img src={Google}/>
-                                </button>
-                            </div>
-                            <div>
-                                <button className='social-button' onClick={() => login(facebook)}>
-                                    <img src={Facebook}/>
-                                </button>
-                            </div>
-                            <div>
-                                <button className='social-button' onClick={() => login(twitter)}>
-                                    <img src={Twitter}/>
-                                </button>
-                            </div>
-                        </div>
+                        
                     </div>
                     <div className='footer-auth'>
                         <div className='title-auth-white-div title-auth-white-div-reg'>
