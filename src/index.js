@@ -6,6 +6,9 @@ import App from './App';
 import { AuthProvider } from './component/providers/AuthProvider';
 import { JwtProvider } from './component/providers/JwtProvider';
 
+import axios from 'axios';
+axios.defaults.withCredentials = true;
+
 ReactDOM.render(
     <React.StrictMode>
         <JwtProvider>

@@ -1,4 +1,5 @@
 import React, {useContext, useState} from 'react';
+import { useNavigate } from 'react-router-dom';
 import {Collapse} from 'react-collapse';
 
 import Logo from '../images/logo/SakuraTails.svg';
@@ -86,7 +87,22 @@ function App() {
 
 export default function HomePage() {
 
-    const {user, setUser} = useContext(AuthContext);
+    const {user} = useContext(AuthContext);
+    const navigate = useNavigate();
+    const [isProfileModalOpen, setIsProfileModalOpen] = useState("");
+
+    const handleHeadClick = (e) => {
+      e.preventDefault();
+      if (!user) {
+        navigate('/authorization');
+      } else {
+        setIsProfileModalOpen(!isProfileModalOpen);
+      }
+    };
+
+    const handleSettingsClick = () => {
+        navigate("/profile-settings")
+    };
 
 const [modalIsOpen_1, setModalIsOpen_1] = useState(false);
 const [modalIsOpen_2, setModalIsOpen_2] = useState(false);
@@ -327,71 +343,73 @@ const Carousel = ({ items }) => {
               <a className='head-logo' href='/'>SakuraTails</a>
               </div>
               <div className='head-right-div'>
-              <div className='head-nav-div'>
-                  <a className='header-link' href='https://www.figma.com/'>Про нас</a>
-                  </div>
-                  <div className='head-nav-div'>
-                  <a className='header-link' href='https://www.figma.com/'>Коробки</a>
-                  </div>
-              <div className='head-nav-div'>
-              <a href='#' className='icon-head'>
-                  <img src={Basket}></img>
-              </a>
-              </div>
-              <div className='head-nav-div dropdown-header'>
-              <a href={user ? "/profile" : "/authorization"} className='icon-head'>
-                  <img src={Profile}></img>
-              </a>
-              <div class="dropdown-content-header">
-                <div>
-                  <p className='head-email-dropdown'>IDK@gmail.com</p>
+                <div className='head-nav-div'>
+                    <a className='header-link' href='https://www.figma.com/'>Про нас</a>
                 </div>
-                <div>
-                  <p className='hello-dropdown'>Вітаємо, <span className='name-dropdown'>(Ім'я)</span> <img src={HelloEmoji}></img></p>
+                <div className='head-nav-div'>
+                    <a className='header-link' href='https://www.figma.com/'>Коробки</a>
                 </div>
-               <div>
-               <details className='dropdown-details'>
-               <summary>Показати більше акаунтів</summary>
-               <div>
-               <button className='dropdown-button'><img src={AddPlus}></img>Додати інший акаунт</button>
-               </div>
-               <div>
-               <button className='dropdown-border-bottom-button'><img src={Exit}></img>Вийти зі всіх акаунтів</button>
-               </div>
-               </details>
-               </div>
-                <div>
-               <button className='dropdown-border-top-button'><img src={History}></img>Історія замовлень</button>
-               </div>
-               <div>
-               <button className='dropdown-button'><img src={Transfer}></img>Відстеження замовлення</button>
-               </div>
-               <div>
-               <button className='dropdown-button'><img src={Like}></img>Обране</button>
-               </div>
-               <div>
-               <button className='dropdown-button'><img src={Pen}></img>Мої відгуки</button>
-               </div>
-               <div>
-               <button className='dropdown-button'><img src={Wallet}></img>Мій гаманець</button>
-               </div>
-               <div>
-               <button className='dropdown-border-bottom-button'><img src={Procent}></img>Знижки та бонуси</button>
-               </div>
-               <div>
-               <button className='dropdown-border-left-button'>Налаштування</button>
-               <button className='dropdown-border-right-button'>Довідка</button>
-               </div>
-               <div>
-               <button className='dropdown-border-bottom-button'><img src={Case}></img>Кабінет продавця</button>
-               </div>
-               <div>
-                <p className='bottom-dropdown'>
-                  <a href=''>Privacy Policy</a><span className='slash-dropdown'>/</span><a href=''> Terms of Service</a>
-                </p>
-               </div>
-              </div>
-              </div>
+                <div className='head-nav-div'>
+                    <a href='#' className='icon-head'>
+                        <img src={Basket}></img>
+                    </a>
+                </div>
+                <div className='head-nav-div dropdown-header'>
+                    <a href='#' className='icon-head' onClick={handleHeadClick}>
+                        <img src={Profile}></img>
+                    </a>
+                    {user && (
+                        <div className="dropdown-content-header" style={{ display: isProfileModalOpen ? "block" : "none" }}>
+                            <div>
+                                <p className='head-email-dropdown'>IDK@gmail.com</p>
+                            </div>
+                            <div>
+                                <p className='hello-dropdown'>Вітаємо, <span className='name-dropdown'>(Ім'я)</span> <img src={HelloEmoji} alt="Hello Emoji" /></p>
+                            </div>
+                            <div>
+                                <details className='dropdown-details'>
+                                    <summary>Показати більше акаунтів</summary>
+                                    <div>
+                                        <button className='dropdown-button'><img src={AddPlus} alt="Add Plus" />Додати інший акаунт</button>
+                                    </div>
+                                    <div>
+                                        <button className='dropdown-border-bottom-button'><img src={Exit} alt="Exit" />Вийти зі всіх акаунтів</button>
+                                    </div>
+                                </details>
+                            </div>
+                            <div>
+                                <button className='dropdown-border-top-button'><img src={History} alt="History" />Історія замовлень</button>
+                            </div>
+                            <div>
+                                <button className='dropdown-button'><img src={Transfer} alt="Transfer" />Відстеження замовлення</button>
+                            </div>
+                            <div>
+                                <button className='dropdown-button'><img src={Like} alt="Like" />Обране</button>
+                            </div>
+                            <div>
+                                <button className='dropdown-button'><img src={Pen} alt="Pen" />Мої відгуки</button>
+                            </div>
+                            <div>
+                                <button className='dropdown-button'><img src={Wallet} alt="Wallet" />Мій гаманець</button>
+                            </div>
+                            <div>
+                                <button className='dropdown-border-bottom-button'><img src={Procent} alt="Procent" />Знижки та бонуси</button>
+                            </div>
+                            <div>
+                                <button className='dropdown-border-left-button' onClick={handleSettingsClick}>Налаштування</button>
+                                <button className='dropdown-border-right-button'>Довідка</button>
+                            </div>
+                            <div>
+                                <button className='dropdown-border-bottom-button'><img src={Case} alt="Case" />Кабінет продавця</button>
+                            </div>
+                            <div>
+                                <p className='bottom-dropdown'>
+                                    <a href=''>Privacy Policy</a><span className='slash-dropdown'>/</span><a href=''> Terms of Service</a>
+                                </p>
+                            </div>
+                        </div>
+                    )}
+                </div>
               <div className='language-div'>
                 <div className='language-left-div'>
                   <a className='language-link-left language-link'>

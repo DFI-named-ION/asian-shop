@@ -33,8 +33,8 @@ function App() {
 						<Route path='/test' element={<ProfilePage/>}/>
                     </Route>
                     <Route element={<NotVerifiedRoute />}>
-                        <Route path='/profile' element={<ProfilePage />} />
-						<Route path='/confirmation' element={<MailConfirmationPage />} />
+                        <Route path='/profile-settings' element={<ProfilePage />} />
+                        <Route path='/confirmation' element={<MailConfirmationPage />} />
                     </Route>
                     <Route element={<PublicRoute />}>
                         <Route path='/registration' element={<RegistrationPage />} />

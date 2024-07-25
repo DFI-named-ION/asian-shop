@@ -23,44 +23,36 @@ function App() {
 
 export default function Authorization() {
 
-    const [modalIsOpenErrorAuth, setModalIsOpenErrorAuth] = useState(false);
-
-  const openModalErrorAuth = () => {
-    setModalIsOpenErrorAuth(true);
-  };
-
-  const closeModalProfilePassword = () => {
-    setModalIsOpenErrorAuth(false);
-  };
-
-  const [modalIsOpenErrorAuth_1, setModalIsOpenErrorAuth_1] = useState(false);
-
-  const openModalErrorAuth_1 = () => {
-    setModalIsOpenErrorAuth_1(true);
-  };
-
-  const closeModalProfilePassword_1 = () => {
-    setModalIsOpenErrorAuth_1(false);
-  };
-    
-    const { user, setUser } = useContext(AuthContext);
+    const { user, login, axiosError } = useContext(AuthContext);
     const navigate = useNavigate();
 
     useEffect(() => {
         if (user) {
-            if (user.emailVerified) {
-                navigate("/profile");
+            if (user.isVerified) {
+                navigate("/profile-settings");
             } else {
                 navigate("/confirmation");
             }
         }
     }, [user, navigate]);
 
+    const [isErrorModalOpen, setIsErrorModalOpen] = useState(false);
     const [email, setEmail] = useState("");
-    const [emailError, setEmailError] = useState("");
+    const [emailShortError, setEmailShortError] = useState("");
+    const [emailLongError, setEmailLongError] = useState("");
     const [password, setPassword] = useState("");
     const [passwordError, setPasswordError] = useState("");
     const [token, setToken] = useState(false);
+    const [passwordShortError, setPasswordShortError] = useState("");
+    const [passwordLongError, setPasswordLongError] = useState("");
+
+    const openErrorModal = () => {
+        setIsErrorModalOpen(true);
+    };
+
+    const closeErrorModal = () => {
+        setIsErrorModalOpen(false);
+    };
 
     const handleEmailChange = (e) => {
         setEmail(e.target.value);
@@ -82,32 +74,40 @@ export default function Authorization() {
         }
     };
 
-    const handleLoginClick = async (e) => {
-        e.preventDefault();
-        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-        const passRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,64}$/;
+    const handleAuth = async (providerOrEvent) => {
+        if (providerOrEvent.preventDefault) {
+            providerOrEvent.preventDefault();
+            const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            const passRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,64}$/;
+    
+            if (!emailRegex.test(email)) {
+                handleError("email-format-error");
+                return;
+            }
 
-        if (!emailRegex.test(email)) {
-            handleError("email-format-error");
-            return;
-        }
-        setEmailError("");
-
-        if (!passRegex.test(password)) {
-            handleError("password-format-error");
-            return;
-        }
-        setPasswordError("");
-        if(!token){
-            handleError("recaptcha-error");
-            return;
-        }
-
-        try {
-            const result = await signInWithEmailAndPassword(auth, email, password);
-            setUser(result.user);
-        } catch (err) {
-            handleError(err.code);
+            if (!passRegex.test(password)) {
+                handleError("password-format-error");
+                return;
+            }
+            setPasswordError("");
+            if(!token){
+                handleError("recaptcha-error");
+                return;
+            }
+    
+            try {
+                const result = await signInWithEmailAndPassword(auth, email, password);
+                await login(await result.user.getIdToken());
+            } catch (err) {
+                handleError(err.code);
+            }
+        } else {
+            try {
+                const result = await signInWithPopup(auth, providerOrEvent);
+                await login(await result.user.getIdToken());
+            } catch (err) {
+                handleError(err.code);
+            }
         }
     };
 
@@ -116,36 +116,80 @@ export default function Authorization() {
         navigate("/");
     };
 
+    useEffect(() => {
+        if (axiosError) {
+            setEmailShortError(axiosError.short);
+            setEmailLongError(axiosError.long);
+        }
+    }, [axiosError]);
+
     const handleError = (error) => {
-        let text = "";
         switch (error) {
+            case "auth/popup-closed-by-user":
+                setEmailShortError("Popup was closed");
+                setEmailLongError("You accidantly closed popup. Try again.");
+                setPasswordShortError("");
+                setPasswordLongError("");
+                break;
             case "auth/invalid-credential":
-                text = "Invalid credentials.";
-                setEmailError(text);
-                setPasswordError(text);
+                setEmailShortError("Invalid credentials");
+                setEmailLongError("Probably you entered wrong email or password.");
+                setPasswordShortError("Invalid credentials");
+                setPasswordLongError("");
                 break;
             case "auth/too-many-requests":
-                text = "Too many requests. Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later.";
-                setPasswordError(text);
+                setEmailShortError("Too much requests");
+                setEmailLongError("Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later.")
+                setPasswordShortError("");
+                setPasswordLongError("");
                 break;
             case "email-format-error":
-                setEmailError("Invalid email format.");
+                setEmailShortError("Invalid email format");
+                setEmailLongError("Correct email look like this: user@example.com.");
+                setPasswordShortError("");
+                setPasswordLongError("");
                 break;
             case "password-format-error":
-                setPasswordError("Invalid password format:\nPassword length: 6-64 characters\nAt least one uppercase letter\nAt least one lowercase letter\nAt least one digit\nAt least one special character: @, $, !, %, *, ?, &");
+                setEmailShortError("");
+                setEmailLongError("");
+                setPasswordShortError("Invalid password format");
+                setPasswordLongError("password-format-error");
+                break;
+            case "recaptcha-error":
+                setEmailShortError("");
+                setEmailLongError("");
+                setPasswordShortError("Invalid recaptcha.");
+                setPasswordLongError("");
                 break;
             case "recaptcha-error":
                 setPasswordError("Invalid recaptcha.");
                 break;
             default:
-                console.log(error);
+                // console.log(error); // for debug
                 break;
         };
     };
 
+    document.addEventListener('mousemove', function(e) {
+        const textBlock = document.getElementById('parallax');
+        const rect = textBlock.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+        const mouseX = e.clientX;
+        const mouseY = e.clientY;
+        const moveX = (mouseX - centerX) * -0.05;
+        const moveY = (mouseY - centerY) * -0.05;
+    
+        const limit = 10;
+        const limitedMoveX = Math.max(Math.min(moveX, limit), -limit);
+        const limitedMoveY = Math.max(Math.min(moveY, limit), -limit);
+    
+        textBlock.style.transform = `translate(${limitedMoveX}px, ${limitedMoveY}px)`;
+    });
+
     return (
         <body className='authorization-body'>
-                <div className='left-auth'>
+                <div className='left-auth' id="parallax">
                     <h1>Привіт</h1>
                 </div>
                 <div className='right-auth'>
@@ -157,20 +201,45 @@ export default function Authorization() {
                     </div>
                     <div>
                         <form className='form-auth'>
+                            <Modal isOpen={isErrorModalOpen} onRequestClose={closeErrorModal} className='background-modal-div'>
+                                <div className='modal-link-error-div'> 
+                                    <button onClick={closeErrorModal} className='close-modal-button close-link-error-button'></button>
+                                    <p>
+                                        {emailLongError}
+                                        {passwordLongError === "password-format-error" ? (
+                                            <>
+                                                <p>Неправильний формат пароля:</p>
+                                                <ol>
+                                                    <li>Довжина пароля повинна бути від 6 до 64 символів.</li>
+                                                    <li>Пароль повинен містити:</li>
+                                                </ol>
+                                                <ul>
+                                                    <li>одну велику літеру.</li>
+                                                    <li>одну малу літеру.</li>
+                                                    <li>одну цифру.</li>
+                                                    <li>один спеціальний символ: @, $, !, %, *, ?, &.</li>
+                                                </ul>
+                                            </>
+                                        ) : (
+                                            passwordLongError
+                                        )}
+                                    </p>
+                                </div>
+                            </Modal>
                             <h5 className='title-line'>Пошта</h5>
                             <p className='text-auth'>
                                 <input className='text-block-margin-zero' type='login' name='Email' value={email} onChange={handleEmailChange} placeholder='email@gmail.com' required />
                                 <div className='line-text-block'></div>
                             </p>
                             <p className='title-line-error'>
-                                {emailError}
-                                {/* <a className='link-line-error' href='#' onClick={openModalErrorAuth_1}>ⓘ</a>
-                                        <Modal isOpen={modalIsOpenErrorAuth_1} onRequestClose={closeModalProfilePassword_1} className='background-modal-div'>
-                    <div className='modal-link-error-div'> 
-                    <button onClick={closeModalProfilePassword_1} className='close-modal-button close-link-error-button'></button>
-                     <p>Користувача не знайдено. Сервер зіткнувся з неочікуваною помилкою при спробі обробити запит. Невірні облікові дані.</p>
-                    </div>
-                    </Modal> */}
+                                {emailShortError.length > 0 ? (
+                                    <>
+                                        {emailShortError}
+                                        <a className='link-line-error' href='#' onClick={openErrorModal}>ⓘ</a>
+                                    </>
+                                ) : (
+                                    <></>
+                                )}
                             </p>
                             <h5 className='title-line'>Пароль</h5>
                             <p className='text-auth'>
@@ -178,29 +247,14 @@ export default function Authorization() {
                                 <div className='line-text-block'></div>
                             </p>
                             <p className='title-line-error'>
-                                {passwordError.split('\n').map((line) => (
+                                {passwordShortError.length > 0 ? (
                                     <>
-                                        {line} 
-                                        {/* <a className='link-line-error' href='#' onClick={openModalErrorAuth}>ⓘ</a>
-                                        <Modal isOpen={modalIsOpenErrorAuth} onRequestClose={closeModalProfilePassword} className='background-modal-div'>
-                    <div className='modal-link-error-div'> 
-                    <button onClick={closeModalProfilePassword} className='close-modal-button close-link-error-button'></button>
-                     <p>Неправильний формат пароля:</p>
-                     <ol>
-                        <li>Довжина пароля повинна бути від 6 до 64 символів.</li>
-                        <li>Пароль повинен містити:</li>
-                    </ol>
-                    <ul>
-                        <li>одну велику літеру.</li>
-                        <li>одну малу літеру.</li>
-                        <li>одну цифру.</li>
-                        <li>один спеціальний символ: @, $, !, %, *, ?, &..</li>
-                    </ul>
-                    </div>
-                    </Modal> */}
-                                        <br />
+                                        {passwordShortError}
+                                        <a className='link-line-error' href='#' onClick={openErrorModal}>ⓘ</a>
                                     </>
-                                ))}
+                                ) : (
+                                    <></>
+                                )}
                             </p>
                             <div className="Captcha-div">
                                 <ReCaptcha className="Captcha"
@@ -210,7 +264,7 @@ export default function Authorization() {
                             
                         </form>
                         <a>
-                            <input className='login-button' type='submit' value='Увійти' onClick={handleLoginClick}/>
+                            <input className='login-button' type='submit' value='Увійти' onClick={handleAuth}/>
                         </a>
                         <p className='forgot-password'>
                             <a className='text-auth' href='/reset-password-verification'>Забули свій пароль?</a>
@@ -228,17 +282,17 @@ export default function Authorization() {
 
                         <div className='socials-auth-div'>
                             <div>
-                                <button className='social-button' onClick={() => login(google)}>
+                                <button className='social-button' onClick={() => handleAuth(google)}>
                                     <img src={Google}/>
                                 </button>
                             </div>
                             <div>
-                                <button className='social-button' onClick={() => login(facebook)}>
+                                <button className='social-button' onClick={() => handleAuth(facebook)}>
                                     <img src={Facebook}/>
                                 </button>
                             </div>
                             <div>
-                                <button className='social-button' onClick={() => login(twitter)}>
+                                <button className='social-button' onClick={() => handleAuth(twitter)}>
                                     <img src={Twitter}/>
                                 </button>
                             </div>
