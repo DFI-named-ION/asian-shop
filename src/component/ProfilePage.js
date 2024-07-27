@@ -422,30 +422,25 @@ export default function ProfilePage() {
                           <a className='head-logo footer-logo' href='/'>SakuraTails</a>
                       </div>
                       <div className='nav-footer-div'>
-                        <div className='left-nav-div'>
-                      <ul>
-                          <li><a className='section-footer' href='/'>SakuraTails Sites</a></li>
-                          <li><a className='section-footer' href='https://www.figma.com/'>SakuraTails Market</a></li>
-                          <li><a className='section-footer' href='https://www.figma.com/'>SakuraTails Gift Boxes</a></li>
-                      </ul>
-                      </div>
-                      <div className='center-nav-div'>
-                      <ul>
-                          <li><a className='section-footer' href='https://www.figma.com/'>Shop</a></li>
-                          <li><a className='section-footer' href='#subcribtion-section'>Subscribe</a></li>
-                          <li><a className='section-footer' href='https://www.figma.com/'>About Us</a></li>
-                      </ul>
-                      </div>
-                      <div className='right-nav-div'>
-                      <ul>
-                          <li><a className='section-footer' href='https://www.figma.com/'>Support</a></li>
-                          <li><a className='section-footer' href='https://www.figma.com/'>Privacy Policy</a></li>
-                          <li><a className='section-footer' href='https://www.figma.com/'>Terms</a></li>
-                          <li><a className='section-footer' href='https://www.figma.com/'>FAQ</a></li>
-                          <li><a className='section-footer' href='https://www.figma.com/'>Shipping Policy</a></li>
-                      </ul>
-                      </div>
-                      </div>
+                    <div className='left-nav-div'>
+                  <ul>
+                      <li className='section-footer-bold'><a className='section-footer section-footer-bold' href='/'>Тільки на SakuraTails</a></li>
+                      <li className='section-footer'><a className='section-footer' href='https://www.figma.com/'>Магазин</a></li>
+                      <li className='section-footer'><a className='section-footer' href='https://www.figma.com/'>Подарункові коробки</a></li>
+                      <li className='section-footer'><a className='section-footer' href='https://www.figma.com/'>Підписка</a></li>
+                  </ul>
+                  </div>
+                  <div className='right-nav-div'>
+                  <ul>
+                      <li className='section-footer-bold'><a className='section-footer section-footer-bold' href='https://www.figma.com/'>Підтримка</a></li>
+                      <li className='section-footer'><a className='section-footer' href='https://www.figma.com/'>Політика конфіденційності</a></li>
+                      <li className='section-footer'><a className='section-footer' href='https://www.figma.com/'>Про нас</a></li>
+                      <li className='section-footer'><a className='section-footer' href='https://www.figma.com/'>Умови</a></li>
+                      <li className='section-footer'><a className='section-footer' href='https://www.figma.com/'>FAQ</a></li>
+                      <li className='section-footer'><a className='section-footer' href='https://www.figma.com/'>Політика доставки</a></li>
+                  </ul>
+                  </div>
+                  </div>
                       <div className='pay-footer-div'>
                         <div className='we-accept-div'>
                       <h3 className='we-accept'>We accept</h3>

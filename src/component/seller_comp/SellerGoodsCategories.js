@@ -16,6 +16,7 @@ import BigOptionSeller from '../seller_comp/img_seller/big-option-seller.svg';
 import SakuraSeller from '../seller_comp/img_seller/sakura-seller.svg';
 import BigGoodsSeller from '../seller_comp/img_seller/big-goods-seller.svg';
 import AddGoods from '../seller_comp/img_seller//add-goods-box-seller.svg';
+import ChipsLeys from '../seller_comp/img_seller/chips-leys.jpg';
 
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
     return <SakuraSeller />;
     return <BigGoodsSeller />;
     return <AddGoods />;
+    return <ChipsLeys />;
 }
 export default function SellerOptionCompany() {
     return (
@@ -237,7 +239,7 @@ export default function SellerOptionCompany() {
                         </div>
                         <div className='information-categories'>
                             {/* Виберіть категорію */}
-                            <p className='select-category-seller'>Виберіть категорію</p>
+                            {/* <p className='select-category-seller'>Виберіть категорію</p> */}
 
                             {/* Виберіть підкатегорію */}
                             {/* <p className='select-subcategory-seller'>Виберіть підкатегорію</p> */}
@@ -245,6 +247,23 @@ export default function SellerOptionCompany() {
                             {/* Додати товар */}
                             {/* <a><img src={AddGoods} className='img-goods-categories'></img>
                             <p className='add-goods-categories-seller'>Додати товар</p></a> */}
+
+                            {/* З товарами */}
+                            <div className='goods-position-seller-block'>
+                        <div className='good-position-seller'>
+                        <img src={ChipsLeys} className='img-position-good'></img>
+                        <h5>Картопляні чіпси Lay's: Пряні раки</h5>
+                        <p className='text-position-good'>23 шт. в наявності</p>
+                        <p className='price-position-good'><span className='span-small-pos'>$</span>3.49 <span className='span-slash-pos'>/</span>80<span className='span-small-pos'>г.</span></p>
+                        </div>
+
+                        <div className='good-position-seller'>
+                        <img src={ChipsLeys} className='img-position-good'></img>
+                        <h5>Картопляні чіпси Lay's: Пряні раки</h5>
+                        <p className='text-position-good'>23 шт. в наявності</p>
+                        <p className='price-position-good'><span className='span-small-pos'>$</span>3.49 <span className='span-slash-pos'>/</span>80<span className='span-small-pos'>г.</span></p>
+                        </div>
+                    </div>
                         </div>
                     </div>
                   </div>
