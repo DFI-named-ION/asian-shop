@@ -2,7 +2,9 @@ import React, { useContext, useEffect, useState } from 'react';
 import Modal from 'react-modal';
 import { useParams, useNavigate } from 'react-router-dom';
 
-import { AuthContext } from './providers/AuthProvider';
+import { useErrors } from './providers/ErrorProvider';
+import { useAuth } from './providers/AuthProvider';
+import { useData } from './providers/DataProvider';
 
 import Basket from '../images/icons/basket.svg';
 import Profile from '../images/icons/profile.svg';
@@ -57,17 +59,22 @@ export default function ProfilePage() {
     setModalIsOpenProfilePassword(false);
   };
 
-    const {user, logout} = useContext(AuthContext);
+    const { user, logout } = useAuth();
+    const { handleMethod, catchedError } = useErrors();
     const navigate = useNavigate();
+    const { requestData } = useData();
+
+    useEffect(() => {
+        if (!user) {
+            navigate('/authorization');
+        } else {
+            handleMethod(() => requestData('phone;birthday;'));
+        }
+    }, []);
 
     const handleLogOutClick = async (e) => {
         e.preventDefault();
         logout();
-    };
-
-    const handleResetPassword = (e) => {
-      e.preventDefault();
-      navigate("/reset-password-verification");
     };
 
     return (
@@ -133,19 +140,19 @@ export default function ProfilePage() {
                       <div className='columns-profile-div'>
                         <div className='column-profile-div'>
                           <h4>Прізвище</h4>
-                          <p>Тестове</p>
+                          <p>{user?.lastName ? user.lastName : "Не вказано"}</p>
                           <h4>Дата народження</h4>
                           <p>01/01/2000</p>
                         </div>
                         <div className='column-profile-div'>
                         <h4>Ім'я</h4>
-                        <p>Тестове</p>
+                        <p>{user?.firstName ? user.firstName : "Не вказано"}</p>
                         <h4>Стать</h4>
                           <p>Не вказано</p>
                         </div>
                         <div className='column-profile-div'>
                         <h4>По батькові</h4>
-                        <p>Не вказано</p>
+                        <p>{user?.middleName ? user.middleName : "Не вказано"}</p>
                         <h4>Мова спілкування</h4>
                           <p>Українська</p>
                         </div>
@@ -159,11 +166,11 @@ export default function ProfilePage() {
                       <div className='columns-profile-div'>
                         <div className='column-profile-div'>
                           <h4>Підтверджений телефон</h4>
-                          <p>+380 66 000 00 00</p>
+                          <p>{user?.phone ? user.phone : "Не вказано"}</p>
                         </div>
                         <div className='column-profile-div'>
                         <h4>Електронна пошта</h4>
-                        <p>email@gmail.com</p>
+                        <p>{user?.email ? user.email : "Не вказано"}</p>
                         <h4>Не друкувати чеки та гарантійні талони</h4>
                           <p>Так</p>
                         </div>
@@ -415,30 +422,25 @@ export default function ProfilePage() {
                           <a className='head-logo footer-logo' href='/'>SakuraTails</a>
                       </div>
                       <div className='nav-footer-div'>
-                        <div className='left-nav-div'>
-                      <ul>
-                          <li><a className='section-footer' href='/'>SakuraTails Sites</a></li>
-                          <li><a className='section-footer' href='https://www.figma.com/'>SakuraTails Market</a></li>
-                          <li><a className='section-footer' href='https://www.figma.com/'>SakuraTails Gift Boxes</a></li>
-                      </ul>
-                      </div>
-                      <div className='center-nav-div'>
-                      <ul>
-                          <li><a className='section-footer' href='https://www.figma.com/'>Shop</a></li>
-                          <li><a className='section-footer' href='#subcribtion-section'>Subscribe</a></li>
-                          <li><a className='section-footer' href='https://www.figma.com/'>About Us</a></li>
-                      </ul>
-                      </div>
-                      <div className='right-nav-div'>
-                      <ul>
-                          <li><a className='section-footer' href='https://www.figma.com/'>Support</a></li>
-                          <li><a className='section-footer' href='https://www.figma.com/'>Privacy Policy</a></li>
-                          <li><a className='section-footer' href='https://www.figma.com/'>Terms</a></li>
-                          <li><a className='section-footer' href='https://www.figma.com/'>FAQ</a></li>
-                          <li><a className='section-footer' href='https://www.figma.com/'>Shipping Policy</a></li>
-                      </ul>
-                      </div>
-                      </div>
+                    <div className='left-nav-div'>
+                  <ul>
+                      <li className='section-footer-bold'><a className='section-footer section-footer-bold' href='/'>Тільки на SakuraTails</a></li>
+                      <li className='section-footer'><a className='section-footer' href='https://www.figma.com/'>Магазин</a></li>
+                      <li className='section-footer'><a className='section-footer' href='https://www.figma.com/'>Подарункові коробки</a></li>
+                      <li className='section-footer'><a className='section-footer' href='https://www.figma.com/'>Підписка</a></li>
+                  </ul>
+                  </div>
+                  <div className='right-nav-div'>
+                  <ul>
+                      <li className='section-footer-bold'><a className='section-footer section-footer-bold' href='https://www.figma.com/'>Підтримка</a></li>
+                      <li className='section-footer'><a className='section-footer' href='https://www.figma.com/'>Політика конфіденційності</a></li>
+                      <li className='section-footer'><a className='section-footer' href='https://www.figma.com/'>Про нас</a></li>
+                      <li className='section-footer'><a className='section-footer' href='https://www.figma.com/'>Умови</a></li>
+                      <li className='section-footer'><a className='section-footer' href='https://www.figma.com/'>FAQ</a></li>
+                      <li className='section-footer'><a className='section-footer' href='https://www.figma.com/'>Політика доставки</a></li>
+                  </ul>
+                  </div>
+                  </div>
                       <div className='pay-footer-div'>
                         <div className='we-accept-div'>
                       <h3 className='we-accept'>We accept</h3>

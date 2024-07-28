@@ -31,6 +31,31 @@ function App() {
 }
 
 export default function SellerOptionCompany() {
+
+    const radio = document.querySelectorAll('input[type="radio"]')
+    const selectRadio1 = document.querySelector('#block-1')
+    const selectRadio2 = document.querySelector('#block-2')
+
+    radio.forEach(el => {
+        el.onclick = (e) => {
+          show(e.target.value)
+      }
+    })
+    
+    function show(val) {
+        if (val == 1) {
+          selectRadio1.style.display = 'flex'
+      }
+      else if (val == 2) {
+            selectRadio2.style.display = 'flex'  
+      } 
+      else {
+          selectRadio1.style.display = 'none'
+          selectRadio2.style.display = 'none'  
+      }
+    }
+
+    
     return (
         <body className='seller-body'>
             <div className='seller-div'>
@@ -45,9 +70,6 @@ export default function SellerOptionCompany() {
                 </div>
 
                 <div className='seller-buttons-div seller-buttons-option-company-div'>
-                    {/* <div className='wolf-seller-div'>
-                    <img src={WolfSeller} className='wolf-seller'></img>
-                    </div> */}
                     <div>
                     <button className='left-seller-button'><img src={MainSeller} className='img-seller-left'></img>Головна</button>
                     </div>
@@ -184,17 +206,49 @@ export default function SellerOptionCompany() {
                             <div>
                                 <h4 className='title-radio-checkbox-promotion-seller'>Акція діє <span>*</span></h4>
                                 <div className='radio-goods-seller-div'>
-                                <input className='radio-goods-seller' type="radio" value="style"></input>
+                                <input className='radio-goods-seller' type="radio"></input>
                                 <p className='radio-goods-seller-text'>На всі товари</p>
                                 </div>
                                 <div className='radio-goods-seller-div'>
-                                <input className='radio-goods-seller' type="radio"></input>
+                                <input className='radio-goods-seller' type="radio" value="1"></input>
                                 <p className='radio-goods-seller-text'>На обраний тип позиції</p>
                                 </div>
+                                <div class="radio-select-seller-div" id='block-1'>
+                                <select className='radio-select-seller'>
+                                <option>Випічка</option>
+                                 <option>Морепродукти</option>
+                                 <option>Шоколад</option>
+                                 <option>Моті</option>
+                                 <option>Печиво</option>
+                                 <option>Торти</option>
+                                 <option>Мармеладки</option>
+                                 <option>Чипси</option>
+                                 <option>Крекери</option>
+                                 <option>Горіхи</option>
+                                 <option>Гострі</option>
+                                 <option>Локшина</option>
+                                 <option>Каррі</option>
+                                 <option>Рис</option>
+                                 <option>Токпоккі</option>
+                                 <option>Місо</option>
+                                 <option>Соєвий</option>
+                                 <option>Оцти</option>
+                                 <option>Газованка</option>
+                                 <option>Сік</option>
+                                 <option>Фітнес</option>
+                                 <option>Вода</option>
+                                 <option>Чай</option>
+                                 <option>Кава</option>
+                                 <option>Молоко</option>
+                                 </select>
+                                 </div>
                                 <div className='radio-goods-seller-div'>
-                                <input className='radio-goods-seller' type="radio"></input>
+                                <input className='radio-goods-seller' type="radio" value="2"></input>
                                 <p className='radio-goods-seller-text'>На обрану позицію</p>
                                 </div>
+                                <div class="radio-select-seller-div" id='block-2'>
+                                <input className='radio-text-seller' type='text' placeholder='Виберіть обрану позицію'></input>
+                                 </div>
                             </div>
                             <div>
                                 <h4 className='title-radio-checkbox-promotion-seller'>Обмеження по використанню</h4>
@@ -202,10 +256,21 @@ export default function SellerOptionCompany() {
                                 <input className='radio-goods-seller' type="checkbox" value="style"></input>
                                 <p className='radio-goods-seller-text'>Обмеження за загальною кількістю використань промокоду</p>
                                 </div>
+                                <div class="radio-select-seller-div" id='block-3'>
+                                <input className='radio-text-seller radio-text-seller-short' type='text' placeholder='1'></input>
+                                 </div>
                                 <div className='radio-goods-seller-div'>
                                 <input className='radio-goods-seller' type="checkbox"></input>
                                 <p className='radio-goods-seller-text'>Знижка діє при мінімальній сумі замовлення</p>
                                 </div>
+                                <div className='radio-flex-div-seller'>
+                                <div class="radio-select-seller-div" id='block-4'>
+                                <input className='radio-text-seller radio-text-seller-short' type='text' placeholder='200'></input>
+                                 </div>
+                                 <div>
+                                 <p className='dollar-seller'>₴</p>
+                                 </div>
+                                 </div>
                                 <div className='radio-goods-seller-div'>
                                 <input className='radio-goods-seller' type="checkbox"></input>
                                 <p className='radio-goods-seller-text'>Не застосовувати промокод для товарів з діючою знижкою</p>
@@ -214,13 +279,22 @@ export default function SellerOptionCompany() {
 
                             <div>
                                 <h4 className='title-radio-checkbox-promotion-seller'>Термін дії акції</h4>
+                                <div className='time-promotion'>
+                                <div>
                                <p className='subtitle-promotion-seller'>Початок акції</p>
                                <input className='input-date-promotion' type='date' placeholder='дд / мм / рррр' required></input>
+                               </div>
+                               <div className='end-time-promotion'>
+                               <p className='subtitle-promotion-seller'>Закінчення акції</p>
+                               <input className='input-date-promotion' type='date' placeholder='дд / мм / рррр' required></input>
+                               </div>
+                               </div>
                                <div className='radio-goods-seller-div'>
                                 <input className='radio-goods-seller' type="checkbox"></input>
                                 <p className='radio-goods-seller-text'>Встановити дату закінчення</p>
                                 </div>
                             </div>
+                            
                             </div>
                     </div>
                     <div>

@@ -7,15 +7,21 @@ import { AuthProvider } from './component/providers/AuthProvider';
 import { JwtProvider } from './component/providers/JwtProvider';
 
 import axios from 'axios';
+import { ErrorProvider } from './component/providers/ErrorProvider';
+import { DataProvider } from './component/providers/DataProvider';
 axios.defaults.withCredentials = true;
 
 ReactDOM.render(
     <React.StrictMode>
-        <JwtProvider>
-            <AuthProvider>
-                <App />
-            </AuthProvider>
-        </JwtProvider>
+        <ErrorProvider>
+            <JwtProvider>
+                <AuthProvider>
+                    <DataProvider>
+                        <App />
+                    </DataProvider>
+                </AuthProvider>
+            </JwtProvider>
+        </ErrorProvider>
     </React.StrictMode>,
     document.getElementById('root')
 );
