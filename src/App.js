@@ -2,9 +2,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import HomePage from "./component/HomePage"
 import AuthorizationPage from './component/Authorization';
-import ShopAuthorizationPage from './component/ShopAuthorization';
 import RegistrationPage from "./component/Registration";
-import ShopRegistrationPage from "./component/ShopRegistration";
 import MailConfirmationPage from "./component/MailConfirmation";
 import PasswordChangeMail from "./component/PasswordChangeMail";
 import PasswordChange from "./component/PasswordChange";
@@ -38,9 +36,7 @@ function App() {
                     </Route>
                     <Route element={<PublicRoute />}>
                         <Route path='/registration' element={<RegistrationPage />} />
-                        <Route path='/shop-registration' element={<ShopRegistrationPage />} />
                         <Route path='/authorization' element={<AuthorizationPage />} />
-                        <Route path='/shop-authorization' element={<ShopAuthorizationPage />} />
                         <Route path='/reset-password-verification' element={<PasswordChangeMail />} />
                         <Route path='/reset-password' element={<PasswordChange />} />
 						<Route path='/' element={<HomePage />} />
