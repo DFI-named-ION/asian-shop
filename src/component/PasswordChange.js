@@ -95,7 +95,7 @@ export default function MailConfirmation() {
                             <div className='modal-link-error-div'> 
                                 <button onClick={closeErrorModal} className='close-modal-button close-link-error-button'></button>
                                 <p>
-                                    {catchedError.long === "password-format-error" ? (
+                                    {catchedError.code === "password-format-error" ? (
                                         <>
                                             <p>Неправильний формат пароля:</p>
                                             <ol>

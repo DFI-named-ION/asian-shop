@@ -30,7 +30,22 @@ function App() {
     return <BigGoodsSeller />;
 }
 
-export default function SellerOptionCompany() {
+export default function SellerGoodsPromotion() {
+
+    const navigate = useNavigate();
+
+    const handleCompanyClick = () => {
+        navigate("/seller/company");
+    };
+
+    const handleProfileClick = () => {
+        navigate("/seller/profile");
+    };
+
+    const handlePromotionsClick = () => {
+        navigate("/seller/promotions");
+    };
+
     return (
         <body className='seller-body'>
             <div className='seller-div'>
@@ -63,7 +78,7 @@ export default function SellerOptionCompany() {
                     <div>
                     <button className='left-seller-subbutton'>Позиції</button>
                     </div>
-                    <div>
+                    <div onClick={handlePromotionsClick}>
                     <button className='left-seller-subbutton left-seller-subbutton-open'>Акції та промокоди</button>
                     </div>
                     <div>
@@ -89,10 +104,10 @@ export default function SellerOptionCompany() {
                     <div>
                     <details className='seller-details'>
                     <summary><img src={OptionSeller} className='img-seller-left'></img>Налаштування</summary>
-                    <div>
+                    <div onClick={handleCompanyClick}>
                     <button className='left-seller-subbutton'>Компанія</button>
                     </div>
-                    <div>
+                    <div onClick={handleProfileClick}>
                     <button className='left-seller-subbutton'>Профіль</button>
                     </div>
                     <div>

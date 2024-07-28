@@ -30,6 +30,19 @@ function App() {
 
 export default function Seller() {
 
+    const navigate = useNavigate();
+
+    const handleCompanyClick = () => {
+        navigate("/seller/company");
+    };
+
+    const handleProfileClick = () => {
+        navigate("/seller/profile");
+    };
+
+    const handlePromotionsClick = () => {
+        navigate("/seller/promotions");
+    };
 
     return (
         <body className='seller-body'>
@@ -63,7 +76,7 @@ export default function Seller() {
                     <div>
                     <button className='left-seller-subbutton'>Позиції</button>
                     </div>
-                    <div>
+                    <div onClick={handlePromotionsClick}>
                     <button className='left-seller-subbutton'>Акції та промокоди</button>
                     </div>
                     <div>
@@ -89,10 +102,10 @@ export default function Seller() {
                     <div>
                     <details className='seller-details'>
                     <summary><img src={OptionSeller} className='img-seller-left'></img>Налаштування</summary>
-                    <div>
+                    <div onClick={handleCompanyClick}>
                     <button className='left-seller-subbutton'>Компанія</button>
                     </div>
-                    <div>
+                    <div onClick={handleProfileClick}>
                     <button className='left-seller-subbutton'>Профіль</button>
                     </div>
                     <div>

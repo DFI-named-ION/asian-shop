@@ -105,15 +105,18 @@ export const ErrorProvider = ({ children }) => {
                     isForUser = true;
                     tags.push("code-field");
                 break;
-            case "Failed to get user with email":
-                //?????
-                break;
             case 400:
                 return getErrorInfo(object.response.data);
             case 401:
                 short = "Unauthorized error";
                 long = "Unauthorized error occured";
                 origin = "api";
+                break;
+            case 405:
+                short = "Bad request";
+                long = "Bad request occured";
+                origin = "axios";
+                tags.push("profile-page");
                 break;
             case "jwt-decrypt-error":
                 short = "Url is not valid";
@@ -143,12 +146,35 @@ export const ErrorProvider = ({ children }) => {
                 isForUser = true;
                 tags.push("password-field");
                 break;
+            case "phone-format-error":
+                short = "Invalid phone format";
+                long = "Correct phone is 10 digits long without country code: xxx xxx xx xx";
+                origin = "custom";
+                isForUser = true;
+                tags.push("phone-field");
+                tags.push("profile-page");
+                break;
+            case "address-format-error":
+                short = "Invalid address format";
+                long = "Fields 'City', 'Street' and 'House' are required while 'Apartment' is not";
+                origin = "custom";
+                isForUser = true;
+                tags.push("address-field");
+                tags.push("profile-page");
+                break;
             case "not-full-code":
                 short = "Code is not full";
                 long = "Code is not full.";
                 origin = "custom";
                 isForUser = true;
                 tags.push("code-field");
+                break;
+            case "not-same-error":
+                short = "Passwords are not same";
+                long = "Passwords are not same.";
+                origin = "custom";
+                isForUser = true;
+                tags.push("password-field");
                 break;
             case "recaptcha-error":
                 short = "Captcha is not complete";
@@ -164,6 +190,7 @@ export const ErrorProvider = ({ children }) => {
                 isForUser = true;
                 tags.push("email-field");
                 tags.push("password-field");
+                tags.push("profile-page");
                 break;
         };
         setCatchedError({ origin, code: error, short, long, isForUser, tags})
