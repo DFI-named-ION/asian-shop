@@ -39,6 +39,7 @@ function App() {
     return <GreyX />;
     return <ChipsLeys />;
 }
+
 export default function SellerGoodsPosition() {
     return (
         <body className='seller-body'>

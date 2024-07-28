@@ -36,6 +36,7 @@ function App() {
     return <AddGoods />;
     return <ChipsLeys />;
 }
+
 export default function SellerGoodsCategories() {
     return (
         <body className='seller-body'>

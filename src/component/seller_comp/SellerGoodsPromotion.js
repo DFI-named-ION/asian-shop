@@ -49,7 +49,6 @@ export default function SellerGoodsPromotion() {
         navigate("/seller/promotions");
     };
 
-
     radio.forEach(el => {
         el.onclick = (e) => {
           show(e.target.value)
