@@ -150,7 +150,7 @@ export default function Authorization() {
                                     <></>
                                 )}
                             </p>
-                            <div className="Captcha-div">
+                            <div className="Captcha-div Captcha-div-shop">
                                 <ReCaptcha className="Captcha"
                                     sitekey="6Le0QA8qAAAAAHq5xgAIIBAuZfy7oNG1bDazdwQF"
                                     onChange={handleTokenChange}/>
