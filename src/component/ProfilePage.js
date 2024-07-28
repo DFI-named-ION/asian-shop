@@ -104,7 +104,7 @@ export default function ProfilePage() {
         if (!user) {
             navigate('/authorization');
         } else {
-            handleMethod(() => requestData('firstName;middleName;lastName;language;sex;phones;birthday;doPrint;addresses;'));
+            handleMethod(async () => await requestData('firstName;middleName;lastName;language;sex;phones;birthday;doPrint;addresses;'));
         }
     }, []);
 
@@ -141,31 +141,26 @@ export default function ProfilePage() {
     };
 
     const handleInputChange = (event, index) => {
-      const { name, value } = event.target;
+      const { name, value, type, checked } = event.target;
+      const parsedValue = type === 'checkbox' ? checked : value;
     
-      if (name.startsWith('city') || name.startsWith('street') || name.startsWith('houseNumber') || name.startsWith('apartmentNumber')) {
-        setNewUser(prevState => {
+      setNewUser(prevState => {
+        if (name.startsWith('city') || name.startsWith('street') || name.startsWith('houseNumber') || name.startsWith('apartmentNumber')) {
           const updatedAddresses = [...prevState.addresses];
           const field = name.replace(/[0-9]/g, '');
-          updatedAddresses[index] = { ...updatedAddresses[index], [field]: value };
+          updatedAddresses[index] = { ...updatedAddresses[index], [field]: parsedValue };
     
           return { ...prevState, addresses: updatedAddresses };
-        });
-      } else if (name.startsWith('telephone')) {
-        const updatedPhones = [...newUser.phones];
-        updatedPhones[index] = value;
+        } else if (name.startsWith('telephone')) {
+          const updatedPhones = [...prevState.phones];
+          updatedPhones[index] = parsedValue;
     
-        const filteredPhones = updatedPhones.filter(phone => phone.trim() !== '');
-        setNewUser(prevState => ({
-          ...prevState,
-          phones: filteredPhones
-        }));
-      } else {
-        setNewUser(prevState => ({
-          ...prevState,
-          [name]: value,
-        }));
-      }
+          const filteredPhones = updatedPhones.filter(phone => phone.trim() !== '');
+          return { ...prevState, phones: filteredPhones };
+        } else {
+          return { ...prevState, [name]: parsedValue };
+        }
+      });
     };
   
     const handleAddPhoneField = () => {
@@ -204,7 +199,7 @@ export default function ProfilePage() {
       });
     };
 
-    const handleSave = () => {
+    const handleSave = async () => {
       handleMethod(async () => {
         const validPhones = newUser.phones.filter(phone => phone.trim() !== '');
     
@@ -237,9 +232,9 @@ export default function ProfilePage() {
           phones: validPhones,
           addresses: validAddresses
         }));
-    
+
         await updateUserInfo({ ...newUser, phones: validPhones, addresses: validAddresses });
-        window.location.reload(true);
+        // window.location.reload(true);
       });
     };
 
@@ -268,13 +263,13 @@ export default function ProfilePage() {
       setModalIsOpenProfilePassword(false);
     };
 
-    const handleChangePassword = () => {
+    const handleChangePassword = async () => {
       handleMethod(async () => {
         const passRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,64}$/;
         if (!passRegex.test(newPassword)) throw "password-format-error";
         if (newPassword !== newPasswordRepeat) throw "not-same-error";
         await updatePassword(oldPassword, newPassword, newPasswordRepeat);
-        window.location.reload(true);
+        // window.location.reload(true);
       });
     };
 

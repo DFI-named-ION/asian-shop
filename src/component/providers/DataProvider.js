@@ -18,7 +18,7 @@ export const DataProvider = ({ children }) => {
         const fieldsToFetch = fields.split(';').filter(field => !requestedFields.has(field)).join(';');
         if (!fieldsToFetch) return;
 
-        handleMethod(async () => {
+        return handleMethod(async () => {
             const response = await axios.get(`${process.env.REACT_APP_WEB_API_BASE_URL}/Data/fetchData?fields=${fieldsToFetch}`);
             updateUser(response.data.data);
             setRequestedFields(prevFields => new Set([...prevFields, ...fields.split(';')]));
@@ -26,7 +26,7 @@ export const DataProvider = ({ children }) => {
     };
 
     const updateUserInfo = async (newUser) => {
-        handleMethod(async () => {
+        return handleMethod(async () => {
             let token = await encryptJwtToken(newUser);
             await axios.post(`${process.env.REACT_APP_WEB_API_BASE_URL}/Data/updateUser`, {token});
         });

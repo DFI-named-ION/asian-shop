@@ -34,10 +34,11 @@ export const AuthProvider = ({ children }) => {
         setUser((prevUser) => ({ ...prevUser, ...data }));
     };
 
-    const login = async (token) => {
+    const login = async (accessToken, name = "") => {
         try {
             setPending(true);
-            await axios.post(`${process.env.REACT_APP_WEB_API_BASE_URL}/Auth/login`, { accessToken: token });
+            let token = await encryptJwtToken({accessToken, name});
+            await axios.post(`${process.env.REACT_APP_WEB_API_BASE_URL}/Auth/login`, { token });
             await fetchUserData();
         } catch (error) {
             throw error;
@@ -68,11 +69,11 @@ export const AuthProvider = ({ children }) => {
         });
     };
 
-    const registerWithEmailAndPassword = async (email, password) => {
+    const registerWithEmailAndPassword = async (email, password, name) => {
         handleMethod(async () => {
             try {
                 const result = await createUserWithEmailAndPassword(auth, email, password);
-                await login(await result.user.getIdToken());
+                await login(await result.user.getIdToken(), name);
             } catch (error) {
                 throw error;
             }
