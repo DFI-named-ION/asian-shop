@@ -41,6 +41,12 @@ export default function SellerOptionProfile() {
 
     const handlePromotionsClick = () => { navigate("/seller/promotions") };
 
+    const handlePositionsClick = () => { navigate("/seller/positions") };
+
+    const handleCategoriesClick = () => { navigate("/seller/categories") };
+
+    const handleMainClick = () => { navigate("/") };
+
     const [modalIsOptionProfileSeller, setModalIsOptionProfileSeller] = useState(false);
 
   const openModalOptionProfileSeller = () => {
@@ -87,7 +93,7 @@ export default function SellerOptionProfile() {
                     {/* <div className='wolf-seller-div'>
                     <img src={WolfSeller} className='wolf-seller'></img>
                     </div> */}
-                    <div>
+                    <div onClick={handleMainClick}>
                     <button className='left-seller-button'><img src={MainSeller} className='img-seller-left'></img>Головна</button>
                     </div>
                     <div>
@@ -96,10 +102,10 @@ export default function SellerOptionProfile() {
                     <div>
                     <details className='seller-details'>
                     <summary><img src={GoodsSeller} className='img-seller-left'></img>Товари і послуги</summary>
-                    <div>
+                    <div onClick={handleCategoriesClick}>
                     <button className='left-seller-subbutton'>Категорії</button>
                     </div>
-                    <div>
+                    <div onClick={handlePositionsClick}>
                     <button className='left-seller-subbutton'>Позиції</button>
                     </div>
                     <div onClick={handlePromotionsClick}>
