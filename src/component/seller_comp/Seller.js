@@ -44,6 +44,18 @@ export default function Seller() {
         navigate("/seller/promotions");
     };
 
+    const handlePositionsClick = () => {
+        navigate("/seller/positions");
+    };
+
+    const handleCategoriesClick = () => {
+        navigate("/seller/categories");
+    };
+
+    const handleMainClick = () => {
+        navigate("/");
+    };
+
     return (
         <body className='seller-body'>
             <div className='seller-div'>
@@ -61,7 +73,7 @@ export default function Seller() {
                     {/* <div className='wolf-seller-div'>
                     <img src={WolfSeller} className='wolf-seller'></img>
                     </div> */}
-                    <div>
+                    <div onClick={handleMainClick}>
                     <button className='left-seller-button'><img src={MainSeller} className='img-seller-left'></img>Головна</button>
                     </div>
                     <div>
@@ -70,10 +82,10 @@ export default function Seller() {
                     <div>
                     <details className='seller-details'>
                     <summary><img src={GoodsSeller} className='img-seller-left'></img>Товари і послуги</summary>
-                    <div>
+                    <div onClick={handleCategoriesClick}>
                     <button className='left-seller-subbutton'>Категорії</button>
                     </div>
-                    <div>
+                    <div onClick={handlePositionsClick}>
                     <button className='left-seller-subbutton'>Позиції</button>
                     </div>
                     <div onClick={handlePromotionsClick}>
