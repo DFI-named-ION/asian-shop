@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useContext, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import Cakes from '../images/market-menu-img/Cakes.png';
 import Chips from '../images/market-menu-img/Chips.png';
@@ -28,7 +29,8 @@ import Pen from '../images/icons/pen.svg';
 import Wallet from '../images/icons/wallet.svg';
 import Procent from '../images/icons/procent.svg';
 import Case from '../images/icons/case.svg';
-import { useNavigate } from 'react-router-dom';
+
+import { useAuth } from './providers/AuthProvider';
 
 
 function App() {
@@ -64,6 +66,28 @@ function App() {
 
 export default function MailConfirmation() {
 
+    const [modalIsOpenProfile, setModalIsOpenProfile] = useState(false);
+
+    const {user} = useAuth();
+    const navigate = useNavigate();
+
+    const handleHeadClick = (e) => {
+        e.preventDefault();
+        if (!user) {
+            navigate('/authorization');
+        } else {
+            setModalIsOpenProfile(!modalIsOpenProfile);
+        }
+    };
+  
+    const handleSellerProfileClick = () => {
+        navigate("/seller");
+    };
+  
+    const handleSettingsClick = () => {
+        navigate("/profile-settings")
+    };
+
     return (
         <body className='market-menu-body'>
           <section className='header-section'>
@@ -92,16 +116,16 @@ export default function MailConfirmation() {
                     </a>
                 </div>
                 <div className='head-nav-div dropdown-header'>
-                    <a href='#' className='icon-head'>
+                    <a href='#' className='icon-head' onClick={handleHeadClick}>
                         <img src={Profile}></img>
                     </a>
-                    
-                        <div className="dropdown-content-header">
+                    {user && (
+                        <div className="dropdown-content-header" style={{ display: modalIsOpenProfile ? "block" : "none" }}>
                             <div>
                                 <p className='head-email-dropdown'></p>
                             </div>
                             <div>
-                                <p className='hello-dropdown'>Вітаємо, <span className='name-dropdown'></span> <img src={HelloEmoji} alt="Hello Emoji" /></p>
+                                <p className='hello-dropdown'>Вітаємо, <span className='name-dropdown'>{user.displayName}</span> <img src={HelloEmoji} alt="Hello Emoji" /></p>
                             </div>
                             <div>
                                 <details className='dropdown-details'>
@@ -133,10 +157,10 @@ export default function MailConfirmation() {
                                 <button className='dropdown-border-bottom-button'><img src={Procent} alt="Procent" />Знижки та бонуси</button>
                             </div>
                             <div>
-                                <button className='dropdown-border-left-button'>Налаштування</button>
+                                <button className='dropdown-border-left-button' onClick={handleSettingsClick}>Налаштування</button>
                                 <button className='dropdown-border-right-button'>Довідка</button>
                             </div>
-                            <div>
+                            <div onClick={handleSellerProfileClick}>
                                 <button className='dropdown-border-bottom-button'><img src={Case} alt="Case" />Кабінет продавця</button>
                             </div>
                             <div>
@@ -145,7 +169,7 @@ export default function MailConfirmation() {
                                 </p>
                             </div>
                         </div>
-                    
+                    )}
                 </div>
               <div className='language-div'>
                 <div className='language-left-div'>
