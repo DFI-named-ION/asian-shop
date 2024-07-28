@@ -1578,6 +1578,11 @@ input{
     height: 148px;
 }
 
+.custom-profile-div{
+    height: auto !important;
+    margin-bottom: 50px;
+}
+
 .column-profile-div h4{
     font-size: 15px;
     color: #647484;
@@ -1717,8 +1722,8 @@ input{
     background-color: transparent;
     padding-left: 15px;
     padding-right: 15px;
-    padding-top: 20px;
-    padding-bottom: 20px;
+    /* padding-top: 20px;
+    padding-bottom: 20px; */
 }
 
 .checkbox-profile{

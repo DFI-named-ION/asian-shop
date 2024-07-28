@@ -32,7 +32,7 @@ function App() {
     return <AddImage />;
 }
 
-export default function SellerOptionCompany() {
+export default function SellerAddPosition() {
     return (
         <body className='seller-body'>
             <div className='seller-div'>

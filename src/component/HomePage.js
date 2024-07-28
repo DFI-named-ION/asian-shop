@@ -100,6 +100,10 @@ export default function HomePage() {
       }
     };
 
+    const handleSellerProfileClick = () => {
+        navigate("/seller");
+    };
+
     const handleSettingsClick = () => {
         navigate("/profile-settings")
     };
@@ -399,7 +403,7 @@ const Carousel = ({ items }) => {
                                 <button className='dropdown-border-left-button' onClick={handleSettingsClick}>Налаштування</button>
                                 <button className='dropdown-border-right-button'>Довідка</button>
                             </div>
-                            <div>
+                            <div onClick={handleSellerProfileClick}>
                                 <button className='dropdown-border-bottom-button'><img src={Case} alt="Case" />Кабінет продавця</button>
                             </div>
                             <div>

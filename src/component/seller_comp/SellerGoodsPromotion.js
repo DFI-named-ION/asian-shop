@@ -30,11 +30,24 @@ function App() {
     return <BigGoodsSeller />;
 }
 
-export default function SellerOptionCompany() {
+export default function SellerGoodsPromotion() {
 
     const radio = document.querySelectorAll('input[type="radio"]')
     const selectRadio1 = document.querySelector('#block-1')
     const selectRadio2 = document.querySelector('#block-2')
+    const navigate = useNavigate();
+
+    const handleCompanyClick = () => {
+        navigate("/seller/company");
+    };
+
+    const handleProfileClick = () => {
+        navigate("/seller/profile");
+    };
+
+    const handlePromotionsClick = () => {
+        navigate("/seller/promotions");
+    };
 
     radio.forEach(el => {
         el.onclick = (e) => {
@@ -85,7 +98,7 @@ export default function SellerOptionCompany() {
                     <div>
                     <button className='left-seller-subbutton'>Позиції</button>
                     </div>
-                    <div>
+                    <div onClick={handlePromotionsClick}>
                     <button className='left-seller-subbutton left-seller-subbutton-open'>Акції та промокоди</button>
                     </div>
                     <div>
@@ -111,10 +124,10 @@ export default function SellerOptionCompany() {
                     <div>
                     <details className='seller-details'>
                     <summary><img src={OptionSeller} className='img-seller-left'></img>Налаштування</summary>
-                    <div>
+                    <div onClick={handleCompanyClick}>
                     <button className='left-seller-subbutton'>Компанія</button>
                     </div>
-                    <div>
+                    <div onClick={handleProfileClick}>
                     <button className='left-seller-subbutton'>Профіль</button>
                     </div>
                     <div>

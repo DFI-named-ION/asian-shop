@@ -36,7 +36,8 @@ function App() {
     return <AddGoods />;
     return <ChipsLeys />;
 }
-export default function SellerOptionCompany() {
+
+export default function SellerGoodsCategories() {
     return (
         <body className='seller-body'>
             <div className='seller-div'>

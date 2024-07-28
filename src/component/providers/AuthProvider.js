@@ -3,6 +3,7 @@ import axios from "axios";
 import { auth } from "../../firebaseConfig";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { useErrors } from "./ErrorProvider";
+import { JwtContext } from "./JwtProvider";
 
 const AuthContext = createContext();
 
@@ -10,6 +11,7 @@ export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
     const { handleMethod } = useErrors();
+    const { encryptJwtToken } = useContext(JwtContext);
     const [user, setUser] = useState(null);
     const [pending, setPending] = useState(true);
 
@@ -19,7 +21,7 @@ export const AuthProvider = ({ children }) => {
 
     const fetchUserData = async () => {
         try {
-            const response = await axios.get(`${process.env.REACT_APP_WEB_API_BASE_URL}/Auth/fetchData?fields=displayName;isVerified;email;`);
+            const response = await axios.get(`${process.env.REACT_APP_WEB_API_BASE_URL}/Data/fetchData?fields=displayName;isVerified;email;`);
             setUser(response.data.data);
         } catch (error) {
             setUser(null);
@@ -32,10 +34,11 @@ export const AuthProvider = ({ children }) => {
         setUser((prevUser) => ({ ...prevUser, ...data }));
     };
 
-    const login = async (token) => {
+    const login = async (accessToken, name = "") => {
         try {
             setPending(true);
-            await axios.post(`${process.env.REACT_APP_WEB_API_BASE_URL}/Auth/login`, { accessToken: token });
+            let token = await encryptJwtToken({accessToken, name});
+            await axios.post(`${process.env.REACT_APP_WEB_API_BASE_URL}/Auth/login`, { token });
             await fetchUserData();
         } catch (error) {
             throw error;
@@ -66,11 +69,11 @@ export const AuthProvider = ({ children }) => {
         });
     };
 
-    const registerWithEmailAndPassword = async (email, password) => {
+    const registerWithEmailAndPassword = async (email, password, name) => {
         handleMethod(async () => {
             try {
                 const result = await createUserWithEmailAndPassword(auth, email, password);
-                await login(await result.user.getIdToken());
+                await login(await result.user.getIdToken(), name);
             } catch (error) {
                 throw error;
             }
@@ -79,13 +82,23 @@ export const AuthProvider = ({ children }) => {
 
     const logout = async () => {
         setPending(true);
-        setUser(null);
-        await axios.get(`${process.env.REACT_APP_WEB_API_BASE_URL}/Auth/logout`);
+        handleMethod(async () => {
+            await axios.get(`${process.env.REACT_APP_WEB_API_BASE_URL}/Auth/logout`);
+            setUser(null);
+        });
         setPending(false);
     };
 
+    const updatePassword = async (oldPassword, newPassword, newPasswordRepeat) => {
+        handleMethod(async () => {
+            await signInWithEmailAndPassword(auth, user.email, oldPassword);
+            let token = await encryptJwtToken({newPassword, newPasswordRepeat});
+            await axios.post(`${process.env.REACT_APP_WEB_API_BASE_URL}/Auth/updatePassword`, {token});
+        });
+    };
+
     return (
-        <AuthContext.Provider value={{ user, pending, loginWithEmailAndPassword, loginWithPopup, registerWithEmailAndPassword, logout, updateUser }}>
+        <AuthContext.Provider value={{ user, pending, loginWithEmailAndPassword, loginWithPopup, registerWithEmailAndPassword, logout, updateUser, updatePassword }}>
             {children}
         </AuthContext.Provider>
     );
