@@ -28,6 +28,7 @@ import Pen from '../images/icons/pen.svg';
 import Wallet from '../images/icons/wallet.svg';
 import Procent from '../images/icons/procent.svg';
 import Case from '../images/icons/case.svg';
+import { useNavigate } from 'react-router-dom';
 
 
 function App() {
@@ -69,7 +70,7 @@ export default function MailConfirmation() {
             <div className='head-div'>
                 <div className='head-left-div'>
                 <div className='head-nav-div'>
-                  <a className='header-link header-link-market' href='https://www.figma.com/'>Каталог</a>
+                  <a className='header-link header-link-market' href='/catalog'>Каталог</a>
                   </div>
                   <div className='head-nav-div'>
                   <a className='header-link' href='https://www.figma.com/'>Подарунки</a>

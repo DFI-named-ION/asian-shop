@@ -337,7 +337,7 @@ const Carousel = ({ items }) => {
             <div className='head-div'>
                 <div className='head-left-div'>
                 <div className='head-nav-div'>
-                  <a className='header-link header-link-market' href='https://www.figma.com/'>Каталог</a>
+                  <a className='header-link header-link-market' href='/catalog'>Каталог</a>
                   </div>
                   <div className='head-nav-div'>
                   <a className='header-link' href='https://www.figma.com/'>Подарунки</a>
