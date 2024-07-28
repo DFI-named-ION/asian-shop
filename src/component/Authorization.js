@@ -84,6 +84,23 @@ export default function Authorization() {
         navigate("/");
     };
 
+    document.addEventListener('mousemove', function(e) {
+        const parallax = document.getElementById('parallax');
+        const rect = parallax.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+        const mouseX = e.clientX;
+        const mouseY = e.clientY;
+        const moveX = (mouseX - centerX) * -0.05;
+        const moveY = (mouseY - centerY) * -0.05;
+    
+        const limit = 10;
+        const limitedMoveX = Math.max(Math.min(moveX, limit), -limit);
+        const limitedMoveY = Math.max(Math.min(moveY, limit), -limit);
+    
+        parallax.style.transform = `translate(${limitedMoveX}px, ${limitedMoveY}px)`;
+    });
+
     return (
         <body className='authorization-body'>
                 <div className='left-auth' id="parallax">
@@ -150,7 +167,7 @@ export default function Authorization() {
                                     <></>
                                 )}
                             </p>
-                            <div className="Captcha-div">
+                            <div className="Captcha-div Captcha-div-shop">
                                 <ReCaptcha className="Captcha"
                                     sitekey="6Le0QA8qAAAAAHq5xgAIIBAuZfy7oNG1bDazdwQF"
                                     onChange={handleTokenChange}/>

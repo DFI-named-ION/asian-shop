@@ -23,14 +23,13 @@
     max-height: auto;
 
     background-image: url(./images/img/background.png);
-    background-size:cover;
+    background-size: auto;
     /* width: 2560px;
     height: 1440px; */
 
     background-repeat: no-repeat;
     display: flex;
     justify-content: space-around;
-    padding-bottom: 0%;
     background-attachment: fixed;
 }
 
@@ -1089,8 +1088,8 @@ h1, h2, h3, h4, p{
 .title-auth-block-div h4{
     font-size: 230%;
     font-weight: 700;
-    margin-left: 40%;
-    margin-bottom: 2%;
+    text-align: center;
+    margin-bottom: 10%;
 }
 
 .right-auth{
@@ -1098,10 +1097,10 @@ h1, h2, h3, h4, p{
     backdrop-filter: blur(10px); 
     border-radius: 40px;
     width: 40%;
-    height: 80%;
+    height: 100%;
     /*position: relative;*/
     margin-top: 2%;
-    margin-bottom: 2%;
+    margin-bottom: 1.5%;
     margin-left: 3%;
     padding-top: 5%;
     padding-bottom: 1%;
@@ -1116,7 +1115,7 @@ h1, h2, h3, h4, p{
     width: 40%;
     height: 80%;
     margin-top: 2%;
-    margin-bottom: 2%;
+    margin-bottom: 2.5%;
     margin-left: 3%;
     padding-top: 5%;
     padding-bottom: 1%;
@@ -1132,7 +1131,7 @@ h1, h2, h3, h4, p{
     font-size: 800%;
     font-weight: 700;
     color: #EAE5D9;
-    margin-top: 60%;
+    margin-top: 75%;
     margin-left: 5%;
     /*position: relative;*/
 }
@@ -1146,6 +1145,15 @@ h1, h2, h3, h4, p{
     margin-right: 10%;
 }
 
+.left-auth-reg-shop{
+    margin-top: 10%;
+    font-size:600%;
+    font-weight: 700;
+    color: #EAE5D9;
+    margin-right: 10%;
+    white-space: nowrap;
+}
+
 .left-title-auth{
     margin-left: 15%;
     margin-top: 20%;
@@ -1155,6 +1163,21 @@ h1, h2, h3, h4, p{
 .left-title-auth-plus{
     margin-left: 55%;
     margin-top: 4%;
+}
+
+.left-title-auth-shop{
+    margin-left: 15%;
+    margin-top: 30%;
+    margin-bottom: -10%;
+}
+
+.left-title-auth-plus-shop{
+    margin-left: 55%;
+    margin-top: 4%;
+}
+.left-title-auth-reg-plus-shop{
+    margin-left: 20%;
+    margin-top: 0%;
 }
 
 .left-title-shop-auth{
@@ -1239,20 +1262,23 @@ h1, h2, h3, h4, p{
 }
 
 .title-auth-block-div-reg{
-    margin-left: -73px;
+    text-align: center;
 }
 
 .login-button{
     background-color: #951717;
     color: #EAE5D9;
     border-radius: 32px;
-    width: 100%;
+    width: 70%;
     height: 100%;
     cursor: pointer;
     border:0%;
     font-weight: 600;
     font-size: 150%;
+    display: block;
+    margin-right: auto;
     margin-left: auto;
+    margin-top: 10%;
 }
 
 .login-button:hover{
@@ -1316,7 +1342,13 @@ h1, h2, h3, h4, p{
 .lines-or{
     display: flex;
     justify-content: space-around;
-    margin-top: 5%;
+    margin-top: 7%;
+    
+}
+.lines-or-reg{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 15%;
     
 }
 
@@ -1367,8 +1399,15 @@ h1, h2, h3, h4, p{
 }
 
 .footer-auth{
-    margin-top: 1%;
+    margin-top: 8%;
     text-align: center;
+}
+
+.footer-auth-shop{
+    margin-top: 36%;
+}
+.footer-auth-shop-reg{
+    margin-top: 16%;
 }
 
 input{
@@ -2874,6 +2913,13 @@ input{
     margin-left: 433px;
   }
 
+  .Captcha-div{
+    text-align: center;
+  }
+  .Captcha-div-shop{
+    text-align: center;
+    margin-top: 4%;
+  }
   .Captcha{
     display: inline-block;
     margin: auto;
