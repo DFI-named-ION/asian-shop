@@ -41,12 +41,13 @@ export const JwtProvider = ({ children }) => {
                     padding: CryptoJS.pad.Pkcs7,
                 }
             );
-
+    
             const cipherText = CryptoJS.enc.Base64.stringify(
                 iv.concat(encrypted.ciphertext)
             );
             return cipherText;
         } catch (error) {
+            console.log(error);
             throw "jwt-encrypt-error";
         }
     };
@@ -70,19 +71,22 @@ export const JwtProvider = ({ children }) => {
     const encryptJwtToken = async (data) => {
         try {
             const encryptedPayload = {};
-
+    
             Object.keys(data).forEach((key) => {
-                encryptedPayload[key] = encryptString(data[key], secretKey);
+                const value = data[key];
+                const stringValue = typeof value === 'object' ? JSON.stringify(value) : String(value);
+                encryptedPayload[key] = encryptString(stringValue, secretKey);
             });
-
+    
             const secret = new TextEncoder().encode(secretKey);
             const token = await new SignJWT(encryptedPayload)
                 .setProtectedHeader({ alg: "HS256" })
                 .setExpirationTime("30m")
                 .sign(secret);
-
+    
             return token;
         } catch (error) {
+            console.log(error);
             throw "jwt-encrypt-error";
         }
     };

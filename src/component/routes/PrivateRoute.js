@@ -3,17 +3,13 @@ import { Navigate, Outlet } from 'react-router-dom';
 import { useAuth } from "../providers/AuthProvider";
 
 const PrivateRoute = () => {
-    const { user, pending } = useAuth;
+    const { user, pending } = useAuth();
 
     if (pending) {
-        return null;
+        return <div>Loading...</div>;
     }
 
-    if (!user) {
-        return <Navigate to="/authorization" />;
-    }
-
-    return user.emailVerified ? <Outlet /> : <Navigate to="/confirmation" />;
+    return user && user.isVerified ? <Outlet /> : <Navigate to="/authorization" />;
 };
 
 export default PrivateRoute;
