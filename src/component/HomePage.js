@@ -429,22 +429,22 @@ const Carousel = ({ items }) => {
           <main>
               <section id='new-box-section'>
                 <div className='new-box-div'>
-                <div className='left-box-div'>
-                <div className='subtitle-div'>
-                  <h3 className='subtitle'>НОВА КОРОБОЧКА ВІД SAKURATAILS</h3>
-                  </div>
-                  <h2 className='new-box-title'>Насолоджуйтесь неймовірними закусками та сюрпризами.</h2>
-                  <div className='text-block-div'>
-                  <p className='text-basis'>Відкрийте для себе коробку SakuraTails, наповнену різноманітними смаколиками, які порадують ваші органи чуття. Підпишіться зараз, щоб насолодитися цими винятковими пропозиціями, поки вони є в наявності!</p>
-                  </div>
-                  <a href='#subcribtion-section'>
+                  <div className='left-box-div'>
+                    <div className='subtitle-div'>
+                      <h3 className='subtitle'>НОВА КОРОБОЧКА ВІД SAKURATAILS</h3>
+                    </div>
+                    <h2 className='new-box-title'>Насолоджуйтесь неймовірними закусками та сюрпризами.</h2>
+                    <div className='text-block-div'>
+                      <p className='text-basis'>Відкрийте для себе коробку SakuraTails, наповнену різноманітними смаколиками, які порадують ваші органи чуття. Підпишіться зараз, щоб насолодитися цими винятковими пропозиціями, поки вони є в наявності!</p>
+                    </div>
+                    <a href='#subcribtion-section'>
                       <input className='subscribe-button' type='button' value='Subscribe' />
-                  </a>
+                    </a>
                   </div>
                   <div className='right-box-div'>
-                  <img src={require('../images/img/tea.jpg')} alt='tea'></img>
+                    <img className='tea-img' src={require('../images/img/tea.jpg')} alt='tea'></img>
                   </div>
-                  </div>
+                </div>
               </section>
               <section id='promocode-section'>
                 <div className='promocode-div'>
@@ -457,11 +457,11 @@ const Carousel = ({ items }) => {
                     <div className='right-description-div'>
                 <div className='subtitle-div'>
                   <h3 className='subtitle'>КОЖНА КОРОБКА РОЗРИВАЄТЬСЯ З</h3>
-                  </div>
-                  <div className='title-description-div'>
+                </div>
+                <div className='title-description-div'>
                   <h2 className='title-basis title-desc'>Закуски, посмішки та багато іншого.</h2>
-                  </div>
-                  <div className='block-description-div'>
+                </div>
+                <div className='block-description-div'>
                  <div className='left-block-description-div'>
                     <div className='box-description-div'>
                     <div className='icon-description-div noodle-description-div'>

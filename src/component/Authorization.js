@@ -150,10 +150,11 @@ export default function Authorization() {
                                     <></>
                                 )}
                             </p>
-                            <ReCaptcha className="Captcha"
-                                sitekey="6Le0QA8qAAAAAHq5xgAIIBAuZfy7oNG1bDazdwQF"
-                                onChange={handleTokenChange}
-                            />
+                            <div className="Captcha-div">
+                                <ReCaptcha className="Captcha"
+                                    sitekey="6Le0QA8qAAAAAHq5xgAIIBAuZfy7oNG1bDazdwQF"
+                                    onChange={handleTokenChange}/>
+                            </div>
                         </form>
                         <a>
                             <input className='login-button' type='submit' value='Увійти' onClick={handleAuth}/>
