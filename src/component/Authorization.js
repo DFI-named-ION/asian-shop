@@ -91,8 +91,8 @@ export default function Authorization() {
         const centerY = rect.top + rect.height / 2;
         const mouseX = e.clientX;
         const mouseY = e.clientY;
-        const moveX = (mouseX - centerX) * -0.05;
-        const moveY = (mouseY - centerY) * -0.05;
+        const moveX = (mouseX - centerX) * -0.04;
+        const moveY = (mouseY - centerY) * -0.04;
     
         const limit = 10;
         const limitedMoveX = Math.max(Math.min(moveX, limit), -limit);
@@ -155,7 +155,7 @@ export default function Authorization() {
                             <h5 className='title-line'>Пароль</h5>
                             <p className='text-auth'>
                                 <input className='text-block-margin-zero' type='password' name='Password' value={password} onChange={handlePasswordChange} placeholder='*********' required />
-                                <div className='line-text-block'></div>
+                                <div className='line-text-block-bottom'></div>
                             </p>
                             <p className='title-line-error'>
                                 {catchedError.tags.includes("password-field") ? (
