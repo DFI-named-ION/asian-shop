@@ -1094,8 +1094,8 @@ h1, h2, h3, h4, p{
 .title-auth-block-div h4{
     font-size: 230%;
     font-weight: 700;
-    margin-left: 40%;
-    margin-bottom: 2%;
+    text-align: center;
+    margin-bottom: 10%;
 }
 
 .right-auth{
@@ -1121,7 +1121,7 @@ h1, h2, h3, h4, p{
     width: 664px;
     height: 80%;
     margin-top: 2%;
-    margin-bottom: 2%;
+    margin-bottom: 2.5%;
     margin-left: 3%;
     padding-top: 5%;
     padding-bottom: 1%;
@@ -1151,6 +1151,15 @@ h1, h2, h3, h4, p{
     margin-right: 10%;
 }
 
+.left-auth-reg-shop{
+    margin-top: 10%;
+    font-size:600%;
+    font-weight: 700;
+    color: #EAE5D9;
+    margin-right: 10%;
+    white-space: nowrap;
+}
+
 .left-title-auth{
     margin-left: 15%;
     margin-top: 10%;
@@ -1160,6 +1169,21 @@ h1, h2, h3, h4, p{
 .left-title-auth-plus{
     margin-left: 55%;
     margin-top: 4%;
+}
+
+.left-title-auth-shop{
+    margin-left: 15%;
+    margin-top: 30%;
+    margin-bottom: -10%;
+}
+
+.left-title-auth-plus-shop{
+    margin-left: 55%;
+    margin-top: 4%;
+}
+.left-title-auth-reg-plus-shop{
+    margin-left: 20%;
+    margin-top: 0%;
 }
 
 .left-title-shop-auth{
@@ -1249,7 +1273,7 @@ h1, h2, h3, h4, p{
 }
 
 .title-auth-block-div-reg{
-    margin-left: -73px;
+    text-align: center;
 }
 
 .login-button{
@@ -1334,7 +1358,13 @@ h1, h2, h3, h4, p{
 .lines-or{
     display: flex;
     justify-content: space-around;
-    margin-top: 5%;
+    margin-top: 7%;
+    
+}
+.lines-or-reg{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 15%;
     
 }
 
@@ -1387,6 +1417,13 @@ h1, h2, h3, h4, p{
 .footer-auth{
     margin-top: 40px;
     text-align: center;
+}
+
+.footer-auth-shop{
+    margin-top: 36%;
+}
+.footer-auth-shop-reg{
+    margin-top: 16%;
 }
 
 input{
@@ -2892,6 +2929,13 @@ input{
     margin-left: 433px;
   }
 
+  .Captcha-div{
+    text-align: center;
+  }
+  .Captcha-div-shop{
+    text-align: center;
+    margin-top: 4%;
+  }
   .Captcha{
     /* display: inline-block;
     margin: auto; */
