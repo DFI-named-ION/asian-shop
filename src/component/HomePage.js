@@ -414,7 +414,7 @@ const Carousel = ({ items }) => {
                         </div>
                     )}
                 </div>
-              <div className='language-div'>
+              {/* <div className='language-div'>
                 <div className='language-left-div'>
                   <a className='language-link-left language-link'>
                     <p>EN</p>
@@ -425,7 +425,7 @@ const Carousel = ({ items }) => {
                     <p>UA</p>
                   </a>
                 </div>
-              </div>
+              </div> */}
               </div>
               </div>
           </section>
@@ -442,7 +442,7 @@ const Carousel = ({ items }) => {
                       <p className='text-basis'>Відкрийте для себе коробку SakuraTails, наповнену різноманітними смаколиками, які порадують ваші органи чуття. Підпишіться зараз, щоб насолодитися цими винятковими пропозиціями, поки вони є в наявності!</p>
                     </div>
                     <a href='#subcribtion-section'>
-                      <input className='subscribe-button' type='button' value='Subscribe' />
+                      <input className='subscribe-button' type='button' value='Підписатись' />
                     </a>
                   </div>
                   <div className='right-box-div'>
@@ -460,7 +460,7 @@ const Carousel = ({ items }) => {
                 <Carousel items={['./karusel1.jpg', './karusel2.jpg', './karusel3.jpg', './karusel4.jpg', './karusel5.jpg']}/>
                     <div className='right-description-div'>
                 <div className='subtitle-div'>
-                  <h3 className='subtitle'>КОЖНА КОРОБКА РОЗРИВАЄТЬСЯ З</h3>
+                  <h3 className='subtitle'>КОЖНА КОРОБКА ТРИЩАЄ З</h3>
                 </div>
                 <div className='title-description-div'>
                   <h2 className='title-basis title-desc'>Закуски, посмішки та багато іншого.</h2>
@@ -510,10 +510,10 @@ const Carousel = ({ items }) => {
                   </div>
                   </div>
                   <a href='#subcribtion-section'>
-                      <input className='subcribtion-now-button' type='button' value='SUBSCRIBE NOW' />
+                      <input className='subcribtion-now-button' type='button' value='ПІДПИСАТИСЬ ЗАРАЗ' />
                   </a>
                   <div className='gift-div gift-right-div'>
-                  <a className='gift' href='#'>Gift</a>
+                  <a className='gift' href='#'>Подарувати</a>
                   </div>
                   </div>
                   </div>
@@ -572,10 +572,10 @@ const Carousel = ({ items }) => {
                   <p className='text-basis text-woman'>SakuraTails пропонує унікальний спосіб пізнати, скуштувати і відчути Азію та її яскраву культуру, не виходячи з дому.</p>
                   </div>
                   <a href='#subcribtion-section'>
-                      <input className='subscribe-button' type='button' value='Subscribe' />
+                      <input className='subscribe-button' type='button' value='Підписатись' />
                   </a>
                   <div className='gift-div'>
-                  <a className='gift' href='#'>Gift</a>
+                  <a className='gift' href='#'>Подарувати</a>
                   </div>
                   </div>
                   <div className='right-box-div right-box-woman'>
@@ -2442,15 +2442,15 @@ const Carousel = ({ items }) => {
                   <div className='nav-footer-div'>
                     <div className='left-nav-div'>
                   <ul>
-                      <li className='section-footer-bold'><a className='section-footer section-footer-bold' href='/'>Тільки на SakuraTails</a></li>
-                      <li className='section-footer'><a className='section-footer' href='https://www.figma.com/'>Магазин</a></li>
+                      <li className='section-footer-bold'><a className='section-footer section-footer-bold'>Тільки на SakuraTails</a></li>
+                      <li className='section-footer'><a className='section-footer' href='#'>Магазин</a></li>
                       <li className='section-footer'><a className='section-footer' href='https://www.figma.com/'>Подарункові коробки</a></li>
-                      <li className='section-footer'><a className='section-footer' href='https://www.figma.com/'>Підписка</a></li>
+                      <li className='section-footer'><a className='section-footer' href='#subcribtion-section'>Підписка</a></li>
                   </ul>
                   </div>
                   <div className='right-nav-div'>
                   <ul>
-                      <li className='section-footer-bold'><a className='section-footer section-footer-bold' href='https://www.figma.com/'>Підтримка</a></li>
+                      <li className='section-footer-bold'><a className='section-footer section-footer-bold'>Підтримка</a></li>
                       <li className='section-footer'><a className='section-footer' href='https://www.figma.com/'>Політика конфіденційності</a></li>
                       <li className='section-footer'><a className='section-footer' href='https://www.figma.com/'>Про нас</a></li>
                       <li className='section-footer'><a className='section-footer' href='https://www.figma.com/'>Умови</a></li>

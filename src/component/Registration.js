@@ -88,8 +88,8 @@ export default function Registration() {
         const centerY = rect.top + rect.height / 2;
         const mouseX = e.clientX;
         const mouseY = e.clientY;
-        const moveX = (mouseX - centerX) * -0.05;
-        const moveY = (mouseY - centerY) * -0.05;
+        const moveX = (mouseX - centerX) * -0.04;
+        const moveY = (mouseY - centerY) * -0.04;
     
         const limit = 10;
         const limitedMoveX = Math.max(Math.min(moveX, limit), -limit);
@@ -140,8 +140,8 @@ export default function Registration() {
                             </div>
                         </Modal>
                         <h5 className='title-line'>Ім'я</h5>
-                        <p className='text-auth'><input className='text-block' type='text' name='Name' value={name} onChange={handleNameChange} placeholder='Best name'></input></p>
-                        <div className='line-text-block line-text-block_plus'></div>
+                        <p className='text-auth'><input className='text-block' type='text' name='Name' value={name} onChange={handleNameChange} placeholder="Ім'я"></input></p>
+                        <div className='line-text-block-bottom line-text-block_plus'></div>
                         <h5 className='title-line'>Пошта</h5>
                         <p className='text-auth'><input className='text-block-margin-zero' type='login' name='Email' value={email} onChange={handleEmailChange} placeholder='email@gmail.com' required></input><div className='line-text-block'></div></p>
                         <p className='title-line-error'>
