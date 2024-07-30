@@ -313,17 +313,6 @@ export default function ProfilePage() {
                         <p className='hello-dropdown'>Вітаємо, <span className='name-dropdown'>{user.displayName}</span> <img src={HelloEmoji} alt="Hello Emoji" /></p>
                     </div>
                     <div>
-                        <details className='dropdown-details'>
-                            <summary>Показати більше акаунтів</summary>
-                            <div>
-                                <button className='dropdown-button'><img src={AddPlus} alt="Add Plus" />Додати інший акаунт</button>
-                            </div>
-                            <div>
-                                <button className='dropdown-border-bottom-button'><img src={Exit} alt="Exit" />Вийти зі всіх акаунтів</button>
-                            </div>
-                        </details>
-                    </div>
-                    <div>
                         <button className='dropdown-border-top-button'><img src={History} alt="History" />Історія замовлень</button>
                     </div>
                     <div>
@@ -342,6 +331,9 @@ export default function ProfilePage() {
                         <button className='dropdown-border-bottom-button'><img src={Procent} alt="Procent" />Знижки та бонуси</button>
                     </div>
                     <div>
+                        <button className='dropdown-button dropdown-button-exit'><img src={Exit} alt="Exit" />Вийти з акаунта</button>
+                      </div>
+                    <div>
                         <button className='dropdown-border-left-button' onClick={handleSettingsClick}>Налаштування</button>
                         <button className='dropdown-border-right-button'>Довідка</button>
                     </div>
@@ -355,7 +347,7 @@ export default function ProfilePage() {
                     </div>
                   </div>
                   </div>
-                  <div className='language-div'>
+                  {/* <div className='language-div'>
                     <div className='language-left-div'>
                       <a className='language-link-left language-link'>
                         <p>EN</p>
@@ -366,7 +358,7 @@ export default function ProfilePage() {
                         <p>UA</p>
                       </a>
                     </div>
-                  </div>
+                  </div> */}
                   </div>
                   </div>
               </section>
@@ -625,7 +617,10 @@ export default function ProfilePage() {
                         <div className='column-profile-div'>
                         <h4>Отримувач (за замовчуванням)</h4>
                         <p className='input-profile'>
-                                <input className='line-profile' type='text' name='text' required/>
+                        <select className='select-profile' name='sex' value={newUser.sex} onChange={handleInputChange}>
+                              <option>Тестове</option>
+                              <option>Тестове</option>
+                            </select>
                             </p>
                       </div>
 
@@ -723,15 +718,15 @@ export default function ProfilePage() {
                       <div className='nav-footer-div'>
                     <div className='left-nav-div'>
                   <ul>
-                      <li className='section-footer-bold'><a className='section-footer section-footer-bold' href='/'>Тільки на SakuraTails</a></li>
-                      <li className='section-footer'><a className='section-footer' href='https://www.figma.com/'>Магазин</a></li>
+                      <li className='section-footer-bold'><a className='section-footer section-footer-bold'>Тільки на SakuraTails</a></li>
+                      <li className='section-footer'><a className='section-footer' href='#'>Магазин</a></li>
                       <li className='section-footer'><a className='section-footer' href='https://www.figma.com/'>Подарункові коробки</a></li>
-                      <li className='section-footer'><a className='section-footer' href='https://www.figma.com/'>Підписка</a></li>
+                      <li className='section-footer'><a className='section-footer' href='#subcribtion-section'>Підписка</a></li>
                   </ul>
                   </div>
                   <div className='right-nav-div'>
                   <ul>
-                      <li className='section-footer-bold'><a className='section-footer section-footer-bold' href='https://www.figma.com/'>Підтримка</a></li>
+                      <li className='section-footer-bold'><a className='section-footer section-footer-bold'>Підтримка</a></li>
                       <li className='section-footer'><a className='section-footer' href='https://www.figma.com/'>Політика конфіденційності</a></li>
                       <li className='section-footer'><a className='section-footer' href='https://www.figma.com/'>Про нас</a></li>
                       <li className='section-footer'><a className='section-footer' href='https://www.figma.com/'>Умови</a></li>

@@ -151,7 +151,7 @@ export default function Registration() {
                         </Modal>
                         <h5 className='title-line'>Ім'я</h5>
                         <p className='text-auth'><input className='text-block' type='text' name='Name' value={name} onChange={handleNameChange} placeholder="Ім'я"></input></p>
-                        <div className='line-text-block-bottom line-text-block_plus'></div>
+                        <div className='line-text-block line-text-block-top'></div>
                         <h5 className='title-line'>Пошта</h5>
                         <p className='text-auth'><input className='text-block-margin-zero' type='login' name='Email' value={email} onChange={handleEmailChange} placeholder='email@gmail.com' required></input><div className='line-text-block'></div></p>
                         <p className='title-line-error'>

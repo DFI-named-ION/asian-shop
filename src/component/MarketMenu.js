@@ -128,17 +128,6 @@ export default function MailConfirmation() {
                                 <p className='hello-dropdown'>Вітаємо, <span className='name-dropdown'>{user.displayName}</span> <img src={HelloEmoji} alt="Hello Emoji" /></p>
                             </div>
                             <div>
-                                <details className='dropdown-details'>
-                                    <summary>Показати більше акаунтів</summary>
-                                    <div>
-                                        <button className='dropdown-button'><img src={AddPlus} alt="Add Plus" />Додати інший акаунт</button>
-                                    </div>
-                                    <div>
-                                        <button className='dropdown-border-bottom-button'><img src={Exit} alt="Exit" />Вийти зі всіх акаунтів</button>
-                                    </div>
-                                </details>
-                            </div>
-                            <div>
                                 <button className='dropdown-border-top-button'><img src={History} alt="History" />Історія замовлень</button>
                             </div>
                             <div>
@@ -157,6 +146,9 @@ export default function MailConfirmation() {
                                 <button className='dropdown-border-bottom-button'><img src={Procent} alt="Procent" />Знижки та бонуси</button>
                             </div>
                             <div>
+                                <button className='dropdown-button dropdown-button-exit'><img src={Exit} alt="Exit" />Вийти з акаунта</button>
+                            </div>
+                            <div>
                                 <button className='dropdown-border-left-button' onClick={handleSettingsClick}>Налаштування</button>
                                 <button className='dropdown-border-right-button'>Довідка</button>
                             </div>
@@ -171,7 +163,7 @@ export default function MailConfirmation() {
                         </div>
                     )}
                 </div>
-              <div className='language-div'>
+              {/* <div className='language-div'>
                 <div className='language-left-div'>
                   <a className='language-link-left language-link'>
                     <p>EN</p>
@@ -182,7 +174,7 @@ export default function MailConfirmation() {
                     <p>UA</p>
                   </a>
                 </div>
-              </div>
+              </div> */}
               </div>
               </div>
           </section>

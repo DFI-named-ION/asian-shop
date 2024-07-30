@@ -6,6 +6,7 @@ import Arrow from '../images/icons/arrowLeft.svg';
 import Google from '../images/socials/google-auth.svg'
 import Facebook from '../images/socials/facebook-auth.svg'
 import Twitter from '../images/socials/twitter-auth.svg';
+import ErrorPassword from '../images/icons/error-password.svg';
 
 import ReCaptcha from 'react-google-recaptcha';
 
@@ -19,6 +20,7 @@ function App() {
     return <Facebook />;
     return <Twitter />;
     return <Arrow />;
+    return <ErrorPassword />;
 }
 
 export default function Authorization() {
@@ -164,8 +166,9 @@ export default function Authorization() {
                             </p>
                             <h5 className='title-line'>Пароль</h5>
                             <p className='text-auth'>
-                                <input className='text-block-margin-zero' type='password' name='Password' value={password} onChange={handlePasswordChange} placeholder='*********' required />
-                                <div className='line-text-block-bottom'></div>
+                                <img className="error-password-block" src={ErrorPassword}/>
+                                <input className='text-block-margin-zero text-block-password-error' type='password' name='Password' value={password} onChange={handlePasswordChange} placeholder='*********' required />
+                                <div className='line-text-block'></div>
                             </p>
                             <p className='title-line-error'>
                                 {catchedError.tags.includes("password-field") ? (
