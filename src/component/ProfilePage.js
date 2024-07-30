@@ -100,13 +100,13 @@ export default function ProfilePage() {
     const { requestData, updateUserInfo } = useData();
     const [isEditing, setIsEditing] = useState({state: false, section: "none"});
 
-    useEffect(() => {
-        if (!user) {
-            navigate('/authorization');
-        } else {
-            handleMethod(async () => await requestData('firstName;middleName;lastName;language;sex;phones;birthday;doPrint;addresses;'));
-        }
-    }, []);
+    // useEffect(() => {
+    //     if (!user) {
+    //         navigate('/authorization');
+    //     } else {
+    //         handleMethod(async () => await requestData('firstName;middleName;lastName;language;sex;phones;birthday;doPrint;addresses;'));
+    //     }
+    // }, []);
 
     useEffect(() => {
       resetUser();
