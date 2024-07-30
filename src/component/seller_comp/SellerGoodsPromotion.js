@@ -49,6 +49,18 @@ export default function SellerGoodsPromotion() {
         navigate("/seller/promotions");
     };
 
+    const handlePositionsClick = () => {
+        navigate("/seller/positions");
+    };
+
+    const handleCategoriesClick = () => {
+        navigate("/seller/categories");
+    };
+
+    const handleMainClick = () => {
+        navigate("/");
+    };
+
     radio.forEach(el => {
         el.onclick = (e) => {
           show(e.target.value)
@@ -83,7 +95,7 @@ export default function SellerGoodsPromotion() {
                 </div>
 
                 <div className='seller-buttons-div seller-buttons-option-company-div'>
-                    <div>
+                    <div onClick={handleMainClick}>
                     <button className='left-seller-button'><img src={MainSeller} className='img-seller-left'></img>Головна</button>
                     </div>
                     <div>
@@ -92,10 +104,10 @@ export default function SellerGoodsPromotion() {
                     <div>
                     <details className='seller-details'>
                     <summary><img src={GoodsSeller} className='img-seller-left'></img>Товари і послуги</summary>
-                    <div>
+                    <div onClick={handleCategoriesClick}>
                     <button className='left-seller-subbutton'>Категорії</button>
                     </div>
-                    <div>
+                    <div onClick={handlePositionsClick}>
                     <button className='left-seller-subbutton'>Позиції</button>
                     </div>
                     <div onClick={handlePromotionsClick}>
@@ -111,15 +123,6 @@ export default function SellerGoodsPromotion() {
                     </div>
                     <div>
                     <button className='left-seller-button'><img src={PenSeller} className='img-seller-left'></img>Відгуки</button>
-                    </div>
-                    <div>
-                    <button className='left-seller-button'><img src={ClientSeller} className='img-seller-left'></img>Клієнти</button>
-                    </div>
-                    <div>
-                    <button className='left-seller-button'><img src={AnaliticSeller} className='img-seller-left'></img>Аналітика</button>
-                    </div>
-                    <div>
-                    <button className='left-seller-button'><img src={WalletSeller} className='img-seller-left'></img>Гаманець компанії</button>
                     </div>
                     <div>
                     <details className='seller-details'>

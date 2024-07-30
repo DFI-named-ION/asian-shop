@@ -337,7 +337,7 @@ const Carousel = ({ items }) => {
             <div className='head-div'>
                 <div className='head-left-div'>
                 <div className='head-nav-div'>
-                  <a className='header-link header-link-market' href='https://www.figma.com/'>Каталог</a>
+                  <a className='header-link header-link-market' href='/catalog'>Каталог</a>
                   </div>
                   <div className='head-nav-div'>
                   <a className='header-link' href='https://www.figma.com/'>Подарунки</a>
@@ -371,17 +371,6 @@ const Carousel = ({ items }) => {
                                 <p className='hello-dropdown'>Вітаємо, <span className='name-dropdown'>{user.displayName}</span> <img src={HelloEmoji} alt="Hello Emoji" /></p>
                             </div>
                             <div>
-                                <details className='dropdown-details'>
-                                    <summary>Показати більше акаунтів</summary>
-                                    <div>
-                                        <button className='dropdown-button'><img src={AddPlus} alt="Add Plus" />Додати інший акаунт</button>
-                                    </div>
-                                    <div>
-                                        <button className='dropdown-border-bottom-button'><img src={Exit} alt="Exit" />Вийти зі всіх акаунтів</button>
-                                    </div>
-                                </details>
-                            </div>
-                            <div>
                                 <button className='dropdown-border-top-button'><img src={History} alt="History" />Історія замовлень</button>
                             </div>
                             <div>
@@ -398,6 +387,9 @@ const Carousel = ({ items }) => {
                             </div>
                             <div>
                                 <button className='dropdown-border-bottom-button'><img src={Procent} alt="Procent" />Знижки та бонуси</button>
+                            </div>
+                            <div>
+                                <button className='dropdown-button dropdown-button-exit'><img src={Exit} alt="Exit" />Вийти з акаунта</button>
                             </div>
                             <div>
                                 <button className='dropdown-border-left-button' onClick={handleSettingsClick}>Налаштування</button>
@@ -610,7 +602,7 @@ const Carousel = ({ items }) => {
                     <img className='img-modal' src={require('../images/img/modal-1.jpg')}>
                     </img>
                     <div className='price-img-div'>
-                    <p>$44.50</p>
+                    <p>€44.50</p>
                     </div>
                     <div className='heart-img'>
                     &#x2665;
@@ -645,7 +637,7 @@ const Carousel = ({ items }) => {
                     </label>
                     <input name="fst" id="fst-5" value="5" type="radio" />
             
-                    <p className='modal-reviews-text'>66 reviews</p>
+                    <p className='modal-reviews-text'>66 відгуки</p>
 
                     <button className='spread-button'>
                     <img src={Spread}></img>
@@ -653,10 +645,10 @@ const Carousel = ({ items }) => {
                     </div>
                     </div>
                     <div className='text-modal-goods-div'>
-                      <p>Are you tired of overly sweet desserts? Try this pudding, which will be flown to you directly from Japan. Nothing extra, just a delicate “cloud” on your plate</p>
+                      <p>Вам набридли надто солодкі десерти? Спробуйте цей пудинг, який прилетить до вас прямо з Японії. Нічого зайвого, лише ніжна «хмаринка» на вашій тарілці</p>
                     </div>
                     <div className='add-modal-div'>
-                    <input className='add-modal-button' type='button' value='Add to cart' />
+                    <input className='add-modal-button' type='button' value='В кошик' />
                     </div>
                      </div>
                     </Modal>
@@ -672,7 +664,7 @@ const Carousel = ({ items }) => {
                     <img className='img-modal' src={require('../images/img/modal-2.jpg')}>
                     </img>
                     <div className='price-img-div'>
-                    <p>$69.99</p>
+                    <p>€69.99</p>
                     </div>
                     <div className='heart-img'>
                     &#x2665;
@@ -707,7 +699,7 @@ const Carousel = ({ items }) => {
                     </label>
                     <input name="fst" id="fst-5" value="5" type="radio" />
             
-                    <p className='modal-reviews-text'>96 reviews</p>
+                    <p className='modal-reviews-text'>96 відгуки</p>
 
                     <button className='spread-button'>
                     <img src={Spread}></img>
@@ -715,10 +707,10 @@ const Carousel = ({ items }) => {
                     </div>
                     </div>
                     <div className='text-modal-goods-div'>
-                      <p>The cookies look like they were made with love by my grandmother for tea, with many flavors and fillings. A large group of friends will be excited.</p>
+                      <p>Печиво виглядає так, ніби його з любов'ю приготувала моя бабуся до чаю, з безліччю смаків та начинок. Велика компанія друзів буде в захваті.</p>
                     </div>
                     <div className='add-modal-div'>
-                    <input className='add-modal-button' type='button' value='Add to cart' />
+                    <input className='add-modal-button' type='button' value='В кошик' />
                     </div>
                      </div>
                     </Modal>
@@ -734,7 +726,7 @@ const Carousel = ({ items }) => {
                     <img className='img-modal' src={require('../images/img/modal-3.jpg')}>
                     </img>
                     <div className='price-img-div'>
-                    <p>$30.50</p>
+                    <p>€30.50</p>
                     </div>
                     <div className='heart-img'>
                     &#x2665;
@@ -769,7 +761,7 @@ const Carousel = ({ items }) => {
                     </label>
                     <input name="fst" id="fst-5" value="5" type="radio" />
             
-                    <p className='modal-reviews-text'>42 reviews</p>
+                    <p className='modal-reviews-text'>42 відгуки</p>
 
                     <button className='spread-button'>
                     <img src={Spread}></img>
@@ -777,10 +769,10 @@ const Carousel = ({ items }) => {
                     </div>
                     </div>
                     <div className='text-modal-goods-div'>
-                      <p>The waffles are anime-like. You have never tasted such a delicate strawberry cream. The chocolate between the layers melts on your tongue and takes you to paradise. Lemon adds a touch of sourness and refreshes your mood.</p>
+                      <p>Ось що називають милим у кондитерському мистецтві. Такого ніжного полуничного крему ви ще не куштували. Шоколад між шарами тане на язиці і переносить вас до раю. Лимон додає нотку кислинки та освіжає настрій</p>
                     </div>
                     <div className='add-modal-div'>
-                    <input className='add-modal-button' type='button' value='Add to cart' />
+                    <input className='add-modal-button' type='button' value='В кошик' />
                     </div>
                      </div>
                     </Modal>
@@ -796,7 +788,7 @@ const Carousel = ({ items }) => {
                     <img className='img-modal' src={require('../images/img/modal-4.jpg')}>
                     </img>
                     <div className='price-img-div'>
-                    <p>$20.99</p>
+                    <p>€20.99</p>
                     </div>
                     <div className='heart-img'>
                     &#x2665;
@@ -831,7 +823,7 @@ const Carousel = ({ items }) => {
                     </label>
                     <input name="fst" id="fst-5" value="5" type="radio" />
             
-                    <p className='modal-reviews-text'>33 reviews</p>
+                    <p className='modal-reviews-text'>33 відгуки</p>
 
                     <button className='spread-button'>
                     <img src={Spread}></img>
@@ -839,10 +831,10 @@ const Carousel = ({ items }) => {
                     </div>
                     </div>
                     <div className='text-modal-goods-div'>
-                      <p>Unique noodles in the form of a knot. One knot is enough for a large portion. It is an independent dish. Easy to teach children to eat healthy with flavors: carrot, spinach, egg, red cabbage, tomato and clean taste.</p>
+                      <p>Унікальна локшина у вигляді вузлика. Одного вузлика вистачає на велику порцію. Є самостійною стравою. Легко привчати дітей до здорового харчування завдяки смакам: морква, шпинат, червонокачанна капуста, помідор, чистому смаку та яєчної локшини.</p>
                     </div>
                     <div className='add-modal-div'>
-                    <input className='add-modal-button' type='button' value='Add to cart' />
+                    <input className='add-modal-button' type='button' value='В кошик' />
                     </div>
                      </div>
                     </Modal>
@@ -858,7 +850,7 @@ const Carousel = ({ items }) => {
                     <img className='img-modal' src={require('../images/img/modal-5.jpg')}>
                     </img>
                     <div className='price-img-div'>
-                    <p>$59.99</p>
+                    <p>€59.99</p>
                     </div>
                     <div className='heart-img'>
                     &#x2665;
@@ -893,7 +885,7 @@ const Carousel = ({ items }) => {
                     </label>
                     <input name="fst" id="fst-5" value="5" type="radio" />
             
-                    <p className='modal-reviews-text'>73 reviews</p>
+                    <p className='modal-reviews-text'>73 відгуки</p>
 
                     <button className='spread-button'>
                     <img src={Spread}></img>
@@ -901,10 +893,10 @@ const Carousel = ({ items }) => {
                     </div>
                     </div>
                     <div className='text-modal-goods-div'>
-                      <p>Made with 100% Real Sakura flower petals . Hand harvested and sorted to yield the purest Cherry Blossom Syrup. Mix for pancakes and waffles. Pink chocolate with cherry extract.</p>
+                      <p>Виготовлений зі справжніх пелюсток квітів сакури. Зібрані вручну та відсортовані для отримання найчистішого вишневого сиропу. Змішайте для млинців та вафель та окунайте в рожевий шоколад з екстрактом вишні.</p>
                     </div>
                     <div className='add-modal-div'>
-                    <input className='add-modal-button' type='button' value='Add to cart' />
+                    <input className='add-modal-button' type='button' value='В кошик' />
                     </div>
                      </div>
                     </Modal>
@@ -920,7 +912,7 @@ const Carousel = ({ items }) => {
                     <img className='img-modal' src={require('../images/img/modal-6.jpg')}>
                     </img>
                     <div className='price-img-div'>
-                    <p>$30.50</p>
+                    <p>€30.50</p>
                     </div>
                     <div className='heart-img'>
                     &#x2665;
@@ -955,7 +947,7 @@ const Carousel = ({ items }) => {
                     </label>
                     <input name="fst" id="fst-5" value="5" type="radio" />
             
-                    <p className='modal-reviews-text'>59 reviews</p>
+                    <p className='modal-reviews-text'>59 відгуки</p>
 
                     <button className='spread-button'>
                     <img src={Spread}></img>
@@ -963,10 +955,10 @@ const Carousel = ({ items }) => {
                     </div>
                     </div>
                     <div className='text-modal-goods-div'>
-                      <p>This is an easy and delicious dessert that does not require preheating the oven. The main ingredients include Greek cereal, hand-whipped buttercream, fresh berries (such as strawberries, raspberries, blue currants), and powdered sugar.</p>
+                      <p>Це легкий і смачний десерт, який потребує заморозки. Має безліч смаків, які гарно поєднуються між собою. Вибери свого фаворита</p>
                     </div>
                     <div className='add-modal-div'>
-                    <input className='add-modal-button' type='button' value='Add to cart' />
+                    <input className='add-modal-button' type='button' value='В кошик' />
                     </div>
                      </div>
                     </Modal>
@@ -982,7 +974,7 @@ const Carousel = ({ items }) => {
                     <img className='img-modal' src={require('../images/img/modal-7.jpg')}>
                     </img>
                     <div className='price-img-div'>
-                    <p>$20.99</p>
+                    <p>€20.99</p>
                     </div>
                     <div className='heart-img'>
                     &#x2665;
@@ -1017,7 +1009,7 @@ const Carousel = ({ items }) => {
                     </label>
                     <input name="fst" id="fst-5" value="5" type="radio" />
             
-                    <p className='modal-reviews-text'>38 reviews</p>
+                    <p className='modal-reviews-text'>38 відгуки</p>
 
                     <button className='spread-button'>
                     <img src={Spread}></img>
@@ -1025,10 +1017,10 @@ const Carousel = ({ items }) => {
                     </div>
                     </div>
                     <div className='text-modal-goods-div'>
-                      <p>If you want to try different textures in cookies but don't know what to try, this set is for you. The assortment includes cookies with jam and chocolate!</p>
+                      <p>Якщо ви хочете спробувати різні текстури в печиві, але не знаєте, що саме спробувати, цей набір для вас. В асортименті є печиво з джемом та шоколадом!</p>
                     </div>
                     <div className='add-modal-div'>
-                    <input className='add-modal-button' type='button' value='Add to cart' />
+                    <input className='add-modal-button' type='button' value='В кошик' />
                     </div>
                      </div>
                     </Modal>
@@ -1044,7 +1036,7 @@ const Carousel = ({ items }) => {
                     <img className='img-modal' src={require('../images/img/modal-1.jpg')}>
                     </img>
                     <div className='price-img-div'>
-                    <p>$44.50</p>
+                    <p>€44.50</p>
                     </div>
                     <div className='heart-img'>
                     &#x2665;
@@ -1079,7 +1071,7 @@ const Carousel = ({ items }) => {
                     </label>
                     <input name="fst" id="fst-5" value="5" type="radio" />
             
-                    <p className='modal-reviews-text'>66 reviews</p>
+                    <p className='modal-reviews-text'>66 відгуки</p>
 
                     <button className='spread-button'>
                     <img src={Spread}></img>
@@ -1087,10 +1079,10 @@ const Carousel = ({ items }) => {
                     </div>
                     </div>
                     <div className='text-modal-goods-div'>
-                      <p>Are you tired of overly sweet desserts? Try this pudding, which will be flown to you directly from Japan. Nothing extra, just a delicate “cloud” on your plate</p>
+                      <p>Вам набридли надто солодкі десерти? Спробуйте цей пудинг, який прилетить до вас прямо з Японії. Нічого зайвого, лише ніжна «хмаринка» на вашій тарілці.</p>
                     </div>
                     <div className='add-modal-div'>
-                    <input className='add-modal-button' type='button' value='Add to cart' />
+                    <input className='add-modal-button' type='button' value='В кошик' />
                     </div>
                      </div>
                     </Modal>
@@ -1106,7 +1098,7 @@ const Carousel = ({ items }) => {
                     <img className='img-modal' src={require('../images/img/modal-2.jpg')}>
                     </img>
                     <div className='price-img-div'>
-                    <p>$69.99</p>
+                    <p>€69.99</p>
                     </div>
                     <div className='heart-img'>
                     &#x2665;
@@ -1141,7 +1133,7 @@ const Carousel = ({ items }) => {
                     </label>
                     <input name="fst" id="fst-5" value="5" type="radio" />
             
-                    <p className='modal-reviews-text'>96 reviews</p>
+                    <p className='modal-reviews-text'>96 відгуки</p>
 
                     <button className='spread-button'>
                     <img src={Spread}></img>
@@ -1149,10 +1141,10 @@ const Carousel = ({ items }) => {
                     </div>
                     </div>
                     <div className='text-modal-goods-div'>
-                      <p>The cookies look like they were made with love by my grandmother for tea, with many flavors and fillings. A large group of friends will be excited.</p>
+                      <p>Печиво виглядає так, ніби його з любов'ю приготувала моя бабуся до чаю, з безліччю смаків та начинок. Велика компанія друзів буде в захваті.</p>
                     </div>
                     <div className='add-modal-div'>
-                    <input className='add-modal-button' type='button' value='Add to cart' />
+                    <input className='add-modal-button' type='button' value='В кошик' />
                     </div>
                      </div>
                     </Modal>
@@ -1168,7 +1160,7 @@ const Carousel = ({ items }) => {
                     <img className='img-modal' src={require('../images/img/modal-3.jpg')}>
                     </img>
                     <div className='price-img-div'>
-                    <p>$30.50</p>
+                    <p>€30.50</p>
                     </div>
                     <div className='heart-img'>
                     &#x2665;
@@ -1203,7 +1195,7 @@ const Carousel = ({ items }) => {
                     </label>
                     <input name="fst" id="fst-5" value="5" type="radio" />
             
-                    <p className='modal-reviews-text'>42 reviews</p>
+                    <p className='modal-reviews-text'>42 відгуки</p>
 
                     <button className='spread-button'>
                     <img src={Spread}></img>
@@ -1211,10 +1203,10 @@ const Carousel = ({ items }) => {
                     </div>
                     </div>
                     <div className='text-modal-goods-div'>
-                      <p>The waffles are anime-like. You have never tasted such a delicate strawberry cream. The chocolate between the layers melts on your tongue and takes you to paradise. Lemon adds a touch of sourness and refreshes your mood.</p>
+                      <p>Ось що називають милим у кондитерському мистецтві. Такого ніжного полуничного крему ви ще не куштували. Шоколад між шарами тане на язиці і переносить вас до раю. Лимон додає нотку кислинки та освіжає настрій.</p>
                     </div>
                     <div className='add-modal-div'>
-                    <input className='add-modal-button' type='button' value='Add to cart' />
+                    <input className='add-modal-button' type='button' value='В кошик' />
                     </div>
                      </div>
                     </Modal>
@@ -1230,7 +1222,7 @@ const Carousel = ({ items }) => {
                     <img className='img-modal' src={require('../images/img/modal-4.jpg')}>
                     </img>
                     <div className='price-img-div'>
-                    <p>$20.99</p>
+                    <p>€20.99</p>
                     </div>
                     <div className='heart-img'>
                     &#x2665;
@@ -1265,7 +1257,7 @@ const Carousel = ({ items }) => {
                     </label>
                     <input name="fst" id="fst-5" value="5" type="radio" />
             
-                    <p className='modal-reviews-text'>33 reviews</p>
+                    <p className='modal-reviews-text'>33 відгуки</p>
 
                     <button className='spread-button'>
                     <img src={Spread}></img>
@@ -1273,10 +1265,10 @@ const Carousel = ({ items }) => {
                     </div>
                     </div>
                     <div className='text-modal-goods-div'>
-                      <p>Unique noodles in the form of a knot. One knot is enough for a large portion. It is an independent dish. Easy to teach children to eat healthy with flavors: carrot, spinach, egg, red cabbage, tomato and clean taste.</p>
+                      <p>Унікальна локшина у вигляді вузлика. Одного вузлика вистачає на велику порцію. Є самостійною стравою. Легко привчати дітей до здорового харчування завдяки смакам: морква, шпинат, червонокачанна капуста, помідор, чистому смаку та яєчної локшини.</p>
                     </div>
                     <div className='add-modal-div'>
-                    <input className='add-modal-button' type='button' value='Add to cart' />
+                    <input className='add-modal-button' type='button' value='В кошик' />
                     </div>
                      </div>
                     </Modal>
@@ -1292,7 +1284,7 @@ const Carousel = ({ items }) => {
                     <img className='img-modal' src={require('../images/img/modal-5.jpg')}>
                     </img>
                     <div className='price-img-div'>
-                    <p>$59.99</p>
+                    <p>€59.99</p>
                     </div>
                     <div className='heart-img'>
                     &#x2665;
@@ -1327,7 +1319,7 @@ const Carousel = ({ items }) => {
                     </label>
                     <input name="fst" id="fst-5" value="5" type="radio" />
             
-                    <p className='modal-reviews-text'>73 reviews</p>
+                    <p className='modal-reviews-text'>73 відгуки</p>
 
                     <button className='spread-button'>
                     <img src={Spread}></img>
@@ -1335,10 +1327,10 @@ const Carousel = ({ items }) => {
                     </div>
                     </div>
                     <div className='text-modal-goods-div'>
-                      <p>Made with 100% Real Sakura flower petals . Hand harvested and sorted to yield the purest Cherry Blossom Syrup. Mix for pancakes and waffles. Pink chocolate with cherry extract.</p>
+                      <p>Виготовлений зі справжніх пелюсток квітів сакури. Зібрані вручну та відсортовані для отримання найчистішого вишневого сиропу. Змішайте для млинців та вафель та окунайте в рожевий шоколад з екстрактом вишні.</p>
                     </div>
                     <div className='add-modal-div'>
-                    <input className='add-modal-button' type='button' value='Add to cart' />
+                    <input className='add-modal-button' type='button' value='В кошик' />
                     </div>
                      </div>
                     </Modal>
@@ -1354,7 +1346,7 @@ const Carousel = ({ items }) => {
                     <img className='img-modal' src={require('../images/img/modal-6.jpg')}>
                     </img>
                     <div className='price-img-div'>
-                    <p>$30.50</p>
+                    <p>€30.50</p>
                     </div>
                     <div className='heart-img'>
                     &#x2665;
@@ -1389,7 +1381,7 @@ const Carousel = ({ items }) => {
                     </label>
                     <input name="fst" id="fst-5" value="5" type="radio" />
             
-                    <p className='modal-reviews-text'>59 reviews</p>
+                    <p className='modal-reviews-text'>59 відгуки</p>
 
                     <button className='spread-button'>
                     <img src={Spread}></img>
@@ -1397,10 +1389,10 @@ const Carousel = ({ items }) => {
                     </div>
                     </div>
                     <div className='text-modal-goods-div'>
-                      <p>This is an easy and delicious dessert that does not require preheating the oven. The main ingredients include Greek cereal, hand-whipped buttercream, fresh berries (such as strawberries, raspberries, blue currants), and powdered sugar.</p>
+                      <p>Це легкий і смачний десерт, який потребує заморозки. Має безліч смаків, які гарно поєднуються між собою. Вибери свого фаворита.</p>
                     </div>
                     <div className='add-modal-div'>
-                    <input className='add-modal-button' type='button' value='Add to cart' />
+                    <input className='add-modal-button' type='button' value='В кошик' />
                     </div>
                      </div>
                     </Modal>
@@ -1416,7 +1408,7 @@ const Carousel = ({ items }) => {
                     <img className='img-modal' src={require('../images/img/modal-7.jpg')}>
                     </img>
                     <div className='price-img-div'>
-                    <p>$20.99</p>
+                    <p>€20.99</p>
                     </div>
                     <div className='heart-img'>
                     &#x2665;
@@ -1451,7 +1443,7 @@ const Carousel = ({ items }) => {
                     </label>
                     <input name="fst" id="fst-5" value="5" type="radio" />
             
-                    <p className='modal-reviews-text'>38 reviews</p>
+                    <p className='modal-reviews-text'>38 відгуки</p>
 
                     <button className='spread-button'>
                     <img src={Spread}></img>
@@ -1459,10 +1451,10 @@ const Carousel = ({ items }) => {
                     </div>
                     </div>
                     <div className='text-modal-goods-div'>
-                      <p>If you want to try different textures in cookies but don't know what to try, this set is for you. The assortment includes cookies with jam and chocolate!</p>
+                      <p>Якщо ви хочете спробувати різні текстури в печиві, але не знаєте, що саме спробувати, цей набір для вас. В асортименті є печиво з джемом та шоколадом!</p>
                     </div>
                     <div className='add-modal-div'>
-                    <input className='add-modal-button' type='button' value='Add to cart' />
+                    <input className='add-modal-button' type='button' value='В кошик' />
                     </div>
                      </div>
                     </Modal>
@@ -1480,7 +1472,7 @@ const Carousel = ({ items }) => {
                     <img className='img-modal' src={require('../images/img/modal-14.jpg')}>
                     </img>
                     <div className='price-img-div'>
-                    <p>$20.99</p>
+                    <p>€20.99</p>
                     </div>
                     <div className='heart-img'>
                     &#x2665;
@@ -1515,7 +1507,7 @@ const Carousel = ({ items }) => {
                     </label>
                     <input name="fst" id="fst-5" value="5" type="radio" />
             
-                    <p className='modal-reviews-text'>38 reviews</p>
+                    <p className='modal-reviews-text'>38 відгуки</p>
 
                     <button className='spread-button'>
                     <img src={Spread}></img>
@@ -1523,10 +1515,10 @@ const Carousel = ({ items }) => {
                     </div>
                     </div>
                     <div className='text-modal-goods-div'>
-                      <p>An update on cookies has been released!!! The assortment of cookies with green tea and almonds is now available. As always, the constant quality of our sweets is waiting for our customers' criticism.</p>
+                      <p>Вийшло оновлення по печиву!!! В асортименті з'явилося печиво з зеленим чаєм та мигдалем. Як завжди, незмінна якість наших солодощів чекає на критику наших клієнтів.</p>
                     </div>
                     <div className='add-modal-div'>
-                    <input className='add-modal-button' type='button' value='Add to cart' />
+                    <input className='add-modal-button' type='button' value='В кошик' />
                     </div>
                      </div>
                     </Modal>
@@ -1542,7 +1534,7 @@ const Carousel = ({ items }) => {
                     <img className='img-modal' src={require('../images/img/modal-8.jpg')}>
                     </img>
                     <div className='price-img-div'>
-                    <p>$20.50</p>
+                    <p>€20.50</p>
                     </div>
                     <div className='heart-img'>
                     &#x2665;
@@ -1577,7 +1569,7 @@ const Carousel = ({ items }) => {
                     </label>
                     <input name="fst" id="fst-5" value="5" type="radio" />
             
-                    <p className='modal-reviews-text'>122 reviews</p>
+                    <p className='modal-reviews-text'>122 відгуки</p>
 
                     <button className='spread-button'>
                     <img src={Spread}></img>
@@ -1585,10 +1577,10 @@ const Carousel = ({ items }) => {
                     </div>
                     </div>
                     <div className='text-modal-goods-div'>
-                      <p>Freshly picked strawberries covered with chocolate will add new colors and romance to your evening. Our advice is to eat strawberries with your partner.</p>
+                      <p>Свіжозібрана полуниця, вкрита шоколадом, додасть нових барв і романтики вашому вечору. Наша порада  їжте полуницю разом зі своїм партнером.</p>
                     </div>
                     <div className='add-modal-div'>
-                    <input className='add-modal-button' type='button' value='Add to cart' />
+                    <input className='add-modal-button' type='button' value='В кошик' />
                     </div>
                      </div>
                     </Modal>
@@ -1604,7 +1596,7 @@ const Carousel = ({ items }) => {
                     <img className='img-modal' src={require('../images/img/modal-9.jpg')}>
                     </img>
                     <div className='price-img-div'>
-                    <p>$44.50</p>
+                    <p>€44.50</p>
                     </div>
                     <div className='heart-img'>
                     &#x2665;
@@ -1639,7 +1631,7 @@ const Carousel = ({ items }) => {
                     </label>
                     <input name="fst" id="fst-5" value="5" type="radio" />
             
-                    <p className='modal-reviews-text'>66 reviews</p>
+                    <p className='modal-reviews-text'>66 відгуки</p>
 
                     <button className='spread-button'>
                     <img src={Spread}></img>
@@ -1647,10 +1639,10 @@ const Carousel = ({ items }) => {
                     </div>
                     </div>
                     <div className='text-modal-goods-div'>
-                      <p>Sakura box misses cherry lovers so much, so it decided to come out in a new design. Today, it surprises with its marmalade and incredible tea with the already legendary pink cookies.</p>
+                      <p>Коробка «Сакура» дуже скучила за любителями вишні, тому вирішила вийти в новому дизайні. Сьогодні вона дивує своїм мармеладом та неймовірним чаєм з уже легендарним рожевим печивом.</p>
                     </div>
                     <div className='add-modal-div'>
-                    <input className='add-modal-button' type='button' value='Add to cart' />
+                    <input className='add-modal-button' type='button' value='В кошик' />
                     </div>
                      </div>
                     </Modal>
@@ -1666,7 +1658,7 @@ const Carousel = ({ items }) => {
                     <img className='img-modal' src={require('../images/img/modal-10.jpg')}>
                     </img>
                     <div className='price-img-div'>
-                    <p>$69.99</p>
+                    <p>€69.99</p>
                     </div>
                     <div className='heart-img'>
                     &#x2665;
@@ -1701,7 +1693,7 @@ const Carousel = ({ items }) => {
                     </label>
                     <input name="fst" id="fst-5" value="5" type="radio" />
             
-                    <p className='modal-reviews-text'>96 reviews</p>
+                    <p className='modal-reviews-text'>96 відгуки</p>
 
                     <button className='spread-button'>
                     <img src={Spread}></img>
@@ -1709,10 +1701,10 @@ const Carousel = ({ items }) => {
                     </div>
                     </div>
                     <div className='text-modal-goods-div'>
-                      <p>If you love cats and drinking tea with sweets, then this set is definitely for you. Cookies and candies for every taste from chocolate to berries, even a cup as a gift.</p>
+                      <p>Якщо ви любите котів і п'єте чай з солодощами, то цей набір точно для вас. Печиво та цукерки на будь-який смак - від шоколаду до ягід, навіть чашка в подарунок.</p>
                     </div>
                     <div className='add-modal-div'>
-                    <input className='add-modal-button' type='button' value='Add to cart' />
+                    <input className='add-modal-button' type='button' value='В кошик' />
                     </div>
                      </div>
                     </Modal>
@@ -1728,7 +1720,7 @@ const Carousel = ({ items }) => {
                     <img className='img-modal' src={require('../images/img/modal-11.jpg')}>
                     </img>
                     <div className='price-img-div'>
-                    <p>$30.50</p>
+                    <p>€30.50</p>
                     </div>
                     <div className='heart-img'>
                     &#x2665;
@@ -1763,7 +1755,7 @@ const Carousel = ({ items }) => {
                     </label>
                     <input name="fst" id="fst-5" value="5" type="radio" />
             
-                    <p className='modal-reviews-text'>42 reviews</p>
+                    <p className='modal-reviews-text'>42 відгуки</p>
 
                     <button className='spread-button'>
                     <img src={Spread}></img>
@@ -1771,10 +1763,10 @@ const Carousel = ({ items }) => {
                     </div>
                     </div>
                     <div className='text-modal-goods-div'>
-                      <p>6 interesting flavors straight from the Asian market. It's time to try peach lemonade! Don't forget to do the tasting with your friends.</p>
+                      <p>6 цікавих смаків прямо з азійського ринку. Час спробувати персиковий лимонад! Не забудьте провести дегустацію з друзями.</p>
                     </div>
                     <div className='add-modal-div'>
-                    <input className='add-modal-button' type='button' value='Add to cart' />
+                    <input className='add-modal-button' type='button' value='В кошик' />
                     </div>
                      </div>
                     </Modal>
@@ -1790,7 +1782,7 @@ const Carousel = ({ items }) => {
                     <img className='img-modal' src={require('../images/img/modal-12.jpg')}>
                     </img>
                     <div className='price-img-div'>
-                    <p>$20.99</p>
+                    <p>€20.99</p>
                     </div>
                     <div className='heart-img'>
                     &#x2665;
@@ -1825,7 +1817,7 @@ const Carousel = ({ items }) => {
                     </label>
                     <input name="fst" id="fst-5" value="5" type="radio" />
             
-                    <p className='modal-reviews-text'>33 reviews</p>
+                    <p className='modal-reviews-text'>33 відгуки</p>
 
                     <button className='spread-button'>
                     <img src={Spread}></img>
@@ -1833,10 +1825,10 @@ const Carousel = ({ items }) => {
                     </div>
                     </div>
                     <div className='text-modal-goods-div'>
-                      <p>Do you like dogs and tea? Find a novelty tea with some surprises in the middle, and I'm not talking about cookies. The perfect gift for furry lovers.</p>
+                      <p>Любите собак і чай? Знайдіть новий чай з сюрпризами в середині, і я вже не кажу про печиво у вигляді лапок. Ідеальний подарунок для любителів пухнастиків.</p>
                     </div>
                     <div className='add-modal-div'>
-                    <input className='add-modal-button' type='button' value='Add to cart' />
+                    <input className='add-modal-button' type='button' value='В кошик' />
                     </div>
                      </div>
                     </Modal>
@@ -1852,7 +1844,7 @@ const Carousel = ({ items }) => {
                     <img className='img-modal' src={require('../images/img/modal-13.jpg')}>
                     </img>
                     <div className='price-img-div'>
-                    <p>$20.50</p>
+                    <p>€20.50</p>
                     </div>
                     <div className='heart-img'>
                     &#x2665;
@@ -1887,7 +1879,7 @@ const Carousel = ({ items }) => {
                     </label>
                     <input name="fst" id="fst-5" value="5" type="radio" />
             
-                    <p className='modal-reviews-text'>122 reviews</p>
+                    <p className='modal-reviews-text'>122 відгуки</p>
 
                     <button className='spread-button'>
                     <img src={Spread}></img>
@@ -1895,10 +1887,10 @@ const Carousel = ({ items }) => {
                     </div>
                     </div>
                     <div className='text-modal-goods-div'>
-                      <p>Have you ever dreamed of a ton of motti? Not that much, of course, but a kilogram of the new motti flavor is waiting for you in our store. The choice of connoisseurs.</p>
+                      <p>Ви коли-небудь мріяли про тонну мотті? Не так багато, звичайно, але кілограм нового смаку мотті чекає на вас у нашому магазині. Вибір поціновувачів.</p>
                     </div>
                     <div className='add-modal-div'>
-                    <input className='add-modal-button' type='button' value='Add to cart' />
+                    <input className='add-modal-button' type='button' value='В кошик' />
                     </div>
                      </div>
                     </Modal>
@@ -1915,7 +1907,7 @@ const Carousel = ({ items }) => {
                     <img className='img-modal' src={require('../images/img/modal-14.jpg')}>
                     </img>
                     <div className='price-img-div'>
-                    <p>$20.99</p>
+                    <p>€20.99</p>
                     </div>
                     <div className='heart-img'>
                     &#x2665;
@@ -1950,7 +1942,7 @@ const Carousel = ({ items }) => {
                     </label>
                     <input name="fst" id="fst-5" value="5" type="radio" />
             
-                    <p className='modal-reviews-text'>38 reviews</p>
+                    <p className='modal-reviews-text'>38 відгуки</p>
 
                     <button className='spread-button'>
                     <img src={Spread}></img>
@@ -1958,10 +1950,10 @@ const Carousel = ({ items }) => {
                     </div>
                     </div>
                     <div className='text-modal-goods-div'>
-                      <p>An update on cookies has been released!!! The assortment of cookies with green tea and almonds is now available. As always, the constant quality of our sweets is waiting for our customers' criticism.</p>
+                      <p>Вийшло оновлення по печиву!!! В асортименті з'явилося печиво з зеленим чаєм та мигдалем. Як завжди, незмінна якість наших солодощів чекає на критику наших клієнтів.</p>
                     </div>
                     <div className='add-modal-div'>
-                    <input className='add-modal-button' type='button' value='Add to cart' />
+                    <input className='add-modal-button' type='button' value='В кошик' />
                     </div>
                      </div>
                     </Modal>
@@ -1977,7 +1969,7 @@ const Carousel = ({ items }) => {
                     <img className='img-modal' src={require('../images/img/modal-8.jpg')}>
                     </img>
                     <div className='price-img-div'>
-                    <p>$20.50</p>
+                    <p>€20.50</p>
                     </div>
                     <div className='heart-img'>
                     &#x2665;
@@ -2012,7 +2004,7 @@ const Carousel = ({ items }) => {
                     </label>
                     <input name="fst" id="fst-5" value="5" type="radio" />
             
-                    <p className='modal-reviews-text'>122 reviews</p>
+                    <p className='modal-reviews-text'>122 відгуки</p>
 
                     <button className='spread-button'>
                     <img src={Spread}></img>
@@ -2020,10 +2012,10 @@ const Carousel = ({ items }) => {
                     </div>
                     </div>
                     <div className='text-modal-goods-div'>
-                      <p>Freshly picked strawberries covered with chocolate will add new colors and romance to your evening. Our advice is to eat strawberries with your partner.</p>
+                      <p>Свіжозібрана полуниця, вкрита шоколадом, додасть нових барв і романтики вашому вечору. Наша порада  їжте полуницю разом зі своїм партнером.</p>
                     </div>
                     <div className='add-modal-div'>
-                    <input className='add-modal-button' type='button' value='Add to cart' />
+                    <input className='add-modal-button' type='button' value='В кошик' />
                     </div>
                      </div>
                     </Modal>
@@ -2039,7 +2031,7 @@ const Carousel = ({ items }) => {
                     <img className='img-modal' src={require('../images/img/modal-9.jpg')}>
                     </img>
                     <div className='price-img-div'>
-                    <p>$44.50</p>
+                    <p>€44.50</p>
                     </div>
                     <div className='heart-img'>
                     &#x2665;
@@ -2074,7 +2066,7 @@ const Carousel = ({ items }) => {
                     </label>
                     <input name="fst" id="fst-5" value="5" type="radio" />
             
-                    <p className='modal-reviews-text'>66 reviews</p>
+                    <p className='modal-reviews-text'>66 відгуки</p>
 
                     <button className='spread-button'>
                     <img src={Spread}></img>
@@ -2082,10 +2074,10 @@ const Carousel = ({ items }) => {
                     </div>
                     </div>
                     <div className='text-modal-goods-div'>
-                      <p>Sakura box misses cherry lovers so much, so it decided to come out in a new design. Today, it surprises with its marmalade and incredible tea with the already legendary pink cookies.</p>
+                      <p>Коробка «Сакура» дуже скучила за любителями вишні, тому вирішила вийти в новому дизайні. Сьогодні вона дивує своїм мармеладом та неймовірним чаєм з уже легендарним рожевим печивом.</p>
                     </div>
                     <div className='add-modal-div'>
-                    <input className='add-modal-button' type='button' value='Add to cart' />
+                    <input className='add-modal-button' type='button' value='В кошик' />
                     </div>
                      </div>
                     </Modal>
@@ -2101,7 +2093,7 @@ const Carousel = ({ items }) => {
                     <img className='img-modal' src={require('../images/img/modal-10.jpg')}>
                     </img>
                     <div className='price-img-div'>
-                    <p>$69.99</p>
+                    <p>€69.99</p>
                     </div>
                     <div className='heart-img'>
                     &#x2665;
@@ -2136,7 +2128,7 @@ const Carousel = ({ items }) => {
                     </label>
                     <input name="fst" id="fst-5" value="5" type="radio" />
             
-                    <p className='modal-reviews-text'>96 reviews</p>
+                    <p className='modal-reviews-text'>96 відгуки</p>
 
                     <button className='spread-button'>
                     <img src={Spread}></img>
@@ -2144,10 +2136,10 @@ const Carousel = ({ items }) => {
                     </div>
                     </div>
                     <div className='text-modal-goods-div'>
-                      <p>If you love cats and drinking tea with sweets, then this set is definitely for you. Cookies and candies for every taste from chocolate to berries, even a cup as a gift.</p>
+                      <p>Якщо ви любите котів і п'єте чай з солодощами, то цей набір точно для вас. Печиво та цукерки на будь-який смак - від шоколаду до ягід, навіть чашка в подарунок.</p>
                     </div>
                     <div className='add-modal-div'>
-                    <input className='add-modal-button' type='button' value='Add to cart' />
+                    <input className='add-modal-button' type='button' value='В кошик' />
                     </div>
                      </div>
                     </Modal>
@@ -2163,7 +2155,7 @@ const Carousel = ({ items }) => {
                     <img className='img-modal' src={require('../images/img/modal-11.jpg')}>
                     </img>
                     <div className='price-img-div'>
-                    <p>$30.50</p>
+                    <p>€30.50</p>
                     </div>
                     <div className='heart-img'>
                     &#x2665;
@@ -2198,7 +2190,7 @@ const Carousel = ({ items }) => {
                     </label>
                     <input name="fst" id="fst-5" value="5" type="radio" />
             
-                    <p className='modal-reviews-text'>42 reviews</p>
+                    <p className='modal-reviews-text'>42 відгуки</p>
 
                     <button className='spread-button'>
                     <img src={Spread}></img>
@@ -2206,10 +2198,10 @@ const Carousel = ({ items }) => {
                     </div>
                     </div>
                     <div className='text-modal-goods-div'>
-                      <p>6 interesting flavors straight from the Asian market. It's time to try peach lemonade! Don't forget to do the tasting with your friends.</p>
+                      <p>6 цікавих смаків прямо з азійського ринку. Час спробувати персиковий лимонад! Не забудьте провести дегустацію з друзями.</p>
                     </div>
                     <div className='add-modal-div'>
-                    <input className='add-modal-button' type='button' value='Add to cart' />
+                    <input className='add-modal-button' type='button' value='В кошик' />
                     </div>
                      </div>
                     </Modal>
@@ -2225,7 +2217,7 @@ const Carousel = ({ items }) => {
                     <img className='img-modal' src={require('../images/img/modal-12.jpg')}>
                     </img>
                     <div className='price-img-div'>
-                    <p>$20.99</p>
+                    <p>€20.99</p>
                     </div>
                     <div className='heart-img'>
                     &#x2665;
@@ -2260,7 +2252,7 @@ const Carousel = ({ items }) => {
                     </label>
                     <input name="fst" id="fst-5" value="5" type="radio" />
             
-                    <p className='modal-reviews-text'>33 reviews</p>
+                    <p className='modal-reviews-text'>33 відгуки</p>
 
                     <button className='spread-button'>
                     <img src={Spread}></img>
@@ -2268,10 +2260,10 @@ const Carousel = ({ items }) => {
                     </div>
                     </div>
                     <div className='text-modal-goods-div'>
-                      <p>Do you like dogs and tea? Find a novelty tea with some surprises in the middle, and I'm not talking about cookies. The perfect gift for furry lovers.</p>
+                      <p>Любите собак і чай? Знайдіть новий чай з сюрпризами в середині, і я вже не кажу про печиво у вигляді лапок. Ідеальний подарунок для любителів пухнастиків.</p>
                     </div>
                     <div className='add-modal-div'>
-                    <input className='add-modal-button' type='button' value='Add to cart' />
+                    <input className='add-modal-button' type='button' value='В кошик' />
                     </div>
                      </div>
                     </Modal>
@@ -2287,7 +2279,7 @@ const Carousel = ({ items }) => {
                     <img className='img-modal' src={require('../images/img/modal-13.jpg')}>
                     </img>
                     <div className='price-img-div'>
-                    <p>$20.50</p>
+                    <p>€20.50</p>
                     </div>
                     <div className='heart-img'>
                     &#x2665;
@@ -2322,7 +2314,7 @@ const Carousel = ({ items }) => {
                     </label>
                     <input name="fst" id="fst-5" value="5" type="radio" />
             
-                    <p className='modal-reviews-text'>122 reviews</p>
+                    <p className='modal-reviews-text'>122 відгуки</p>
 
                     <button className='spread-button'>
                     <img src={Spread}></img>
@@ -2330,10 +2322,10 @@ const Carousel = ({ items }) => {
                     </div>
                     </div>
                     <div className='text-modal-goods-div'>
-                      <p>Have you ever dreamed of a ton of motti? Not that much, of course, but a kilogram of the new motti flavor is waiting for you in our store. The choice of connoisseurs.</p>
+                      <p>Ви коли-небудь мріяли про тонну мотті? Не так багато, звичайно, але кілограм нового смаку мотті чекає на вас у нашому магазині. Вибір поціновувачів.</p>
                     </div>
                     <div className='add-modal-div'>
-                    <input className='add-modal-button' type='button' value='Add to cart' />
+                    <input className='add-modal-button' type='button' value='В кошик' />
                     </div>
                      </div>
                     </Modal>
@@ -2362,7 +2354,7 @@ const Carousel = ({ items }) => {
                       <h2 className='block-month'>6 - МІСЯЦІВ</h2>
                       </div>
                       <div>
-                      <h3 className='text-title-block text-subtitle-block'>ОТРИМУЙ 3 КОРОБКИ ТА ЗБЕРЕЖИ 30$</h3>
+                      <h3 className='text-title-block text-subtitle-block'>ОТРИМУЙ 3 КОРОБКИ ТА ЗБЕРЕЖИ 30€</h3>
                       </div>
                       </div>
                       <div className='best-value-div'>
@@ -2370,10 +2362,10 @@ const Carousel = ({ items }) => {
                       </div>
                       </div>
                       <div className='price-div'>
-                      <h3 className='text-title-block'><span className='price-block'>$49.99</span> USD ЗА КОРОБКУ</h3>
+                      <h3 className='text-title-block'><span className='price-block'>€49.99</span> ЗА КОРОБКУ</h3>
                       </div>
                       <div className='description-subcribtion-div'>
-                      <h4 className='description-subcribtion-block'>Ви будете отримувати рахунок на суму $149.97 кожні 6 місяців.</h4>
+                      <h4 className='description-subcribtion-block'>Ви будете отримувати рахунок на суму €149.97 кожні 6 місяців.</h4>
                       </div>
                       <div className='line-subcribtion-div'></div>
                       <div className='list-subcribtion-div'>
@@ -2397,7 +2389,7 @@ const Carousel = ({ items }) => {
                     <div className='top-box-div'>
                       <div>
                         <div className='month-div'>
-                      <h2 className='block-month'>1 - МІСЯЦІВ</h2>
+                      <h2 className='block-month'>1 - МІСЯЦЬ</h2>
                       </div>
                       <div>
                       <h3 className='text-title-block text-subtitle-block'>ПЛАТИ ЗА ОДНУ КОРОБКУ</h3>
@@ -2408,10 +2400,10 @@ const Carousel = ({ items }) => {
                       </div>
                       </div>
                       <div className='price-div'>
-                      <h3 className='text-title-block'><span className='price-block'>$59.99</span> USD ЗА КОРОБКУ</h3>
+                      <h3 className='text-title-block'><span className='price-block'>€59.99</span> ЗА КОРОБКУ</h3>
                       </div>
                       <div className='description-subcribtion-div'>
-                      <h4 className='description-subcribtion-block'>Ви будете отримувати рахунок на суму $59.99 кожен місяць.</h4>
+                      <h4 className='description-subcribtion-block'>Ви будете отримувати рахунок на суму €59.99 кожен місяць.</h4>
                       </div>
                       <div className='line-subcribtion-div'></div>
                       <div className='list-subcribtion-div'>

@@ -41,6 +41,37 @@ function App() {
 }
 
 export default function SellerGoodsPosition() {
+
+    const navigate = useNavigate();
+
+    const handleCompanyClick = () => {
+        navigate("/seller/company");
+    };
+
+    const handleProfileClick = () => {
+        navigate("/seller/profile");
+    };
+
+    const handlePromotionsClick = () => {
+        navigate("/seller/promotions");
+    };
+
+    const handlePositionsClick = () => {
+        navigate("/seller/positions");
+    };
+
+    const handleAddPositionClick = () => {
+        navigate("/seller/positions/add");
+    };
+
+    const handleCategoriesClick = () => {
+        navigate("/seller/categories");
+    };
+
+    const handleMainClick = () => {
+        navigate("/");
+    };
+
     return (
         <body className='seller-body'>
             <div className='seller-div'>
@@ -55,7 +86,7 @@ export default function SellerGoodsPosition() {
                 </div>
 
                 <div className='seller-buttons-div seller-buttons-option-company-div'>
-                    <div>
+                    <div onClick={handleMainClick}>
                     <button className='left-seller-button'><img src={MainSeller} className='img-seller-left'></img>Головна</button>
                     </div>
                     <div>
@@ -64,13 +95,13 @@ export default function SellerGoodsPosition() {
                     <div>
                     <details className='seller-details'>
                     <summary><img src={GoodsSeller} className='img-seller-left'></img>Товари і послуги</summary>
-                    <div>
+                    <div onClick={handleCategoriesClick}>
                     <button className='left-seller-subbutton'>Категорії</button>
                     </div>
-                    <div>
+                    <div onClick={handlePositionsClick}>
                     <button className='left-seller-subbutton left-seller-subbutton-open'>Позиції</button>
                     </div>
-                    <div>
+                    <div onClick={handlePromotionsClick}>
                     <button className='left-seller-subbutton'>Акції та промокоди</button>
                     </div>
                     <div>
@@ -85,21 +116,12 @@ export default function SellerGoodsPosition() {
                     <button className='left-seller-button'><img src={PenSeller} className='img-seller-left'></img>Відгуки</button>
                     </div>
                     <div>
-                    <button className='left-seller-button'><img src={ClientSeller} className='img-seller-left'></img>Клієнти</button>
-                    </div>
-                    <div>
-                    <button className='left-seller-button'><img src={AnaliticSeller} className='img-seller-left'></img>Аналітика</button>
-                    </div>
-                    <div>
-                    <button className='left-seller-button'><img src={WalletSeller} className='img-seller-left'></img>Гаманець компанії</button>
-                    </div>
-                    <div>
                     <details className='seller-details'>
                     <summary><img src={OptionSeller} className='img-seller-left'></img>Налаштування</summary>
-                    <div>
+                    <div onClick={handleCompanyClick}>
                     <button className='left-seller-subbutton'>Компанія</button>
                     </div>
-                    <div>
+                    <div onClick={handleProfileClick}>
                     <button className='left-seller-subbutton'>Профіль</button>
                     </div>
                     <div>
@@ -130,7 +152,7 @@ export default function SellerGoodsPosition() {
             <img src={BigGoodsSeller} className='img-seller-left'></img>
             <p>Перелік позицій</p>
             <div className='save-seller-button-div save-seller-button-div-pos'>
-            <button className='save-seller-button'>Додати позицію</button>
+            <button className='save-seller-button' onClick={handleAddPositionClick}>Додати позицію</button>
             </div>
             </div>
             

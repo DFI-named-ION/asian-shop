@@ -994,7 +994,7 @@ h1, h2, h3, h4, p{
 
 .price-img-div{
     position: relative;
-    width: 129px;
+    width: 136px;
     height: 45px;
     background-color: #EAE5D9;
     bottom: 45px;
@@ -1094,8 +1094,8 @@ h1, h2, h3, h4, p{
 .title-auth-block-div h4{
     font-size: 230%;
     font-weight: 700;
-    margin-left: 40%;
-    margin-bottom: 2%;
+    text-align: center;
+    margin-bottom: 10%;
 }
 
 .right-auth{
@@ -1121,6 +1121,8 @@ h1, h2, h3, h4, p{
     height: 80%;
     margin-top: 100px;
     margin-bottom: 128px;
+    margin-top: 2%;
+    margin-bottom: 2.5%;
     margin-left: 3%;
     padding-top: 5%;
     padding-bottom: 1%;
@@ -1150,6 +1152,15 @@ h1, h2, h3, h4, p{
     margin-right: 10%;
 }
 
+.left-auth-reg-shop{
+    margin-top: 10%;
+    font-size:600%;
+    font-weight: 700;
+    color: #EAE5D9;
+    margin-right: 10%;
+    white-space: nowrap;
+}
+
 .left-title-auth{
     margin-left: 15%;
     margin-top: 10%;
@@ -1159,6 +1170,21 @@ h1, h2, h3, h4, p{
 .left-title-auth-plus{
     margin-left: 55%;
     margin-top: 4%;
+}
+
+.left-title-auth-shop{
+    margin-left: 15%;
+    margin-top: 30%;
+    margin-bottom: -10%;
+}
+
+.left-title-auth-plus-shop{
+    margin-left: 55%;
+    margin-top: 4%;
+}
+.left-title-auth-reg-plus-shop{
+    margin-left: 20%;
+    margin-top: 0%;
 }
 
 .left-title-shop-auth{
@@ -1248,7 +1274,7 @@ h1, h2, h3, h4, p{
 }
 
 .title-auth-block-div-reg{
-    margin-left: -73px;
+    text-align: center;
 }
 
 .login-button{
@@ -1330,7 +1356,13 @@ h1, h2, h3, h4, p{
 .lines-or{
     display: flex;
     justify-content: space-around;
-    margin-top: 5%;
+    margin-top: 7%;
+    
+}
+.lines-or-reg{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 15%;
     
 }
 
@@ -1383,6 +1415,13 @@ h1, h2, h3, h4, p{
 .footer-auth{
     margin-top: 40px;
     text-align: center;
+}
+
+.footer-auth-shop{
+    margin-top: 36%;
+}
+.footer-auth-shop-reg{
+    margin-top: 16%;
 }
 
 input{
@@ -1565,7 +1604,7 @@ input{
     padding-left: 70px;
     padding-bottom: 20px;
     margin-top: 105px;
-    background: linear-gradient(90deg, rgba(186,134,33,0.4) 0%, rgba(255,250,120,0) 100%);
+    background: linear-gradient(108deg, rgba(186,134,33,0.4) 0%, rgba(255,250,120,0) 100%);
     display: flex;
     color: #647484;
     backdrop-filter: blur(5px);
@@ -1580,8 +1619,10 @@ input{
 .ProfilePage-body{
     background-color: #EAE5D9;
     font-family: "Montserrat", sans-serif;
-    max-width: 5000px;
-    min-width: 1900px;
+    /* max-width: 5000px;
+    min-width: 1900px; */
+    width: 100%;
+    height: 100%;
 }
 
 .top-left-block-div{
@@ -1643,7 +1684,7 @@ input{
     padding-left: 70px;
     padding-bottom: 25px;
     margin-top: 20px;
-    background: linear-gradient(90deg, rgba(186,134,33,0.4) 0%, rgba(255,250,120,0) 100%);
+    background: linear-gradient(108deg, rgba(186,134,33,0.4) 0%, rgba(255,250,120,0) 100%);
     display: flex;
     color: #647484;
     backdrop-filter: blur(5px);
@@ -1665,7 +1706,7 @@ input{
     padding-left: 70px;
     padding-bottom: 20px;
     margin-top: 20px;
-    background: linear-gradient(90deg, rgba(186,134,33,0.4) 0%, rgba(255,250,120,0) 100%);
+    background: linear-gradient(108deg, rgba(186,134,33,0.4) 0%, rgba(255,250,120,0) 100%);
     display: flex;
     color: #647484;
     backdrop-filter: blur(5px);
@@ -1895,7 +1936,7 @@ input{
 .dropdown-content-header {
     display: none;
     position: absolute;
-    background-color: #951717;
+    background-color: #751313;
     width: 514px;
     /* height: 1138px; */
     z-index: 1;
@@ -2006,38 +2047,11 @@ input{
     border-radius: 10px;
   }
 
-  .dropdown-details summary{
-    background-color: transparent;
-    background: radial-gradient(circle, rgba(186,33,33,0.1) 0%, rgba(255,250,120,0.1) 100%);
-    background-repeat: no-repeat;
-    width: 474px;
-    height: 74px;
-    border: 0px;
-    text-align: start;
-    color: #EAE5D9;
-    font-size: 20px;
-    font-weight: 500;
-    padding-left: 30px;
-    margin-bottom: 6px;
+  .dropdown-button-exit{
     border-radius: 40px;
-    padding-top: 20px;
     margin-top: 20px;
+    margin-bottom: 0px;
   }
-
-  .dropdown-details summary::before {
-    content: url('./images/icons/arrowBottom.svg');
-    position: absolute;
-    left: 450px;
-  }
-
-  .dropdown-details[open] > summary::before {
-    transform: rotate(180deg);
-}
-
-  details > summary::marker {
-    display: none;
-    content: ''; 
-}
 
 .dropdown-details summary:hover{
     background: linear-gradient(90deg, rgba(186,134,33,0.5) 0%, rgba(255,250,120,0.1) 100%);
@@ -2163,8 +2177,10 @@ input{
     background: linear-gradient(111deg, rgba(240,207,202,1) 0%, rgba(255,253,221,1) 100%);
     color: #182531;
     font-family: "Montserrat", sans-serif;
-    max-width: 5000px;
-    min-width: 1903px;
+    /* max-width: 5000px;
+    min-width: 1903px; */
+    width: 100%;
+    height: 100%;
   }
 
   .left-seller{
@@ -2323,7 +2339,7 @@ input{
   }
 
   .head-seller{
-    width: 1540px;
+    min-width: 1565px;
     height: 84px;
     background-color: #AA4A47;
     padding-top: 15px;
@@ -2892,6 +2908,13 @@ input{
     margin-left: 433px;
   }
 
+  .Captcha-div{
+    text-align: center;
+  }
+  .Captcha-div-shop{
+    text-align: center;
+    margin-top: 4%;
+  }
   .Captcha{
     /* display: inline-block;
     margin: auto; */
@@ -3163,7 +3186,8 @@ input{
     font-family: 'Montserrat', sans-serif;
     background: radial-gradient(102.97% 217.23% at 1.86% 0%, rgba(186, 33, 33, 0.25) 0%, rgba(255, 250, 120, 0.25) 100%);
     overflow: hidden;
-    height: 100vh;
+    width: 100%;
+    min-height: 1220px;
 }
 
 .market-menu-body h1 {
