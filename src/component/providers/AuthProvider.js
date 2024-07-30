@@ -12,7 +12,19 @@ export const useAuth = () => useContext(AuthContext);
 export const AuthProvider = ({ children }) => {
     const { handleMethod } = useErrors();
     const { encryptJwtToken } = useContext(JwtContext);
-    const [user, setUser] = useState(null);
+    const [user, setUser] = useState({
+        email: "user.email",
+        lastName: "",
+        firstName: "",
+        middleName: "",
+        sex: false,
+        phones: [''],
+        addresses: [{city: '', street: '', house: '', apartment: ''}],
+        recipients: [],
+        doPrint: false,
+        birthday: "",
+        language: ""
+      });
     const [pending, setPending] = useState(true);
 
     useEffect(() => {
@@ -24,7 +36,7 @@ export const AuthProvider = ({ children }) => {
             const response = await axios.get(`${process.env.REACT_APP_WEB_API_BASE_URL}/Data/fetchData?fields=displayName;isVerified;email;`);
             setUser(response.data.data);
         } catch (error) {
-            setUser(null);
+            // setUser(null);
         } finally {
             setPending(false);
         }
