@@ -37,6 +37,31 @@ export default function Authorization() {
         }
     }, [user, navigate]);
 
+    useEffect(() => {
+        const handleMouseMove = (e) => {
+          const parallax = document.getElementById('parallax');
+          const rect = parallax.getBoundingClientRect();
+          const centerX = rect.left + rect.width / 2;
+          const centerY = rect.top + rect.height / 2;
+          const mouseX = e.clientX;
+          const mouseY = e.clientY;
+          const moveX = (mouseX - centerX) * -0.04;
+          const moveY = (mouseY - centerY) * -0.04;
+    
+          const limit = 10;
+          const limitedMoveX = Math.max(Math.min(moveX, limit), -limit);
+          const limitedMoveY = Math.max(Math.min(moveY, limit), -limit);
+    
+          parallax.style.transform = `translate(${limitedMoveX}px, ${limitedMoveY}px)`;
+        };
+    
+        document.addEventListener('mousemove', handleMouseMove);
+    
+        return () => {
+          document.removeEventListener('mousemove', handleMouseMove);
+        };
+      }, []);
+
     const [isErrorModalOpen, setIsErrorModalOpen] = useState(false);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -83,23 +108,6 @@ export default function Authorization() {
         e.preventDefault();
         navigate("/");
     };
-
-    document.addEventListener('mousemove', function(e) {
-        const parallax = document.getElementById('parallax');
-        const rect = parallax.getBoundingClientRect();
-        const centerX = rect.left + rect.width / 2;
-        const centerY = rect.top + rect.height / 2;
-        const mouseX = e.clientX;
-        const mouseY = e.clientY;
-        const moveX = (mouseX - centerX) * -0.04;
-        const moveY = (mouseY - centerY) * -0.04;
-    
-        const limit = 10;
-        const limitedMoveX = Math.max(Math.min(moveX, limit), -limit);
-        const limitedMoveY = Math.max(Math.min(moveY, limit), -limit);
-    
-        parallax.style.transform = `translate(${limitedMoveX}px, ${limitedMoveY}px)`;
-    });
 
     return (
         <body className='authorization-body'>
