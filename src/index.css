@@ -391,7 +391,7 @@ h1, h2, h3, h4, p{
 }
 
 .left-box-div{
-    padding-top: 4%;
+    padding-top: 134.5px;
 }
 
 .right-box-woman{
@@ -1104,8 +1104,7 @@ h1, h2, h3, h4, p{
     border-radius: 40px;
     width: 664px;
     height: 80%;
-    /*position: relative;*/
-    /* margin-top: 10%; */
+    margin-top: 40px;
     margin-bottom: 5%;
     margin-left: 3%;
     padding-top: 5%;
@@ -1120,8 +1119,8 @@ h1, h2, h3, h4, p{
     border-radius: 40px;
     width: 664px;
     height: 80%;
-    margin-top: 2%;
-    margin-bottom: 2%;
+    margin-top: 100px;
+    margin-bottom: 128px;
     margin-left: 3%;
     padding-top: 5%;
     padding-bottom: 1%;
@@ -1261,7 +1260,7 @@ h1, h2, h3, h4, p{
     cursor: pointer;
     border:0px;
     font-weight: 600;
-    font-size: 150%;
+    font-size: 20px;
     margin-left: 85px;
     justify-content: center;
 }
@@ -1320,11 +1319,8 @@ h1, h2, h3, h4, p{
     position: relative;
 }
 
-.line-text-block-bottom{
-    height: 4px;
-    background-color: #647484;
-    border-radius: 5px;
-    width: 530px;
+.line-text-block-top{
+    top:-27px
 }
 
 .line-text-block_plus{
@@ -1409,8 +1405,6 @@ input{
 }
 
 .background-mail-div{
-    background-image: url(./images/img/background.png);
-    background-size: cover;
     width: 100%;
     height: 100%;
     background-repeat: no-repeat;
@@ -1483,6 +1477,12 @@ input{
 
 .mail-button{
     margin-top: 40px;
+}
+
+.error-password-block{
+    position: absolute;
+        left: -370px;
+        top: 255px
 }
 
 /* Password change */
