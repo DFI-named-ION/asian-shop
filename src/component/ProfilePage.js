@@ -34,6 +34,7 @@ import Wallet from '../images/icons/wallet.svg';
 import Procent from '../images/icons/procent.svg';
 import Case from '../images/icons/case.svg';
 import History from '../images/icons/history.svg';
+import PenProfile from '../images/icons/pen-profile.svg';
 
 function App() {
     return <Basket />;
@@ -54,6 +55,7 @@ function App() {
     return <Facebook />;
     return <Tiktok />;
     return <Qr />;
+    return <PenProfile />;
   }
 
 export default function ProfilePage() {
@@ -471,9 +473,14 @@ export default function ProfilePage() {
                             </div>
                             <div className='column-profile-div'>
                             <h4>Електронна пошта</h4>
+                            <div className='email-dis-profile'>
                             <p className='input-profile'>
-                              <input className='line-profile' type='email' name='email' placeholder='email@gmail.com' required value={newUser.email}/>
+                              <input className='line-profile' type='email' name='email' disabled placeholder='email@gmail.com' required value={newUser.email}/>
                             </p>
+                            <a href='#' className='icon-profile'>
+                            <img src={PenProfile}></img>
+                            </a>
+                            </div>
                             <div className='checkbox-profile-div'>
                               <p className='input-profile'>
                                   <input className='checkbox-profile' type='checkbox' name='doPrint' required onChange={handleInputChange} checked={newUser.doPrint}/>

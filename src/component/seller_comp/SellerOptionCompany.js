@@ -136,8 +136,10 @@ export default function SellerOptionCompany() {
             </div>
             <div className='cabinet-seller-div'>
             <div className='head-seller'>
+            <div>
             <img src={BigOptionSeller} className='img-seller-left'></img>
             <p>Компанія</p>
+            </div>
             <div className='save-seller-button-div'>
             <button className='save-seller-button'>Зберегти зміни</button>
             </div>

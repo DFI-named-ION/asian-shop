@@ -142,8 +142,10 @@ export default function SellerGoodsCategories() {
             </div>
             <div className='cabinet-seller-div'>
             <div className='head-seller'>
+                <div>
             <img src={BigGoodsSeller} className='img-seller-left'></img>
             <p>Управління категоріями товарів</p>
+            </div>
             </div>
             <div className='right-seller'>
                     <div className='top-option-company'>

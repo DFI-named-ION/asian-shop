@@ -156,13 +156,15 @@ export default function SellerOptionProfile() {
             </div>
             <div className='cabinet-seller-div'>
             <div className='head-seller'>
+                <div>
             <img src={BigOptionSeller} className='img-seller-left'></img>
             <p>Профіль</p>
+            </div>
             <div className='save-seller-button-div'>
             <button className='save-seller-button'>Зберегти зміни</button>
             </div>
             </div>
-            <div className='right-seller'>
+            <div className='right-seller right-seller-bottom'>
                 {/* <div className='sakura-seller-div'>
                     <img src={SakuraSeller} className='sakura-seller'></img>
                     </div> */}
