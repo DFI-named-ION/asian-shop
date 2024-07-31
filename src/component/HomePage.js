@@ -452,7 +452,7 @@ const Carousel = ({ items }) => {
                 <Carousel items={['./karusel1.jpg', './karusel2.jpg', './karusel3.jpg', './karusel4.jpg', './karusel5.jpg']}/>
                     <div className='right-description-div'>
                 <div className='subtitle-div'>
-                  <h3 className='subtitle'>КОЖНА КОРОБКА ТРИЩАЄ З</h3>
+                  <h3 className='subtitle'>КОЖНА КОРОБКА ВМІЩАЄ</h3>
                 </div>
                 <div className='title-description-div'>
                   <h2 className='title-basis title-desc'>Закуски, посмішки та багато іншого.</h2>

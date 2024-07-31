@@ -136,8 +136,10 @@ export default function Seller() {
             </div>
             <div className='cabinet-seller-div'>
             <div className='head-seller'>
+            <div>
             <img src={BigOptionSeller} className='img-seller-left'></img>
             <p>Компанія</p>
+            </div>
             </div>
             <div className='text-cabinet-seller'>
                     <h1>Кабінет продавця</h1>

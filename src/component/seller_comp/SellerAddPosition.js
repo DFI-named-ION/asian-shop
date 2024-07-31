@@ -137,9 +137,11 @@ export default function SellerAddPosition() {
             </div>
             <div className='cabinet-seller-div'>
             <div className='head-seller'>
+                <div>
             <img src={BigGoodsSeller} className='img-seller-left'></img>
             <p>Нова позиція</p>
-            <div className='save-seller-button-div save-seller-button-div-width'>
+            </div>
+            <div className='save-seller-button-div'>
             <button className='save-seller-button'>Додати товар</button>
             </div>
             </div>
@@ -193,7 +195,7 @@ export default function SellerAddPosition() {
                                 <div className='block-input-seller'>
                                 <p className='name-input-seller'>Ціна <span>*</span></p>
                                 <p className='text-input-seller text-input-short-seller'>
-                                <input type='text' placeholder="200₴" required></input>
+                                <input type='text' placeholder="10€" required></input>
                                 <div className='short-line-seller'></div>
                                 </p>
                             <div className='block-input-seller'>

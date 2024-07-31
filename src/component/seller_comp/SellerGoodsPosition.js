@@ -148,9 +148,11 @@ export default function SellerGoodsPosition() {
 
             </div>
             <div className='cabinet-seller-div'>
-            <div className='head-seller head-seller-pos'>
+            <div className='head-seller'>
+                <div>
             <img src={BigGoodsSeller} className='img-seller-left'></img>
             <p>Перелік позицій</p>
+            </div>
             <div className='save-seller-button-div save-seller-button-div-pos'>
             <button className='save-seller-button' onClick={handleAddPositionClick}>Додати позицію</button>
             </div>

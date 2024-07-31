@@ -158,8 +158,8 @@ export default function SellerGoodsPromotion() {
             </div>
             <div className='cabinet-seller-div'>
             <div className='head-seller'>
+                <div>
             <img src={BigGoodsSeller} className='img-seller-left'></img>
-            <div className='title-head-seller-width'>
             <p>Акції і промокоди</p>
             </div>
             <div className='save-seller-button-div save-seller-button-div-width'>
@@ -281,10 +281,10 @@ export default function SellerGoodsPromotion() {
                                 </div>
                                 <div className='radio-flex-div-seller'>
                                 <div class="radio-select-seller-div" id='block-4'>
-                                <input className='radio-text-seller radio-text-seller-short' type='text' placeholder='200'></input>
+                                <input className='radio-text-seller radio-text-seller-short' type='text' placeholder='10'></input>
                                  </div>
                                  <div>
-                                 <p className='dollar-seller'>₴</p>
+                                 <p className='dollar-seller'>€</p>
                                  </div>
                                  </div>
                                 <div className='radio-goods-seller-div'>
