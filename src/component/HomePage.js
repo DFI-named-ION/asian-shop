@@ -353,14 +353,57 @@ const Carousel = ({ items }) => {
                 <div className='head-nav-div'>
                     <a className='header-link' href='https://www.figma.com/'>Коробки</a>
                 </div>
-                <div className='head-nav-div'>
+                <div className='head-nav-div dropdown-header'>
                     <a href='#' className='icon-head'>
                         <img src={Basket}></img>
                     </a>
+                    <div className="dropdown-basket-header">
+                      <h2>Кошик</h2>
+
+                      {/* Пустий кошик */}
+
+                      <h2 className='basket-zero'>Кошик порожній</h2>
+                      <h4>Подивись наш каталог, обов'язково щось знайдеш</h4>
+                      <button className='market-basket-button'>Каталог</button>
+
+                      {/* Повний кошик */}
+
+                      {/* <div className='boxes-basket'>
+                        <div className='box-basket'>
+                          <div className='img-basket-div'></div>
+                          <div className='title-good-basket'>
+                            <h3>Name</h3>
+                          </div>
+                          <div className='quantity-of-goods'>
+                            <div className='plus-minus-basket'>
+                              <p>
+                              +
+                              </p>
+                            </div>
+                            <div className='number-good-basket'>
+                              <input type='number' content='1'>
+                              </input>
+                            </div>
+                            <div className='plus-minus-basket minus-basket'>
+                            <p>
+                              -
+                              </p>
+                              </div>
+                          </div>
+                          <div className='price-basket'>
+                            <p>€25.60</p>
+                          </div>
+                        </div>
+                      </div> */}
+                    </div>
+
                 </div>
                 <div className='head-nav-div dropdown-header'>
                     <a href='#' className='icon-head' onClick={handleHeadClick}>
-                        <img src={Profile}></img>
+                        {/* <img src={Profile}></img> */}
+                        <div className='profile-avto'>
+                          <p>VK</p>
+                        </div>
                     </a>
                     {user && (
                         <div className="dropdown-content-header" style={{ display: isProfileModalOpen ? "block" : "none" }}>
@@ -2501,7 +2544,7 @@ const Carousel = ({ items }) => {
               <div className='bottom-footer-div'>
               
                 <div>
-              <h3 className='sakuratails'>2024 SakuraTails</h3>
+              <p className='sakuratails'>2024 SakuraTails</p>
               </div>
                   <ul>
                   <div className='social-box-div'>
