@@ -72,14 +72,70 @@ namespace AsianStoreWebAPI.Services
             var to = new MailAddress(user.Email);
             var subject = "Verification code";
             var body = $@"
-                    <div style='margin: 0 auto; border: 1px dashed black; text-align: center; width: 640px; margin-top: 50px; background-color: #951717; font-family: Montserrat, sans-serif;'>
-                        <h1 style='padding: 20px; color: #EAE5D9; font-weight: 600;'>Asian store</h1>
-                        <hr style='color: #EAE5D9;'/>
-                        <h6 style='background-color: #EAE5D9; padding: 20px; font-weight: 400; font-size: 14pt;'>Hi! This is Asian store.<br/>We are sending you this email with verification code that will help you follow the registration process!</h6>
-                        <hr style='color: #EAE5D9;'/>
-                        <h1 style='letter-spacing: 10px; color: #EAE5D9; padding: 50px; font-weight: 800; font-size: 40pt;'>{code}</h1>
-                        <h6 style='background-color: #EAE5D9; margin-bottom: 0px; padding: 20px; font-size: 14pt;'>Best wishes!</h6>
-                    </div>";
+                <link href='https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap' rel='stylesheet' type='text/css'>
+                <div style='font-family: Montserrat, sans-serif;
+                    font-weight: bold;
+                    width: 100%;
+                    background-color: #e6d6c8;
+                    margin: auto;
+                    position: relative;'>
+                <div style='font-weight: 700;
+                font-size: 1000%;
+                color: #951717;
+                text-align: center;
+                letter-spacing: -2%;
+
+                position: absolute;
+                top: 20%; 
+                left: 0%;
+                right: 0%;
+                z-index: 2;'>Ласкаво просимо</div>
+                <img src='https://firebasestorage.googleapis.com/v0/b/asianstoreauthtest.appspot.com/o/system%2Fright-message.svg?alt=media&token=4d52365a-3784-4220-a06b-e12ba4a9f144' style='display: block;
+                position: absolute;
+                width: 55%;
+                left: 45%;
+                top: 1%;
+                z-index: 2;'/>
+                <div style='position: absolute;
+                top: 37%;
+                left: 33%;
+                z-index: 3;
+                background: linear-gradient(90deg, rgba(186,33,33,0.1) 0%, rgba(255,250,120,0.1) 100%);
+                backdrop-filter: blur(5px); 
+                border-radius: 20px;
+                width: 34%;
+                padding-top: 2%;
+                padding-bottom: 2%;'>
+                    <div style='font-weight: 450;
+                    font-size: 110%;
+                    color: #951717;
+                    padding-left: 12%;'>Ми раді, що ви можете розпочати роботу.</div>
+                    <div style='font-weight: 450;
+                    font-size: 110%;
+                    color: #951717;
+                    padding-left: 12%;'>Вам потрібно підтвердити свій обліковий запис.</div>
+                    <div style='font-weight: 450;
+                    font-size: 110%;
+                    color: #951717;
+                    padding-left: 12%;'>Введіть код нижче</div>
+                    <div style='padding-top: 3%;
+                    padding-bottom: 3%;
+                    font-weight: 550;
+                    font-size: 400%;
+                    color: #951717;
+                    text-align: center;'>{code}</div>
+                    <div style='font-weight: 450;
+                    font-size: 97%;
+                    color: #951717;
+                    padding-left: 12%;
+                    padding-right: 10%;'>У разі виникненні запитань, дайте відповідь на цей електронний лист - ми завжди раді вам допомогти.</div>
+                </div>
+                <img src='https://firebasestorage.googleapis.com/v0/b/asianstoreauthtest.appspot.com/o/system%2Fleft-message.svg?alt=media&token=b380723f-e2c8-40cb-b17d-ca8128f37db9' style='position: relative;
+                padding-top: 4%;
+                width: 50%;
+                display: block;
+                z-index: 4;'/>
+            </div>";
             await SendEmailAsync(from, to, subject, body);
         }
 
@@ -92,14 +148,66 @@ namespace AsianStoreWebAPI.Services
             var to = new MailAddress(user.Email);
             var subject = "Password reset";
             var body = $@"
-                    <div style='margin: 0 auto; border: 1px dashed black; text-align: center; width: 640px; margin-top: 50px; background-color: #951717; font-family: Montserrat, sans-serif;'>
-                        <h1 style='padding: 20px; color: #EAE5D9; font-weight: 600;'>Asian store</h1>
-                        <hr style='color: #EAE5D9;'/>
-                        <h6 style='background-color: #EAE5D9; padding: 20px; font-weight: 400; font-size: 14pt;'>Hi! This is Asian store.<br/>We are sending you this email that will help you reset your password!</h6>
-                        <hr style='color: #EAE5D9;'/>
-                        <h1><a style='color: #EAE5D9; padding: 50px; font-weight: 800; font-size: 15pt; text-decoration: none;' href='{url}'>Click on me!</a></h1>
-                        <h6 style='background-color: #EAE5D9; margin-bottom: 0px; padding: 20px; font-size: 14pt;'>Best wishes!</h6>
-                    </div>";
+                    <link href='https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap' rel='stylesheet' type='text/css'>
+    <div style='font-family: Montserrat, sans-serif;
+                font-weight: bold;
+                width: 100%;
+                background-color: #e6d6c8;
+                margin: auto;
+                position: relative;'>
+        <div style='font-weight: 700;
+                    font-size: 1000%;
+                    color: #951717;
+                    text-align: center;
+                    letter-spacing: -2%;
+                    position: absolute;
+                    top: 20%; 
+                    left: 0%;
+                    right: 0%;
+                    z-index: 2;'>Скидання паролю</div>
+        <img src='https://firebasestorage.googleapis.com/v0/b/asianstoreauthtest.appspot.com/o/system%2Fright-message.svg?alt=media&token=4d52365a-3784-4220-a06b-e12ba4a9f144' style='display: block;
+                                        position: absolute;
+                                        width: 55%;
+                                        left: 45%;
+                                        top: 1%;
+                                        z-index: 2;'/>
+        <div style='position: absolute;
+                    top: 39%;
+                    left: 34%;
+                    z-index: 3;
+                    background: linear-gradient(90deg, rgba(186,33,33,0.1) 0%, rgba(255,250,120,0.1) 100%);
+                    backdrop-filter: blur(5px); 
+                    border-radius: 20px;
+                    width: 32%;
+                    padding-top: 3%;
+                    padding-bottom: 3%;'>
+            <div style='font-weight: 450;
+                        font-size: 110%;
+                        color: #951717;
+                        padding-left: 12%;'>Будь ласка, натисніть на посилання нижче, щоб скинути пароль:</div>
+            <div style='padding-top: 3%;
+                        padding-bottom: 3%;
+                        font-weight: 650;
+                        font-size: 100%;
+                        color: #951717;
+                        text-align: center;'><a href='{url}' style='color: #951717; text-decoration: none;'>{url}</a></div>
+            <div style='font-weight: 450;
+                        font-size: 97%;
+                        color: #951717;
+                        padding-left: 12%;
+                        padding-right: 10%;'>Якщо ви не робили цей запит, проігноруйте цей лист</div>
+            <div style='font-weight: 450;
+                        font-size: 97%;
+                        color: #951717;
+                        padding-left: 12%;
+                        padding-right: 10%;'>У paзi виникненні запитань, дайте відповідь на цей електронний лист - ми завжди раді вам допомогти.</div>
+                    </div>
+            <img src='https://firebasestorage.googleapis.com/v0/b/asianstoreauthtest.appspot.com/o/system%2Fleft-message.svg?alt=media&token=b380723f-e2c8-40cb-b17d-ca8128f37db9' style='position: relative;
+                                    padding-top: 4%;
+                                    width: 50%;
+                                    display: block;
+                                    z-index: 4;'/>
+            </div>";
             await SendEmailAsync(from, to, subject, body);
         }
 
