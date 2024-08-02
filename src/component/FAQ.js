@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import {Collapse} from 'react-collapse';
 
@@ -74,6 +74,22 @@ function App() {
     const navigate = useNavigate();
     const [isProfileModalOpen, setIsProfileModalOpen] = useState("");
 
+    useEffect(() => {
+        const faqItems = document.querySelectorAll(".faq-item");
+        faqItems.forEach(function (item) {
+          const question = item.querySelector(".faq-question");
+          const answer = item.querySelector(".faq-answer");
+    
+          question.addEventListener("click", function () {
+            if (answer.style.display === "block") {
+              answer.style.display = "none";
+            } else {
+              answer.style.display = "block";
+            }
+          });
+        });
+    }, []);
+
     const handleHeadClick = (e) => {
       e.preventDefault();
       if (!user) {
@@ -90,23 +106,6 @@ function App() {
     const handleSettingsClick = () => {
         navigate("/profile-settings")
     };
-
-    document.addEventListener("DOMContentLoaded", function() {
-        var faqItems = document.querySelectorAll(".faq-item");
-    
-        faqItems.forEach(function(item) {
-            var question = item.querySelector(".faq-question");
-            var answer = item.querySelector(".faq-answer");
-    
-            question.addEventListener("click", function() {
-                if (answer.style.display === "block") {
-                    answer.style.display = "none";
-                } else {
-                    answer.style.display = "block";
-                }
-            });
-        });
-    });
 
     return (
         <body className='faq-body'>
