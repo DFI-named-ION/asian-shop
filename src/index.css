@@ -2190,8 +2190,8 @@ input{
     display: none;
     position: absolute;
     background-color: #751313;
-    width: 514px;
-    min-height: 800px;
+    min-width: 514px;
+    max-width: 594px;
     z-index: 1;
     margin-top: 40px;
     right: 80px;
@@ -2240,16 +2240,13 @@ input{
     border-radius: 50px;
     margin-left: 33px;
     margin-top: 28px;
+    margin-bottom: 275px;
   }
 
   .market-basket-button:hover{
     border: #EAE5D9 solid 3px;
     color: #182531;
     background-color: #EAE5D9;
-  }
-
-  .boxes-basket{
-    
   }
 
   .box-basket{
@@ -2261,6 +2258,7 @@ input{
     padding-left: 19px;
     padding-right: 19px;
     display: flex;
+    margin-bottom: 5px;
   }
 
   .img-basket-div{
@@ -2282,7 +2280,7 @@ input{
 
   .quantity-of-goods{
     display: flex;
-    margin-left: 80px;
+    margin-left: 137px;
   }
 
   .plus-minus-basket{
@@ -2336,6 +2334,62 @@ input{
     font-size: 20px;
     font-weight: 600;
     color: #EAE5D9;
+  }
+
+  .dump-basket{
+    margin-left: 50px;
+    margin-top: 29px;
+    cursor: pointer;
+  }
+
+  .white-line-basket{
+    width: 100%;
+    height: 3px;
+    background-color: #EAE5D9;
+  }
+
+  .footer-basket{
+    display: flex;
+  }
+
+  .left-footer-basket p{
+    font-size: 24px;
+    color: #EAE5D9;
+    font-weight: 600;
+    margin-left: 18px;
+    margin-top: 22px;
+  }
+
+  .right-footer-basket p{
+    font-size: 24px;
+    color: #EAE5D9;
+    font-weight: 600;
+    margin-top: 22px;
+    margin-left: 294px;
+  }
+
+  .right-footer-basket p span{
+    font-size: 16px;
+    color: #EAE5D9;
+    font-weight: 600;
+  }
+
+  .pay-basket-button{
+    width: 100%;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 600;
+    color: #EAE5D9;
+    border-radius: 32px;
+    background-color: #951717;
+    border: solid 3px #951717;
+    margin-top: 30px;
+  }
+
+  .pay-basket-button:hover{
+    border: solid #EAE5D9 3px;
   }
 
   /* Seller */
@@ -2948,6 +3002,16 @@ input{
     font-weight: 400;
     margin-top: 20px;
     cursor: pointer;
+ }
+
+ .text-block-manager p{
+  color: #647484;
+  font-size: 16px;
+ }
+
+ .text-block-manager{
+  width: 250px;
+  margin-top: 15px;
  }
 
  HEAD
@@ -3626,6 +3690,65 @@ text-transform: uppercase;
 .container-pol ul li {
     margin-bottom: 10px;
 }
+
+/* FAQ */
+
+.faq-body {
+  margin: 0;
+  font-family: 'Montserrat';
+  color: #182531;
+  background: 
+      radial-gradient(102.97% 217.23% at 1.86% 0%, rgba(186, 33, 33, 0.2) 0%, rgba(255, 250, 120, 0.2) 100%), 
+      url('./images/img/background-about.png') no-repeat center center fixed;
+  background-size: cover;
+  background-position: center top;
+}
+.faq-container {
+  width: 80%;
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: left;
+  padding-bottom: 60px;
+}
+
+.faq-item {
+  margin-bottom: 15px;
+  width: 100%;
+  
+}
+
+.faq-question {
+  background: radial-gradient(102.97% 217.23% at 1.86% 0%, rgba(186, 33, 33, 0.1) 0%, rgba(255, 250, 120, 0.1) 100%);
+  border: none;
+  border-radius: 20px; /* Залишаємо округлені кути */
+  padding: 18px 60px;
+  width: 100%;
+  cursor: pointer;
+  font-size: 16px;
+  text-align: left;
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 400;
+  font-family: 'Montserrat';
+  box-shadow: 0 3px 0 0 #182531; /* Імітація нижнього border'а */
+}
+
+.faq-answer {
+  display: none;
+  font-size: 24px;
+  margin-top: 25px;
+  
+}
+
+.faq-container h1{
+  margin-top: 60px;
+  margin-bottom: 40px;
+}
+
+/* Коло профіль */
 
 .profile-avto{
     border-radius: 50%;
