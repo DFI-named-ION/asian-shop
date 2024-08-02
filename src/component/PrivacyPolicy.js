@@ -69,7 +69,7 @@ function App() {
     return <Case />;
   }
 
-  export default function HomePage() {
+  export default function PrivacyPolicy() {
     const {user} = useAuth();
     const navigate = useNavigate();
     const [isProfileModalOpen, setIsProfileModalOpen] = useState("");

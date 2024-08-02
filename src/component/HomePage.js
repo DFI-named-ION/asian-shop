@@ -41,6 +41,7 @@ import Pen from '../images/icons/pen.svg';
 import Wallet from '../images/icons/wallet.svg';
 import Procent from '../images/icons/procent.svg';
 import Case from '../images/icons/case.svg';
+import Dump from '../images/icons/dump.svg';
 
 import { useAuth } from './providers/AuthProvider';
 
@@ -83,6 +84,7 @@ function App() {
     return <Wallet />;
     return <Procent />;
     return <Case />;
+    return <Dump />;
   }
 
 export default function HomePage() {
@@ -362,13 +364,13 @@ const Carousel = ({ items }) => {
 
                       {/* Пустий кошик */}
 
-                      <h2 className='basket-zero'>Кошик порожній</h2>
+                      {/* <h2 className='basket-zero'>Кошик порожній</h2>
                       <h4>Подивись наш каталог, обов'язково щось знайдеш</h4>
-                      <button className='market-basket-button'>Каталог</button>
+                      <button className='market-basket-button'>Каталог</button> */}
 
                       {/* Повний кошик */}
 
-                      {/* <div className='boxes-basket'>
+                      <div className='boxes-basket'>
                         <div className='box-basket'>
                           <div className='img-basket-div'></div>
                           <div className='title-good-basket'>
@@ -381,7 +383,7 @@ const Carousel = ({ items }) => {
                               </p>
                             </div>
                             <div className='number-good-basket'>
-                              <input type='number' content='1'>
+                              <input type='number' value="1">
                               </input>
                             </div>
                             <div className='plus-minus-basket minus-basket'>
@@ -393,10 +395,54 @@ const Carousel = ({ items }) => {
                           <div className='price-basket'>
                             <p>€25.60</p>
                           </div>
+                          <div className='dump-basket'>
+                          <img src={Dump}></img>
+                          </div>
                         </div>
-                      </div> */}
-                    </div>
+                        <div className='box-basket'>
+                          <div className='img-basket-div'></div>
+                          <div className='title-good-basket'>
+                            <h3>Name</h3>
+                          </div>
+                          <div className='quantity-of-goods'>
+                            <div className='plus-minus-basket'>
+                              <p>
+                              +
+                              </p>
+                            </div>
+                            <div className='number-good-basket'>
+                              <input type='number' value="1">
+                              </input>
+                            </div>
+                            <div className='plus-minus-basket minus-basket'>
+                            <p>
+                              -
+                              </p>
+                              </div>
+                          </div>
+                          <div className='price-basket'>
+                            <p>€25.60</p>
+                          </div>
+                          <div className='dump-basket'>
+                          <img src={Dump}></img>
+                          </div>
+                        </div>
 
+                        <div className='white-line-basket'>
+                        </div>
+
+                        <div className='footer-basket'>
+                          <div className='left-footer-basket'>
+                            <p>Всього:</p>
+                          </div>
+                          <div className='right-footer-basket'>
+                            <p><span>€</span>153.60</p>
+                          </div>
+                        </div>
+
+                        <button className='pay-basket-button'>Сплатити</button>
+                      </div>
+                    </div>
                 </div>
                 <div className='head-nav-div dropdown-header'>
                     <a href='#' className='icon-head' onClick={handleHeadClick}>

@@ -69,7 +69,7 @@ function App() {
     return <Case />;
   }
 
-  export default function AboutUs() {
+  export default function FAQ() {
     const {user} = useAuth();
     const navigate = useNavigate();
     const [isProfileModalOpen, setIsProfileModalOpen] = useState("");
@@ -91,8 +91,25 @@ function App() {
         navigate("/profile-settings")
     };
 
+    document.addEventListener("DOMContentLoaded", function() {
+        var faqItems = document.querySelectorAll(".faq-item");
+    
+        faqItems.forEach(function(item) {
+            var question = item.querySelector(".faq-question");
+            var answer = item.querySelector(".faq-answer");
+    
+            question.addEventListener("click", function() {
+                if (answer.style.display === "block") {
+                    answer.style.display = "none";
+                } else {
+                    answer.style.display = "block";
+                }
+            });
+        });
+    });
+
     return (
-        <body className='aboutUs-body'>
+        <body className='faq-body'>
         <><><header>
               <section className='header-section'>
                 <div className='head-div'>
@@ -184,34 +201,81 @@ function App() {
               </section>
           </header>
               <main>
-              <section class="welcome-about">
-            <h1>Ласкаво просимо до SakuraTails!</h1>
-            <div class="h2-about">
-                <h2>Все почалося у</h2>
-                <p>2024</p> 
+              <div class="faq-container">
+        <h1>Питання та Відповіді (FAQ)</h1>
+
+        <div class="faq-item">
+            <button class="faq-question">Як зробити замовлення на вашому сайті?</button>
+            <div class="faq-answer">
+                <p>Щоб зробити замовлення, виберіть продукти, які вам подобаються, додайте їх до кошика та перейдіть до оформлення замовлення. Заповніть необхідну інформацію та підтвердіть замовлення. Після цього ви отримаєте підтвердження на електронну пошту.</p>
             </div>
-            <p>Наша компанія є вашим надійним провідником у світ захоплюючих азіатських смаків. Вибираючи SakuraTails, ви обираєте не просто їжу, а справжню культурну пригоду.</p>
-        </section>
+        </div>
 
-        <section class="mission-about">
-            <h3>Наша місія</h3>
-            <p>Ми прагнемо зробити азіатську кухню доступною кожному в Україні, пропонуючи ексклюзивний асортимент продуктів з різних куточків Азії. Від основних страв до екзотичних десертів – ми завжди маємо щось на свій смак.</p>
-        </section>
-
-        <section class="why-us-about">
-            <h3>Чому ми?</h3>
-            <div>
-                <p class="why-reasons-about">Інноваційність: Наша особливість – коробки з різноманітним наповненням, які є чудовим способом познайомитись з азіатською кухнею. Кожна коробка – це сюрприз, який розкриває нові горизонти смаків і вражень. Це ідеальний варіант для подарунка близьким або як новий елемент вечері вдома.</p>
-                <p class="why-reasons-about">Доступність: Ми робимо азіатську кухню легкодоступною, надаючи швидку доставку по всій Україні, що дозволяє вам насолоджуватися свіжими і якісними продуктами без зусиль.</p>
-                <p class="why-reasons-about">Вибір: Від японських закусок до корейських соусів, та китайських локшин до тайських десертів – SakuraTails пропонує широкий спектр продуктів, які постійно оновлюються.</p>
+        <div class="faq-item">
+            <button class="faq-question">Які способи оплати ви приймаєте?</button>
+            <div class="faq-answer">
+                <p>Ми приймаємо оплату банківськими картками (Visa, MasterCard), електронні платіжні системи (PayPal), а також післяплатою при отриманні товару.</p>
             </div>
-        </section>
+        </div>
 
-        <section class="competitors-about">
-            <h3>Наші конкуренти</h3>
-            <p>У сфері азіатських продуктів в Україні є чимало конкурентів, однак ми відзначаємося завдяки унікальній пропозиції та високому рівню сервісу. Враховуючи бурхливий розвиток ринку, ми продовжуємо впроваджувати нові стандарти якості та вибору для наших клієнтів.</p>
-            <p>Вибір SakuraTails – це більше, ніж покупка. Це ваш квиток в незабутню кулінарну подорож, яка обіцяє бути захоплюючою. Приєднуйтесь до нас у цій пригоді смаків і культур разом з SakuraTails!</p>
-        </section>
+        <div class="faq-item">
+            <button class="faq-question">Як довго триватиме доставка?</button>
+            <div class="faq-answer">
+                <p>Доставка зазвичай займає від 3 до 7 робочих днів залежно від вашого місцезнаходження. Ви також можете вибрати експрес-доставку за додаткову плату, яка займе 1-3 дні.</p>
+            </div>
+        </div>
+       
+        <div class="faq-item">
+            <button class="faq-question">Чи можна повернути або обміняти товар?</button>
+            <div class="faq-answer">
+                <p>Оскільки продукти харчування та напої, які ми куруємо, є швидкопсувними, а іноді мають короткий термін зберігання, всі товари, придбані через SakuraTails, є остаточними і не підлягають поверненню.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question">Чи є у вас фізичні магазини?</button>
+            <div class="faq-answer">
+                <p>Ні, ми є інтернет-магазином і здійснюємо продажі виключно онлайн. Це дозволяє нам пропонувати широкий асортимент продукції за вигідними цінами.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question">Як я можу відстежити своє замовлення?</button>
+            <div class="faq-answer">
+                <p>Після відправлення замовлення ви отримаєте електронного листа з трекінг-номером. Ви можете відстежувати своє замовлення на сайті транспортної компанії, використовуючи цей номер.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question">Чи можу я змінити своє замовлення після його оформлення?</button>
+            <div class="faq-answer">
+                <p>Якщо ваше замовлення ще не відправлено, ви можете внести зміни, зв'язавшись з нашою службою підтримки клієнтів якомога швидше. Після відправлення замовлення зміни неможливі.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question">Які країни ви обслуговуєте?</button>
+            <div class="faq-answer">
+                <p>На даний момент ми обслуговуємо клієнтів в Україні. Ми працюємо над розширенням нашої географії доставки.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question">Чи надаєте ви знижки на великі замовлення?</button>
+            <div class="faq-answer">
+                <p>Так, ми пропонуємо знижки на великі замовлення. Будь ласка, зв'яжіться з нами для отримання детальної інформації про умови знижок.</p>
+            </div>
+        </div>
+
+
+        <div class="faq-item">
+            <button class="faq-question">Як зв'язатися з вашою службою підтримки клієнтів?</button>
+            <div class="faq-answer">
+                <p>Ви можете зв'язатися з нами за допомогою форми зворотного зв'язку на сайті, електронної пошти або за телефоном, вказаним на сторінці контактів. Ми завжди раді допомогти вам!</p>
+            </div>
+        </div>
+
+    </div>
               </main></>
     
               <footer>
