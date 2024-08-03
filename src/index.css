@@ -923,7 +923,7 @@ h1, h2, h3, h4, p{
 .full-stars .rating-group {
     display: flex;
     margin-top: 20px;
-    width: 160px;
+    width: 370px;
 }
 
 .full-stars input {
@@ -951,6 +951,10 @@ h1, h2, h3, h4, p{
     fill: transparent;
 }
 
+.rating-group label{
+  margin-right: -5px;
+}
+
 .modal-reviews-text{
     font-size: 18px;
     font-weight: 600;
@@ -958,14 +962,15 @@ h1, h2, h3, h4, p{
     line-height: 24px;
     margin-left: 15px;
     font-family: "Montserrat", sans-serif;
-    width: 500px;
+    width: 100%;
     height: 10px;
+    margin-top: 2px;
 }
 
 .spread-button{
     border: 0px;
     background-color: #EAE5D9;
-    margin-left: 119px;
+    margin-left: 50px;
 }
 
 .text-modal-goods-div p{
@@ -2060,6 +2065,22 @@ input{
     border-radius: 10px;
   }
 
+  .dropdown-button img{
+    margin-top: -5px;
+  }
+
+  .dropdown-border-bottom-button img{
+    margin-top: -5px;
+  }
+
+  .dropdown-button-exit img{
+    margin-top: 1px;
+  }
+
+  .home-dropdown-p{
+    margin-top: 5px;
+  }
+
   .dropdown-button-exit{
     border-radius: 40px;
     margin-top: 20px;
@@ -2401,6 +2422,7 @@ input{
     /* max-width: 5000px;
     min-width: 1903px; */
     width: 100%;
+    /* height: 100%; */
   }
 
 
