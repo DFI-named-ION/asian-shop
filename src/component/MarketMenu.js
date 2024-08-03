@@ -16,6 +16,17 @@ import Soda from '../images/market-menu-img/Soda.png';
 import Sport from '../images/market-menu-img/Sport.png';
 import Tea from '../images/market-menu-img/Tea.png';
 import Water from '../images/market-menu-img/Water.png';
+import Bakery from '../images/market-menu-img/Bakery.png';
+import Cari from '../images/market-menu-img/Cari.png';
+import Miso from '../images/market-menu-img/Miso.png';
+import Noodles from '../images/market-menu-img/Noodles.png';
+import Rice from '../images/market-menu-img/Rice.png';
+import Seafood from '../images/market-menu-img/Seafood.png';
+import Soy from '../images/market-menu-img/Soy.png';
+import SpiceSouce from '../images/market-menu-img/Spicy souce.png';
+import Spicy from '../images/market-menu-img/Spicy.png';
+import Teokbokki from '../images/market-menu-img/Teokbokki.png';
+import Vinegar from '../images/market-menu-img/Vinegar.png';
 import Logo from '../images/logo/SakuraTails.svg';
 import Basket from '../images/icons/basket.svg';
 import Profile from '../images/icons/profile.svg';
@@ -62,6 +73,16 @@ function App() {
     return <Wallet />;
     return <Procent />;
     return <Case />;
+    return <Cari />;
+    return <Miso />;
+    return <Noodles />;
+    return <Rice />;
+    return <Seafood />;
+    return <Soy />;
+    return <SpiceSouce />;
+    return <Spicy />;
+    return <Vinegar />;
+    return <Bakery />;
 }
 
 export default function MailConfirmation() {
@@ -185,11 +206,11 @@ export default function MailConfirmation() {
             <h2>Заморожені</h2>
             <div class="category-item">
                 Морепродукти
-                {/* <img src="images/Catalog.png" alt="Морепродукти"> */}
+                <img src={Seafood} alt="Морепродукти"/>
             </div>
             <div class="category-item">
                 Випічка
-                {/* <img src="images/Catalog.png" alt="Випічка"> */}
+                <img src={Bakery} alt="Випічка"/>
             </div>
         </div>
         <div class="category-market-menu">
@@ -234,42 +255,42 @@ export default function MailConfirmation() {
             <h2>Страви</h2>
             <div class="category-item">
                 Гострі
-                {/* <img src="images/Catalog.png" alt="Гострі"> */}
+                <img src={Spicy} alt="Гострі"/>
             </div>
             <div class="category-item">
                 Локшина
-                {/* <img src="images/Catalog.png" alt="Локшина"> */}
+                <img src={Noodles} alt="Локшина"/>
             </div>
             <div class="category-item">
                 Каррі
-                {/* <img src="images/Catalog.png" alt="Каррі"> */}
+                <img src={Cari} alt="Каррі"/>
             </div>
             <div class="category-item">
                 Рис
-                {/* <img src="images/Catalog.png" alt="Рис"> */}
+                <img src={Rice} alt="Рис"/>
             </div>
             <div class="category-item">
                 Токпоккі
-                {/* <img src="images/Catalog.png" alt="Токпоккі"> */}
+                <img src={Teokbokki} alt="Токпоккі"/>
             </div>
             <div class="category-item">
                 Місо
-                {/* <img src="images/Catalog.png" alt="Місо"> */}
+                <img src={Miso} alt="Місо"/>
             </div>
         </div>
         <div class="category-market-menu">
             <h2>Соуси</h2>
             <div class="category-item">
                 Гострі
-                {/* <img src="images/Catalog.png" alt="Гострі"> */}
+                <img src={Spicy} alt="Гострі"/>
             </div>
             <div class="category-item">
                 Соєвий
-                {/* <img src={Choko} alt="Шоколад"></img> */}
+                <img src={Soy} alt="Шоколад"/>
             </div>
             <div class="category-item">
                 Оцти
-                {/* <img src="images/Catalog.png" alt="Оцти"> */}
+                <img src={Vinegar} alt="Оцти"/>
             </div>
         </div>
         <div class="category-market-menu">
