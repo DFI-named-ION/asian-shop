@@ -23,7 +23,7 @@ import Noodles from '../images/market-menu-img/Noodles.png';
 import Rice from '../images/market-menu-img/Rice.png';
 import Seafood from '../images/market-menu-img/Seafood.png';
 import Soy from '../images/market-menu-img/Soy.png';
-import SpiceSouce from '../images/market-menu-img/Spicy souce.png';
+import SpicySouce from '../images/market-menu-img/Spicy-souce.png';
 import Spicy from '../images/market-menu-img/Spicy.png';
 import Teokbokki from '../images/market-menu-img/Teokbokki.png';
 import Vinegar from '../images/market-menu-img/Vinegar.png';
@@ -79,7 +79,7 @@ function App() {
     return <Rice />;
     return <Seafood />;
     return <Soy />;
-    return <SpiceSouce />;
+    return <SpicySouce />;
     return <Spicy />;
     return <Vinegar />;
     return <Bakery />;
@@ -282,7 +282,7 @@ export default function MailConfirmation() {
             <h2>Соуси</h2>
             <div class="category-item">
                 Гострі
-                <img src={Spicy} alt="Гострі"/>
+                <img src={SpicySouce} alt="Гострі"/>
             </div>
             <div class="category-item">
                 Соєвий
