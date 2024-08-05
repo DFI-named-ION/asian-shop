@@ -3102,6 +3102,40 @@ input{
     background-color: transparent;
  }
 
+ .block-promotion{
+  display: flex;
+  border: 3px solid #647484;
+  width: 100%;
+  border-radius: 10px;
+  padding-top: 27px;
+  padding-bottom: 27px;
+  padding-left: 30px;
+  padding-right: 30px;
+  justify-content: space-between;
+  margin-bottom: 20px;
+ }
+
+ .display-promotion-block{
+  width: 100%;
+ }
+
+ .subblock-promotion p{
+  font-size: 20px;
+  font-weight: 500;
+  color: #647484;
+ }
+
+ .subblock-promotion p span{
+  font-weight: 600;
+  margin-right: 30px;
+ }
+
+ .goods-position-seller-block-promotion{
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-top: 30px;
+ }
+
  .categories-title-seller{
     width: 300px;
     height: 84px;
@@ -3455,6 +3489,8 @@ input{
 
   .goods-position-seller-block{
     display: flex;
+    flex-direction:row;
+    flex-wrap:wrap;
   }
 
   .good-position-seller{
@@ -3940,4 +3976,170 @@ text-transform: uppercase;
   font-size: 16px;
   font-weight: 400;
   color: #182531;
+}
+
+/* Market */
+
+.market-body{
+  font-family: 'Montserrat';
+  width: 100%;
+  color: #182531;
+  background: linear-gradient(119deg, rgba(186,33,33,0.25) 0%, rgba(255,250,120,0.25) 100%);
+}
+
+.market-body main{
+  padding-top: 90px;
+  padding-bottom: 90px;
+  padding-left: 150px;
+  padding-right: 100px;
+  display: flex;
+}
+
+.filter-market-div{
+  margin-right: 30px;
+  width: 285px;
+}
+
+.checkbox-market-block{
+  display: flex;
+  margin-bottom: 3px;
+}
+
+.checkbox-market-block p{
+  font-size: 18px;
+}
+
+.subfilter-market h4{
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.subfilter-market{
+  margin-bottom: 20px;
+}
+
+.summary-details-market{
+  font-size: 18px;
+  margin-bottom: 5px;
+  width: 260px;
+}
+
+.checkbox-market{
+  width: 20px;
+  height: 20px;
+  border: 1px solid #182531;
+  cursor: pointer;
+  margin-right: 4px;
+  margin-top: 4px;
+}
+
+.market-details > summary::before {
+  content: url('./images/icons/arrowLeftSmall.svg');
+  position: absolute;
+  left: 422px;
+}
+
+.market-details[open] summary::before{
+  transform: rotate(270deg);
+}
+
+.catalog-market{
+  display: flex;
+  flex-direction:row;
+  flex-wrap:wrap;
+  width: 100%;
+  margin-left: 35px;
+  
+}
+
+.good-catalog-market{
+  border: 3px #EAE5D9 solid;
+  background: linear-gradient(140deg, rgba(186,33,33,0.25) 0%, rgba(255,250,120,0.25) 55%);
+  border-radius: 10px;
+  padding-left: 16.5px;
+  padding-right: 16.5px;
+  padding-top: 31px;
+  padding-bottom: 31px;
+  width: 315px;
+  cursor: pointer;
+  margin-right: 20px;
+  margin-bottom: 40px;
+  height: 530px;
+  
+}
+
+.good-catalog-market:hover{
+  border: 3px #951717 solid;
+}
+
+.good-catalog-market img{
+  width: 277px;
+  height: 294px;
+  margin-bottom: 11px;
+}
+
+.good-catalog-market h5{
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: 11px;
+}
+
+.full-stars-good{
+  margin-left: 64.5px;
+}
+
+.price-range{
+  font-size: 16px;
+}
+
+.subfilter-market input[range]{
+  width: 100%;
+  margin-top: 24px;
+  margin-bottom: 15px;
+}
+
+.menu-range-market{
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Terms of use */
+
+.terms-body {
+  font-family: 'Montserrat';
+  color: #182531;
+  background: 
+      radial-gradient(102.97% 217.23% at 1.86% 0%, rgba(186, 33, 33, 0.2) 0%, rgba(255, 250, 120, 0.2) 100%), 
+      url('./images/img/background-about.png') no-repeat center center fixed;
+  background-size: cover;
+  background-position: center top;
+}
+
+.terms-container{
+  margin: 50px 150px 50px 150px;
+}
+.section-terms p{
+  font-size: 20px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+.terms-body main h1{
+  font-size: 48px;
+}
+.terms-body main h2{
+  font-size: 36px;
+  margin-bottom: 15px;
+  margin-top: 30px;
+}
+.terms-body main h3{
+  font-size: 32px;
+  margin-top: 30px;
+}
+.pbold-terms{
+  font-weight: bold;
+}
+.terms-body main ul{
+  margin-left: 15px;
 }
