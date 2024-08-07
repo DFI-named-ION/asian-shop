@@ -224,80 +224,100 @@ function App() {
                 </div>
 
                 <div className='right-good-page'>
-                    <div className='nav-top-good'>
-                        <p>Каталог<span>/</span>Снеки<span>/</span>Чипси</p>
-                    </div>
-                    <div className='full-stars'>
-                      <div className='rating-group rating-group-good'>
-                      <div className='stars-good-page'>
-                   <input name="fst" value="0" type="radio" disabled checked />
-                   
-                    <label for="fst-1">
-                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"/></svg>
-                   </label>
-                   <input name="fst" id="fst-1" value="1" type="radio" />
-                       
-                   <label for="fst-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" stroke="#182531" stroke-width="30" viewBox="0 0 576 512"><path d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"/></svg>
-                   </label>
-                   <input name="fst" id="fst-2" value="2" type="radio" />
-          
-                   <label for="fst-3">
-                       <svg xmlns="http://www.w3.org/2000/svg" stroke="#182531" stroke-width="30" viewBox="0 0 576 512"><path d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"/></svg>
-                   </label>
-                   <input name="fst" id="fst-3" value="3" type="radio" />
-                         
-                   <label for="fst-4">
-                       <svg xmlns="http://www.w3.org/2000/svg" stroke="#182531" stroke-width="30" viewBox="0 0 576 512"><path d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"/></svg>
-                   </label>
-                   <input name="fst" id="fst-4" value="4" type="radio" />
-                    
-                    <label for="fst-5">
-                        <svg xmlns="http://www.w3.org/2000/svg" stroke="#182531" stroke-width="30" viewBox="0 0 576 512"><path d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"/></svg>
-                    </label>
-                    <input name="fst" id="fst-5" value="5" type="radio" />
-                    </div>
-            
-                    <p className='modal-reviews-text'>1 відгуки</p>
-
-                    <button className='spread-button spread-button-good'>
-                    <img src={Spread}></img>
-                    </button>
-                    </div>
+                    <div className='choose-plan-box-page'>
+                        <p>Виберіть план</p>
                     </div>
 
-                    <div className='title-good-page'>
+                    <div className='title-box-page'>
                         <h2>
-                        Картопляні чіпси Lay's: гострі раки  
-                        <span>Код: 1</span>
+                        Підписка на коробки зі смаколиками
                         </h2>
                     </div>
 
-                    <div className='price-good-page'>
-                        <p>€6.99<span><span className='crossed-out-good'>€8.99</span>22% OFF</span></p>
+                    <div className='four-plan-box-page'>
+                        <div>
+                        <button className='plan-box-page-button'>
+                            <div>
+                                <p className='plan-box-page-big-text'>12 Місяців</p>
+                                </div>
+                                <div className='red-box-plan'>НАЙКРАЩА ЦІНА</div>
+                                <div className='plan-box-page-save-money'>
+                                <p className='plan-box-page-small-text'>Збережи €120</p>
+                                <p className='plan-box-page-big-text'>€39.99/міс</p>
+                                </div>
+                        </button>
+                        </div>
+
+                        <div>
+                        <button className='plan-box-page-button'>
+                            <div>
+                                <p className='plan-box-page-big-text'>6 Місяців</p>
+                                </div>
+                                <div className='plan-box-page-save-money'>
+                                <p className='plan-box-page-small-text'>Збережи €36</p>
+                                <p className='plan-box-page-big-text'>€43.99/міс</p>
+                                </div>
+                        </button>
+                        </div>
+
+                        <div className='four-plan-box-page'>
+                        <div>
+                        <button className='plan-box-page-button'>
+                            <div>
+                                <p className='plan-box-page-big-text'>3 Місяців</p>
+                                </div>
+                                <div className='red-box-plan'>ПОПУЛЯРНО</div>
+                                <div className='plan-box-page-save-money'>
+                                <p className='plan-box-page-small-text'>Збережи €12</p>
+                                <p className='plan-box-page-big-text'>€45.99/міс</p>
+                                </div>
+                        </button>
+                        </div>
+                        </div>
+
+                        <div className='four-plan-box-page'>
+                        <div>
+                        <button className='plan-box-page-button'>
+                            <div>
+                                <p className='plan-box-page-big-text'>1 Місяць</p>
+                                </div>
+                                <div>
+                                <p className='plan-box-page-big-text'>€49.99/міс</p>
+                                </div>
+                        </button>
+                        </div>
+                        </div>
                     </div>
 
-                    <div>
-                        <button className='add-basket-good-button'>Додати до кошику</button>
+                    <div className='inference-plan'>
+                        <div className='inference-plan-plus'>
+                        <div>
+                            <p className='inference-plan-text'>ВСЬОГО:</p>
+                            <p className='inference-plan-price'>€137.97</p>
+                        </div>
+                        <div className='inference-plan-red'>
+                            <p className='inference-plan-text'>ЗБEРЕЖИ 12€</p>
+                            <p className='inference-plan-price inference-plan-price-cross-out'>€149.97</p>
+                        </div>
                     </div>
-
-                    <div className='advantages-good'>
-                        <div className='subadvantages-good'>
-                        <div><img src={Transport}></img></div>
-                        <div><p>Безкоштовна доставка на суму понад 1000 грн</p></div>
-                        </div>
-                        <div className='subadvantages-good'>
-                        <div><img src={PriceGood}></img></div>
-                        <div><p>Щотижня нова продукція</p></div>
-                        </div>
-                        <div className='subadvantages-good'>
-                        <div><img src={Quality}></img></div>
-                        <div><p>Гарантована свіжість</p></div>
+                        <div>
+                        <button className='inference-plan-button'>ОБРАТИ ЦЕЙ ПЛАН</button>
                         </div>
                     </div>
 
-                    <div className='text-good-page'>
-                        <p>Додайте трохи хвилювання до вашого перекусу з цими спокусливими гострими картопляними чіпсами з раками від Lay's! Зануртеся в пакетик і відчуйте сміливий і вогненний смак морепродуктів, що вражає уяву. Смакуйте ці чіпси самі по собі або додавайте їх до супів, салатів чи інших страв.</p>
+                    <div className='PS-box-page'>
+                        <p>Рахунок виставляється щоквартально, скасувати можна будь-коли.<br/>
+                            <br/>
+                        Сума плюс вартість доставки розраховується при оформленні замовлення. 
+                        Всі ціни в євро
+                        </p>
+                    </div>
+
+                    <div className='text-good-page text-box-page'>
+                        <p><span>Шматочок Азії прямо на столі</span><br/>Ми доставляємо до ваших дверей досвід дегустації автентичних азіатських закусок,
+цукерок та чаю, отриманих безпосередньо від багатовікових сімейних виробників. Кожна коробка, яку ви
+купуєте, підтримує ці сімейні бізнеси в Азії та допомагає зберегти їхні
+традиції.</p>
                     </div>
 
 <div className="menu-good">
@@ -324,7 +344,7 @@ function App() {
             <div className="content-good-page">
                 {content === 'Склад продукту' && (
                     <div>
-                        <p>Склад: Картопля, рослинна олія, гостра ракова приправа, сіль, натуральні ароматизатори, антиоксиданти.</p>
+                        <p>Інгридієнти: Секрет, проте не містить молока, горіхів та глютену.</p>
                     </div>
                 )}
                 {content === 'Інформація' && (
