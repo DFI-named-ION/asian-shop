@@ -109,7 +109,7 @@ function App() {
                   </div>
                   <div className='head-right-div'>
                     <div className='head-nav-div'>
-                        <a className='header-link' href='https://www.figma.com/'>Про нас</a>
+                        <a className='header-link' href='/about'>Про нас</a>
                     </div>
                     <div className='head-nav-div'>
                         <a className='header-link' href='https://www.figma.com/'>Коробки</a>

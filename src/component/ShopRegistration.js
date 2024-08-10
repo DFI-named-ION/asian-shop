@@ -24,24 +24,24 @@ function App() {
 export default function ShopRegistration() {
 
     const { catchedError, handleMethod } = useErrors();
-    const { user, registerWithEmailAndPassword, loginWithPopup } = useAuth();
+    const { user, registerSeller, loginWithPopup } = useAuth();
     const navigate = useNavigate();
 
-    useEffect(() => {
-        if (user) {
-            if (user.isVerified) {
-                navigate("/profile-settings");
-            } else {
-                navigate("/confirmation");
-            }
-        }
-    }, [user, navigate]);
+    // useEffect(() => {
+    //     if (user) {
+    //         if (user.isVerified) {
+    //             navigate("/profile-settings");
+    //         } else {
+    //             navigate("/confirmation");
+    //         }
+    //     }
+    // }, [user, navigate]);
 
     const [name, setName] = useState("");
     const [isErrorModalOpen, setIsErrorModalOpen] = useState(false);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [cname, setCName] = useState("");
+    const [companyName, setCompanyName] = useState("");
     const [token, setToken] = useState(false);
     
     const openErrorModal = () => {
@@ -64,28 +64,28 @@ export default function ShopRegistration() {
         setPassword(e.target.value);
     };
     
-    const handleCNameChange = (e) => {
-        setPassword(e.target.value);
+    const handleCompanyNameChange = (e) => {
+        setCompanyName(e.target.value);
     };
 
     const handleTokenChange = (e) => {
-        setToken(true);
+        setToken(e);
     };
 
-    const handleAuth = async (providerOrEvent) => {
+    const handleAuth = async (e) => {
         await handleMethod(() => {
-            if (providerOrEvent.preventDefault) {
-                providerOrEvent.preventDefault();
-                const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-                if (!emailRegex.test(email)) throw "email-format-error";
-                const passRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,64}$/;
-                if (!passRegex.test(password)) throw "password-format-error";
-                if(!token) throw "recaptcha-error";
-        
-                registerWithEmailAndPassword(email, password, name);
-            } else {
-                loginWithPopup(providerOrEvent);
-            }
+            e.preventDefault();
+            const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            if (!emailRegex.test(email)) throw "email-format-error";
+            const passRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,64}$/;
+            if (!passRegex.test(password)) throw "password-format-error";
+            if (companyName.length < 5) throw "company-format-error";
+            if (!token) throw "recaptcha-error";
+
+            console.log("go");
+
+            registerSeller(email, password, name, companyName);
+            // registerWithEmailAndPassword(email, password, name);
         });
     };
 
@@ -163,7 +163,17 @@ export default function ShopRegistration() {
                             )}
                         </p>
                         <h5 className='title-line'>Назва компанії</h5>
-                        <p className='text-auth'><input className='text-block-margin-zero' type='text' name='CName' value={cname} onChange={handleCNameChange} placeholder='Best company' required></input><div className='line-text-block'></div></p>
+                        <p className='text-auth'><input className='text-block-margin-zero' type='text' name='companyName' value={companyName} onChange={handleCompanyNameChange} placeholder='Компанія' required></input><div className='line-text-block'></div></p>
+                        <p className='title-line-error'>
+                            {catchedError.tags.includes("company-field") ? (
+                                <>
+                                    {catchedError.short}
+                                    <a className='link-line-error' href='#' onClick={openErrorModal}>ⓘ</a>
+                                </>
+                            ) : (
+                                <></>
+                            )}
+                        </p>
                         <div className="Captcha-div-shop">
                                 <ReCaptcha className="Captcha"
                                     sitekey="6Le0QA8qAAAAAHq5xgAIIBAuZfy7oNG1bDazdwQF"

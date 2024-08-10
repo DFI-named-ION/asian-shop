@@ -3493,7 +3493,7 @@ input{
     flex-wrap:wrap;
   }
 
-  .good-position-seller{
+  .good-position-seller, .good-position-seller-custom {
     width: 206px;
     padding-top: 38px;
     padding-bottom: 38px;
@@ -3513,9 +3513,32 @@ input{
     border: #951717 solid 3px;
   }
 
+  .good-position-seller-custom {
+    position: relative;
+  }
+
+  .close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: transparent;
+    border: none;
+    color: #951717;
+    font-size: 32px;
+    cursor: pointer;
+    padding: 0;
+    line-height: 1;
+  }
+
+  .close-button:hover {
+    color: #ff0000;
+  }
+
   .img-position-good{
     background-color: transparent;
     border-radius: 5px;
+    width: 164px;
+    height: 164px;
   }
 
   .good-position-seller h5{

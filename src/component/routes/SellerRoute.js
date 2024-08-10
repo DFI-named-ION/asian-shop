@@ -5,7 +5,7 @@ import LoadingPage from "./LoadingPage";
 import { useData } from "../providers/DataProvider";
 import { useAuth } from "../providers/AuthProvider";
 
-const NotVerifiedRoute = () => {
+const PrivateRoute = () => {
     const { catchedError, handleMethod } = useErrors();
     const { requestData } = useData();
     const { user } = useAuth();
@@ -13,7 +13,7 @@ const NotVerifiedRoute = () => {
 
     useEffect(() => {
         const method = async () => {
-            await requestData("email;isVerified;displayName;");
+            await requestData("email;isSeller;displayName;firstName;lastName;");
         };
 
         handleMethod(async () => {
@@ -27,9 +27,9 @@ const NotVerifiedRoute = () => {
     }
     return (
         <>
-            {isLoaded && user ? <Outlet /> : <LoadingPage isLoading />}
+            {isLoaded && user.isSeller ? <Outlet /> : <LoadingPage isLoading />}
         </>
     );
 };
 
-export default NotVerifiedRoute;
+export default PrivateRoute;

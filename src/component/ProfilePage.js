@@ -36,28 +36,6 @@ import Case from '../images/icons/case.svg';
 import History from '../images/icons/history.svg';
 import PenProfile from '../images/icons/pen-profile.svg';
 
-function App() {
-    return <Basket />;
-    return <Profile />;
-    return <WhiteWolf />;
-    return <Amex />;
-    return <Apple />;
-    return <F />;
-    return <Discover />;
-    return <Google />;
-    return <Mastercard />;
-    return <Paypal />;
-    return <Shop />;
-    return <V />;
-    return <Visa />;
-    return <Instagram />;
-    return <X />;
-    return <Facebook />;
-    return <Tiktok />;
-    return <Qr />;
-    return <PenProfile />;
-  }
-
 export default function ProfilePage() {
 
   const [modalIsOpenProfile, setModalIsOpenProfile] = useState(false);
@@ -88,7 +66,8 @@ export default function ProfilePage() {
       sex: false,
       phones: [''],
       addresses: [{city: '', street: '', house: '', apartment: ''}],
-      recipients: [],
+      recipients: [{lastName: "", firstName: "", middleName: "", phone: ""}],
+      selectedRecipient: null,
       doPrint: false,
       birthday: "",
       language: ""
@@ -102,20 +81,22 @@ export default function ProfilePage() {
     const { requestData, updateUserInfo } = useData();
     const [isEditing, setIsEditing] = useState({state: false, section: "none"});
 
-    // useEffect(() => {
-    //     if (!user) {
-    //         navigate('/authorization');
-    //     } else {
-    //         handleMethod(async () => await requestData('firstName;middleName;lastName;language;sex;phones;birthday;doPrint;addresses;'));
-    //     }
-    // }, []);
+    useEffect(() => {
+        const method = async () => {
+            await requestData("firstName;middleName;lastName;language;sex;phones;birthday;doPrint;addresses;recipients;selectedRecipient;");
+        };
+
+        handleMethod(async () => {
+            await method();
+        });
+    }, []);
 
     useEffect(() => {
       resetUser();
     }, [user]);
 
     useEffect(() => {
-      if (catchedError.tags.includes("profile-page")) {
+      if (catchedError.tags.includes("profile-page") && catchedError.tags.includes("overlay")) {
         setIsErrorModalOpen(true);
       }
     }, [catchedError]);
@@ -135,7 +116,10 @@ export default function ProfilePage() {
         addresses: (user.addresses && user.addresses.filter(addr => addr.city.trim() !== '' && addr.street.trim() !== '' && addr.houseNumber.trim() !== '').length > 0) 
           ? user.addresses.filter(addr => addr.city.trim() !== '' && addr.street.trim() !== '' && addr.houseNumber.trim() !== '')
           : [{ city: '', street: '', houseNumber: '', apartmentNumber: '' }],
-        recipients: user.recipients || [],
+        recipients: (user.recipients && user.recipients.filter(recipient => recipient.firstName.trim() !== '' && recipient.middleName.trim() !== '' && recipient.lastName.trim() !== '' && recipient.phone.trim() !== '').length > 0) 
+        ? user.recipients.filter(recipient => recipient.firstName.trim() !== '' && recipient.middleName.trim() !== '' && recipient.lastName.trim() !== '' && recipient.phone.trim() !== '')
+        : [{ firstName: '', lastName: '', middleName: '', phone: '' }],
+        selectedRecipient: user.selectedRecipient || null,
         doPrint: user.doPrint || false,
         birthday: user.birthday || "",
         language: user.language || ""
@@ -145,7 +129,7 @@ export default function ProfilePage() {
     const handleInputChange = (event, index) => {
       const { name, value, type, checked } = event.target;
       const parsedValue = type === 'checkbox' ? checked : value;
-    
+
       setNewUser(prevState => {
         if (name.startsWith('city') || name.startsWith('street') || name.startsWith('houseNumber') || name.startsWith('apartmentNumber')) {
           const updatedAddresses = [...prevState.addresses];
@@ -153,12 +137,20 @@ export default function ProfilePage() {
           updatedAddresses[index] = { ...updatedAddresses[index], [field]: parsedValue };
     
           return { ...prevState, addresses: updatedAddresses };
+        } else if (name.startsWith("recipientFirstName") || name.startsWith("recipientMiddleName") || name.startsWith("recipientLastName") || name.startsWith("recipientPhone")) {
+            const updatedRecipients = [...prevState.recipients];
+            const field = name.replace(/recipient(\w+)/, (match, p1) => p1.charAt(0).toLowerCase() + p1.slice(1)).replace(/\d+$/, "");
+            updatedRecipients[index] = { ...updatedRecipients[index], [field]: parsedValue };
+            return { ...prevState, recipients: updatedRecipients, selectedRecipient: null };
         } else if (name.startsWith('telephone')) {
           const updatedPhones = [...prevState.phones];
           updatedPhones[index] = parsedValue;
     
           const filteredPhones = updatedPhones.filter(phone => phone.trim() !== '');
           return { ...prevState, phones: filteredPhones };
+        } else if (name.startsWith("selectedRecipient")) {
+            const selectedRecipient = value ? JSON.parse(value) : null;
+            return { ...prevState, selectedRecipient };
         } else {
           return { ...prevState, [name]: parsedValue };
         }
@@ -201,6 +193,24 @@ export default function ProfilePage() {
       });
     };
 
+    const handleAddRecipientField = () => {
+        handleMethod(() => {
+            const hasError = newUser.recipients.some(recipient => {
+                if (!recipient.firstName.trim() || !recipient.lastName.trim() || !recipient.phone.trim()) {
+                    throw "recipient-format-error";
+                }
+                return false;
+            });
+
+            if (!hasError && newUser.recipients.length < 3) {
+                setNewUser(prevState => ({
+                    ...prevState,
+                    recipients: [...prevState.recipients, {firstName: "", lastName: "", middleName: "", phone: ""}]
+                }));
+            }
+        });
+    };
+
     const handleSave = async () => {
       handleMethod(async () => {
         const validPhones = newUser.phones.filter(phone => phone.trim() !== '');
@@ -229,14 +239,42 @@ export default function ProfilePage() {
           throw "address-format-error";
         }
     
+        const validRecipients = newUser.recipients.filter(recipient => 
+            recipient.firstName.trim() !== '' ||
+            recipient.middleName.trim() !== '' ||
+            recipient.lastName.trim() !== ''
+        );
+
+        const hasRecipientError = validRecipients.some(recipient => 
+            recipient.firstName.trim() === '' ||
+            recipient.middleName.trim() === '' ||
+            recipient.lastName.trim() === ''
+        );
+
+        if (hasRecipientError) {
+            throw "recipient-format-error";
+        }
+
+        const hasRecipientPhoneError = validRecipients.some(recipient => 
+            !/^([+]?\d{1,2}[-\s]?|)\d{3}[-\s]?\d{3}[-\s]?\d{4}$/.test(recipient.phone)
+        );
+        
+        if (hasRecipientPhoneError) {
+            throw "phone-format-error";
+        }
+
         setNewUser(prevState => ({
           ...prevState,
           phones: validPhones,
           addresses: validAddresses
         }));
 
-        await updateUserInfo({ ...newUser, phones: validPhones, addresses: validAddresses });
-        // window.location.reload(true);
+        try {
+          await updateUserInfo({ ...newUser, phones: validPhones, addresses: validAddresses, recipients: validRecipients });
+          window.location.reload(true);
+        } catch (err) {
+          throw err;
+        }
       });
     };
 
@@ -255,7 +293,9 @@ export default function ProfilePage() {
 
     const handleLogOutClick = async (e) => {
         e.preventDefault();
-        logout();
+        handleMethod(() => {
+            logout();
+        });
     };
 
     const handleCancelChangePassword = () => {
@@ -270,8 +310,12 @@ export default function ProfilePage() {
         const passRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,64}$/;
         if (!passRegex.test(newPassword)) throw "password-format-error";
         if (newPassword !== newPasswordRepeat) throw "not-same-error";
-        await updatePassword(oldPassword, newPassword, newPasswordRepeat);
-        // window.location.reload(true);
+        try {
+          await updatePassword(oldPassword, newPassword, newPasswordRepeat);
+          window.location.reload(true);
+        } catch (err) {
+          throw err;
+        }
       });
     };
 
@@ -293,10 +337,10 @@ export default function ProfilePage() {
                   </div>
                   <div className='head-right-div'>
                   <div className='head-nav-div'>
-                      <a className='header-link' href='https://www.figma.com/'>Про нас</a>
+                      <a className='header-link' href='/about'>Про нас</a>
                       </div>
                       <div className='head-nav-div'>
-                      <a className='header-link' href='https://www.figma.com/'>Коробки</a>
+                      <a className='header-link' href='/boxes'>Коробки</a>
                       </div>
                   <div className='head-nav-div'>
                   <a href='#' className='icon-head'>
@@ -305,14 +349,29 @@ export default function ProfilePage() {
                   </div>
                   <div className='head-nav-div'>
                   <a href='#' className='icon-head' onClick={() => { setModalIsOpenProfile(!modalIsOpenProfile) }}>
-                      <img src={Profile}></img>
+                    {user ? (
+                      <div className='profile-avto'>
+                        <p>
+                          {user.displayName 
+                            ? user.displayName.substring(0, 2) 
+                            : user.email.substring(0, 2)}
+                        </p>
+                      </div>
+                    ) : (
+                      <img src={Profile} alt='Profile Icon' />
+                    )}
                   </a>
                   <div className="dropdown-content-header" style={{ display: modalIsOpenProfile ? "block" : "none" }}>
                     <div>
                         <p className='head-email-dropdown'>{user.email}</p>
                     </div>
                     <div>
-                        <p className='hello-dropdown'>Вітаємо, <span className='name-dropdown'>{user.displayName}</span> <img src={HelloEmoji} alt="Hello Emoji" /></p>
+                        <p className='hello-dropdown'>Вітаємо, <span className='name-dropdown'>
+                          {user.displayName
+                            ? (user.displayName.length > 5 ? user.displayName.substring(0, 3) + "..." : user.displayName.substring(0, 5))
+                            : user.email.substring(0, 5)}
+                          </span> <img src={HelloEmoji} alt="Hello Emoji" />
+                        </p>
                     </div>
                     <div>
                         <button className='dropdown-border-top-button'><img src={History} alt="History" />Історія замовлень</button>
@@ -477,9 +536,10 @@ export default function ProfilePage() {
                             <p className='input-profile'>
                               <input className='line-profile' type='email' name='email' disabled placeholder='email@gmail.com' required value={newUser.email}/>
                             </p>
-                            <a href='#' className='icon-profile'>
+                            {/* NO HTML AVAILABLE */}
+                            {/* <a href='#' className='icon-profile'>
                             <img src={PenProfile}></img>
-                            </a>
+                            </a> */}
                             </div>
                             <div className='checkbox-profile-div'>
                               <p className='input-profile'>
@@ -600,75 +660,121 @@ export default function ProfilePage() {
                     )}
                   </div>
 
-                  {/* PARCEL RECIPIENT */}
-                  {/* FIRST PART */}
-                  <div className='bottom-block-div'>
-                    <div className='top-left-block-div'>
-                      <h2 className='title-profile-block'>
-                        Мої отримувачі замовлень
-                      </h2>
-                        <div className='column-profile-div'>
-                        <h4>Тестове Тестове</h4>
-                          <p>+380 66 000 00 00</p>
-                      </div>
-                      <input className='edit-profile-button' type='button' value='Редагувати' />
-                    </div>
-                  </div>
-
-                  {/* SECONT PART */}
-                  {/* <div className='bottom-block-div'>
-                    <div className='top-left-block-div'>
-                      <h2 className='title-profile-block title-black-profile-block'>
-                        Мої отримувачі замовлень
-                      </h2>
-                        <div className='column-profile-div'>
-                        <h4>Отримувач (за замовчуванням)</h4>
-                        <p className='input-profile'>
-                        <select className='select-profile' name='sex' value={newUser.sex} onChange={handleInputChange}>
-                              <option>Тестове</option>
-                              <option>Тестове</option>
-                            </select>
+                {/* PARCEL RECIPIENT PART */}
+                <div className='bottom-block-div'>
+                    {isEditing.section === "recipient" && isEditing.state ? (
+                        <div className='top-left-block-div'>
+                            <h2 className='title-profile-block title-black-profile-block'>
+                                Мої отримувачі замовлень
+                            </h2>
+                            <div className='column-profile-div'>
+                                <h4>Отримувач (за замовчуванням)</h4>
+                                <p className='input-profile'>
+                                    <select className='select-profile' name='selectedRecipient' value={JSON.stringify(newUser.selectedRecipient) || ''} onChange={handleInputChange}>
+                                        <option value='' defaultChecked>Не обрано</option>
+                                        {newUser.recipients
+                                            .filter(recipient =>
+                                                recipient.firstName.trim() !== '' &&
+                                                recipient.lastName.trim() !== '' &&
+                                                recipient.middleName.trim() !== '' &&
+                                                recipient.phone.trim() !== ''
+                                            )
+                                            .map((recipient, index) => (
+                                                <option key={index} value={JSON.stringify(recipient)}>
+                                                    {recipient.lastName} {recipient.firstName} {recipient.middleName}
+                                                </option>
+                                            ))
+                                        }
+                                    </select>
+                                </p>
+                            </div>
+                            <p className='title-bottom-profile'>
+                                Отримувач замовлень
                             </p>
-                      </div>
-
-                      <p className='title-bottom-profile'>
-                        Отримувач замовлень
-                      </p>
-                      <div className='columns-profile-div columns-bottom-profile-div'>
-                      <div className='column-profile-div'>
-                        <h4>Прізвище</h4>
-                          <p className='input-profile'>
-                                <input className='line-profile' type='text' name='first name' required/>
-                            </p>
-                            <a className='add-info-profile' href='#'>
-                            <p>Додати ще отримувача</p>
-                            </a>
-                      </div>
-                      <div className='column-profile-div'>
-                        <h4>Ім'я</h4>
-                          <p className='input-profile'>
-                                <input className='line-profile' type='text' name='last name' required/>
-                            </p>
-                      </div>
-                      <div className='column-profile-div'>
-                        <h4>По батькові</h4>
-                          <p className='input-profile'>
-                                <input className='line-profile' type='text' name='father name' required/>
-                            </p>
-                      </div>
-                      <div className='column-profile-div'>
-                        <h4>Мобільний телефон</h4>
-                          <p className='input-profile'>
-                                <input className='line-profile' type='tel' name='tel' required/>
-                            </p>
-                      </div>
-                      </div>
-                      <div className='button-profile-div button-medium-profile-div'>
-                      <input className='save-profile-button' type='button' value='Зберегти' />
-                      <input className='cancel-profile-button' type='button' value='Скасувати' />
-                      </div>
-                    </div>
-                  </div> */}
+                            <div className='columns-profile-div columns-bottom-profile-div custom-profile-div'>
+                                <div className='column-profile-div'>
+                                    <h4>Прізвище</h4>
+                                    {newUser.recipients.map((recipient, index) => (
+                                        <p className='input-profile'>
+                                            <input className='line-profile' type='text' name={`recipientLastName${index + 1}`} value={recipient.lastName} onChange={(e) => { handleInputChange(e, index) }} required/>
+                                        </p>
+                                    ))}
+                                    {newUser.recipients.length < 3 && (
+                                        <a className='add-info-profile' href='#' onClick={handleAddRecipientField}>
+                                            <p>Додати ще отримувача</p>
+                                        </a>
+                                    )}
+                                </div>
+                                <div className='column-profile-div'>
+                                    <h4>Ім'я</h4>
+                                    {newUser.recipients.map((recipient, index) => (
+                                        <p className='input-profile'>
+                                            <input className='line-profile' type='text' name={`recipientFirstName${index + 1}`} value={recipient.firstName} onChange={(e) => { handleInputChange(e, index) }} required/>
+                                        </p>
+                                    ))}
+                                </div>
+                                <div className='column-profile-div'>
+                                    <h4>По батькові</h4>
+                                    {newUser.recipients.map((recipient, index) => (
+                                        <p className='input-profile'>
+                                            <input className='line-profile' type='text' name={`recipientMiddleName${index + 1}`} value={recipient.middleName} onChange={(e) => { handleInputChange(e, index) }} required/>
+                                        </p>
+                                    ))}
+                                </div>
+                                <div className='column-profile-div'>
+                                    <h4>Мобільний телефон</h4>
+                                    {newUser.recipients.map((recipient, index) => (
+                                        <p className='input-profile'>
+                                            <input className='line-profile' type='text' name={`recipientPhone${index + 1}`} value={recipient.phone} onChange={(e) => { handleInputChange(e, index) }} required/>
+                                        </p>
+                                    ))}
+                                </div>
+                            </div>
+                            <div className='button-profile-div button-medium-profile-div'>
+                                <input className='save-profile-button' type='button' value='Зберегти' onClick={handleSave}  />
+                                <input className='cancel-profile-button' type='button' value='Скасувати' onClick={handleCancelEditing} />
+                            </div>
+                        </div>
+                    ) : (
+                        <div className='top-left-block-div'>
+                            {user?.recipients?.length > 0 ? (
+                                <>
+                                    <h2 className='title-profile-block'>
+                                        Мої отримувачі замовлень
+                                    </h2>
+                                    <div className='column-profile-div'>
+                                        {user.recipients.map((recipient, index) => (
+                                            <>
+                                                <h4>{recipient.lastName} {recipient.firstName} {recipient.middleName}</h4>
+                                                <p>{recipient.phone}</p>
+                                            </>
+                                        ))}
+                                    </div>
+                                    <div className='column-profile-div'>
+                                        <h4>Отримувач (за замовчуванням)</h4>
+                                        {user.selectedRecipient !== null ? (
+                                            <>
+                                                <h4>{user.selectedRecipient.lastName} {user.selectedRecipient.firstName} {user.selectedRecipient.middleName}</h4>
+                                                <p>{user.selectedRecipient.phone}</p>
+                                            </>
+                                        ) : (
+                                            <>
+                                                <p>Не вказано</p>
+                                            </>
+                                        )}
+                                    </div>
+                                </>
+                            ) : (
+                                <>    
+                                    <div className='column-profile-div'>
+                                        <p>Не вказано</p>
+                                    </div>
+                                </>
+                            )}
+                            <input className='edit-profile-button' type='button' value='Редагувати' onClick={() => { handleSetEditing("recipient") }} />
+                        </div>
+                    )}
+                </div>
 
                   <div className='footer-profile-div'>
                     <a href='#' onClick={openModalProfilePassword}>
