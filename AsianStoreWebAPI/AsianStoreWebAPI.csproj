@@ -9,6 +9,9 @@
 
   <ItemGroup>
     <PackageReference Include="FirebaseAdmin" Version="3.0.0" />
+    <PackageReference Include="FirebaseAuthentication.net" Version="4.1.0" />
+    <PackageReference Include="FirebaseStorage.net" Version="1.0.3" />
+    <PackageReference Include="Google.Apis.Storage.v1" Version="1.68.0.3474" />
     <PackageReference Include="Google.Cloud.Firestore" Version="3.8.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.6" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.6" />
