@@ -1,19 +1,7 @@
-using AsianStoreWebAPI.EF;
-using AsianStoreWebAPI.EF.Models;
 using AsianStoreWebAPI.Repositories;
 using AsianStoreWebAPI.Services;
 using FirebaseAdmin;
-using Google.Api;
 using Google.Apis.Auth.OAuth2;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Models;
-using Newtonsoft.Json;
-using Swashbuckle.AspNetCore.Filters;
-using System.Text;
 
 namespace AsianStoreWebAPI
 {
@@ -36,22 +24,27 @@ namespace AsianStoreWebAPI
             builder.Services.AddSingleton<JwtService>();
             builder.Services.AddSingleton<FirestoreService>();
             builder.Services.AddSingleton<FirebaseAuthService>();
+            builder.Services.AddSingleton<FirebaseStorageService>();
 
             // Scopes
             builder.Services.AddScoped<IUserRepository, UserRepository>();
-            builder.Services.AddScoped<IRoleRepository, RoleRepository>();
+            builder.Services.AddScoped<ISellerRepository, SellerRepository>();
 
+            // Configure CORS
             builder.Services.AddCors(options =>
             {
                 options.AddPolicy("CorsPolicy",
                     builder => builder
-                        .WithOrigins("http://localhost:3000", "https://localhost:3000", "https://asian-shop.vercel.app/", "https://asian-shop-dev.vercel.app/") // Replace with your React app's URL
+                        // .WithOrigins("https://asian-shop.vercel.app")
+                        .WithOrigins("https://localhost:3000")
                         .AllowAnyMethod()
                         .AllowAnyHeader()
                         .AllowCredentials());
             });
 
             var app = builder.Build();
+
+            app.UseCors("CorsPolicy");
 
             if (app.Environment.IsDevelopment())
             {
@@ -60,10 +53,6 @@ namespace AsianStoreWebAPI
             }
 
             app.UseHttpsRedirection();
-
-            app.UseAuthorization();
-
-            app.UseCors("CorsPolicy");
 
             app.MapControllers();
 

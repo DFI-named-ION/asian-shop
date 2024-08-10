@@ -10,13 +10,15 @@ namespace AsianStoreWebAPI.Repositories
 {
     public interface IUserRepository
     {
-        Task<Session> LoginAsync(string accessToken);
+        Task<Session> RegisterSellerAsync(string token);
+        Task<Session> LoginAsync(string token);
         Task CheckVerificationCodeAsync(string sessionId, string code);
         Task SendVerificatoinCodeAsync(string sessionId);
         Task SendForgotUrlAsync(string email);
+        Task UpdatePasswordAsync(string sessionId, string token);
         Task ResetPasswordAsync(string token);
         Task<object> FetchDataAsync(string sessionId, string fields);
 
-        Task<(string, List<UserRecord>)> GetAllUsersAsync();
+        Task UpdateUserAsync(string sessionId, string token);
     }
 }

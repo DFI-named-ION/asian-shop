@@ -1,7 +1,5 @@
 ﻿using AsianStoreWebAPI.EF.DTO;
-using AsianStoreWebAPI.EF.Models;
 using AsianStoreWebAPI.Repositories;
-using AsianStoreWebAPI.Responses;
 using AsianStoreWebAPI.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -26,9 +24,28 @@ namespace AsianStoreWebAPI.Controllers
             {
                 await _userRepo.SendForgotUrlAsync(dto.Email);
                 return Ok("Success");
+            } catch (FirebaseAdmin.Auth.FirebaseAuthException ex) when (ex.Message.Contains("Failed to get user with email:"))
+            {
+                return BadRequest("User not found");
             } catch (Exception ex)
             {
-                return Ok(ex.Message);
+                return BadRequest(ex.Message);
+            }
+        }
+
+
+        [HttpPost("updatePassword")]
+        public async Task<IActionResult> UpdatePassword(JwtTokenDTO dto)
+        {
+            try
+            {
+                var sessionId = Request.Cookies["sessionId"];
+                await _userRepo.UpdatePasswordAsync(sessionId, dto.Token);
+                return Ok("Success");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
             }
         }
 
@@ -42,7 +59,7 @@ namespace AsianStoreWebAPI.Controllers
                 return Ok("Success");
             } catch (Exception ex)
             {
-                return Ok(ex.Message);
+                return BadRequest(ex.Message);
             }
         }
 
@@ -57,7 +74,7 @@ namespace AsianStoreWebAPI.Controllers
                 return Ok("Success");
             } catch (Exception ex)
             {
-                return Ok(ex.Message);
+                return BadRequest(ex.Message);
             }
         }
 
@@ -72,56 +89,56 @@ namespace AsianStoreWebAPI.Controllers
                 return Ok("Success");
             } catch (Exception ex)
             {
-                return Ok(ex.Message);
+                return BadRequest(ex.Message);
             }
-        } 
-
-
-        [HttpGet("users")]
-        public async Task<IActionResult> GetUserAsync()
-        {
-            var result = await _userRepo.GetAllUsersAsync();
-            var response = new ServiceResponses.DataResponse(result.Item1, result.Item2);
-            return Ok(response);
         }
 
 
         [HttpPost("login")]
-        public async Task<IActionResult> LoginAsync(AccessTokenDTO dto) // change to JwtTokenDTO
+        public async Task<IActionResult> LoginAsync(JwtTokenDTO dto)
         {
             try
             {
-                var session = await _userRepo.LoginAsync(dto.AccessToken);
+                var session = await _userRepo.LoginAsync(dto.Token);
 
                 Response.Cookies.Append("sessionId", session.Id, new CookieOptions()
                 {
                     Path = "/",
-                    Domain = "localhost",
+                    Domain = "localhost", // comment when ready to publish
                     Secure = true,
                     HttpOnly = true,
+                    SameSite = SameSiteMode.None,
                     Expires = session.ExpiresIn
                 });
                 return Ok();
             } catch (Exception ex)
             {
-                return Ok(ex.Message);
+                return BadRequest(ex.Message);
             }
         }
 
 
-        [HttpGet("fetchData")]
-        public async Task<IActionResult> FetchDataAsync([FromQuery] string fields)
+        [HttpPost("registerSeller")]
+        public async Task<IActionResult> RegisterSellerAsync(JwtTokenDTO dto)
         {
             try
             {
-                var sessionId = Request.Cookies["sessionId"];
-                var data = await _userRepo.FetchDataAsync(sessionId, fields);
+                var session = await _userRepo.RegisterSellerAsync(dto.Token);
 
-                return Ok(new ServiceResponses.DataResponse("Success", data));
+                Response.Cookies.Append("sessionId", session.Id, new CookieOptions()
+                {
+                    Path = "/",
+                    Domain = "localhost", // comment when ready to publish
+                    Secure = true,
+                    HttpOnly = true,
+                    SameSite = SameSiteMode.None,
+                    Expires = session.ExpiresIn
+                });
+                return Ok();
             }
             catch (Exception ex)
             {
-                return Ok(ex.Message);
+                return BadRequest(ex.Message);
             }
         }
 
@@ -129,7 +146,13 @@ namespace AsianStoreWebAPI.Controllers
         [HttpGet("logout")]
         public async Task<IActionResult> LogoutAsync()
         {
-            Response.Cookies.Delete("sessionId");
+            Response.Cookies.Delete("sessionId", new CookieOptions()
+            {
+                Path = "/",
+                Secure = true,
+                HttpOnly = true,
+                SameSite = SameSiteMode.None
+            });
             // remove session!
             return Ok();
         }
