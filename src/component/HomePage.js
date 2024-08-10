@@ -350,7 +350,7 @@ const Carousel = ({ items }) => {
               </div>
               <div className='head-right-div'>
                 <div className='head-nav-div'>
-                    <a className='header-link' href='https://www.figma.com/'>Про нас</a>
+                    <a className='header-link' href='/about'>Про нас</a>
                 </div>
                 <div className='head-nav-div'>
                     <a className='header-link' href='https://www.figma.com/'>Коробки</a>
@@ -446,10 +446,17 @@ const Carousel = ({ items }) => {
                 </div>
                 <div className='head-nav-div dropdown-header'>
                     <a href='#' className='icon-head' onClick={handleHeadClick}>
-                        {/* <img src={Profile}></img> */}
+                      {user ? (
                         <div className='profile-avto'>
-                          <p>VK</p>
+                          <p>
+                            {user.displayName 
+                              ? user.displayName.substring(0, 2) 
+                              : user.email.substring(0, 2)}
+                          </p>
                         </div>
+                      ) : (
+                        <img src={Profile} alt='Profile Icon' />
+                      )}
                     </a>
                     {user && (
                         <div className="dropdown-content-header" style={{ display: isProfileModalOpen ? "block" : "none" }}>
@@ -457,7 +464,12 @@ const Carousel = ({ items }) => {
                                 <p className='head-email-dropdown'>{user.email}</p>
                             </div>
                             <div>
-                                <p className='hello-dropdown'>Вітаємо, <span className='name-dropdown'>{user.displayName}</span> <img src={HelloEmoji} alt="Hello Emoji" /></p>
+                              <p className='hello-dropdown'>Вітаємо, <span className='name-dropdown'>
+                                {user.displayName
+                                  ? (user.displayName.length > 5 ? user.displayName.substring(0, 3) + "..." : user.displayName.substring(0, 5))
+                                  : user.email.substring(0, 5)}
+                                </span> <img src={HelloEmoji} alt="Hello Emoji" />
+                              </p>
                             </div>
                             <div>
                                 <button className='dropdown-border-top-button'><img src={History} alt="History" />Історія замовлень</button>
@@ -489,7 +501,7 @@ const Carousel = ({ items }) => {
                             </div>
                             <div>
                                 <p className='bottom-dropdown'>
-                                    <a href=''>Privacy Policy</a><span className='slash-dropdown'>/</span><a href=''> Terms of Service</a>
+                                    <a href='/privacy'>Privacy Policy</a><span className='slash-dropdown'>/</span><a href=''> Terms of Service</a>
                                 </p>
                             </div>
                         </div>

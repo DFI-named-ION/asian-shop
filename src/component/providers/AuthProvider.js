@@ -1,4 +1,6 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, useContext } from "react";
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchUserData, setUser, clearUser } from './slices/userSlice';
 import axios from "axios";
 import { auth } from "../../firebaseConfig";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
@@ -10,52 +12,22 @@ const AuthContext = createContext();
 export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
+    const dispatch = useDispatch();
+    const { user, pending } = useSelector((state) => state.user);
     const { handleMethod } = useErrors();
     const { encryptJwtToken } = useContext(JwtContext);
-    const [user, setUser] = useState({
-        email: "user.email",
-        lastName: "",
-        firstName: "",
-        middleName: "",
-        sex: false,
-        phones: [''],
-        addresses: [{city: '', street: '', house: '', apartment: ''}],
-        recipients: [],
-        doPrint: false,
-        birthday: "",
-        language: ""
-      });
-    const [pending, setPending] = useState(true);
-
-    useEffect(() => {
-        handleMethod(fetchUserData);
-    }, []);
-
-    const fetchUserData = async () => {
-        try {
-            const response = await axios.get(`${process.env.REACT_APP_WEB_API_BASE_URL}/Data/fetchData?fields=displayName;isVerified;email;`);
-            setUser(response.data.data);
-        } catch (error) {
-            // setUser(null);
-        } finally {
-            setPending(false);
-        }
-    };
 
     const updateUser = (data) => {
-        setUser((prevUser) => ({ ...prevUser, ...data }));
+        dispatch(setUser(data));
     };
 
     const login = async (accessToken, name = "") => {
         try {
-            setPending(true);
             let token = await encryptJwtToken({accessToken, name});
             await axios.post(`${process.env.REACT_APP_WEB_API_BASE_URL}/Auth/login`, { token });
-            await fetchUserData();
+            dispatch(fetchUserData());
         } catch (error) {
             throw error;
-        } finally {
-            setPending(false);
         }
     };
 
@@ -92,25 +64,39 @@ export const AuthProvider = ({ children }) => {
         });
     };
 
-    const logout = async () => {
-        setPending(true);
+    const registerSeller = async (email, password, name, companyName) => {
         handleMethod(async () => {
-            await axios.get(`${process.env.REACT_APP_WEB_API_BASE_URL}/Auth/logout`);
-            setUser(null);
+            try {
+                const result = await createUserWithEmailAndPassword(auth, email, password);
+                await register(await result.user.getIdToken(), name, companyName);
+            } catch (error) {
+                throw error;
+            }
         });
-        setPending(false);
+    };
+
+    const register = async (accessToken, name, companyName) => {
+        try {
+            let token = await encryptJwtToken({accessToken, name, companyName});
+            await axios.post(`${process.env.REACT_APP_WEB_API_BASE_URL}/Auth/registerSeller`, { token });
+        } catch (error) {
+            throw error;
+        }
+    };
+
+    const logout = async () => {
+        await axios.get(`${process.env.REACT_APP_WEB_API_BASE_URL}/Auth/logout`);
+        dispatch(clearUser());
     };
 
     const updatePassword = async (oldPassword, newPassword, newPasswordRepeat) => {
-        handleMethod(async () => {
-            await signInWithEmailAndPassword(auth, user.email, oldPassword);
-            let token = await encryptJwtToken({newPassword, newPasswordRepeat});
-            await axios.post(`${process.env.REACT_APP_WEB_API_BASE_URL}/Auth/updatePassword`, {token});
-        });
+        await signInWithEmailAndPassword(auth, user.email, oldPassword);
+        let token = await encryptJwtToken({newPassword, newPasswordRepeat});
+        await axios.post(`${process.env.REACT_APP_WEB_API_BASE_URL}/Auth/updatePassword`, {token});
     };
 
     return (
-        <AuthContext.Provider value={{ user, pending, loginWithEmailAndPassword, loginWithPopup, registerWithEmailAndPassword, logout, updateUser, updatePassword }}>
+        <AuthContext.Provider value={{ user, pending, loginWithEmailAndPassword, loginWithPopup, registerWithEmailAndPassword, logout, updateUser, updatePassword, registerSeller }}>
             {children}
         </AuthContext.Provider>
     );

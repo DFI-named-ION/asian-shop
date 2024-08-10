@@ -126,7 +126,7 @@ export default function MailConfirmation() {
               </div>
               <div className='head-right-div'>
                 <div className='head-nav-div'>
-                    <a className='header-link' href='https://www.figma.com/'>Про нас</a>
+                    <a className='header-link' href='/about'>Про нас</a>
                 </div>
                 <div className='head-nav-div'>
                     <a className='header-link' href='https://www.figma.com/'>Коробки</a>
@@ -178,7 +178,7 @@ export default function MailConfirmation() {
                             </div>
                             <div>
                                 <p className='bottom-dropdown'>
-                                    <a href=''>Privacy Policy</a><span className='slash-dropdown'>/</span><a href=''> Terms of Service</a>
+                                    <a href='/privacy'>Privacy Policy</a><span className='slash-dropdown'>/</span><a href=''> Terms of Service</a>
                                 </p>
                             </div>
                         </div>

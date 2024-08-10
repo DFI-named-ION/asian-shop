@@ -99,7 +99,7 @@ export default function Authorization() {
                 if (!emailRegex.test(email)) throw "email-format-error";
                 const passRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,64}$/;
                 if (!passRegex.test(password)) throw "password-format-error";
-                if(!token) throw "recaptcha-error";
+                // if(!token) throw "recaptcha-error"; // fix captcha
               
                 loginWithEmailAndPassword(email, password);
             } else {
