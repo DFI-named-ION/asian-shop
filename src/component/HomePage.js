@@ -242,14 +242,31 @@ const Carousel = ({ items }) => {
   const handlePrev = () => {
     setCurrentIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : length - 1));
   };
-  
+
+  const goToSlide = (index) => {
+    setCurrentIndex(index);
+  };
+
   return (
     <div className='left-description-div'>
-      <div className='button-carousel button-left-carousel' onClick={handlePrev}><a class="prev-carousel"></a></div>
-      <div className='img-carousel'>
-        <img src={assetsPath(items[currentIndex])} alt={`Slide ${currentIndex + 1}`}></img>
+      <div className='left-div'>
+        <div className='button-carousel button-left-carousel' onClick={handlePrev}><a class="prev-carousel"></a></div>
+        <div className='img-carousel'>
+          <img src={assetsPath(items[currentIndex])} alt={`Slide ${currentIndex + 1}`}></img>
+        </div>
+        <div className='button-carousel button-right-carousel' onClick={handleNext}> <a class="next-carousel"></a></div>
+      </div> 
+      <div className="carousel-indicators">
+        {items.map((_, index) => (
+          <button
+            key={index}
+            className={index === currentIndex ? 'active' : ''}
+            onClick={() => goToSlide(index)}
+          ></button>
+        ))}
       </div>
-      <div className='button-carousel button-right-carousel' onClick={handleNext}> <a class="next-carousel"></a></div></div>
+    </div>
+      
   );
 };
 
