@@ -5,11 +5,10 @@ const ErrorContext = createContext();
 export const useErrors = () => useContext(ErrorContext);
 
 export const ErrorProvider = ({ children }) => {
-    
-    const [catchedError, setCatchedError] = useState({origin: "", code: "", short: "", long: "", tags: []});
+    const [catchedError, setCatchedError] = useState({ origin: "", code: "", short: "", long: "", tags: [] });
 
     const handleMethod = async (method) => {
-        setCatchedError({origin: "", code: "", short: "", long: "", tags: []});
+        setCatchedError({ origin: "", code: "", short: "", long: "", tags: [] });
         try {
             await method();
         } catch (error) {
@@ -26,13 +25,15 @@ export const ErrorProvider = ({ children }) => {
             }
         }
     };
-    
+
     const getErrorInfo = (error, object = null) => {
         let short = "";
         let long = "";
         let origin = "";
         let isForUser = false;
         let tags = [];
+
+        console.log(error); // debug
 
         switch (error) {
             case "ERR_NETWORK":
@@ -42,6 +43,9 @@ export const ErrorProvider = ({ children }) => {
                 isForUser = true;
                 tags.push("email-field");
                 tags.push("code-field");
+                tags.push("general");
+                tags.push("server");
+                tags.push("critical");
                 break;
             case "auth/invalid-email":
                 short = "Invalid email format";
@@ -49,6 +53,7 @@ export const ErrorProvider = ({ children }) => {
                 origin = "firebase";
                 isForUser = true;
                 tags.push("email-field");
+                tags.push("server");
                 break;
             case "auth/invalid-credential":
                 short = "Invalid credentials";
@@ -57,6 +62,7 @@ export const ErrorProvider = ({ children }) => {
                 isForUser = true;
                 tags.push("email-field");
                 tags.push("password-field");
+                tags.push("server");
                 break;
             case "auth/too-many-requests":
                 short = "Too much requests";
@@ -64,6 +70,7 @@ export const ErrorProvider = ({ children }) => {
                 origin = "firebase";
                 isForUser = true;
                 tags.push("email-field");
+                tags.push("server");
                 break;
             case "auth/popup-closed-by-user":
                 short = "Popup was closed";
@@ -71,6 +78,7 @@ export const ErrorProvider = ({ children }) => {
                 origin = "firebase";
                 isForUser = true;
                 tags.push("email-field");
+                tags.push("server");
                 break;
             case "auth/email-already-in-use":
                 short = "Email is already taken";
@@ -78,13 +86,34 @@ export const ErrorProvider = ({ children }) => {
                 origin = "firebase";
                 isForUser = true;
                 tags.push("email-field");
+                tags.push("server");
                 break;
+            case "Session not found":
+            case "Session is not valid":
+            case "Session Id is null":
+            case "user-not-authenticated-error":
+                short = "You are not logged in";
+                long = "You cannot preform this action, because are not logged in.";
+                origin = "api";
+                isForUser = true;
+                tags.push("critical");
+                tags.push("general");
+                break;
+            case "user-not-found-error":
             case "User not found":
                 short = "User not found";
                 long = "User with provided email is not found.";
                 origin = "api";
                 isForUser = true;
                 tags.push("email-field");
+                tags.push("server");
+                break;
+            case "add-product-error":
+                short = "Product was not added due error";
+                long = "Product was not added due error.";
+                origin = "api";
+                isForUser = true;
+                tags.push("overlay");
                 break;
             case "User is already verified":
                 short = "User is already verified";
@@ -92,18 +121,14 @@ export const ErrorProvider = ({ children }) => {
                 origin = "api";
                 isForUser = true;
                 tags.push("code-field");
-                break;
-            case "Session Id is null":
-                short = "You are not logged in";
-                long = "You cannot preform this action, because are not logged in.";
-                origin = "api";
+                tags.push("server");
                 break;
             case "Code is not valid":
-                    short = "Code is not valid";
-                    long = "Code is not valid.";
-                    origin = "api";
-                    isForUser = true;
-                    tags.push("code-field");
+                short = "Code is not valid";
+                long = "Code is not valid.";
+                origin = "api";
+                isForUser = true;
+                tags.push("code-field");
                 break;
             case 400:
                 return getErrorInfo(object.response.data);
@@ -145,6 +170,16 @@ export const ErrorProvider = ({ children }) => {
                 origin = "custom";
                 isForUser = true;
                 tags.push("password-field");
+                tags.push("profile-page");
+                break;
+            case "password-format-error-overlay":
+                short = "Invalid password format";
+                long = "Invalid password format";
+                origin = "custom";
+                isForUser = true;
+                tags.push("password-field");
+                tags.push("overlay");
+                tags.push("profile-page");
                 break;
             case "phone-format-error":
                 short = "Invalid phone format";
@@ -153,6 +188,7 @@ export const ErrorProvider = ({ children }) => {
                 isForUser = true;
                 tags.push("phone-field");
                 tags.push("profile-page");
+                tags.push("overlay");
                 break;
             case "address-format-error":
                 short = "Invalid address format";
@@ -161,6 +197,7 @@ export const ErrorProvider = ({ children }) => {
                 isForUser = true;
                 tags.push("address-field");
                 tags.push("profile-page");
+                tags.push("overlay");
                 break;
             case "not-full-code":
                 short = "Code is not full";
@@ -183,6 +220,104 @@ export const ErrorProvider = ({ children }) => {
                 isForUser = true;
                 tags.push("email-field");
                 break;
+            case "image-format-error":
+                short = "Image extention is not valid";
+                long = "The extention of selected file is not allowed, please use one of these: .JPG, .PNG, .GIF, .WEBP."
+                origin = "custom";
+                isForUser = true;
+                tags.push("overlay");
+                break;
+            case "image-size-error":
+                short = "Image size is not valid";
+                long = "The size of selected file is larger then allowed, max image size is 10MB."
+                origin = "custom";
+                isForUser = true;
+                tags.push("overlay");
+                break;
+            case "image-upload-error":
+                short = "Image was not uploaded due error";
+                long = "Image was not uploaded due error."
+                origin = "api";
+                isForUser = true;
+                tags.push("overlay");
+                break;
+            case "image-remove-error":
+                short = "Image was not removed due error";
+                long = "Image was not removed due error."
+                origin = "api";
+                isForUser = true;
+                tags.push("overlay");
+                break;
+            case "title-format-error":
+                short = "Title cannot be empty";
+                long = "The product title cannot be left empty. Please provide a valid title.";
+                origin = "custom";
+                isForUser = true;
+                tags.push("overlay");
+                break;
+            case "price-format-error":
+                short = "Price must be a positive number with up to two decimal places";
+                long = "The price must be a positive number, without leading zeros or symbols, and must have at most two decimal places. The minimum allowed value is 0.01.";
+                origin = "custom";
+                isForUser = true;
+                tags.push("overlay");
+                break;
+            case "article-format-error":
+                short = "Article number must be exactly 6 digits";
+                long = "The article number must be exactly 6 digits long and cannot consist entirely of zeros. Please provide a valid article number.";
+                origin = "custom";
+                isForUser = true;
+                tags.push("overlay");
+                break;
+            case "category-format-error":
+                short = "Product category must be selected";
+                long = "Please select a valid product category. The product category is required and cannot be left unselected.";
+                origin = "custom";
+                isForUser = true;
+                tags.push("overlay");
+                break;
+            case "subcategory-format-error":
+                short = "Product subcategory must be selected";
+                long = "Please select a valid product subcategory. The product subcategory is required and cannot be left unselected.";
+                origin = "custom";
+                isForUser = true;
+                tags.push("overlay");
+                break;
+            case "photos-format-error":
+                short = "At least one product photo is required";
+                long = "You must provide at least one photo of the product. Please upload a valid image.";
+                origin = "custom";
+                isForUser = true;
+                tags.push("overlay");
+                break;
+            case "height-format-error":
+                short = "Height must be a positive number with up to two decimal places";
+                long = "The height must be a positive number, greater than or equal to 0.01, with up to two decimal places. Cyrillic letters are allowed in the unit.";
+                origin = "custom";
+                isForUser = true;
+                tags.push("overlay");
+                break;
+            case "width-format-error":
+                short = "Width must be a positive number with up to two decimal places";
+                long = "The width must be a positive number, greater than or equal to 0.01, with up to two decimal places. Cyrillic letters are allowed in the unit.";
+                origin = "custom";
+                isForUser = true;
+                tags.push("overlay");
+                break;
+            case "length-format-error":
+                short = "Length must be a positive number with up to two decimal places";
+                long = "The length must be a positive number, greater than or equal to 0.01, with up to two decimal places. Cyrillic letters are allowed in the unit.";
+                origin = "custom";
+                isForUser = true;
+                tags.push("overlay");
+                break;
+            case "weight-format-error":
+                short = "Weight must be a positive number with up to two decimal places";
+                long = "The weight must be a positive number, greater than or equal to 0.01, with up to two decimal places. Cyrillic letters are allowed in the unit.";
+                origin = "custom";
+                isForUser = true;
+                tags.push("overlay");
+                break;
             default:
                 short = "Unexpected error";
                 long = "You encountered unexpected error.";
@@ -191,9 +326,11 @@ export const ErrorProvider = ({ children }) => {
                 tags.push("email-field");
                 tags.push("password-field");
                 tags.push("profile-page");
+                tags.push("critical");
+                tags.push("general");
                 break;
         };
-        setCatchedError({ origin, code: error, short, long, isForUser, tags})
+        setCatchedError({ origin, code: error, short, long, isForUser, tags });
     };
 
     return (

@@ -1,5 +1,5 @@
-import React, { useEffect, useState, useContext, useRef } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Modal from 'react-modal';
 
 import MainSeller from '../seller_comp/img_seller/main-seller.svg';
@@ -18,52 +18,72 @@ import BigGoodsSeller from '../seller_comp/img_seller/big-goods-seller.svg';
 import AddGoods from '../seller_comp/img_seller//add-goods-box-seller.svg';
 import ChipsLeys from '../seller_comp/img_seller/chips-leys.jpg';
 
-
-function App() {
-    return <MainSeller />;
-    return <OrderSeller />;
-    return <GoodsSeller />;
-    return <MessageSeller />;
-    return <PenSeller />;
-    return <ClientSeller />;
-    return <AnaliticSeller />;
-    return <WalletSeller />;
-    return <OptionSeller />;
-    return <WolfSeller />;
-    return <BigOptionSeller />;
-    return <SakuraSeller />;
-    return <BigGoodsSeller />;
-    return <AddGoods />;
-    return <ChipsLeys />;
-}
+import { useAuth } from '../providers/AuthProvider';
+import { useData } from '../providers/DataProvider';
+import { useErrors } from '../providers/ErrorProvider';
 
 export default function SellerGoodsCategories() {
 
+    const { requestData } = useData();
+    const { catchedError, handleMethod } = useErrors();
     const navigate = useNavigate();
 
-    const handleCompanyClick = () => {
-        navigate("/seller/company");
+    const [selectedCategory, setSelectedCategory] = useState(null);
+    const [selectedSubCategory, setSelectedSubCategory] = useState(null);
+    const [filteredProducts, setFilteredProducts] = useState([]);
+    const { user } = useAuth();
+
+    useEffect(() => {
+        const method = async () => {
+            await requestData("email;isSeller;displayName;products;");
+        };
+
+        handleMethod(async () => {
+            await method();
+        });
+    }, []);
+
+    useEffect(() => {
+        if (selectedCategory && selectedSubCategory) {
+            setFilteredProducts(user.products.filter(p => p.category === selectedCategory && p.subCategory === selectedSubCategory));
+        } else {
+            setFilteredProducts([]);
+        }
+    }, [selectedCategory, selectedSubCategory]);
+
+    const [openDetails, setOpenDetails] = useState(null);
+
+    const handleToggle = (category, event) => {
+        event.preventDefault();
+        if (openDetails === category) {
+          setOpenDetails(null);
+          setSelectedCategory(null);
+          setSelectedSubCategory(null);
+        } else {
+          setOpenDetails(category);
+          setSelectedCategory(category);
+          setSelectedSubCategory(null);
+        }
     };
 
-    const handleProfileClick = () => {
-        navigate("/seller/profile");
+    const handleSubcategoryChange = (subCategory, event) => {
+        event.preventDefault();
+        setSelectedSubCategory(subCategory);
     };
 
-    const handlePromotionsClick = () => {
-        navigate("/seller/promotions");
-    };
+    const handleAddProductClick = () => { navigate("/seller/positions/add") };
 
-    const handlePositionsClick = () => {
-        navigate("/seller/positions");
-    };
+    const handleCompanyClick = () => { navigate("/seller/company") };
 
-    const handleCategoriesClick = () => {
-        navigate("/seller/categories");
-    };
+    const handleProfileClick = () => { navigate("/seller/profile") };
 
-    const handleMainClick = () => {
-        navigate("/");
-    };
+    const handlePromotionsClick = () => { navigate("/seller/promotions") };
+
+    const handlePositionsClick = () => { navigate("/seller/positions") };
+
+    const handleCategoriesClick = () => { navigate("/seller/categories") };
+
+    const handleMainClick = () => { navigate("/") };
 
     return (
         <body className='seller-body'>
@@ -71,7 +91,7 @@ export default function SellerGoodsCategories() {
             <div className='left-seller'>
                 <h1 className='logo-seller'>SakuraTails</h1>
                 <div className='name-id-seller'>
-                    <h3>Ім'я Прізвище</h3>
+                    <h3>{user.displayName}</h3>
                     <p>Ваш ID: 0000001</p>
                 </div>
                 <div className='seller-search-div'>
@@ -79,7 +99,7 @@ export default function SellerGoodsCategories() {
                 </div>
 
                 <div className='seller-buttons-div seller-buttons-option-company-div'>
-                    <div onClick={handleMainClick}>
+                <div onClick={handleMainClick}>
                     <button className='left-seller-button'><img src={MainSeller} className='img-seller-left'></img>Головна</button>
                     </div>
                     <div>
@@ -97,13 +117,7 @@ export default function SellerGoodsCategories() {
                     <div onClick={handlePromotionsClick}>
                     <button className='left-seller-subbutton'>Акції та промокоди</button>
                     </div>
-                    <div>
-                    <button className='left-seller-subbutton'>Видалені позиції</button>
-                    </div>
                     </details>
-                    </div>
-                    <div>
-                    <button className='left-seller-button'><img src={MessageSeller} className='img-seller-left'></img>Сповіщення</button>
                     </div>
                     <div>
                     <button className='left-seller-button'><img src={PenSeller} className='img-seller-left'></img>Відгуки</button>
@@ -121,9 +135,6 @@ export default function SellerGoodsCategories() {
                     <button className='left-seller-subbutton'>Менеджери</button>
                     </div>
                     <div>
-                    <button className='left-seller-subbutton'>Інтернет-магазин</button>
-                    </div>
-                    <div>
                     <button className='left-seller-subbutton'>Способи доставки</button>
                     </div>
                     <div>
@@ -131,9 +142,6 @@ export default function SellerGoodsCategories() {
                     </div>
                     <div>
                     <button className='left-seller-subbutton'>Графік роботи</button>
-                    </div>
-                    <div>
-                    <button className='left-seller-subbutton'>Повернення та гарантія</button>
                     </div>
                     </details>
                     </div>
@@ -147,148 +155,149 @@ export default function SellerGoodsCategories() {
             <p>Управління категоріями товарів</p>
             </div>
             </div>
-            <div className='right-seller'>
-                    <div className='top-option-company'>
-                        <div>
-                        <div className='categories-title-seller'>
-                            <h3>Категорії</h3>
+                    <div className='right-seller'>
+                        <div className='top-option-company'>
+                            <div>
+                                <div className='categories-title-seller'>
+                                    <h3>Категорії</h3>
+                                </div>
+                                <div className='list-categories-seller'>
+                                    <details className='seller-categories-details' open={openDetails === 'category1'}>
+                                        <summary data-category="Заморожені" onClick={(e) => handleToggle('category1', e)}>Заморожені</summary>
+                                        <div>
+                                            <button className='list-buttons-categories-seller' data-subcategory="Морепродукти" onClick={(e) => handleSubcategoryChange('subCategory1', e)}>Морепродукти</button>
+                                        </div>
+                                        <div>
+                                            <button className='list-buttons-categories-seller' data-subcategory="Випічка" onClick={(e) => handleSubcategoryChange('subCategory2', e)}>Випічка</button>
+                                        </div>
+                                    </details>
+
+                                    <details className='seller-categories-details' open={openDetails === 'category2'}>
+                                        <summary data-category="Солодощі" onClick={(e) => handleToggle('category2', e)}>Солодощі</summary>
+                                        <div>
+                                            <button className='list-buttons-categories-seller' data-subcategory="Шоколад" onClick={(e) => handleSubcategoryChange('subCategory1', e)}>Шоколад</button>
+                                        </div>
+                                        <div>
+                                            <button className='list-buttons-categories-seller' data-subcategory="Моті" onClick={(e) => handleSubcategoryChange('subCategory2', e)}>Моті</button>
+                                        </div>
+                                        <div>
+                                            <button className='list-buttons-categories-seller' data-subcategory="Печиво" onClick={(e) => handleSubcategoryChange('subCategory3', e)}>Печиво</button>
+                                        </div>
+                                        <div>
+                                            <button className='list-buttons-categories-seller' data-subcategory="Торти" onClick={(e) => handleSubcategoryChange('subCategory4', e)}>Торти</button>
+                                        </div>
+                                        <div>
+                                            <button className='list-buttons-categories-seller' data-subcategory="Мармеладки" onClick={(e) => handleSubcategoryChange('subCategory5', e)}>Мармеладки</button>
+                                        </div>
+                                    </details>
+
+                                    <details className='seller-categories-details' open={openDetails === 'category3'}>
+                                        <summary data-category="Закуски" onClick={(e) => handleToggle('category3', e)}>Закуски</summary>
+                                        <div>
+                                            <button className='list-buttons-categories-seller' data-subcategory="Чипси" onClick={(e) => handleSubcategoryChange('subCategory1', e)}>Чипси</button>
+                                        </div>
+                                        <div>
+                                            <button className='list-buttons-categories-seller' data-subcategory="Крекери" onClick={(e) => handleSubcategoryChange('subCategory2', e)}>Крекери</button>
+                                        </div>
+                                        <div>
+                                            <button className='list-buttons-categories-seller' data-subcategory="Горіхи" onClick={(e) => handleSubcategoryChange('subCategory3', e)}>Горіхи</button>
+                                        </div>
+                                    </details>
+
+                                    <details className='seller-categories-details' open={openDetails === 'category4'}>
+                                        <summary data-category="Страви" onClick={(e) => handleToggle('category4', e)}>Страви</summary>
+                                        <div>
+                                            <button className='list-buttons-categories-seller' data-subcategory="Гострі" onClick={(e) => handleSubcategoryChange('subCategory1', e)}>Гострі</button>
+                                        </div>
+                                        <div>
+                                            <button className='list-buttons-categories-seller' data-subcategory="Локшина" onClick={(e) => handleSubcategoryChange('subCategory2', e)}>Локшина</button>
+                                        </div>
+                                        <div>
+                                            <button className='list-buttons-categories-seller' data-subcategory="Каррі" onClick={(e) => handleSubcategoryChange('subCategory3', e)}>Каррі</button>
+                                        </div>
+                                        <div>
+                                            <button className='list-buttons-categories-seller' data-subcategory="Рис" onClick={(e) => handleSubcategoryChange('subCategory4', e)}>Рис</button>
+                                        </div>
+                                        <div>
+                                            <button className='list-buttons-categories-seller' data-subcategory="Токпоккі" onClick={(e) => handleSubcategoryChange('subCategory5', e)}>Токпоккі</button>
+                                        </div>
+                                        <div>
+                                            <button className='list-buttons-categories-seller' data-subcategory="Місо" onClick={(e) => handleSubcategoryChange('subCategory6', e)}>Місо</button>
+                                        </div>
+                                    </details>
+
+                                    <details className='seller-categories-details' open={openDetails === 'category5'}>
+                                        <summary data-category="Соуси" onClick={(e) => handleToggle('category5', e)}>Соуси</summary>
+                                        <div>
+                                            <button className='list-buttons-categories-seller' data-subcategory="Гострі" onClick={(e) => handleSubcategoryChange('subCategory1', e)}>Гострі</button>
+                                        </div>
+                                        <div>
+                                            <button className='list-buttons-categories-seller' data-subcategory="Соєвий" onClick={(e) => handleSubcategoryChange('subCategory2', e)}>Соєвий</button>
+                                        </div>
+                                        <div>
+                                            <button className='list-buttons-categories-seller' data-subcategory="Оцти" onClick={(e) => handleSubcategoryChange('subCategory3', e)}>Оцти</button>
+                                        </div>
+                                    </details>
+
+                                    <details className='seller-categories-details' open={openDetails === 'category6'}>
+                                        <summary data-category="Напої" onClick={(e) => handleToggle('category6', e)}>Напої</summary>
+                                        <div>
+                                            <button className='list-buttons-categories-seller' data-subcategory="Газованка" onClick={(e) => handleSubcategoryChange('subCategory1', e)}>Газованка</button>
+                                        </div>
+                                        <div>
+                                            <button className='list-buttons-categories-seller' data-subcategory="Сік" onClick={(e) => handleSubcategoryChange('subCategory2', e)}>Сік</button>
+                                        </div>
+                                        <div>
+                                            <button className='list-buttons-categories-seller' data-subcategory="Фітнес" onClick={(e) => handleSubcategoryChange('subCategory3', e)}>Фітнес</button>
+                                        </div>
+                                        <div>
+                                            <button className='list-buttons-categories-seller' data-subcategory="Вода" onClick={(e) => handleSubcategoryChange('subCategory4', e)}>Вода</button>
+                                        </div>
+                                        <div>
+                                            <button className='list-buttons-categories-seller' data-subcategory="Чай" onClick={(e) => handleSubcategoryChange('subCategory5', e)}>Чай</button>
+                                        </div>
+                                        <div>
+                                            <button className='list-buttons-categories-seller' data-subcategory="Кава" onClick={(e) => handleSubcategoryChange('subCategory6', e)}>Кава</button>
+                                        </div>
+                                        <div>
+                                            <button className='list-buttons-categories-seller' data-subcategory="Молоко" onClick={(e) => handleSubcategoryChange('subCategory7', e)}>Молоко</button>
+                                        </div>
+                                    </details>
+                                </div>
+                            </div>
+                            <div className='information-categories'>
+                                {/* Виберіть категорію */}
+                                { !selectedCategory && (<p className='select-category-seller'>Виберіть категорію</p>)}
+
+                                {/* Виберіть підкатегорію */}
+                                { selectedCategory && !selectedSubCategory && (<p className='select-subcategory-seller'>Виберіть підкатегорію</p>)}
+
+                                {/* Додати товар */}
+                                { selectedCategory && selectedSubCategory && (
+                                    filteredProducts.length === 0 ? (
+                                        <a onClick={handleAddProductClick}>
+                                            <img src={AddGoods} className='img-goods-categories'/>
+                                            <p className='add-goods-categories-seller'>Додати товар</p>
+                                        </a>
+                                    ) : (
+                                        <div className='goods-position-seller-block'>
+                                            {filteredProducts.map((product, index) => (
+                                                <div key={index} className='good-position-seller'>
+                                                    <img src={product.photoUrls[0]} className='img-position-good' alt={product.title} />
+                                                    <h5>{product.title}</h5>
+                                                    <p className='text-position-good'>{product.inStock} шт. в наявності</p>
+                                                    <p className='price-position-good'>
+                                                        <span className='span-small-pos'>$</span>{product.price} <span className='span-slash-pos'>/</span>{product.weight}<span className='span-small-pos'>г.</span>
+                                                    </p>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    )
+                                )}
+                            </div>
                         </div>
-                        <div className='list-categories-seller'>
-                        <details className='seller-categories-details'>
-                    <summary>Заморожені</summary>
-                    <div>
-                    <button className='list-buttons-categories-seller'>Морепродукти</button>
                     </div>
-                    <div>
-                    <button className='list-buttons-categories-seller'>Випічка</button>
-                    </div>
-                    </details>
-
-                    <details className='seller-categories-details'>
-                    <summary>Солодощі</summary>
-                    <div>
-                    <button className='list-buttons-categories-seller'>Шоколад</button>
-                    </div>
-                    <div>
-                    <button className='list-buttons-categories-seller'>Моті</button>
-                    </div>
-                    <div>
-                    <button className='list-buttons-categories-seller'>Печиво</button>
-                    </div>
-                    <div>
-                    <button className='list-buttons-categories-seller'>Торти</button>
-                    </div>
-                    <div>
-                    <button className='list-buttons-categories-seller'>Мармеладки</button>
-                    </div>
-                    </details>
-
-                    <details className='seller-categories-details'>
-                    <summary>Закуски</summary>
-                    <div>
-                    <button className='list-buttons-categories-seller'>Чипси</button>
-                    </div>
-                    <div>
-                    <button className='list-buttons-categories-seller'>Крекери</button>
-                    </div>
-                    <div>
-                    <button className='list-buttons-categories-seller'>Горіхи</button>
-                    </div>
-                    </details>
-
-                    <details className='seller-categories-details'>
-                    <summary>Страви</summary>
-                    <div>
-                    <button className='list-buttons-categories-seller'>Гострі</button>
-                    </div>
-                    <div>
-                    <button className='list-buttons-categories-seller'>Локшина</button>
-                    </div>
-                    <div>
-                    <button className='list-buttons-categories-seller'>Каррі</button>
-                    </div>
-                    <div>
-                    <button className='list-buttons-categories-seller'>Рис</button>
-                    </div>
-                    <div>
-                    <button className='list-buttons-categories-seller'>Токпоккі</button>
-                    </div>
-                    <div>
-                    <button className='list-buttons-categories-seller'>Місо</button>
-                    </div>
-                    </details>
-
-                    <details className='seller-categories-details'>
-                    <summary>Соуси</summary>
-                    <div>
-                    <button className='list-buttons-categories-seller'>Гострі</button>
-                    </div>
-                    <div>
-                    <button className='list-buttons-categories-seller'>Соєвий</button>
-                    </div>
-                    <div>
-                    <button className='list-buttons-categories-seller'>Оцти</button>
-                    </div>
-                    </details>
-
-                    <details className='seller-categories-details'>
-                    <summary>Напої</summary>
-                    <div>
-                    <button className='list-buttons-categories-seller'>Газованка</button>
-                    </div>
-                    <div>
-                    <button className='list-buttons-categories-seller'>Сік</button>
-                    </div>
-                    <div>
-                    <button className='list-buttons-categories-seller'>Фітнес</button>
-                    </div>
-                    <div>
-                    <button className='list-buttons-categories-seller'>Вода</button>
-                    </div>
-                    <div>
-                    <button className='list-buttons-categories-seller'>Чай</button>
-                    </div>
-                    <div>
-                    <button className='list-buttons-categories-seller'>Кава</button>
-                    </div>
-                    <div>
-                    <button className='list-buttons-categories-seller'>Молоко</button>
-                    </div>
-                    </details>
-                    
-                        </div>
-                        </div>
-                        <div className='information-categories'>
-                            {/* Виберіть категорію */}
-                            {/* <p className='select-category-seller'>Виберіть категорію</p> */}
-
-                            {/* Виберіть підкатегорію */}
-                            {/* <p className='select-subcategory-seller'>Виберіть підкатегорію</p> */}
-
-                            {/* Додати товар */}
-                            {/* <a><img src={AddGoods} className='img-goods-categories'></img>
-                            <p className='add-goods-categories-seller'>Додати товар</p></a> */}
-
-                            {/* З товарами */}
-                            <div className='goods-position-seller-block'>
-                        <div className='good-position-seller'>
-                        <img src={ChipsLeys} className='img-position-good'></img>
-                        <h5>Картопляні чіпси Lay's: Пряні раки</h5>
-                        <p className='text-position-good'>23 шт. в наявності</p>
-                        <p className='price-position-good'><span className='span-small-pos'>$</span>3.49 <span className='span-slash-pos'>/</span>80<span className='span-small-pos'>г.</span></p>
-                        </div>
-
-                        <div className='good-position-seller'>
-                        <img src={ChipsLeys} className='img-position-good'></img>
-                        <h5>Картопляні чіпси Lay's: Пряні раки</h5>
-                        <p className='text-position-good'>23 шт. в наявності</p>
-                        <p className='price-position-good'><span className='span-small-pos'>$</span>3.49 <span className='span-slash-pos'>/</span>80<span className='span-small-pos'>г.</span></p>
-                        </div>
-                    </div>
-                        </div>
-                    </div>
-                  </div>
-            </div>
+                </div>
             </div>
         </body>
     )

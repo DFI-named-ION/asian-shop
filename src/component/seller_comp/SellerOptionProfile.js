@@ -90,10 +90,7 @@ export default function SellerOptionProfile() {
                 </div>
 
                 <div className='seller-buttons-div seller-buttons-option-company-div'>
-                    {/* <div className='wolf-seller-div'>
-                    <img src={WolfSeller} className='wolf-seller'></img>
-                    </div> */}
-                    <div onClick={handleMainClick}>
+                <div onClick={handleMainClick}>
                     <button className='left-seller-button'><img src={MainSeller} className='img-seller-left'></img>Головна</button>
                     </div>
                     <div>
@@ -111,13 +108,7 @@ export default function SellerOptionProfile() {
                     <div onClick={handlePromotionsClick}>
                     <button className='left-seller-subbutton'>Акції та промокоди</button>
                     </div>
-                    <div>
-                    <button className='left-seller-subbutton'>Видалені позиції</button>
-                    </div>
                     </details>
-                    </div>
-                    <div>
-                    <button className='left-seller-button'><img src={MessageSeller} className='img-seller-left'></img>Сповіщення</button>
                     </div>
                     <div>
                     <button className='left-seller-button'><img src={PenSeller} className='img-seller-left'></img>Відгуки</button>
@@ -135,9 +126,6 @@ export default function SellerOptionProfile() {
                     <button className='left-seller-subbutton'>Менеджери</button>
                     </div>
                     <div>
-                    <button className='left-seller-subbutton'>Інтернет-магазин</button>
-                    </div>
-                    <div>
                     <button className='left-seller-subbutton'>Способи доставки</button>
                     </div>
                     <div>
@@ -145,9 +133,6 @@ export default function SellerOptionProfile() {
                     </div>
                     <div>
                     <button className='left-seller-subbutton'>Графік роботи</button>
-                    </div>
-                    <div>
-                    <button className='left-seller-subbutton'>Повернення та гарантія</button>
                     </div>
                     </details>
                     </div>

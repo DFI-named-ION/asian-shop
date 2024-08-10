@@ -86,7 +86,7 @@ export default function SellerGoodsPosition() {
                 </div>
 
                 <div className='seller-buttons-div seller-buttons-option-company-div'>
-                    <div onClick={handleMainClick}>
+                <div onClick={handleMainClick}>
                     <button className='left-seller-button'><img src={MainSeller} className='img-seller-left'></img>Головна</button>
                     </div>
                     <div>
@@ -104,13 +104,7 @@ export default function SellerGoodsPosition() {
                     <div onClick={handlePromotionsClick}>
                     <button className='left-seller-subbutton'>Акції та промокоди</button>
                     </div>
-                    <div>
-                    <button className='left-seller-subbutton'>Видалені позиції</button>
-                    </div>
                     </details>
-                    </div>
-                    <div>
-                    <button className='left-seller-button'><img src={MessageSeller} className='img-seller-left'></img>Сповіщення</button>
                     </div>
                     <div>
                     <button className='left-seller-button'><img src={PenSeller} className='img-seller-left'></img>Відгуки</button>
@@ -128,9 +122,6 @@ export default function SellerGoodsPosition() {
                     <button className='left-seller-subbutton'>Менеджери</button>
                     </div>
                     <div>
-                    <button className='left-seller-subbutton'>Інтернет-магазин</button>
-                    </div>
-                    <div>
                     <button className='left-seller-subbutton'>Способи доставки</button>
                     </div>
                     <div>
@@ -138,9 +129,6 @@ export default function SellerGoodsPosition() {
                     </div>
                     <div>
                     <button className='left-seller-subbutton'>Графік роботи</button>
-                    </div>
-                    <div>
-                    <button className='left-seller-subbutton'>Повернення та гарантія</button>
                     </div>
                     </details>
                     </div>
@@ -265,14 +253,14 @@ export default function SellerGoodsPosition() {
                         <img src={ChipsLeys} className='img-position-good'></img>
                         <h5>Картопляні чіпси Lay's: Пряні раки</h5>
                         <p className='text-position-good'>23 шт. в наявності</p>
-                        <p className='price-position-good'><span className='span-small-pos'>$</span>3.49 <span className='span-slash-pos'>/</span>80<span className='span-small-pos'>г.</span></p>
+                        <p className='price-position-good'><span className='span-small-pos'>€</span>3.49 <span className='span-slash-pos'>/</span>80<span className='span-small-pos'>г.</span></p>
                         </div>
 
                         <div className='good-position-seller'>
                         <img src={ChipsLeys} className='img-position-good'></img>
                         <h5>Картопляні чіпси Lay's: Пряні раки</h5>
                         <p className='text-position-good'>23 шт. в наявності</p>
-                        <p className='price-position-good'><span className='span-small-pos'>$</span>3.49 <span className='span-slash-pos'>/</span>80<span className='span-small-pos'>г.</span></p>
+                        <p className='price-position-good'><span className='span-small-pos'>€</span>3.49 <span className='span-slash-pos'>/</span>80<span className='span-small-pos'>г.</span></p>
                         </div>
                     </div>
                     </div>

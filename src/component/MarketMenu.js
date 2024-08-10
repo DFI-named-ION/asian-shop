@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useContext, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 import Cakes from '../images/market-menu-img/Cakes.png';
 import Chips from '../images/market-menu-img/Chips.png';
@@ -16,21 +15,19 @@ import Soda from '../images/market-menu-img/Soda.png';
 import Sport from '../images/market-menu-img/Sport.png';
 import Tea from '../images/market-menu-img/Tea.png';
 import Water from '../images/market-menu-img/Water.png';
-import Logo from '../images/logo/SakuraTails.svg';
-import Basket from '../images/icons/basket.svg';
-import Profile from '../images/icons/profile.svg';
-import HelloEmoji from '../images/icons/hello-emoji.svg';
-import AddPlus from '../images/icons/add-plus.svg';
-import Exit from '../images/icons/exit.svg';
-import History from '../images/icons/history.svg';
-import Transfer from '../images/icons/transfer.svg';
-import Like from '../images/icons/like.svg';
-import Pen from '../images/icons/pen.svg';
-import Wallet from '../images/icons/wallet.svg';
-import Procent from '../images/icons/procent.svg';
-import Case from '../images/icons/case.svg';
+import Bakery from '../images/market-menu-img/Bakery.png';
+import Cari from '../images/market-menu-img/Cari.png';
+import Miso from '../images/market-menu-img/Miso.png';
+import Noodles from '../images/market-menu-img/Noodles.png';
+import Rice from '../images/market-menu-img/Rice.png';
+import Seafood from '../images/market-menu-img/Seafood.png';
+import Soy from '../images/market-menu-img/Soy.png';
+import SpicySouce from '../images/market-menu-img/Spicy-souce.png';
+import Spicy from '../images/market-menu-img/Spicy.png';
+import Teokbokki from '../images/market-menu-img/Teokbokki.png';
+import Vinegar from '../images/market-menu-img/Vinegar.png';
+import Header from '../component/Header';
 
-import { useAuth } from './providers/AuthProvider';
 
 
 function App() {
@@ -49,135 +46,23 @@ function App() {
     return <Sport />;
     return <Tea />;
     return <Water />;
-    return <Logo />;
-    return <Basket />;
-    return <Profile />;
-    return <HelloEmoji />;
-    return <AddPlus />;
-    return <Exit />;
-    return <History />;
-    return <Transfer />;
-    return <Like />;
-    return <Pen />;
-    return <Wallet />;
-    return <Procent />;
-    return <Case />;
+    return <Cari />;
+    return <Miso />;
+    return <Noodles />;
+    return <Rice />;
+    return <Seafood />;
+    return <Soy />;
+    return <SpicySouce />;
+    return <Spicy />;
+    return <Vinegar />;
+    return <Bakery />;
+    return <Header />;
 }
 
 export default function MailConfirmation() {
-
-    const [modalIsOpenProfile, setModalIsOpenProfile] = useState(false);
-
-    const {user} = useAuth();
-    const navigate = useNavigate();
-
-    const handleHeadClick = (e) => {
-        e.preventDefault();
-        if (!user) {
-            navigate('/authorization');
-        } else {
-            setModalIsOpenProfile(!modalIsOpenProfile);
-        }
-    };
-  
-    const handleSellerProfileClick = () => {
-        navigate("/seller");
-    };
-  
-    const handleSettingsClick = () => {
-        navigate("/profile-settings")
-    };
-
     return (
         <body className='market-menu-body'>
-          <section className='header-section'>
-            <div className='head-div'>
-                <div className='head-left-div'>
-                <div className='head-nav-div'>
-                  <a className='header-link header-link-market' href='/catalog'>Каталог</a>
-                  </div>
-                  <div className='head-nav-div'>
-                  <a className='header-link' href='https://www.figma.com/'>Подарунки</a>
-                  </div>
-                  </div>
-              <div className='head-logo-div'>
-              <a className='head-logo' href='/'>SakuraTails</a>
-              </div>
-              <div className='head-right-div'>
-                <div className='head-nav-div'>
-                    <a className='header-link' href='https://www.figma.com/'>Про нас</a>
-                </div>
-                <div className='head-nav-div'>
-                    <a className='header-link' href='https://www.figma.com/'>Коробки</a>
-                </div>
-                <div className='head-nav-div'>
-                    <a href='#' className='icon-head'>
-                        <img src={Basket}></img>
-                    </a>
-                </div>
-                <div className='head-nav-div dropdown-header'>
-                    <a href='#' className='icon-head' onClick={handleHeadClick}>
-                        <img src={Profile}></img>
-                    </a>
-                    {user && (
-                        <div className="dropdown-content-header" style={{ display: modalIsOpenProfile ? "block" : "none" }}>
-                            <div>
-                                <p className='head-email-dropdown'></p>
-                            </div>
-                            <div>
-                                <p className='hello-dropdown'>Вітаємо, <span className='name-dropdown'>{user.displayName}</span> <img src={HelloEmoji} alt="Hello Emoji" /></p>
-                            </div>
-                            <div>
-                                <button className='dropdown-border-top-button'><img src={History} alt="History" />Історія замовлень</button>
-                            </div>
-                            <div>
-                                <button className='dropdown-button'><img src={Transfer} alt="Transfer" />Відстеження замовлення</button>
-                            </div>
-                            <div>
-                                <button className='dropdown-button'><img src={Like} alt="Like" />Обране</button>
-                            </div>
-                            <div>
-                                <button className='dropdown-button'><img src={Pen} alt="Pen" />Мої відгуки</button>
-                            </div>
-                            <div>
-                                <button className='dropdown-button'><img src={Wallet} alt="Wallet" />Мій гаманець</button>
-                            </div>
-                            <div>
-                                <button className='dropdown-border-bottom-button'><img src={Procent} alt="Procent" />Знижки та бонуси</button>
-                            </div>
-                            <div>
-                                <button className='dropdown-button dropdown-button-exit'><img src={Exit} alt="Exit" />Вийти з акаунта</button>
-                            </div>
-                            <div>
-                                <button className='dropdown-border-left-button' onClick={handleSettingsClick}>Налаштування</button>
-                                <button className='dropdown-border-right-button'>Довідка</button>
-                            </div>
-                            <div onClick={handleSellerProfileClick}>
-                                <button className='dropdown-border-bottom-button'><img src={Case} alt="Case" />Кабінет продавця</button>
-                            </div>
-                            <div>
-                                <p className='bottom-dropdown'>
-                                    <a href=''>Privacy Policy</a><span className='slash-dropdown'>/</span><a href=''> Terms of Service</a>
-                                </p>
-                            </div>
-                        </div>
-                    )}
-                </div>
-              {/* <div className='language-div'>
-                <div className='language-left-div'>
-                  <a className='language-link-left language-link'>
-                    <p>EN</p>
-                  </a>
-                </div>
-                <div className='language-right-div'>
-                <a className='language-link-right language-link'>
-                    <p>UA</p>
-                  </a>
-                </div>
-              </div> */}
-              </div>
-              </div>
-          </section>
+          <Header/>
       
             <h1>Всі категорії</h1>
     <div class="container-market-menu">
@@ -185,11 +70,11 @@ export default function MailConfirmation() {
             <h2>Заморожені</h2>
             <div class="category-item">
                 Морепродукти
-                {/* <img src="images/Catalog.png" alt="Морепродукти"> */}
+                <img src={Seafood} alt="Морепродукти"/>
             </div>
             <div class="category-item">
                 Випічка
-                {/* <img src="images/Catalog.png" alt="Випічка"> */}
+                <img src={Bakery} alt="Випічка"/>
             </div>
         </div>
         <div class="category-market-menu">
@@ -234,42 +119,42 @@ export default function MailConfirmation() {
             <h2>Страви</h2>
             <div class="category-item">
                 Гострі
-                {/* <img src="images/Catalog.png" alt="Гострі"> */}
+                <img src={Spicy} alt="Гострі"/>
             </div>
             <div class="category-item">
                 Локшина
-                {/* <img src="images/Catalog.png" alt="Локшина"> */}
+                <img src={Noodles} alt="Локшина"/>
             </div>
             <div class="category-item">
                 Каррі
-                {/* <img src="images/Catalog.png" alt="Каррі"> */}
+                <img src={Cari} alt="Каррі"/>
             </div>
             <div class="category-item">
                 Рис
-                {/* <img src="images/Catalog.png" alt="Рис"> */}
+                <img src={Rice} alt="Рис"/>
             </div>
             <div class="category-item">
                 Токпоккі
-                {/* <img src="images/Catalog.png" alt="Токпоккі"> */}
+                <img src={Teokbokki} alt="Токпоккі"/>
             </div>
             <div class="category-item">
                 Місо
-                {/* <img src="images/Catalog.png" alt="Місо"> */}
+                <img src={Miso} alt="Місо"/>
             </div>
         </div>
         <div class="category-market-menu">
             <h2>Соуси</h2>
             <div class="category-item">
                 Гострі
-                {/* <img src="images/Catalog.png" alt="Гострі"> */}
+                <img src={SpicySouce} alt="Гострі"/>
             </div>
             <div class="category-item">
                 Соєвий
-                {/* <img src={Choko} alt="Шоколад"></img> */}
+                <img src={Soy} alt="Шоколад"/>
             </div>
             <div class="category-item">
                 Оцти
-                {/* <img src="images/Catalog.png" alt="Оцти"> */}
+                <img src={Vinegar} alt="Оцти"/>
             </div>
         </div>
         <div class="category-market-menu">
