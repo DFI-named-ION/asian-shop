@@ -76,19 +76,19 @@ function App() {
                         <div className='left-nav-div'>
                             <ul>
                                 <li className='section-footer-bold'><a className='section-footer section-footer-bold'>Тільки на SakuraTails</a></li>
-                                <li className='section-footer'><a className='section-footer' href='#'>Магазин</a></li>
+                                <li className='section-footer'><a className='section-footer' href='/'>Магазин</a></li>
                                 <li className='section-footer'><a className='section-footer' href='#subcribtion-section'>Підписка</a></li>
-                                <li className='section-footer'><a className='section-footer' href='#subcribtion-section'>Стати партнером</a></li>
+                                <li className='section-footer'><a className='section-footer' href='/seller/authorization'>Стати партнером</a></li>
                             </ul>
                         </div>
                         <div className='right-nav-div'>
                             <ul>
                                 <li className='section-footer-bold'><a className='section-footer section-footer-bold'>Підтримка</a></li>
-                                <li className='section-footer'><a className='section-footer' href='https://www.figma.com/'>Політика конфіденційності</a></li>
-                                <li className='section-footer'><a className='section-footer' href='https://www.figma.com/'>Про нас</a></li>
-                                <li className='section-footer'><a className='section-footer' href='https://www.figma.com/'>Умови</a></li>
-                                <li className='section-footer'><a className='section-footer' href='https://www.figma.com/'>FAQ</a></li>
-                                <li className='section-footer'><a className='section-footer' href='https://www.figma.com/'>Політика доставки</a></li>
+                                <li className='section-footer'><a className='section-footer' href='/privacy'>Політика конфіденційності</a></li>
+                                <li className='section-footer'><a className='section-footer' href='/about'>Про нас</a></li>
+                                <li className='section-footer'><a className='section-footer' href='/terms-of-use'>Умови</a></li>
+                                <li className='section-footer'><a className='section-footer' href='/faq'>FAQ</a></li>
+                                <li className='section-footer'><a className='section-footer' href='/delivery-policy'>Політика доставки</a></li>
                             </ul>
                         </div>
                     </div>
