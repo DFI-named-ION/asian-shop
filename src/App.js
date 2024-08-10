@@ -9,7 +9,7 @@ import MailConfirmationPage from "./component/MailConfirmation";
 import PasswordChangeMail from "./component/PasswordChangeMail";
 import PasswordChange from "./component/PasswordChange";
 import ProfilePage from './component/ProfilePage';
-import MarketMenu from './component/MarketMenu';
+import Market from './component/Market';
 import Seller from './component/seller_comp/Seller';
 import SellerOptionProfile from "./component/seller_comp/SellerOptionProfile";
 import SellerOptionCompany from "./component/seller_comp/SellerOptionCompany";
@@ -21,6 +21,8 @@ import SellerOptionManager from "./component/seller_comp/SellerOptionManager";
 import FAQ from "./component/FAQ";
 import AboutUs from "./component/AboutUs";
 import PrivacyPolicy from "./component/PrivacyPolicy";
+import TermsOfUse from "./component/TermsOfUse";
+import BoxPage from "./component/BoxPage";
 import GoodPage from "./component/GoodPage";
 
 import SellerRoute from "./component/routes/SellerRoute";
@@ -51,7 +53,7 @@ function App() {
                         <Route path='/confirmation' element={<MailConfirmationPage />} />
                     </Route>
                     <Route element={<PublicRoute />}> {/* AVAILABLE FOR EVERYONE */}
-                        <Route path='/catalog' element={<MarketMenu />} />
+                        <Route path='/catalog' element={<Market />} />
                         <Route path='/catalog/*' element={<GoodPage />} />
                         <Route path='/registration' element={<RegistrationPage />} />
                         <Route path='/authorization' element={<AuthorizationPage />} />
@@ -62,6 +64,8 @@ function App() {
                         <Route path='/faq' element={<FAQ />} />
                         <Route path='/about' element={<AboutUs />} />
                         <Route path='/privacy' element={<PrivacyPolicy />} />
+                        <Route path='/terms-of-use' element={<TermsOfUse />} />
+                        <Route path='/boxes' element={<BoxPage />} />
 						<Route path='/' element={<HomePage />} />
                     </Route>
                 </Routes>

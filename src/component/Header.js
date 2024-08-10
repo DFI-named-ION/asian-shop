@@ -68,7 +68,7 @@ function App() {
                   <a className='header-link header-link-market' href='/catalog'>Каталог</a>
                   </div>
                   <div className='head-nav-div'>
-                  <a className='header-link' href='https://www.figma.com/'>FAQ</a>
+                  <a className='header-link' href='/faq'>FAQ</a>
                   </div>
                   </div>
               <div className='head-logo-div'>
@@ -79,7 +79,7 @@ function App() {
                     <a className='header-link' href='/about'>Про нас</a>
                 </div>
                 <div className='head-nav-div'>
-                    <a className='header-link' href='https://www.figma.com/'>Коробки</a>
+                    <a className='header-link' href='/boxes'>Коробки</a>
                 </div>
                 <div className='head-nav-div dropdown-header'>
                     <a href='#' className='icon-head'>
