@@ -88,17 +88,22 @@ export default function Registration() {
     };
 
     const handleAuth = async (providerOrEvent) => {
-        await handleMethod(() => {
-            if (providerOrEvent.preventDefault) {
-                providerOrEvent.preventDefault();
-                const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-                if (!emailRegex.test(email)) throw "email-format-error";
-                const passRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,64}$/;
-                if (!passRegex.test(password)) throw "password-format-error";
-        
-                registerWithEmailAndPassword(email, password, name);
-            } else {
-                loginWithPopup(providerOrEvent);
+        await handleMethod(async () => {
+            try {
+                if (providerOrEvent.preventDefault) {
+                    providerOrEvent.preventDefault();
+                    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+                    if (!emailRegex.test(email)) throw "email-format-error";
+                    const passRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,64}$/;
+                    if (!passRegex.test(password)) throw "password-format-error";
+            
+                    await registerWithEmailAndPassword(email, password, name);
+                } else {
+                    await loginWithPopup(providerOrEvent);
+                }
+            } catch (err) {
+                if (err?.code === "ERR_NETWORK") throw "server-offline-error";
+                throw err;
             }
         });
     };

@@ -37,12 +37,10 @@ export const ErrorProvider = ({ children }) => {
 
         switch (error) {
             case "ERR_NETWORK":
-                short = "Network error";
-                long = "Network error occured";
+                short = "Server is currently offline";
+                long = "Server is currently offline, sorry but you wont be able to do this action.";
                 origin = "axios";
                 isForUser = true;
-                tags.push("email-field");
-                tags.push("code-field");
                 tags.push("general");
                 tags.push("server");
                 tags.push("critical");
@@ -52,6 +50,7 @@ export const ErrorProvider = ({ children }) => {
                 long = "Correct email look like this: user@example.com.";
                 origin = "firebase";
                 isForUser = true;
+                tags.push("with-button");
                 tags.push("email-field");
                 tags.push("server");
                 break;
@@ -60,6 +59,7 @@ export const ErrorProvider = ({ children }) => {
                 long = "Invalid credentials to access this account.";
                 origin = "firebase";
                 isForUser = true;
+                tags.push("with-button");
                 tags.push("email-field");
                 tags.push("password-field");
                 tags.push("server");
@@ -69,6 +69,7 @@ export const ErrorProvider = ({ children }) => {
                 long = "Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later.";
                 origin = "firebase";
                 isForUser = true;
+                tags.push("with-button");
                 tags.push("email-field");
                 tags.push("server");
                 break;
@@ -77,6 +78,7 @@ export const ErrorProvider = ({ children }) => {
                 long = "You accidantly closed popup. Try again.";
                 origin = "firebase";
                 isForUser = true;
+                tags.push("with-button");
                 tags.push("email-field");
                 tags.push("server");
                 break;
@@ -85,6 +87,7 @@ export const ErrorProvider = ({ children }) => {
                 long = "Account with this email already exists.";
                 origin = "firebase";
                 isForUser = true;
+                tags.push("with-button");
                 tags.push("email-field");
                 tags.push("server");
                 break;
@@ -105,8 +108,25 @@ export const ErrorProvider = ({ children }) => {
                 long = "User with provided email is not found.";
                 origin = "api";
                 isForUser = true;
+                tags.push("with-button");
                 tags.push("email-field");
                 tags.push("server");
+                break;
+            case "server-offline-error":
+                short = "Server is currently offline";
+                long = "Server is currently offline, sorry but you wont be able to do this action.";
+                origin = "custom";
+                isForUser = true;
+                tags.push("with-button");
+                tags.push("email-field");
+                tags.push("code-field");
+                break;
+            case "unauthorized":
+                short = "Unauthrorized access!";
+                long = "You dont have permission to do this action.";
+                origin = "custom";
+                isForUser = true;
+                tags.push("critical");
                 break;
             case "add-product-error":
                 short = "Product was not added due error";
@@ -120,6 +140,7 @@ export const ErrorProvider = ({ children }) => {
                 long = "User is already verified.";
                 origin = "api";
                 isForUser = true;
+                tags.push("with-button");
                 tags.push("code-field");
                 tags.push("server");
                 break;
@@ -128,6 +149,7 @@ export const ErrorProvider = ({ children }) => {
                 long = "Code is not valid.";
                 origin = "api";
                 isForUser = true;
+                tags.push("with-button");
                 tags.push("code-field");
                 break;
             case 400:
@@ -137,17 +159,20 @@ export const ErrorProvider = ({ children }) => {
                 long = "Unauthorized error occured";
                 origin = "api";
                 break;
-            case 405:
-                short = "Bad request";
-                long = "Bad request occured";
-                origin = "axios";
-                tags.push("profile-page");
+            case "not-seller-error":
+                short = "User is not seller";
+                long = "User with this email is not seller.";
+                origin = "api";
+                isForUser = true;
+                tags.push("with-button");
+                tags.push("email-field");
                 break;
             case "jwt-decrypt-error":
                 short = "Url is not valid";
                 long = "Url is no longer valid.";
                 origin = "custom";
                 isForUser = true;
+                tags.push("with-button");
                 tags.push("password-field");
                 break;
             case "jwt-encrypt-error":
@@ -155,6 +180,7 @@ export const ErrorProvider = ({ children }) => {
                 long = "Internal error occured.";
                 origin = "custom";
                 isForUser = true;
+                tags.push("with-button");
                 tags.push("password-field");
                 break;
             case "email-format-error":
@@ -162,6 +188,7 @@ export const ErrorProvider = ({ children }) => {
                 long = "Correct email look like this: user@example.com.";
                 origin = "custom";
                 isForUser = true;
+                tags.push("with-button");
                 tags.push("email-field");
                 break;
             case "password-format-error":
@@ -169,6 +196,7 @@ export const ErrorProvider = ({ children }) => {
                 long = "password-format-error"; // modal will display stylish html
                 origin = "custom";
                 isForUser = true;
+                tags.push("with-button");
                 tags.push("password-field");
                 tags.push("profile-page");
                 break;
@@ -183,7 +211,7 @@ export const ErrorProvider = ({ children }) => {
                 break;
             case "phone-format-error":
                 short = "Invalid phone format";
-                long = "Correct phone is 10 digits long without country code: xxx xxx xx xx";
+                long = "Correct phone is 10 digits long without country code: xxx xxx xx xx.";
                 origin = "custom";
                 isForUser = true;
                 tags.push("phone-field");
@@ -192,10 +220,19 @@ export const ErrorProvider = ({ children }) => {
                 break;
             case "address-format-error":
                 short = "Invalid address format";
-                long = "Fields 'City', 'Street' and 'House' are required while 'Apartment' is not";
+                long = "Fields 'City', 'Street' and 'House' are required while 'Apartment' is not.";
                 origin = "custom";
                 isForUser = true;
                 tags.push("address-field");
+                tags.push("profile-page");
+                tags.push("overlay");
+                break;
+            case "recipient-format-error":
+                short = "Invalid recipient format";
+                long = "It is necessary to fill all previous recipient`s fields to be able to add another recipient.";
+                origin = "custom";
+                isForUser = true;
+                tags.push("recipient-field");
                 tags.push("profile-page");
                 tags.push("overlay");
                 break;
@@ -204,6 +241,7 @@ export const ErrorProvider = ({ children }) => {
                 long = "Code is not full.";
                 origin = "custom";
                 isForUser = true;
+                tags.push("with-button");
                 tags.push("code-field");
                 break;
             case "not-same-error":
@@ -211,6 +249,7 @@ export const ErrorProvider = ({ children }) => {
                 long = "Passwords are not same.";
                 origin = "custom";
                 isForUser = true;
+                tags.push("with-button");
                 tags.push("password-field");
                 break;
             case "recaptcha-error":
@@ -218,6 +257,7 @@ export const ErrorProvider = ({ children }) => {
                 long = "Captcha verification is not complete."
                 origin = "custom";
                 isForUser = true;
+                tags.push("with-button");
                 tags.push("email-field");
                 break;
             case "image-format-error":
@@ -323,6 +363,8 @@ export const ErrorProvider = ({ children }) => {
                 long = "You encountered unexpected error.";
                 origin = "hz";
                 isForUser = true;
+                tags.push("with-button");
+                tags.push("code-field");
                 tags.push("email-field");
                 tags.push("password-field");
                 tags.push("profile-page");

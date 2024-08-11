@@ -25,6 +25,11 @@ export const DataProvider = ({ children }) => {
         });
     };
 
+    const updateSellerInfo = async (newUser) => {
+        let token = await encryptJwtToken(newUser);
+        await axios.post(`${process.env.REACT_APP_WEB_API_BASE_URL}/Data/updateSellerInfo`, { token });
+    };
+
     const updateUserInfo = async (newUser) => {
         let token = await encryptJwtToken(newUser);
         await axios.post(`${process.env.REACT_APP_WEB_API_BASE_URL}/Data/updateUser`, { token });
@@ -51,7 +56,7 @@ export const DataProvider = ({ children }) => {
     };
 
     return (
-        <DataContext.Provider value={{ requestData, updateUserInfo, uploadProductImage, removeProductImage, addProduct }}>
+        <DataContext.Provider value={{ requestData, updateUserInfo, uploadProductImage, removeProductImage, addProduct, updateSellerInfo }}>
             {children}
         </DataContext.Provider>
     );

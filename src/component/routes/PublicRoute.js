@@ -11,7 +11,7 @@ const PublicRoute = () => {
 
     useEffect(() => {
         const method = async () => {
-            await requestData("email;displayName;");
+            await requestData("email;displayName;isSeller;");
         };
 
         handleMethod(async () => {

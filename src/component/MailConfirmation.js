@@ -9,10 +9,6 @@ import axios from 'axios';
 import { useAuth } from './providers/AuthProvider';
 import { useErrors } from './providers/ErrorProvider';
 
-function App() {
-    return <Arrow />;
-}
-
 export default function MailConfirmation() {
     
     const {user} = useAuth();
@@ -40,14 +36,21 @@ export default function MailConfirmation() {
             navigate("/profile-settings");
         }
         
-        handleMethod(sendEmail);
+        handleMethod(async () => {
+            try {
+                await sendEmail();
+            } catch (err) {
+                throw err;
+            }
+        });
     }, [user, navigate]);
 
     const sendEmail = async () => {
         try {
             await axios.get(process.env.REACT_APP_WEB_API_BASE_URL + "/Auth/sendVerificationCode");
-        } catch (error) {
-            throw error;
+        } catch (err) {
+            if (err?.code === "ERR_NETWORK") throw "server-offline-error";
+            throw err;
         }
     };
 
@@ -64,10 +67,17 @@ export default function MailConfirmation() {
         return () => clearInterval(timer);
     }, [isDisabled, timeLeft]);
 
-    const handleResendClick = (e) => {
+    const handleResendClick = async (e) => {
         e.preventDefault();
         setIsDisabled(true);
-        handleMethod(sendEmail);
+
+        handleMethod(async () => {
+            try {
+                await sendEmail();
+            } catch (err) {
+                throw err;
+            }
+        });
         setTimeLeft(59);
     };
 
@@ -80,8 +90,9 @@ export default function MailConfirmation() {
             try {
                 await axios.post(process.env.REACT_APP_WEB_API_BASE_URL + "/Auth/checkVerificationCode", { code: codeStr });
                 navigate("/profile-settings");
-            } catch (error) {
-                throw error;
+            } catch (err) {
+                if (err?.code === "ERR_NETWORK") throw "server-offline-error";
+                throw err;
             }
         });
     };
@@ -114,7 +125,7 @@ export default function MailConfirmation() {
 
     const handleBack = (e) => {
         e.preventDefault();
-        navigate("/authorization");
+        navigate("/");
     };
 
     return (
@@ -181,7 +192,7 @@ export default function MailConfirmation() {
                     </div>
                     
                     <p className='title-line-error-zero-margin'>
-                        {catchedError.tags.includes("code-field") ? (
+                        {catchedError.tags.includes("with-button") && catchedError.tags.includes("code-field") ? (
                             <>
                                 {catchedError.short}
                                 <a className='link-line-error' href='#' onClick={openErrorModal}>ⓘ</a>

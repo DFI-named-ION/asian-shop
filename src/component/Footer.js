@@ -77,7 +77,7 @@ function App() {
                             <ul>
                                 <li className='section-footer-bold'><a className='section-footer section-footer-bold'>Тільки на SakuraTails</a></li>
                                 <li className='section-footer'><a className='section-footer' href='/'>Магазин</a></li>
-                                <li className='section-footer'><a className='section-footer' href='#subcribtion-section'>Підписка</a></li>
+                                <li className='section-footer'><a className='section-footer' href='/#subcribtion-section'>Підписка</a></li>
                                 <li className='section-footer'><a className='section-footer' href='/seller/authorization'>Стати партнером</a></li>
                             </ul>
                         </div>

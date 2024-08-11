@@ -18,48 +18,41 @@ import Case from '../images/icons/case.svg';
 import Dump from '../images/icons/dump.svg';
 
 import { useAuth } from './providers/AuthProvider';
+import { useErrors } from './providers/ErrorProvider';
 
-function App() {
-    return <Logo />;
-    return <Basket />;
-    return <HelloEmoji />;
-    return <AddPlus />;
-    return <Exit />;
-    return <History />;
-    return <Transfer />;
-    return <Like />;
-    return <Pen />;
-    return <Wallet />;
-    return <Procent />;
-    return <Case />;
-    return <Dump />;
-    return <Profile />;
-  }
+export default function Header (){
+    const { user, logout } = useAuth();
+    const { handleMethod } = useErrors();
+    const navigate = useNavigate();
+    const [isProfileModalOpen, setIsProfileModalOpen] = useState("");
 
-   
-
-    export default function Header (){
-        const {user} = useAuth();
-        const navigate = useNavigate();
-        const [isProfileModalOpen, setIsProfileModalOpen] = useState("");
-    
-        const handleHeadClick = (e) => {
-          e.preventDefault();
-          if (!user) {
+    const handleHeadClick = (e) => {
+        e.preventDefault();
+        if (!user) {
             navigate('/authorization');
-          } else {
+        } else {
             setIsProfileModalOpen(!isProfileModalOpen);
-          }
-        };
+        }
+    };
+
+    const handleFavoritesClick = () => { navigate("/favorites") };
     
-        const handleSellerProfileClick = () => {
-            navigate("/seller");
-        };
+    const handleOrdersHistoryClick = () => { navigate("/orders-history") };
+
+    const handleReviewsClick = () => { navigate("/reviews-my") };
     
-        const handleSettingsClick = () => {
-            navigate("/profile-settings")
-        };
+    const handleTrackingClick = () => { navigate("/tracking") };
     
+    const handleSellerProfileClick = () => { navigate("/seller") };
+
+    const handleSettingsClick = () => { navigate("/profile-settings") };
+    
+    const handleLogoutClick = () => {
+        handleMethod(async () => {
+            await logout();
+        });
+    };
+
     return (
         <section className='header-section'>
             <div className='head-div'>
@@ -197,16 +190,16 @@ function App() {
                                 </span> <img src={HelloEmoji} alt="Hello Emoji" />
                               </p>
                             </div>
-                            <div>
+                            <div onClick={handleOrdersHistoryClick}>
                                 <button className='dropdown-border-top-button'><img src={History} alt="History" />Історія замовлень</button>
                             </div>
-                            <div>
+                            <div onClick={handleTrackingClick}>
                                 <button className='dropdown-button'><img src={Transfer} alt="Transfer" />Відстеження замовлення</button>
                             </div>
-                            <div>
+                            <div onClick={handleFavoritesClick}>
                                 <button className='dropdown-button'><img src={Like} alt="Like" />Обране</button>
                             </div>
-                            <div>
+                            <div onClick={handleReviewsClick}>
                                 <button className='dropdown-button'><img src={Pen} alt="Pen" />Мої відгуки</button>
                             </div>
                             <div>
@@ -216,18 +209,20 @@ function App() {
                                 <button className='dropdown-border-bottom-button'><img src={Procent} alt="Procent" />Знижки та бонуси</button>
                             </div>
                             <div>
-                                <button className='dropdown-button dropdown-button-exit'><img src={Exit} alt="Exit" />Вийти з акаунта</button>
+                                <button className='dropdown-button dropdown-button-exit' onClick={handleLogoutClick}><img src={Exit} alt="Exit" />Вийти з акаунта</button>
                             </div>
                             <div>
                                 <button className='dropdown-border-left-button' onClick={handleSettingsClick}>Налаштування</button>
                                 <button className='dropdown-border-right-button'>Довідка</button>
                             </div>
-                            <div onClick={handleSellerProfileClick}>
+                            {user.isSeller && (
+                              <div onClick={handleSellerProfileClick}>
                                 <button className='dropdown-border-bottom-button'><img src={Case} alt="Case" />Кабінет продавця</button>
-                            </div>
+                              </div>
+                            )}
                             <div>
                                 <p className='bottom-dropdown'>
-                                    <a href='/privacy'>Privacy Policy</a><span className='slash-dropdown'>/</span><a href=''> Terms of Service</a>
+                                    <a href='/privacy'>Privacy Policy</a><span className='slash-dropdown'>/</span><a href='/terms-of-use'> Terms of Service</a>
                                 </p>
                             </div>
                         </div>
