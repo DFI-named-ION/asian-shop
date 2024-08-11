@@ -13,6 +13,7 @@ import OptionSeller from '../seller_comp/img_seller/option-seller.svg';
 import WolfSeller from '../seller_comp/img_seller/white-trans-wolf.svg';
 import BigOptionSeller from '../seller_comp/img_seller/big-option-seller.svg';
 import BigGoodsSeller from '../seller_comp/img_seller/big-goods-seller.svg';
+import { useAuth } from '../providers/AuthProvider';
 
 
 function App() {
@@ -31,6 +32,8 @@ function App() {
 }
 
 export default function SellerGoodsPromotion() {
+
+    const { user } = useAuth();
 
     const radio = document.querySelectorAll('input[type="radio"]')
     const selectRadio1 = document.querySelector('#block-1')
@@ -87,8 +90,8 @@ export default function SellerGoodsPromotion() {
             <div className='left-seller'>
                 <h1 className='logo-seller'>SakuraTails</h1>
                 <div className='name-id-seller'>
-                    <h3>Ім'я Прізвище</h3>
-                    <p>Ваш ID: 0000001</p>
+                    <h3>{user.sellerFirstName} {user.sellerLastName}</h3>
+                    <p>Ваш ID: {user.sellerId}</p>
                 </div>
                 <div className='seller-search-div'>
                 <input type="search" name="seller-search" className='seller-search' placeholder="Пошук"/>

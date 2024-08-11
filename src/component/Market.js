@@ -477,7 +477,7 @@ export default function Market() {
                     <>
                         {catchedError.tags.includes("critical") ? (
                             <>
-                                {additional.allProducts.map((product, index) => (
+                                {additional && additional.allProducts.map((product, index) => (
                                     <div className='good-catalog-market' onClick={() => { handleProductClick(product.article) }}>
                                         <img src={product.photoUrls[0]} className='img-position-good'></img>
                                         <div className='full-stars full-stars-good'>

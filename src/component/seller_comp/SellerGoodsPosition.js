@@ -18,6 +18,7 @@ import BigGoodsSeller from '../seller_comp/img_seller/big-goods-seller.svg';
 import AddGoods from '../seller_comp/img_seller//add-goods-box-seller.svg';
 import GreyX from '../seller_comp/img_seller/greyX.svg';
 import ChipsLeys from '../seller_comp/img_seller/chips-leys.jpg';
+import { useAuth } from '../providers/AuthProvider';
 
 
 
@@ -41,6 +42,8 @@ function App() {
 }
 
 export default function SellerGoodsPosition() {
+
+    const { user } = useAuth();
 
     const navigate = useNavigate();
 
@@ -78,8 +81,8 @@ export default function SellerGoodsPosition() {
             <div className='left-seller'>
                 <h1 className='logo-seller'>SakuraTails</h1>
                 <div className='name-id-seller'>
-                    <h3>Ім'я Прізвище</h3>
-                    <p>Ваш ID: 0000001</p>
+                    <h3>{user.sellerFirstName} {user.sellerLastName}</h3>
+                    <p>Ваш ID: {user.sellerId}</p>
                 </div>
                 <div className='seller-search-div'>
                 <input type="search" name="seller-search" className='seller-search' placeholder="Пошук"/>

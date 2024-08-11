@@ -14,6 +14,7 @@ import WolfSeller from '../seller_comp/img_seller/white-trans-wolf.svg';
 import BigOptionSeller from '../seller_comp/img_seller/big-option-seller.svg';
 import OpenSchedule from '../seller_comp/img_seller/open-schedule.svg';
 import CloseSchedule from '../seller_comp/img_seller/close-schedule.svg';
+import { useAuth } from '../providers/AuthProvider';
 
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
 
 export default function SellerOptionCompany() {
     
+    const { user } = useAuth();
     const navigate = useNavigate();
 
     const handleCompanyClick = () => {
@@ -66,8 +68,8 @@ export default function SellerOptionCompany() {
             <div className='left-seller'>
                 <h1 className='logo-seller'>SakuraTails</h1>
                 <div className='name-id-seller'>
-                    <h3>Ім'я Прізвище</h3>
-                    <p>Ваш ID: 0000001</p>
+                    <h3>{user.sellerFirstName} {user.sellerLastName}</h3>
+                    <p>Ваш ID: {user.sellerId}</p>
                 </div>
                 <div className='seller-search-div'>
                 <input type="search" name="seller-search" className='seller-search' placeholder="Пошук"/>
