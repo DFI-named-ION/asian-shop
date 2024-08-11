@@ -7,11 +7,11 @@ import { useAuth } from "../providers/AuthProvider";
 
 const PublicRoute = () => {
     const { catchedError, handleMethod } = useErrors();
-    const { requestData } = useData();
+    const { requestFields } = useData();
 
     useEffect(() => {
         const method = async () => {
-            await requestData("email;displayName;isSeller;");
+            await requestFields("email;displayName;isSeller;");
         };
 
         handleMethod(async () => {

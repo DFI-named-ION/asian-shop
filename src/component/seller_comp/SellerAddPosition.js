@@ -24,7 +24,7 @@ import axios from 'axios';
 export default function SellerAddPosition() {
 
     const { user } = useAuth();
-    const { requestData, uploadProductImage, removeProductImage, addProduct } = useData();
+    const { requestFields, uploadProductImage, removeProductImage, addProduct } = useData();
     const { catchedError, handleMethod } = useErrors();
     const [isErrorModalOpen, setIsErrorModalOpen] = useState(false);
     const [newProduct, setNewProduct] = useState({

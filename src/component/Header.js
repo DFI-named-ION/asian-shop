@@ -58,7 +58,7 @@ export default function Header (){
             <div className='head-div'>
                 <div className='head-left-div'>
                 <div className='head-nav-div'>
-                  <a className='header-link header-link-market' href='/catalog'>Каталог</a>
+                  <a className='header-link header-link-market' href='/catalog/menu'>Каталог</a>
                   </div>
                   <div className='head-nav-div'>
                   <a className='header-link' href='/faq'>FAQ</a>

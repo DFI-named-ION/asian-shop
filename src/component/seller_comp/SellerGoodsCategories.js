@@ -24,7 +24,7 @@ import { useErrors } from '../providers/ErrorProvider';
 
 export default function SellerGoodsCategories() {
 
-    const { requestData } = useData();
+    const { requestFields } = useData();
     const { catchedError, handleMethod } = useErrors();
     const navigate = useNavigate();
 
@@ -35,7 +35,7 @@ export default function SellerGoodsCategories() {
 
     useEffect(() => {
         const method = async () => {
-            await requestData("email;isSeller;displayName;products;");
+            await requestFields("email;isSeller;displayName;products;");
         };
 
         handleMethod(async () => {

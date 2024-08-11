@@ -128,6 +128,13 @@ export const ErrorProvider = ({ children }) => {
                 isForUser = true;
                 tags.push("critical");
                 break;
+            case "product-not-found":
+                short = "Product was not found";
+                long = "Product was not found, double check article number.";
+                origin = "api";
+                isForUser = true;
+                tags.push("catalog");
+                break;
             case "add-product-error":
                 short = "Product was not added due error";
                 long = "Product was not added due error.";

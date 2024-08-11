@@ -1,7 +1,8 @@
 import React, { createContext, useContext } from 'react';
 import axios from 'axios';
-import { useDispatch } from 'react-redux';
 import { updateUser } from './slices/userSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { setAdditional, clearAdditional } from './slices/dataSlice';
 import { useErrors } from './ErrorProvider';
 import { JwtContext } from './JwtProvider';
 
@@ -10,15 +11,35 @@ const DataContext = createContext();
 export const useData = () => useContext(DataContext);
 
 export const DataProvider = ({ children }) => {
-    const { handleMethod } = useErrors();
     const dispatch = useDispatch();
+    const { additional } = useSelector((state) => state.data);
+    const { handleMethod } = useErrors();
     const { encryptJwtToken } = useContext(JwtContext);
+
+    const updateAdditional = (data) => {
+        dispatch(setAdditional(data));
+    };
+
+    const clearAdditionalData = () => {
+        dispatch(clearAdditional());
+    };
+
+    const requestFields = async (fields) => {
+        return handleMethod(async () => {
+            try {
+                const response = await axios.get(`${process.env.REACT_APP_WEB_API_BASE_URL}/Data/fetchData?fields=${fields}`);
+                dispatch(updateUser(response.data.data));
+            } catch (err) {
+                throw err;
+            }
+        });
+    };
 
     const requestData = async (fields) => {
         return handleMethod(async () => {
             try {
                 const response = await axios.get(`${process.env.REACT_APP_WEB_API_BASE_URL}/Data/fetchData?fields=${fields}`);
-                dispatch(updateUser(response.data.data));
+                dispatch(updateAdditional(response.data.data));
             } catch (err) {
                 throw err;
             }
@@ -56,7 +77,7 @@ export const DataProvider = ({ children }) => {
     };
 
     return (
-        <DataContext.Provider value={{ requestData, updateUserInfo, uploadProductImage, removeProductImage, addProduct, updateSellerInfo }}>
+        <DataContext.Provider value={{ requestData, additional, updateAdditional, clearAdditionalData, requestFields, updateUserInfo, uploadProductImage, removeProductImage, addProduct, updateSellerInfo }}>
             {children}
         </DataContext.Provider>
     );
