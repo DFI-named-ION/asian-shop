@@ -16,6 +16,7 @@ import NovaPost from '../seller_comp/img_seller/nova-post.svg';
 import UkrPost from '../seller_comp/img_seller/urk-post.svg';
 import Rozetka from '../seller_comp/img_seller/rozetka.svg';
 import BigPen from '../seller_comp/img_seller/big-pen.svg';
+import { useAuth } from '../providers/AuthProvider';
 
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
 
 export default function SellerOptionCompany() {
     
+    const { user } = useAuth();
     const navigate = useNavigate();
 
     const handleCompanyClick = () => {
@@ -66,8 +68,8 @@ export default function SellerOptionCompany() {
             <div className='left-seller'>
                 <h1 className='logo-seller'>SakuraTails</h1>
                 <div className='name-id-seller'>
-                    <h3>Ім'я Прізвище</h3>
-                    <p>Ваш ID: 0000001</p>
+                    <h3>{user.sellerFirstName} {user.sellerLastName}</h3>
+                    <p>Ваш ID: {user.sellerId}</p>
                 </div>
                 <div className='seller-search-div'>
                 <input type="search" name="seller-search" className='seller-search' placeholder="Пошук"/>

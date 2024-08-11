@@ -2,7 +2,7 @@ import React, { createContext, useContext } from 'react';
 import axios from 'axios';
 import { updateUser } from './slices/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { setAdditional, clearAdditional } from './slices/dataSlice';
+import { setAdditional, clearAdditional } from './slices/additionalSlice';
 import { useErrors } from './ErrorProvider';
 import { JwtContext } from './JwtProvider';
 

@@ -15,10 +15,17 @@ import Seller from './component/seller_comp/Seller';
 import SellerOptionProfile from "./component/seller_comp/SellerOptionProfile";
 import SellerOptionCompany from "./component/seller_comp/SellerOptionCompany";
 import SellerGoodsPromotion from "./component/seller_comp/SellerGoodsPromotion";
+import SellerGoodsPromotionList from "./component/seller_comp/SellerGoodsPromotionList";
 import SellerGoodsCategories from "./component/seller_comp/SellerGoodsCategories";
 import SellerGoodsPosition from "./component/seller_comp/SellerGoodsPosition";
 import SellerAddPosition from "./component/seller_comp/SellerAddPosition";
 import SellerOptionManager from "./component/seller_comp/SellerOptionManager";
+import SellerOptionDelivery from "./component/seller_comp/SellerOptionDelivery";
+import OptionDeliveryUkrPost from "./component/seller_comp/OptionDeliveryUkrPost";
+import OptionDeliveryRozetka from "./component/seller_comp/OptionDeliveryRozetka";
+import OptionDeliveryNovaPost from "./component/seller_comp/OptionDeliveryNovaPost";
+import SellerOptionPay from "./component/seller_comp/SellerOptionPay";
+import SellerOptionSchedule from "./component/seller_comp/SellerOptionSchedule";
 import FAQ from "./component/FAQ";
 import AboutUs from "./component/AboutUs";
 import PrivacyPolicy from "./component/PrivacyPolicy";
@@ -45,11 +52,18 @@ function App() {
 						<Route path='/seller' element={<Seller />}/>
                         <Route path='/seller/profile' element={<SellerOptionProfile />}/>
                         <Route path='/seller/company' element={<SellerOptionCompany />}/>
-                        <Route path='/seller/promotions' element={<SellerGoodsPromotion />}/>
+                        <Route path='/seller/promotions' element={<SellerGoodsPromotionList />}/>
+                        <Route path='/seller/promotions/add' element={<SellerGoodsPromotion />}/>
                         <Route path='/seller/categories' element={<SellerGoodsCategories />}/>
                         <Route path='/seller/positions' element={<SellerGoodsPosition />}/>
                         <Route path='/seller/positions/add' element={<SellerAddPosition />}/>
                         <Route path='/seller/managers' element={<SellerOptionManager />}/>
+                        <Route path='/seller/shipping' element={<SellerOptionDelivery />}/>
+                        <Route path='/seller/shipping/novapost' element={<OptionDeliveryNovaPost />}/>
+                        <Route path='/seller/shipping/rozetka' element={<OptionDeliveryRozetka />}/>
+                        <Route path='/seller/shipping/urkpost' element={<OptionDeliveryUkrPost />}/>
+                        <Route path='/seller/payment' element={<SellerOptionPay />}/>
+                        <Route path='/seller/schedule' element={<SellerOptionSchedule />}/>
                     </Route>
                     <Route element={<PrivateRoute />}> {/* USER IN SYSTEM AND IS VERIFIED */}
 						{/* // some routes */}

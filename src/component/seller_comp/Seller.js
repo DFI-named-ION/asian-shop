@@ -12,6 +12,7 @@ import WalletSeller from '../seller_comp/img_seller/wallet-seller.svg';
 import OptionSeller from '../seller_comp/img_seller/option-seller.svg';
 import WolfSeller from '../seller_comp/img_seller/white-trans-wolf.svg';
 import BigOptionSeller from '../seller_comp/img_seller/big-option-seller.svg';
+import { useAuth } from '../providers/AuthProvider';
 
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
 
 export default function Seller() {
 
+    const { user } = useAuth();
     const navigate = useNavigate();
 
     const handleCompanyClick = () => {
@@ -62,8 +64,8 @@ export default function Seller() {
             <div className='left-seller'>
                 <h1 className='logo-seller'>SakuraTails</h1>
                 <div className='name-id-seller'>
-                    <h3>Ім'я Прізвище</h3>
-                    <p>Ваш ID: 0000001</p>
+                    <h3>{user.sellerFirstName} {user.sellerLastName}</h3>
+                    <p>Ваш ID: {user.sellerId}</p>
                 </div>
                 <div className='seller-search-div'>
                 <input type="search" name="seller-search" className='seller-search' placeholder="Пошук"/>
@@ -103,16 +105,16 @@ export default function Seller() {
                     <button className='left-seller-subbutton'>Профіль</button>
                     </div>
                     <div>
-                    <button className='left-seller-subbutton'>Менеджери</button>
+                    <button className='left-seller-subbutton' onClick={() => {navigate("/seller/managers");}}>Менеджери</button>
                     </div>
                     <div>
-                    <button className='left-seller-subbutton'>Способи доставки</button>
+                    <button className='left-seller-subbutton' onClick={() => {navigate("/seller/shipping");}}>Способи доставки</button>
                     </div>
                     <div>
-                    <button className='left-seller-subbutton'>Способи оплати</button>
+                    <button className='left-seller-subbutton' onClick={() => {navigate("/seller/payment");}}>Способи оплати</button>
                     </div>
                     <div>
-                    <button className='left-seller-subbutton'>Графік роботи</button>
+                    <button className='left-seller-subbutton' onClick={() => {navigate("/seller/schedule");}}>Графік роботи</button>
                     </div>
                     </details>
                     </div>

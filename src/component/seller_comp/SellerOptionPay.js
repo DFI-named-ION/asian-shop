@@ -20,6 +20,7 @@ import Mastercard from '../seller_comp/img_seller/mastercard-seller.svg';
 import Visa from '../seller_comp/img_seller/visa-seller.svg';
 import PayPal from '../seller_comp/img_seller/paypal-seller.svg';
 import Card from '../seller_comp/img_seller/card-seller.svg';
+import { useAuth } from '../providers/AuthProvider';
 
 
 function App() {
@@ -42,6 +43,7 @@ function App() {
 
 export default function SellerOptionCompany() {
     
+    const { user } = useAuth();
     const navigate = useNavigate();
 
     const handleCompanyClick = () => {
@@ -74,8 +76,8 @@ export default function SellerOptionCompany() {
             <div className='left-seller'>
                 <h1 className='logo-seller'>SakuraTails</h1>
                 <div className='name-id-seller'>
-                    <h3>Ім'я Прізвище</h3>
-                    <p>Ваш ID: 0000001</p>
+                    <h3>{user.sellerFirstName} {user.sellerLastName}</h3>
+                    <p>Ваш ID: {user.sellerId}</p>
                 </div>
                 <div className='seller-search-div'>
                 <input type="search" name="seller-search" className='seller-search' placeholder="Пошук"/>
