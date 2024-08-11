@@ -1141,7 +1141,7 @@ h1, h2, h3, h4, p{
     border-radius: 40px;
     width: 664px;
     height: 80%;
-    margin-top: 40px;
+    margin-top: 1%;
     margin-bottom: 5%;
     margin-left: 3%;
     padding-top: 5%;
@@ -3308,6 +3308,10 @@ input{
   }
 
   .Captcha-div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
     text-align: center;
   }
   .Captcha-div-shop{
@@ -3315,9 +3319,12 @@ input{
     margin-top: 4%;
   }
   .Captcha{
-    /* display: inline-block;
-    margin: auto; */
-    margin-left: 100px;
+    display: inline-block;
+    margin-left: 40%;
+    zoom:1.7;
+    transform:scale(0.7);
+    transform-origin:0 0;
+    margin-bottom: -5%;
   }
 
   .save-seller-button-div-pos{
