@@ -59,12 +59,12 @@ export default function ProfilePage() {
     const { handleMethod, catchedError, setCatchedError } = useErrors();
     const navigate = useNavigate();
     const [isErrorModalOpen, setIsErrorModalOpen] = useState(false);
-    const { requestData, updateUserInfo } = useData();
+    const { requestFields, updateUserInfo } = useData();
     const [isEditing, setIsEditing] = useState({state: false, section: "none"});
 
     useEffect(() => {
         const method = async () => {
-            await requestData("firstName;middleName;lastName;language;sex;phones;birthday;doPrint;addresses;recipients;selectedRecipient;");
+            await requestFields("firstName;middleName;lastName;language;sex;phones;birthday;doPrint;addresses;recipients;selectedRecipient;");
         };
 
         handleMethod(async () => {

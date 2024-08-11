@@ -7,13 +7,13 @@ import { useAuth } from "../providers/AuthProvider";
 
 const NotVerifiedRoute = () => {
     const { catchedError, handleMethod } = useErrors();
-    const { requestData } = useData();
+    const { requestFields } = useData();
     const { user } = useAuth();
     const [isLoaded, setIsLoaded] = useState(false);
 
     useEffect(() => {
         const method = async () => {
-            await requestData("email;isVerified;displayName;isSeller;");
+            await requestFields("email;isVerified;displayName;isSeller;");
         };
 
         handleMethod(async () => {

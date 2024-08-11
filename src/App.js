@@ -10,6 +10,7 @@ import PasswordChangeMail from "./component/PasswordChangeMail";
 import PasswordChange from "./component/PasswordChange";
 import ProfilePage from './component/ProfilePage';
 import Market from './component/Market';
+import MarketMenu from './component/MarketMenu';
 import Seller from './component/seller_comp/Seller';
 import SellerOptionProfile from "./component/seller_comp/SellerOptionProfile";
 import SellerOptionCompany from "./component/seller_comp/SellerOptionCompany";
@@ -58,8 +59,9 @@ function App() {
                         <Route path='/confirmation' element={<MailConfirmationPage />} />
                     </Route>
                     <Route element={<PublicRoute />}> {/* AVAILABLE FOR EVERYONE */}
-                        <Route path='/catalog' element={<Market />} />
-                        <Route path='/catalog/*' element={<GoodPage />} />
+                        <Route path='/catalog/menu' element={<MarketMenu />} />
+                        <Route path='/catalog/' element={<Market />} />
+                        <Route path='/catalog/:article' element={<GoodPage />} />
                         <Route path='/registration' element={<RegistrationPage />} />
                         <Route path='/authorization' element={<AuthorizationPage />} />
                         <Route path='/seller/registration' element={<ShopRegistrationPage />}/>
