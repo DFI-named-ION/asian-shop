@@ -13,7 +13,7 @@ const PrivateRoute = () => {
 
     useEffect(() => {
         const method = async () => {
-            await requestData("email;isSeller;displayName;firstName;lastName;");
+            await requestData("email;isVerified;isSeller;sellerFirstName;sellerLastName;sellerMiddleName;sellerId;sellerPhone;");
         };
 
         handleMethod(async () => {
@@ -25,9 +25,16 @@ const PrivateRoute = () => {
     if (catchedError.tags.includes("critical")) {
         return <LoadingPage error={catchedError} />;
     }
+
+    if (isLoaded && user && (!user.isSeller || !user.isVerified)) {
+        handleMethod(() => {
+            throw "unauthorized";
+        });
+    }
+
     return (
         <>
-            {isLoaded && user.isSeller ? <Outlet /> : <LoadingPage isLoading />}
+            {isLoaded ? <Outlet /> : <LoadingPage isLoading />}
         </>
     );
 };

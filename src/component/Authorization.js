@@ -6,7 +6,6 @@ import Arrow from '../images/icons/arrowLeft.svg';
 import Google from '../images/socials/google-auth.svg'
 import Facebook from '../images/socials/facebook-auth.svg'
 import Twitter from '../images/socials/twitter-auth.svg';
-import ErrorPassword from '../images/icons/error-password.svg';
 
 import ReCaptcha from 'react-google-recaptcha';
 
@@ -14,14 +13,6 @@ import { facebook, google, twitter } from "./../firebaseConfig";
 
 import { useAuth } from './providers/AuthProvider';
 import { useErrors } from './providers/ErrorProvider';
-
-function App() {
-    return <Google />;
-    return <Facebook />;
-    return <Twitter />;
-    return <Arrow />;
-    return <ErrorPassword />;
-}
 
 export default function Authorization() {
 
@@ -92,18 +83,23 @@ export default function Authorization() {
     };
 
     const handleAuth = async (providerOrEvent) => {
-        await handleMethod(() => {
-            if (providerOrEvent.preventDefault) {
-                providerOrEvent.preventDefault();
-                const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-                if (!emailRegex.test(email)) throw "email-format-error";
-                const passRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,64}$/;
-                if (!passRegex.test(password)) throw "password-format-error";
-                // if(!token) throw "recaptcha-error"; // fix captcha
-              
-                loginWithEmailAndPassword(email, password);
-            } else {
-                loginWithPopup(providerOrEvent);
+        await handleMethod(async () => {
+            try {
+                if (providerOrEvent.preventDefault) {
+                    providerOrEvent.preventDefault();
+                    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+                    if (!emailRegex.test(email)) throw "email-format-error";
+                    const passRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,64}$/;
+                    if (!passRegex.test(password)) throw "password-format-error";
+                    if(!token) throw "recaptcha-error"; // fix captcha
+                  
+                    await loginWithEmailAndPassword(email, password);
+                } else {
+                    await loginWithPopup(providerOrEvent);
+                }
+            } catch (err) {
+                if (err?.code === "ERR_NETWORK") throw "server-offline-error";
+                throw err;
             }
         });
     };
@@ -155,7 +151,7 @@ export default function Authorization() {
                                 <div className='line-text-block'></div>
                             </p>
                             <p className='title-line-error'>
-                                {catchedError.tags.includes("email-field") ? (
+                                {catchedError.tags.includes("with-button") && catchedError.tags.includes("email-field") ? (
                                     <>
                                         {catchedError.short}
                                         <a className='link-line-error' href='#' onClick={openErrorModal}>ⓘ</a>
@@ -166,12 +162,11 @@ export default function Authorization() {
                             </p>
                             <h5 className='title-line'>Пароль</h5>
                             <p className='text-auth'>
-                                <img className="error-password-block" src={ErrorPassword}/>
                                 <input className='text-block-margin-zero text-block-password-error' type='password' name='Password' value={password} onChange={handlePasswordChange} placeholder='*********' required />
                                 <div className='line-text-block'></div>
                             </p>
                             <p className='title-line-error'>
-                                {catchedError.tags.includes("password-field") ? (
+                                {catchedError.tags.includes("with-button") && catchedError.tags.includes("password-field") ? (
                                     <>
                                         {catchedError.short}
                                         <a className='link-line-error' href='#' onClick={openErrorModal}>ⓘ</a>

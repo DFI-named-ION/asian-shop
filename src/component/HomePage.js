@@ -13,6 +13,7 @@ import Box from '../images/icons/box.svg';
 import Header from '../component/Header';
 import Footer from '../component/Footer';
 
+import { useNavigate } from 'react-router-dom';
 
 function App() {
     return <BackgroundSubcribtion />;
@@ -29,6 +30,10 @@ function App() {
   }
 
 export default function HomePage() {
+
+    const navigate = useNavigate();
+
+    const handleBoxesClick = () => { navigate("/boxes") };
 
 const [modalIsOpen_1, setModalIsOpen_1] = useState(false);
 const [modalIsOpen_2, setModalIsOpen_2] = useState(false);
@@ -2228,7 +2233,7 @@ const Carousel = ({ items }) => {
                         <p className='line-subcribtion'>✓ Попередня відправка</p>
                         <p className='line-subcribtion'>✓ Скасувати будь-коли</p>
                       </div>
-                      <input className='button-subcribtion' type='button' value='ОБРАТИ ЦЕЙ ПЛАН' />
+                      <input className='button-subcribtion' type='button' value='ОБРАТИ ЦЕЙ ПЛАН' onClick={handleBoxesClick} />
                   </article>
                   </div>
                   </div>
@@ -2266,7 +2271,7 @@ const Carousel = ({ items }) => {
                         <p className='line-subcribtion line-through'>✗ Попередня відправка</p>
                         <p className='line-subcribtion'>✓ Скасувати будь-коли</p>
                       </div>
-                      <input className='button-subcribtion' type='button' value='ОБРАТИ ЦЕЙ ПЛАН' />
+                      <input className='button-subcribtion' type='button' value='ОБРАТИ ЦЕЙ ПЛАН' onClick={handleBoxesClick} />
                   </article>
                   </div>
                   </div>

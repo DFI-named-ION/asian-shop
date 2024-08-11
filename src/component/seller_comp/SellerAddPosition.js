@@ -254,7 +254,7 @@ export default function SellerAddPosition() {
                 <div className='left-seller'>
                     <h1 className='logo-seller'>SakuraTails</h1>
                     <div className='name-id-seller'>
-                        <h3>{user.firstName} {user.lastName}</h3>
+                        <h3>{user.sellerFirstName} {user.sellerLastName}</h3>
                         <p>Ваш ID: 0000001</p>
                     </div>
                     <div className='seller-search-div'>

@@ -3,6 +3,7 @@ import React, {useContext, useEffect, useState} from 'react';
 import StarRespose from '../images/icons/star-respose.svg';
 import Header from '../component/Header';
 import Footer from '../component/Footer';
+import { useNavigate } from 'react-router-dom';
 
 function App() {
     return <StarRespose />;
@@ -11,6 +12,13 @@ function App() {
   }
 
   export default function ReviewsSeller() {
+
+    const navigate = useNavigate();
+
+    const handleMyReviewsClick = () => { navigate("/reviews-my") };
+
+    const handleSellerReviewsClick = () => { navigate("/reviews-sellers") };
+
     return (
         <body className='reviews-body'>
         <><><header>
@@ -26,8 +34,8 @@ function App() {
 
             <div className='menu-reviews-div'>
                 <div>
-                    <button className='menu-button-reviews menu-button-reviews-border'>Про продавців</button>
-                    <button className='menu-button-reviews'>Про мене</button>
+                    <button className='menu-button-reviews menu-button-reviews-border' onClick={handleSellerReviewsClick}>Про продавців</button>
+                    <button className='menu-button-reviews' onClick={handleMyReviewsClick}>Про мене</button>
                 </div>
             </div>
                 </div>

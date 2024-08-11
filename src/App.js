@@ -23,6 +23,11 @@ import AboutUs from "./component/AboutUs";
 import PrivacyPolicy from "./component/PrivacyPolicy";
 import TermsOfUse from "./component/TermsOfUse";
 import BoxPage from "./component/BoxPage";
+import Chosen from "./component/Chosen";
+import ReviewsClient from "./component/ReviewsClient";
+import ReviewsSeller from "./component/ReviewsSeller";
+import OrderHistory from "./component/OrderHistory";
+import ProductTracking from "./component/ProductTracking";
 import GoodPage from "./component/GoodPage";
 
 import SellerRoute from "./component/routes/SellerRoute";
@@ -66,6 +71,11 @@ function App() {
                         <Route path='/privacy' element={<PrivacyPolicy />} />
                         <Route path='/terms-of-use' element={<TermsOfUse />} />
                         <Route path='/boxes' element={<BoxPage />} />
+                        <Route path='/favorites' element={<Chosen />} />
+                        <Route path='/reviews-my' element={<ReviewsClient />} />
+                        <Route path='/reviews-sellers' element={<ReviewsSeller />} />
+                        <Route path='/orders-history' element={<OrderHistory />} />
+                        <Route path='/tracking' element={<ProductTracking />} />
 						<Route path='/' element={<HomePage />} />
                     </Route>
                 </Routes>

@@ -261,7 +261,6 @@ export default function ProfilePage() {
 
     const handleCancelEditing = () => {
       setIsEditing({ state: false, section: "none" });
-      console.log(newUser);
       resetUser();
     };
 
@@ -274,8 +273,13 @@ export default function ProfilePage() {
 
     const handleLogOutClick = async (e) => {
         e.preventDefault();
-        handleMethod(() => {
-            logout();
+        handleMethod(async () => {
+            try {
+                await logout();
+                navigate("/");
+            } catch (err) {
+                throw err;
+            }
         });
     };
 
@@ -618,18 +622,18 @@ export default function ProfilePage() {
                         </div>
                     ) : (
                         <div className='top-left-block-div'>
+                            <h2 className='title-profile-block'>
+                              Мої отримувачі замовлень
+                            </h2>
                             {user?.recipients?.length > 0 ? (
                                 <>
-                                    <h2 className='title-profile-block'>
-                                        Мої отримувачі замовлень
-                                    </h2>
-                                    <div className='column-profile-div'>
-                                        {user.recipients.map((recipient, index) => (
-                                            <>
-                                                <h4>{recipient.lastName} {recipient.firstName} {recipient.middleName}</h4>
-                                                <p>{recipient.phone}</p>
-                                            </>
-                                        ))}
+                                  <div className='column-profile-div'>
+                                      {user.recipients.map((recipient, index) => (
+                                          <>
+                                              <h4>{recipient.lastName} {recipient.firstName} {recipient.middleName}</h4>
+                                              <p>{recipient.phone}</p>
+                                          </>
+                                      ))}
                                     </div>
                                     <div className='column-profile-div'>
                                         <h4>Отримувач (за замовчуванням)</h4>

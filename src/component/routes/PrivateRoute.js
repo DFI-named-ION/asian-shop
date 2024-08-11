@@ -13,7 +13,7 @@ const PrivateRoute = () => {
 
     useEffect(() => {
         const method = async () => {
-            await requestData("email;isVerified;displayName;");
+            await requestData("email;isVerified;displayName;isSeller;");
         };
 
         handleMethod(async () => {

@@ -24,18 +24,12 @@ function App() {
 export default function ShopRegistration() {
 
     const { catchedError, handleMethod } = useErrors();
-    const { user, registerSeller, loginWithPopup } = useAuth();
+    const { user, registerSeller, logout } = useAuth();
     const navigate = useNavigate();
 
-    // useEffect(() => {
-    //     if (user) {
-    //         if (user.isVerified) {
-    //             navigate("/profile-settings");
-    //         } else {
-    //             navigate("/confirmation");
-    //         }
-    //     }
-    // }, [user, navigate]);
+    useEffect(() => {
+        if (user && user.isSeller) navigate("/seller");
+    }, [user, navigate]);
 
     const [name, setName] = useState("");
     const [isErrorModalOpen, setIsErrorModalOpen] = useState(false);
@@ -72,8 +66,8 @@ export default function ShopRegistration() {
         setToken(e);
     };
 
-    const handleAuth = async (e) => {
-        await handleMethod(() => {
+    const handleAuth = (e) => {
+        handleMethod(async () => {
             e.preventDefault();
             const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
             if (!emailRegex.test(email)) throw "email-format-error";
@@ -82,10 +76,15 @@ export default function ShopRegistration() {
             if (companyName.length < 5) throw "company-format-error";
             if (!token) throw "recaptcha-error";
 
-            console.log("go");
+            try {
+                if (user) await logout();
 
-            registerSeller(email, password, name, companyName);
-            // registerWithEmailAndPassword(email, password, name);
+                await registerSeller(email, password, name, companyName);
+                navigate("/confirmation");
+            } catch (err) {
+                if (err?.code === "ERR_NETWORK") throw "server-offline-error";
+                throw err;
+            }
         });
     };
 
@@ -187,7 +186,7 @@ export default function ShopRegistration() {
                 </div>
                 <div className='footer-auth footer-auth-shop-reg'>
                     <div className='title-auth-white-div title-auth-white-div-reg'>
-                        <h4 className='title-auth-white'>Вже маєте обліковий запис? <a href='/authorization' className='title-auth-white'>Увійдіть</a></h4>
+                        <h4 className='title-auth-white'>Вже маєте обліковий запис? <a href='/seller/authorization' className='title-auth-white'>Увійдіть</a></h4>
                     </div>
                     <p className='text-auth-white bottom-text-auth'>Безпечний вхід за допомогою reCAPTCHA з урахуванням
                         <p className='text-auth-white-plus'> Умови та конфіденційність Google</p>
