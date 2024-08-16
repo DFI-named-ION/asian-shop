@@ -9,6 +9,17 @@ function App() {
   }
 
   export default function GoodPage() {
+
+    const [phoneExist, setPhoneExist] = useState(true);
+
+    const handlePhoneExist = (e) => {
+        if(true == false){   //встав умову
+            
+        }
+        else{
+            setPhoneExist(false);
+        }
+    };
     return (
         <body className='tracking-body'>
         <><><header>
@@ -28,11 +39,17 @@ function App() {
                     <input type='tel' placeholder='+380 (066) 000 00 00' pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" require></input>
                 </div>
                 <div>
-                    <button>Шукати</button>
+                    <button onClick={handlePhoneExist}>Шукати</button>
                 </div>
             </div>
 
-            <p>Немає! Ми не знайшли жодного замовлення за таким номером. Можливо, продавець ще не додав ЕН для відстеження замовлення. Спробуйте ще раз трішки пізніше або перевірте за іншим номером.</p>
+            <p>
+                {phoneExist ? (
+                    <></>
+                    ) : (
+                    <>Немає! Ми не знайшли жодного замовлення за таким номером. Можливо, продавець ще не додав ЕН для відстеження замовлення. Спробуйте ще раз трішки пізніше або перевірте за іншим номером.</>
+                )}
+            </p>
               </main></>
     
               <footer>
