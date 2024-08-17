@@ -1,5 +1,6 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useState, useEffect} from 'react';
 import Modal from 'react-modal';
+import Cookies from 'js-cookie';
 
 import Noodle from '../images/icons/noodle.svg';
 import Book from '../images/icons/book.svg';
@@ -275,6 +276,21 @@ const Carousel = ({ items }) => {
   );
 };
 
+const [cartItems, setCartItems] = useState([]);
+useEffect(() => {
+  const savedCartItems = Cookies.get('cart');
+  if (savedCartItems) {
+    setCartItems(JSON.parse(savedCartItems));
+  }
+}, []);
+
+const addToCart = (item) => {
+  const updatedCart = [...cartItems, { name: item.name, price: item.price, img: item.img, qt: 1}];
+  setCartItems(updatedCart);
+    Cookies.set('cart', JSON.stringify(updatedCart), { expires: 7 });
+};
+
+
   return (
     <body className='homePage-body'>
     <><><header>
@@ -505,7 +521,7 @@ const Carousel = ({ items }) => {
                       <p>Вам набридли надто солодкі десерти? Спробуйте цей пудинг, який прилетить до вас прямо з Японії. Нічого зайвого, лише ніжна «хмаринка» на вашій тарілці</p>
                     </div>
                     <div className='add-modal-div'>
-                    <input className='add-modal-button' type='button' value='В кошик' />
+                    <input className='add-modal-button' type='button' value='В кошик' onClick={() => addToCart({ name: 'Пудинг', price: 44.50, img: "./modal-1.jpg"})}/>
                     </div>
                      </div>
                     </Modal>
@@ -567,7 +583,7 @@ const Carousel = ({ items }) => {
                       <p>Печиво виглядає так, ніби його з любов'ю приготувала моя бабуся до чаю, з безліччю смаків та начинок. Велика компанія друзів буде в захваті.</p>
                     </div>
                     <div className='add-modal-div'>
-                    <input className='add-modal-button' type='button' value='В кошик' />
+                    <input className='add-modal-button' type='button' value='В кошик' onClick={() => addToCart({ name: 'Печиво', price: 69.99, img: "./modal-2.jpg"})}/>
                     </div>
                      </div>
                     </Modal>
@@ -629,7 +645,7 @@ const Carousel = ({ items }) => {
                       <p>Ось що називають милим у кондитерському мистецтві. Такого ніжного полуничного крему ви ще не куштували. Шоколад між шарами тане на язиці і переносить вас до раю. Лимон додає нотку кислинки та освіжає настрій</p>
                     </div>
                     <div className='add-modal-div'>
-                    <input className='add-modal-button' type='button' value='В кошик' />
+                    <input className='add-modal-button' type='button' value='В кошик' onClick={() => addToCart({ name: 'Цукерки', price: 30.50, img: "./modal-3.jpg"})}/>
                     </div>
                      </div>
                     </Modal>
@@ -691,7 +707,7 @@ const Carousel = ({ items }) => {
                       <p>Унікальна локшина у вигляді вузлика. Одного вузлика вистачає на велику порцію. Є самостійною стравою. Легко привчати дітей до здорового харчування завдяки смакам: морква, шпинат, червонокачанна капуста, помідор, чистому смаку та яєчної локшини.</p>
                     </div>
                     <div className='add-modal-div'>
-                    <input className='add-modal-button' type='button' value='В кошик' />
+                    <input className='add-modal-button' type='button' value='В кошик' onClick={() => addToCart({ name: 'Локшина', price: 20.99, img: "./modal-4.jpg"})}/>
                     </div>
                      </div>
                     </Modal>
@@ -753,7 +769,7 @@ const Carousel = ({ items }) => {
                       <p>Виготовлений зі справжніх пелюсток квітів сакури. Зібрані вручну та відсортовані для отримання найчистішого вишневого сиропу. Змішайте для млинців та вафель та окунайте в рожевий шоколад з екстрактом вишні.</p>
                     </div>
                     <div className='add-modal-div'>
-                    <input className='add-modal-button' type='button' value='В кошик' />
+                    <input className='add-modal-button' type='button' value='В кошик' onClick={() => addToCart({ name: 'Сироп', price: 59.90, img: "./modal-5.jpg"})}/>
                     </div>
                      </div>
                     </Modal>
@@ -815,7 +831,7 @@ const Carousel = ({ items }) => {
                       <p>Це легкий і смачний десерт, який потребує заморозки. Має безліч смаків, які гарно поєднуються між собою. Вибери свого фаворита</p>
                     </div>
                     <div className='add-modal-div'>
-                    <input className='add-modal-button' type='button' value='В кошик' />
+                    <input className='add-modal-button' type='button' value='В кошик' onClick={() => addToCart({ name: 'Десерт', price: 30.50, img: "./modal-6.jpg"})} />
                     </div>
                      </div>
                     </Modal>
@@ -877,7 +893,7 @@ const Carousel = ({ items }) => {
                       <p>Якщо ви хочете спробувати різні текстури в печиві, але не знаєте, що саме спробувати, цей набір для вас. В асортименті є печиво з джемом та шоколадом!</p>
                     </div>
                     <div className='add-modal-div'>
-                    <input className='add-modal-button' type='button' value='В кошик' />
+                    <input className='add-modal-button' type='button' value='В кошик' onClick={() => addToCart({ name: 'Печиво', price: 20.99, img: "./modal-7.jpg"})} />
                     </div>
                      </div>
                     </Modal>
@@ -939,7 +955,7 @@ const Carousel = ({ items }) => {
                       <p>Вам набридли надто солодкі десерти? Спробуйте цей пудинг, який прилетить до вас прямо з Японії. Нічого зайвого, лише ніжна «хмаринка» на вашій тарілці.</p>
                     </div>
                     <div className='add-modal-div'>
-                    <input className='add-modal-button' type='button' value='В кошик' />
+                    <input className='add-modal-button' type='button' value='В кошик' onClick={() => addToCart({ name: 'Пудинг', price: 44.50, img: "./modal-1.jpg"})} />
                     </div>
                      </div>
                     </Modal>
@@ -1001,7 +1017,7 @@ const Carousel = ({ items }) => {
                       <p>Печиво виглядає так, ніби його з любов'ю приготувала моя бабуся до чаю, з безліччю смаків та начинок. Велика компанія друзів буде в захваті.</p>
                     </div>
                     <div className='add-modal-div'>
-                    <input className='add-modal-button' type='button' value='В кошик' />
+                    <input className='add-modal-button' type='button' value='В кошик' onClick={() => addToCart({ name: 'Печиво', price: 69.99, img: "./modal-2.jpg"})}/>
                     </div>
                      </div>
                     </Modal>
@@ -1063,7 +1079,7 @@ const Carousel = ({ items }) => {
                       <p>Ось що називають милим у кондитерському мистецтві. Такого ніжного полуничного крему ви ще не куштували. Шоколад між шарами тане на язиці і переносить вас до раю. Лимон додає нотку кислинки та освіжає настрій.</p>
                     </div>
                     <div className='add-modal-div'>
-                    <input className='add-modal-button' type='button' value='В кошик' />
+                    <input className='add-modal-button' type='button' value='В кошик' onClick={() => addToCart({ name: 'Цукерки', price: 30.50, img: "./modal-3.jpg"})}/>
                     </div>
                      </div>
                     </Modal>
@@ -1125,7 +1141,7 @@ const Carousel = ({ items }) => {
                       <p>Унікальна локшина у вигляді вузлика. Одного вузлика вистачає на велику порцію. Є самостійною стравою. Легко привчати дітей до здорового харчування завдяки смакам: морква, шпинат, червонокачанна капуста, помідор, чистому смаку та яєчної локшини.</p>
                     </div>
                     <div className='add-modal-div'>
-                    <input className='add-modal-button' type='button' value='В кошик' />
+                    <input className='add-modal-button' type='button' value='В кошик' onClick={() => addToCart({ name: 'Локшина', price: 20.99, img: "./modal-4.jpg"})}/>
                     </div>
                      </div>
                     </Modal>
@@ -1187,7 +1203,7 @@ const Carousel = ({ items }) => {
                       <p>Виготовлений зі справжніх пелюсток квітів сакури. Зібрані вручну та відсортовані для отримання найчистішого вишневого сиропу. Змішайте для млинців та вафель та окунайте в рожевий шоколад з екстрактом вишні.</p>
                     </div>
                     <div className='add-modal-div'>
-                    <input className='add-modal-button' type='button' value='В кошик' />
+                    <input className='add-modal-button' type='button' value='В кошик' onClick={() => addToCart({ name: 'Сироп', price: 59.90, img: "./modal-5.jpg"})}/>
                     </div>
                      </div>
                     </Modal>
@@ -1249,7 +1265,7 @@ const Carousel = ({ items }) => {
                       <p>Це легкий і смачний десерт, який потребує заморозки. Має безліч смаків, які гарно поєднуються між собою. Вибери свого фаворита.</p>
                     </div>
                     <div className='add-modal-div'>
-                    <input className='add-modal-button' type='button' value='В кошик' />
+                    <input className='add-modal-button' type='button' value='В кошик' onClick={() => addToCart({ name: 'Десерт', price: 30.50, img: "./modal-6.jpg"})}/>
                     </div>
                      </div>
                     </Modal>
@@ -1311,7 +1327,7 @@ const Carousel = ({ items }) => {
                       <p>Якщо ви хочете спробувати різні текстури в печиві, але не знаєте, що саме спробувати, цей набір для вас. В асортименті є печиво з джемом та шоколадом!</p>
                     </div>
                     <div className='add-modal-div'>
-                    <input className='add-modal-button' type='button' value='В кошик' />
+                    <input className='add-modal-button' type='button' value='В кошик' onClick={() => addToCart({ name: 'Печиво', price: 20.99, img: "./modal-7.jpg"})}/>
                     </div>
                      </div>
                     </Modal>
@@ -1375,7 +1391,7 @@ const Carousel = ({ items }) => {
                       <p>Вийшло оновлення по печиву!!! В асортименті з'явилося печиво з зеленим чаєм та мигдалем. Як завжди, незмінна якість наших солодощів чекає на критику наших клієнтів.</p>
                     </div>
                     <div className='add-modal-div'>
-                    <input className='add-modal-button' type='button' value='В кошик' />
+                    <input className='add-modal-button' type='button' value='В кошик' onClick={() => addToCart({ name: 'Печиво', price: 20.99, img: "./modal-14.jpg"})}/>
                     </div>
                      </div>
                     </Modal>
@@ -1437,7 +1453,7 @@ const Carousel = ({ items }) => {
                       <p>Свіжозібрана полуниця, вкрита шоколадом, додасть нових барв і романтики вашому вечору. Наша порада  їжте полуницю разом зі своїм партнером.</p>
                     </div>
                     <div className='add-modal-div'>
-                    <input className='add-modal-button' type='button' value='В кошик' />
+                    <input className='add-modal-button' type='button' value='В кошик' onClick={() => addToCart({ name: 'Полуниця', price: 20.50, img: "./modal-8.jpg"})}/>
                     </div>
                      </div>
                     </Modal>
@@ -1499,7 +1515,7 @@ const Carousel = ({ items }) => {
                       <p>Коробка «Сакура» дуже скучила за любителями вишні, тому вирішила вийти в новому дизайні. Сьогодні вона дивує своїм мармеладом та неймовірним чаєм з уже легендарним рожевим печивом.</p>
                     </div>
                     <div className='add-modal-div'>
-                    <input className='add-modal-button' type='button' value='В кошик' />
+                    <input className='add-modal-button' type='button' value='В кошик' onClick={() => addToCart({ name: 'Коробка «Сакура»', price: 44.50, img: "./modal-9.jpg"})}/>
                     </div>
                      </div>
                     </Modal>
@@ -1561,7 +1577,7 @@ const Carousel = ({ items }) => {
                       <p>Якщо ви любите котів і п'єте чай з солодощами, то цей набір точно для вас. Печиво та цукерки на будь-який смак - від шоколаду до ягід, навіть чашка в подарунок.</p>
                     </div>
                     <div className='add-modal-div'>
-                    <input className='add-modal-button' type='button' value='В кошик' />
+                    <input className='add-modal-button' type='button' value='В кошик' onClick={() => addToCart({ name: 'Солодощі', price: 69.99, img: "./modal-10.jpg"})}/>
                     </div>
                      </div>
                     </Modal>
@@ -1623,7 +1639,7 @@ const Carousel = ({ items }) => {
                       <p>6 цікавих смаків прямо з азійського ринку. Час спробувати персиковий лимонад! Не забудьте провести дегустацію з друзями.</p>
                     </div>
                     <div className='add-modal-div'>
-                    <input className='add-modal-button' type='button' value='В кошик' />
+                    <input className='add-modal-button' type='button' value='В кошик' onClick={() => addToCart({ name: 'Лимонад', price: 30.50, img: "./modal-11.jpg"})}/>
                     </div>
                      </div>
                     </Modal>
@@ -1685,7 +1701,7 @@ const Carousel = ({ items }) => {
                       <p>Любите собак і чай? Знайдіть новий чай з сюрпризами в середині, і я вже не кажу про печиво у вигляді лапок. Ідеальний подарунок для любителів пухнастиків.</p>
                     </div>
                     <div className='add-modal-div'>
-                    <input className='add-modal-button' type='button' value='В кошик' />
+                    <input className='add-modal-button' type='button' value='В кошик' onClick={() => addToCart({ name: 'Печиво', price: 20.99, img: "./modal-12.jpg"})}/>
                     </div>
                      </div>
                     </Modal>
@@ -1747,7 +1763,7 @@ const Carousel = ({ items }) => {
                       <p>Ви коли-небудь мріяли про тонну мотті? Не так багато, звичайно, але кілограм нового смаку мотті чекає на вас у нашому магазині. Вибір поціновувачів.</p>
                     </div>
                     <div className='add-modal-div'>
-                    <input className='add-modal-button' type='button' value='В кошик' />
+                    <input className='add-modal-button' type='button' value='В кошик' onClick={() => addToCart({ name: 'Мотті', price: 20.50, img: "./modal-13.jpg"})}/>
                     </div>
                      </div>
                     </Modal>
@@ -1810,7 +1826,7 @@ const Carousel = ({ items }) => {
                       <p>Вийшло оновлення по печиву!!! В асортименті з'явилося печиво з зеленим чаєм та мигдалем. Як завжди, незмінна якість наших солодощів чекає на критику наших клієнтів.</p>
                     </div>
                     <div className='add-modal-div'>
-                    <input className='add-modal-button' type='button' value='В кошик' />
+                    <input className='add-modal-button' type='button' value='В кошик' onClick={() => addToCart({ name: 'Печиво', price: 20.99, img: "./modal-14.jpg"})}/>
                     </div>
                      </div>
                     </Modal>
@@ -1872,7 +1888,7 @@ const Carousel = ({ items }) => {
                       <p>Свіжозібрана полуниця, вкрита шоколадом, додасть нових барв і романтики вашому вечору. Наша порада  їжте полуницю разом зі своїм партнером.</p>
                     </div>
                     <div className='add-modal-div'>
-                    <input className='add-modal-button' type='button' value='В кошик' />
+                    <input className='add-modal-button' type='button' value='В кошик' onClick={() => addToCart({ name: 'Полуниця', price: 20.50, img: "./modal-8.jpg"})}/>
                     </div>
                      </div>
                     </Modal>
@@ -1934,7 +1950,7 @@ const Carousel = ({ items }) => {
                       <p>Коробка «Сакура» дуже скучила за любителями вишні, тому вирішила вийти в новому дизайні. Сьогодні вона дивує своїм мармеладом та неймовірним чаєм з уже легендарним рожевим печивом.</p>
                     </div>
                     <div className='add-modal-div'>
-                    <input className='add-modal-button' type='button' value='В кошик' />
+                    <input className='add-modal-button' type='button' value='В кошик' onClick={() => addToCart({ name: 'Коробка «Сакура»', price: 44.50, img: "./modal-9.jpg"})}/>
                     </div>
                      </div>
                     </Modal>
@@ -1996,7 +2012,7 @@ const Carousel = ({ items }) => {
                       <p>Якщо ви любите котів і п'єте чай з солодощами, то цей набір точно для вас. Печиво та цукерки на будь-який смак - від шоколаду до ягід, навіть чашка в подарунок.</p>
                     </div>
                     <div className='add-modal-div'>
-                    <input className='add-modal-button' type='button' value='В кошик' />
+                    <input className='add-modal-button' type='button' value='В кошик' onClick={() => addToCart({ name: 'Солодощі', price: 69.99, img: "./modal-10.jpg"})}/>
                     </div>
                      </div>
                     </Modal>
@@ -2058,7 +2074,7 @@ const Carousel = ({ items }) => {
                       <p>6 цікавих смаків прямо з азійського ринку. Час спробувати персиковий лимонад! Не забудьте провести дегустацію з друзями.</p>
                     </div>
                     <div className='add-modal-div'>
-                    <input className='add-modal-button' type='button' value='В кошик' />
+                    <input className='add-modal-button' type='button' value='В кошик' onClick={() => addToCart({ name: 'Лимонад', price: 30.50, img: "./modal-11.jpg"})}/>
                     </div>
                      </div>
                     </Modal>
@@ -2120,7 +2136,7 @@ const Carousel = ({ items }) => {
                       <p>Любите собак і чай? Знайдіть новий чай з сюрпризами в середині, і я вже не кажу про печиво у вигляді лапок. Ідеальний подарунок для любителів пухнастиків.</p>
                     </div>
                     <div className='add-modal-div'>
-                    <input className='add-modal-button' type='button' value='В кошик' />
+                    <input className='add-modal-button' type='button' value='В кошик' onClick={() => addToCart({ name: 'Печиво', price: 20.99, img: "./modal-12.jpg"})}/>
                     </div>
                      </div>
                     </Modal>
@@ -2182,7 +2198,7 @@ const Carousel = ({ items }) => {
                       <p>Ви коли-небудь мріяли про тонну мотті? Не так багато, звичайно, але кілограм нового смаку мотті чекає на вас у нашому магазині. Вибір поціновувачів.</p>
                     </div>
                     <div className='add-modal-div'>
-                    <input className='add-modal-button' type='button' value='В кошик' />
+                    <input className='add-modal-button' type='button' value='В кошик' onClick={() => addToCart({ name: 'Мотті', price: 20.50, img: "./modal-13.jpg"})}/>
                     </div>
                      </div>
                     </Modal>

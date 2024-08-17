@@ -1,4 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react';
+import Cookies from 'js-cookie';
 
 import Chips from '../images/img/chips-good.png';
 import PriceGood from '../images/icons/price-good.svg';
@@ -29,7 +30,19 @@ function App() {
     const handleMouseEnter = (section) => {
         setContent(section);
     }
+    const [cartItems, setCartItems] = useState([]);
+        useEffect(() => {
+        const savedCartItems = Cookies.get('cart');
+        if (savedCartItems) {
+            setCartItems(JSON.parse(savedCartItems));
+        }
+        }, []);
 
+        const addToCart = (item) => {
+        const updatedCart = [...cartItems, { name: item.name, price: item.price, img: item.img, qt: 1}];
+        setCartItems(updatedCart);
+            Cookies.set('cart', JSON.stringify(updatedCart), { expires: 7 });
+    };
 
     return (
         <body className='good-body'>
@@ -99,7 +112,7 @@ function App() {
                     </div>
 
                     <div>
-                        <button className='add-basket-good-button'>Додати до кошику</button>
+                        <button className='add-basket-good-button' onClick={() =>addToCart({ name: 'Good name', price: 1.00, img: "./chips-good.png"})}>Додати до кошику</button>
                     </div>
 
                     <div className='advantages-good'>
