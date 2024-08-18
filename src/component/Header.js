@@ -1,6 +1,7 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useState, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 import {Collapse} from 'react-collapse';
+import Cookies from 'js-cookie';
 
 import Logo from '../images/logo/SakuraTails.svg';
 import Basket from '../images/icons/basket.svg';
@@ -53,6 +54,105 @@ export default function Header (){
         });
     };
 
+    let assetsPath = require.context('../images/img', false, /\.(png|jpe?g|svg)$/); 
+    
+    const Cart = () => {
+      const [cartItems, setCartItems] = useState([]);
+      const [total, setTotal] = useState(0);
+      useEffect(() => {
+        const intervalId = setInterval(() => {
+          const savedCartItems = Cookies.get('cart');
+          if (savedCartItems) {
+            setCartItems(JSON.parse(savedCartItems));
+            calculateTotal(JSON.parse(savedCartItems));
+          }
+        }, 1000);
+        return () => clearInterval(intervalId);
+      }, []);
+
+      const calculateTotal = (items) => {
+        const totalSum = items.reduce((acc, item) => acc + item.price * item.qt, 0);
+        setTotal(totalSum.toFixed(2));
+      };
+
+      const increaseQuantity = (index) => {
+        const updatedItems = [...cartItems];
+        updatedItems[index].qt += 1;
+        setCartItems(updatedItems);
+        Cookies.set('cart', JSON.stringify(updatedItems)); // Обновляем cookie
+        calculateTotal(updatedItems); // Пересчитываем сумму
+      };
+    
+      const decreaseQuantity = (index) => {
+        const updatedItems = [...cartItems];
+        if (updatedItems[index].qt > 1) {
+          updatedItems[index].qt -= 1;
+          setCartItems(updatedItems);
+          Cookies.set('cart', JSON.stringify(updatedItems)); // Обновляем cookie
+          calculateTotal(updatedItems); // Пересчитываем сумму
+        }
+      };
+    
+      const removeItem = (index) => {
+        const updatedItems = [...cartItems];
+        updatedItems.splice(index, 1);
+        setCartItems(updatedItems);
+        Cookies.set('cart', JSON.stringify(updatedItems)); // Обновляем cookie
+        calculateTotal(updatedItems); // Пересчитываем сумму
+      };
+
+      return (
+        <div className='boxes-basket'>
+          {cartItems.map((item, index) => (
+            <div className='box-basket'>
+              <img className='img-basket-div' src={assetsPath(item.img)}></img>
+                <div className='title-good-basket'>
+                  <h3>{item.name}</h3>
+                </div>
+                <div className='quantity-of-goods'>
+                  <div className='plus-minus-basket' onClick={() => increaseQuantity(index)}>
+                    <p>
+                      +
+                    </p>
+                  </div>
+                  <div className='number-good-basket'>
+                    <input type='number' value={item.qt} readOnly>
+                    </input>
+                  </div>
+                  <div className='plus-minus-basket minus-basket'  onClick={() => decreaseQuantity(index)}>
+                    <p>
+                      -
+                    </p>
+                  </div>
+                </div>
+                <div className='price-basket'>
+                  <p>€{item.price.toFixed(2)}</p>
+                </div>
+                <div className='dump-basket'  onClick={() => removeItem(index)}>
+                  <img src={Dump}></img>
+                </div>
+              </div>
+            ))}
+
+            <div className='white-line-basket'>
+            </div>
+            <div className='footer-basket'>
+              <div className='left-footer-basket'>
+                <p>Всього:</p>
+              </div>
+              <div className='right-footer-basket'>
+                <p><span>€</span>{total}</p>
+              </div>
+            </div>
+
+            <button className='pay-basket-button'>Сплатити</button>
+          </div>
+      );
+
+    };
+    
+    
+
     return (
         <section className='header-section'>
             <div className='head-div'>
@@ -89,78 +189,7 @@ export default function Header (){
 
                       {/* Повний кошик */}
 
-                      <div className='boxes-basket'>
-                        <div className='box-basket'>
-                          <div className='img-basket-div'></div>
-                          <div className='title-good-basket'>
-                            <h3>Name</h3>
-                          </div>
-                          <div className='quantity-of-goods'>
-                            <div className='plus-minus-basket'>
-                              <p>
-                              +
-                              </p>
-                            </div>
-                            <div className='number-good-basket'>
-                              <input type='number' value="1">
-                              </input>
-                            </div>
-                            <div className='plus-minus-basket minus-basket'>
-                            <p>
-                              -
-                              </p>
-                              </div>
-                          </div>
-                          <div className='price-basket'>
-                            <p>€25.60</p>
-                          </div>
-                          <div className='dump-basket'>
-                          <img src={Dump}></img>
-                          </div>
-                        </div>
-                        <div className='box-basket'>
-                          <div className='img-basket-div'></div>
-                          <div className='title-good-basket'>
-                            <h3>Name</h3>
-                          </div>
-                          <div className='quantity-of-goods'>
-                            <div className='plus-minus-basket'>
-                              <p>
-                              +
-                              </p>
-                            </div>
-                            <div className='number-good-basket'>
-                              <input type='number' value="1">
-                              </input>
-                            </div>
-                            <div className='plus-minus-basket minus-basket'>
-                            <p>
-                              -
-                              </p>
-                              </div>
-                          </div>
-                          <div className='price-basket'>
-                            <p>€25.60</p>
-                          </div>
-                          <div className='dump-basket'>
-                          <img src={Dump}></img>
-                          </div>
-                        </div>
-
-                        <div className='white-line-basket'>
-                        </div>
-
-                        <div className='footer-basket'>
-                          <div className='left-footer-basket'>
-                            <p>Всього:</p>
-                          </div>
-                          <div className='right-footer-basket'>
-                            <p><span>€</span>153.60</p>
-                          </div>
-                        </div>
-
-                        <button className='pay-basket-button'>Сплатити</button>
-                      </div>
+                      <Cart/>
                     </div>
                 </div>
                 <div className='head-nav-div dropdown-header'>
