@@ -12,15 +12,8 @@ import WalletSeller from '../seller_comp/img_seller/wallet-seller.svg';
 import OptionSeller from '../seller_comp/img_seller/option-seller.svg';
 import WolfSeller from '../seller_comp/img_seller/white-trans-wolf.svg';
 import BigOptionSeller from '../seller_comp/img_seller/big-option-seller.svg';
-import NovaPost from '../seller_comp/img_seller/nova-post.svg';
-import UkrPost from '../seller_comp/img_seller/urk-post.svg';
-import Rozetka from '../seller_comp/img_seller/rozetka.svg';
-import BigPen from '../seller_comp/img_seller/big-pen.svg';
-import Mastercard from '../seller_comp/img_seller/mastercard-seller.svg';
 import Visa from '../seller_comp/img_seller/visa-seller.svg';
-import PayPal from '../seller_comp/img_seller/paypal-seller.svg';
-import Card from '../seller_comp/img_seller/card-seller.svg';
-import { useAuth } from '../providers/AuthProvider';
+import LeftArrow from '../seller_comp/img_seller/arrow-left.svg';
 
 
 function App() {
@@ -35,15 +28,12 @@ function App() {
     return <OptionSeller />;
     return <WolfSeller />;
     return <BigOptionSeller />;
-    return <Mastercard />;
+    return <LeftArrow />;
     return <Visa />;
-    return <PayPal />;
-    return <Card />;
 }
 
-export default function SellerOptionCompany() {
+export default function OptionPayMastercard() {
     
-    const { user } = useAuth();
     const navigate = useNavigate();
 
     const handleCompanyClick = () => {
@@ -76,8 +66,8 @@ export default function SellerOptionCompany() {
             <div className='left-seller'>
                 <h1 className='logo-seller'>SakuraTails</h1>
                 <div className='name-id-seller'>
-                    <h3>{user.sellerFirstName} {user.sellerLastName}</h3>
-                    <p>Ваш ID: {user.sellerId}</p>
+                    <h3>Ім'я Прізвище</h3>
+                    <p>Ваш ID: 0000001</p>
                 </div>
                 <div className='seller-search-div'>
                 <input type="search" name="seller-search" className='seller-search' placeholder="Пошук"/>
@@ -148,82 +138,41 @@ export default function SellerOptionCompany() {
             </div>
             <div className='right-seller'>
                     <div className='top-option-company'>
-                        <div className='description-seller-option'>
-                            <h3>
-                            Способи оплати
-                            </h3>
-                            <p>
-                            Підключіть способи оплати, які будуть доступні в каталозі та на сайті.
-                            </p>
+                        <div className='description-seller-option description-seller-option-delivery'>
+                        <img src={LeftArrow} className='img-delivery'></img>
                         </div>
-                        <div className='information-option information-option-delivery'>
+                        <div className='information-option'>
                             <div className='block-delivery'>
                                 <div className='subblock-delivery'>
-                                <div><img src={Mastercard} className='img-delivery'></img></div>
-                                <div><p className='title-delivery'>Mastercard</p></div>
-                                </div>
-
-                                <div className='subblock-delivery'>
-                                <div><img src={BigPen} className='img-delivery-pen'></img></div>
-                                <div><label class="checkbox-container-delivery"> 
-                                    <input type="checkbox"/>
-                                <span class="checkmark-delivery"/>
-                                </label></div>
-                                </div>
-                            </div>
-                            <div className='long-line-seller long-line-seller-delivery'></div>
-                            
-                            <div className='block-delivery'>
-                                <div className='subblock-delivery'>
-                                <div><img src={Visa} className='img-delivery'></img></div>
+                                <div><img src={Visa} className='img-delivery img-delivery-option'></img></div>
                                 <div><p className='title-delivery'>Visa</p></div>
                                 </div>
 
                                 <div className='subblock-delivery'>
-                                <div><img src={BigPen} className='img-delivery-pen'></img></div>
                                 <div><label class="checkbox-container-delivery"> 
                                     <input type="checkbox"/>
                                 <span class="checkmark-delivery"/>
                                 </label></div>
                                 </div>
                             </div>
-                            <div className='long-line-seller long-line-seller-delivery'></div>
-
-                            <div className='block-delivery'>
-                                <div className='subblock-delivery'>
-                                <div><img src={PayPal} className='img-delivery'></img></div>
-                                <div><p className='title-delivery'>PayPal</p></div>
-                                </div>
-
-                                <div className='subblock-delivery'>
-                                <div><img src={BigPen} className='img-delivery-pen'></img></div>
-                                <div><label class="checkbox-container-delivery"> 
-                                    <input type="checkbox"/>
-                                <span class="checkmark-delivery"/>
-                                </label></div>
-                                </div>   
-                            </div>
-
-                            <div className='long-line-seller long-line-seller-delivery'></div>
-
-<div className='block-delivery'>
-    <div className='subblock-delivery'>
-    <div><img src={Card} className='img-delivery'></img></div>
-    <div><p className='title-delivery'>За реквізитами</p></div>
-    </div>
-
-    <div className='subblock-delivery'>
-    <div><img src={BigPen} className='img-delivery-pen'></img></div>
-    <div><label class="checkbox-container-delivery"> 
-        <input type="checkbox"/>
-    <span class="checkmark-delivery"/>
-    </label></div>
-    </div>   
-</div>
                         </div>
                     </div>
+
+                    <div className='top-option-company'>
+                        <div className='description-seller-option description-seller-option-delivery'>
+                        </div>
+                        <div className='information-option information-option-text'>
+                        <textarea className='big-textarea-seller' placeholder='Умови способу доставки' required></textarea>
+                        </div>
+                    </div>
+                    
+                    <div>
+                    <button className='save-seller-button option-seller-save-button save-seller-button-delivery'>Зберегти зміни</button>
+                    </div>
                   </div>
+                  
             </div>
+            
             </div>
         </body>
     )

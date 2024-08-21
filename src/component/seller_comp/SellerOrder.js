@@ -18,8 +18,7 @@ import BigGoodsSeller from '../seller_comp/img_seller/big-goods-seller.svg';
 import AddGoods from '../seller_comp/img_seller//add-goods-box-seller.svg';
 import GreyX from '../seller_comp/img_seller/greyX.svg';
 import ChipsLeys from '../seller_comp/img_seller/chips-leys.jpg';
-import { useAuth } from '../providers/AuthProvider';
-
+import BigClientSeller from '../seller_comp/img_seller/big-client-seller.svg';
 
 
 function App() {
@@ -36,6 +35,7 @@ function App() {
     return <BigOptionSeller />;
     return <SakuraSeller />;
     return <BigGoodsSeller />;
+    return <BigClientSeller />;
     return <AddGoods />;
     return <GreyX />;
     return <ChipsLeys />;
@@ -43,7 +43,6 @@ function App() {
 
 export default function SellerGoodsPosition() {
 
-    const { user } = useAuth();
     const navigate = useNavigate();
 
     const handleCompanyClick = () => {
@@ -80,8 +79,8 @@ export default function SellerGoodsPosition() {
             <div className='left-seller'>
                 <h1 className='logo-seller'>SakuraTails</h1>
                 <div className='name-id-seller'>
-                    <h3>{user.sellerFirstName} {user.sellerLastName}</h3>
-                    <p>Ваш ID: {user.sellerId}</p>
+                    <h3>Ім'я Прізвище</h3>
+                    <p>Ваш ID: 0000001</p>
                 </div>
                 <div className='seller-search-div'>
                 <input type="search" name="seller-search" className='seller-search' placeholder="Пошук"/>
@@ -92,7 +91,7 @@ export default function SellerGoodsPosition() {
                     <button className='left-seller-button'><img src={MainSeller} className='img-seller-left'></img>Головна</button>
                     </div>
                     <div>
-                    <button className='left-seller-button'><img src={OrderSeller} className='img-seller-left'></img>Замовлення</button>
+                    <button className='left-seller-button left-seller-subbutton-open'><img src={OrderSeller} className='img-seller-left'></img>Замовлення</button>
                     </div>
                     <div>
                     <details className='seller-details'>
@@ -104,7 +103,7 @@ export default function SellerGoodsPosition() {
                     <button className='left-seller-subbutton'>Позиції</button>
                     </div>
                     <div onClick={handlePromotionsClick}>
-                    <button className='left-seller-subbutton left-seller-subbutton-open'>Акції та промокоди</button>
+                    <button className='left-seller-subbutton'>Акції та промокоди</button>
                     </div>
                     </details>
                     </div>
@@ -143,11 +142,11 @@ export default function SellerGoodsPosition() {
             <div className='cabinet-seller-div'>
             <div className='head-seller'>
                 <div>
-            <img src={BigGoodsSeller} className='img-seller-left'></img>
-            <p>Акції та промокоди</p>
+            <img src={BigClientSeller} className='img-seller-left'></img>
+            <p>Замовлення</p>
             </div>
             <div className='save-seller-button-div save-seller-button-div-pos'>
-            <button className='save-seller-button' onClick={handleAddPositionClick}>Додати акцію</button>
+            <button className='save-seller-button' onClick={handleAddPositionClick}>Додати замовлення</button>
             </div>
             </div>
             
@@ -155,26 +154,104 @@ export default function SellerGoodsPosition() {
                    <div className='main-position-seller'>
                     <div className='top-block-position-seller'>
                     <div className='position-search-seller-div'>
-                    <input className='position-search-seller' type='search' placeholder='Пошук по назві акції'></input>
+                    <input className='position-search-seller' type='search' placeholder='Пошук за номером замовлення, ПІБ покупця'></input>
                     </div>
                     </div>
                     <div className='bottom-block-position-seller'>
                     <details className='position-details'>
-                                    <summary className='summary-details'>Відфільтруйте акції</summary>
+                                    <summary className='summary-details'>Відфільтруйте замовлення</summary>
                                     <div>
                                     <details className='position-subdetails position-subdetails-top'>
-                                    <summary className='position-subsummary position-subsummary-top'>Статус акції</summary>
+                                    <summary className='position-subsummary position-subsummary-top'>Статус</summary>
                                     <div>
-                                        <button className='position-button-filter-seller'>Активна</button>
+                                        <button className='position-button-filter-seller'>Нове</button>
                                         </div>
                                         <div>
-                                        <button className='position-button-filter-seller'>Завершена</button>
+                                        <button className='position-button-filter-seller'>Прийнято</button>
                                         </div>
                                         <div>
-                                        <button className='position-button-filter-seller'>Запланована</button>
+                                        <button className='position-button-filter-seller'>Виконано</button>
                                         </div>
                                         <div>
-                                        <button className='position-button-filter-seller'>Архів</button>
+                                        <button className='position-button-filter-seller'>Скасовано</button>
+                                        </div>
+                                        <div>
+                                        <button className='position-button-filter-seller'>Оплачено</button>
+                                        </div>
+                                    </details>
+                                    </div>
+
+                                    <div>
+                                    <details className='position-subdetails position-subdetails-top'>
+                                    <summary className='position-subsummary position-subsummary-top'>Спосіб доставки</summary>
+                                    <div>
+                                        <button className='position-button-filter-seller'>Не вибрано</button>
+                                        </div>
+                                        <div>
+                                        <button className='position-button-filter-seller'>Нова Пошта</button>
+                                        </div>
+                                        <div>
+                                        <button className='position-button-filter-seller'>Розетка</button>
+                                        </div>
+                                        <div>
+                                        <button className='position-button-filter-seller'>УкрПошта</button>
+                                        </div>
+                                    </details>
+                                    </div>
+
+                                    <div>
+                                    <details className='position-subdetails position-subdetails-top'>
+                                    <summary className='position-subsummary position-subsummary-top'>Статус доставки</summary>
+                                    <div>
+                                        <button className='position-button-filter-seller'>Заплановано</button>
+                                        </div>
+                                        <div>
+                                        <button className='position-button-filter-seller'>В дорозі</button>
+                                        </div>
+                                        <div>
+                                        <button className='position-button-filter-seller'>У відділенні</button>
+                                        </div>
+                                        <div>
+                                        <button className='position-button-filter-seller'>Платне збереження</button>
+                                        </div>
+                                        <div>
+                                        <button className='position-button-filter-seller'>Отримано</button>
+                                        </div>
+                                        <div>
+                                        <button className='position-button-filter-seller'>Одержувач відмовився</button>
+                                        </div>
+                                        <div>
+                                        <button className='position-button-filter-seller'>Повернення (в дорозі)</button>
+                                        </div>
+                                        <div>
+                                        <button className='position-button-filter-seller'>Повернення (у відділенні)</button>
+                                        </div>
+                                        <div>
+                                        <button className='position-button-filter-seller'>Повернуто</button>
+                                        </div>
+                                        <div>
+                                        <button className='position-button-filter-seller'>Видалено</button>
+                                        </div>
+                                        <div>
+                                        <button className='position-button-filter-seller'>Припинено зберігання</button>
+                                        </div>
+                                    </details>
+                                    </div>
+
+                                    <div>
+                                    <details className='position-subdetails position-subdetails-top'>
+                                    <summary className='position-subsummary position-subsummary-top'>Спосіб оплати</summary>
+                                    <div>
+                                        <button className='position-button-filter-seller'>Mastercard</button>
+                                        </div>
+                                        <div>
+                                        <button className='position-button-filter-seller'>Visa</button>
+                                        </div>
+                                        <div>
+                                        <button className='position-button-filter-seller'>PayPal</button>
+                                        </div>
+                                        <div>
+                                        <button className='position-button-filter-seller'>За реквізитами</button>
                                         </div>
                                     </details>
                                     </div>
@@ -182,11 +259,11 @@ export default function SellerGoodsPosition() {
 
                                 <div className='filter-position-seller-block'>
                         <div className='filter-position-seller'>
-                        <p>Активна</p>
+                        <p>В дорозі</p>
                         <img src={GreyX} className='img-position-filter'></img>
                     </div>
                     <div className='filter-position-seller'>
-                        <p>Завершена</p>
+                        <p>Прийнято</p>
                         <img src={GreyX} className='img-position-filter'></img>
                     </div>
                     </div>
@@ -194,14 +271,16 @@ export default function SellerGoodsPosition() {
                     <div className='goods-position-seller-block goods-position-seller-block-promotion'>
                         <div className='display-promotion-block'>
                         <div className='block-promotion'>
-                            <div className='subblock-promotion'><p>Назва акції</p></div>
-                            <div className='subblock-promotion'><p><span>n</span>користувачів</p></div>
-                            <div className='subblock-promotion'><p>дд / мм / рррр  -  дд / мм / рррр</p></div>
+                            <div className='subblock-promotion'><p>Замовлення №коду</p></div>
+                            <div className='subblock-promotion'><p>Відгук</p></div>
+                            <div className='subblock-promotion'><p>Повідомлення</p></div>
+                            <div className='subblock-promotion'><p>Прізвище Ім'я</p></div>
                         </div>
                         <div className='block-promotion'>
-                            <div className='subblock-promotion'><p>Назва акції</p></div>
-                            <div className='subblock-promotion'><p><span>n</span>користувачів</p></div>
-                            <div className='subblock-promotion'><p>дд / мм / рррр  -  дд / мм / рррр</p></div>
+                        <div className='subblock-promotion'><p>Замовлення №коду</p></div>
+                            <div className='subblock-promotion'><p>Відгук</p></div>
+                            <div className='subblock-promotion'><p>Повідомлення</p></div>
+                            <div className='subblock-promotion'><p>Прізвище Ім'я</p></div>
                         </div>
                         </div>
 
