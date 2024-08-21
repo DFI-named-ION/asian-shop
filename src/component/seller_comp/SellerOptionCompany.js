@@ -94,6 +94,9 @@ export default function SellerOptionCompany() {
                     <button className='left-seller-button'><img src={PenSeller} className='img-seller-left'></img>Відгуки</button>
                     </div>
                     <div>
+                    <button className='left-seller-button'><img src={ClientSeller} className='img-seller-left'></img>Клієнти</button>
+                    </div>
+                    <div>
                     <details className='seller-details'>
                     <summary><img src={OptionSeller} className='img-seller-left'></img>Налаштування</summary>
                     <div onClick={handleCompanyClick}>

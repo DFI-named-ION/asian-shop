@@ -12,10 +12,7 @@ import WalletSeller from '../seller_comp/img_seller/wallet-seller.svg';
 import OptionSeller from '../seller_comp/img_seller/option-seller.svg';
 import WolfSeller from '../seller_comp/img_seller/white-trans-wolf.svg';
 import BigOptionSeller from '../seller_comp/img_seller/big-option-seller.svg';
-import NovaPost from '../seller_comp/img_seller/nova-post.svg';
-import UkrPost from '../seller_comp/img_seller/urk-post.svg';
-import Rozetka from '../seller_comp/img_seller/rozetka.svg';
-import BigPen from '../seller_comp/img_seller/big-pen.svg';
+import Mastercard from '../seller_comp/img_seller/mastercard-seller.svg';
 import LeftArrow from '../seller_comp/img_seller/arrow-left.svg';
 
 
@@ -32,9 +29,10 @@ function App() {
     return <WolfSeller />;
     return <BigOptionSeller />;
     return <LeftArrow />;
+    return <Mastercard />;
 }
 
-export default function SellerOptionCompany() {
+export default function OptionPayMastercard() {
     
     const navigate = useNavigate();
 
@@ -115,10 +113,10 @@ export default function SellerOptionCompany() {
                     <button className='left-seller-subbutton'>Менеджери</button>
                     </div>
                     <div>
-                    <button className='left-seller-subbutton left-seller-subbutton-open'>Способи доставки</button>
+                    <button className='left-seller-subbutton'>Способи доставки</button>
                     </div>
                     <div>
-                    <button className='left-seller-subbutton'>Способи оплати</button>
+                    <button className='left-seller-subbutton left-seller-subbutton-open'>Способи оплати</button>
                     </div>
                     <div>
                     <button className='left-seller-subbutton'>Графік роботи</button>
@@ -132,7 +130,7 @@ export default function SellerOptionCompany() {
             <div className='head-seller'>
             <div>
             <img src={BigOptionSeller} className='img-seller-left'></img>
-            <p>Способи доставки</p>
+            <p>Способи оплати</p>
             </div>
             <div className='save-seller-button-div'>
             <button className='save-seller-button'>Зберегти зміни</button>
@@ -146,8 +144,8 @@ export default function SellerOptionCompany() {
                         <div className='information-option'>
                             <div className='block-delivery'>
                                 <div className='subblock-delivery'>
-                                <div><img src={UkrPost} className='img-delivery img-delivery-option'></img></div>
-                                <div><p className='title-delivery'>Укрпошта</p></div>
+                                <div><img src={Mastercard} className='img-delivery img-delivery-option'></img></div>
+                                <div><p className='title-delivery'>Mastercard</p></div>
                                 </div>
 
                                 <div className='subblock-delivery'>
@@ -168,49 +166,6 @@ export default function SellerOptionCompany() {
                         </div>
                     </div>
                     
-                    <div className='top-option-company'>
-                        <div className='description-seller-option description-seller-option-delivery'>
-                        </div>
-                        <div className='information-option'>
-                            <div className='block-delivery'>
-                            <div>
-                            <p className='pay-delivery'>Вартість доставки</p>
-                            <div className='block-radio-delivery'>
-                                    <div className='subblock-radio-delivery'>
-                                    <div>
-                                    <input className='radio-goods-seller' type="radio" value="2"></input>
-                                    </div>
-                                    <div>
-                                    <p className='radio-goods-seller-text'>Платна</p>
-                                    </div>
-                                    </div>
-
-                                    <div className='subblock-radio-delivery'>
-                                    <div>
-                                    <input className='radio-goods-seller' type="radio" value="2"></input>
-                                    </div>
-                                    <div>
-                                    <p className='radio-goods-seller-text'>Безплатна</p>
-                                    </div>
-                                    </div>
-                            </div>
-                            <div className='radio-goods-seller-div'>
-                                <input className='radio-goods-seller' type="checkbox"></input>
-                                <p className='radio-goods-seller-text'>Безплатна при замовленні від</p>
-                                </div>
-                                <div className='radio-flex-div-seller'>
-                                <div class="radio-select-seller-div" id='block-4'>
-                                <input className='radio-text-seller radio-text-seller-short' type='text' placeholder='10'></input>
-                                 </div>
-                                 <div>
-                                 <p className='dollar-seller'>€</p>
-                                 </div>
-                                 </div>
-                            </div>
-                            </div>
-                        </div>
-                        
-                    </div>
                     <div>
                     <button className='save-seller-button option-seller-save-button save-seller-button-delivery'>Зберегти зміни</button>
                     </div>

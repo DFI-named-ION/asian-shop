@@ -18,7 +18,7 @@ import BigGoodsSeller from '../seller_comp/img_seller/big-goods-seller.svg';
 import AddGoods from '../seller_comp/img_seller//add-goods-box-seller.svg';
 import GreyX from '../seller_comp/img_seller/greyX.svg';
 import ChipsLeys from '../seller_comp/img_seller/chips-leys.jpg';
-
+import BigClientSeller from '../seller_comp/img_seller/big-client-seller.svg';
 
 
 function App() {
@@ -35,12 +35,24 @@ function App() {
     return <BigOptionSeller />;
     return <SakuraSeller />;
     return <BigGoodsSeller />;
+    return <BigClientSeller />;
     return <AddGoods />;
     return <GreyX />;
     return <ChipsLeys />;
 }
 
 export default function SellerGoodsPosition() {
+
+    const [modalIsOpenProfile, setModalIsOpenProfile] = useState(false);
+    const [modalIsOpenProfilePassword, setModalIsOpenProfilePassword] = useState(false);
+  
+    const openModalProfilePassword = () => {
+      setModalIsOpenProfilePassword(true);
+    };
+  
+    const closeModalProfilePassword = () => {
+      setModalIsOpenProfilePassword(false);
+    };
 
     const navigate = useNavigate();
 
@@ -99,7 +111,7 @@ export default function SellerGoodsPosition() {
                     <button className='left-seller-subbutton'>Категорії</button>
                     </div>
                     <div onClick={handlePositionsClick}>
-                    <button className='left-seller-subbutton left-seller-subbutton-open'>Позиції</button>
+                    <button className='left-seller-subbutton'>Позиції</button>
                     </div>
                     <div onClick={handlePromotionsClick}>
                     <button className='left-seller-subbutton'>Акції та промокоди</button>
@@ -110,7 +122,7 @@ export default function SellerGoodsPosition() {
                     <button className='left-seller-button'><img src={PenSeller} className='img-seller-left'></img>Відгуки</button>
                     </div>
                     <div>
-                    <button className='left-seller-button'><img src={ClientSeller} className='img-seller-left'></img>Клієнти</button>
+                    <button className='left-seller-button left-seller-subbutton-open'><img src={ClientSeller} className='img-seller-left'></img>Клієнти</button>
                     </div>
                     <div>
                     <details className='seller-details'>
@@ -141,11 +153,35 @@ export default function SellerGoodsPosition() {
             <div className='cabinet-seller-div'>
             <div className='head-seller'>
                 <div>
-            <img src={BigGoodsSeller} className='img-seller-left'></img>
-            <p>Перелік позицій</p>
+            <img src={BigClientSeller} className='img-seller-left'></img>
+            <p>Клієнти</p>
             </div>
             <div className='save-seller-button-div save-seller-button-div-pos'>
-            <button className='save-seller-button' onClick={handleAddPositionClick}>Додати позицію</button>
+            <button className='save-seller-button' onClick={openModalProfilePassword}>Додати клієнта</button>
+            <Modal isOpen={modalIsOpenProfilePassword} onRequestClose={closeModalProfilePassword} className='background-modal-div'>
+                      <div className='modal-profile-password-div'> 
+                        <button onClick={closeModalProfilePassword} className='close-modal-button close-modal-profile-button'/>
+                        <h2 className='title-profile-modal'>
+                          Додати клієнта
+                        </h2>
+                        <p className='subtitle-modal-profile'>Прізвище</p>
+                        <p className='input-profile'>
+                          <input className='line-profile-modal' type='text' name='modal-name' placeholder='Прізвище'/>
+                        </p>
+                        <p className='subtitle-modal-profile'>Ім'я</p>
+                        <p className='input-profile'>
+                          <input className='line-profile-modal' type='password' name='modal-name' placeholder="Ім'я"/>
+                        </p>
+                        <p className='subtitle-modal-profile'>Електронна пошта</p>
+                        <p className='input-profile'>
+                          <input className='line-profile-modal' type='email' name='modal-email' placeholder='email@gmail.com'/>
+                        </p>
+                        <div className='button-profile-div button-profile-modal-div'>
+                          <input className='save-profile-button' type='button' value='Зберегти' />
+                          <input className='cancel-profile-button' type='button' value='Скасувати'/>
+                        </div>
+                      </div>
+                    </Modal>
             </div>
             </div>
             
@@ -153,118 +189,109 @@ export default function SellerGoodsPosition() {
                    <div className='main-position-seller'>
                     <div className='top-block-position-seller'>
                     <div className='position-search-seller-div'>
-                    <input className='position-search-seller' type='search' placeholder='Пошук по назві позиції та пошуковим запитам'></input>
+                    <input className='position-search-seller' type='search' placeholder='Пошук по ПІБ, пошті чи номеру телефону клієнта '></input>
                     </div>
                     </div>
                     <div className='bottom-block-position-seller'>
                     <details className='position-details'>
-                                    <summary className='summary-details'>Відфільтруйте товари</summary>
+                                    <summary className='summary-details'>Відфільтруйте клієнтів</summary>
                                     <div>
                                     <details className='position-subdetails position-subdetails-top'>
-                                    <summary className='position-subsummary position-subsummary-top'>Ціна</summary>
+                                    <summary className='position-subsummary position-subsummary-top'>Стать</summary>
                                     <div>
-                                        <button className='position-button-filter-seller'>Від дешевих до дорогих</button>
+                                        <button className='position-button-filter-seller'>Чоловік</button>
                                         </div>
                                         <div>
-                                        <button className='position-button-filter-seller'>Від дорогих до дешевих</button>
+                                        <button className='position-button-filter-seller'>Жінка</button>
                                         </div>
                                     </details>
                                     </div>
+
                                     <div>
                                     <details className='position-subdetails position-subdetails-top'>
-                                    <summary className='position-subsummary'>Категорія</summary>
+                                    <summary className='position-subsummary position-subsummary-top'>Відгук про продавця</summary>
                                     <div>
-                                        <button className='position-button-filter-seller'>Заморожені</button>
+                                        <button className='position-button-filter-seller'>Клієнт залишив відгук</button>
                                         </div>
                                         <div>
-                                        <button className='position-button-filter-seller'>Солодощі</button>
-                                        </div>
-                                        <div>
-                                        <button className='position-button-filter-seller'>Закуски</button>
-                                        </div>
-                                        <div>
-                                        <button className='position-button-filter-seller'>Страви</button>
-                                        </div>
-                                        <div>
-                                        <button className='position-button-filter-seller'>Соуси</button>
-                                        </div>
-                                        <div>
-                                        <button className='position-button-filter-seller'>Напої</button>
+                                        <button className='position-button-filter-seller'>Клієнт не залишив відгук</button>
                                         </div>
                                     </details>
                                     </div>
+
                                     <div>
                                     <details className='position-subdetails position-subdetails-top'>
-                                    <summary className='position-subsummary'>Знижка</summary>
+                                    <summary className='position-subsummary position-subsummary-top'>Повідомлення компанії</summary>
                                     <div>
-                                        <button className='position-button-filter-seller'>Зі знижкою</button>
+                                        <button className='position-button-filter-seller'>Клієнт писав повідомлення</button>
                                         </div>
                                         <div>
-                                        <button className='position-button-filter-seller'>Без знижки</button>
-                                        </div>
-                                        <div>
-                                        <button className='position-button-filter-seller'>Запланована знижка</button>
-                                        </div>
-                                        <div>
-                                        <button className='position-button-filter-seller'>Знижка закінчилася</button>
-                                        </div>
-                                        <div>
-                                        <button className='position-button-filter-seller'>Знижка скоро закінчиться</button>
+                                        <button className='position-button-filter-seller'>Клієнт не писав повідомлення</button>
                                         </div>
                                     </details>
                                     </div>
+
                                     <div>
                                     <details className='position-subdetails position-subdetails-top'>
-                                    <summary className='position-subsummary'>Наявність</summary>
+                                    <summary className='position-subsummary position-subsummary-top'>Період замовлень/повідомлень</summary>
                                     <div>
-                                        <button className='position-button-filter-seller'>У наявності</button>
+                                        <button className='position-button-filter-seller'>Менше чим 3 місяці</button>
                                         </div>
                                         <div>
-                                        <button className='position-button-filter-seller'>Немає в наявності</button>
+                                        <button className='position-button-filter-seller'>Більше чим 3 місяці</button>
                                         </div>
                                     </details>
                                     </div>
+
                                     <div>
-                                        <button className='position-button-filter-seller-del'>Видалені позиції</button>
-                                        </div>
-                                        <div>
                                     <details className='position-subdetails position-subdetails-top'>
-                                    <summary className='position-subsummary position-subsummary-bottom'>Оцінка товару</summary>
+                                    <summary className='position-subsummary position-subsummary-top'>Кількість замовлень/повідомлень</summary>
                                     <div>
-                                        <button className='position-button-filter-seller'>З оцінками</button>
+                                        <button className='position-button-filter-seller'>1</button>
                                         </div>
                                         <div>
-                                        <button className='position-button-filter-seller'>Без оцінок</button>
+                                        <button className='position-button-filter-seller'>2 - 5</button>
+                                        </div>
+                                        <div>
+                                        <button className='position-button-filter-seller'>6 - 10</button>
+                                        </div>
+                                        <div>
+                                        <button className='position-button-filter-seller'>Більше ніж 10</button>
                                         </div>
                                     </details>
                                     </div>
-                                </details>
+                                    </details>
 
                                 <div className='filter-position-seller-block'>
                         <div className='filter-position-seller'>
-                        <p>Від дорогих до дешевих</p>
+                        <p>В дорозі</p>
                         <img src={GreyX} className='img-position-filter'></img>
                     </div>
                     <div className='filter-position-seller'>
-                        <p>Солодощі</p>
+                        <p>Прийнято</p>
                         <img src={GreyX} className='img-position-filter'></img>
                     </div>
                     </div>
 
-                    <div className='goods-position-seller-block'>
-                        <div className='good-position-seller'>
-                        <img src={ChipsLeys} className='img-position-good'></img>
-                        <h5>Картопляні чіпси Lay's: Пряні раки</h5>
-                        <p className='text-position-good'>23 шт. в наявності</p>
-                        <p className='price-position-good'><span className='span-small-pos'>€</span>3.49 <span className='span-slash-pos'>/</span>80<span className='span-small-pos'>г.</span></p>
+                    <div className='goods-position-seller-block goods-position-seller-block-promotion'>
+                        <div className='display-promotion-block'>
+                        <div className='block-promotion'>
+                            <div className='subblock-promotion'><p>Прізвище Ім'я</p></div>
+                            <div className='subblock-promotion'><p>Ч/Ж</p></div>
+                            <div className='subblock-promotion'><p>Відгук</p></div>
+                            <div className='subblock-promotion'><p>Повідомлення</p></div>
+                            <div className='subblock-promotion'><p>Замовлення №коду  </p></div>
+                        </div>
+                        <div className='block-promotion'>
+                        <div className='subblock-promotion'><p>Прізвище Ім'я</p></div>
+                            <div className='subblock-promotion'><p>Ч/Ж</p></div>
+                            <div className='subblock-promotion'><p>Відгук</p></div>
+                            <div className='subblock-promotion'><p>Повідомлення</p></div>
+                            <div className='subblock-promotion'><p>Замовлення №коду  </p></div>
+                        </div>
                         </div>
 
-                        <div className='good-position-seller'>
-                        <img src={ChipsLeys} className='img-position-good'></img>
-                        <h5>Картопляні чіпси Lay's: Пряні раки</h5>
-                        <p className='text-position-good'>23 шт. в наявності</p>
-                        <p className='price-position-good'><span className='span-small-pos'>€</span>3.49 <span className='span-slash-pos'>/</span>80<span className='span-small-pos'>г.</span></p>
-                        </div>
+                        
                     </div>
                     </div>
                    </div>
