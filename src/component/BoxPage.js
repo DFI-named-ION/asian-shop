@@ -1,7 +1,7 @@
 import React, {useContext, useEffect, useState} from 'react';
 
 
-import Chips from '../images/img/chips-good.png';
+import Box from '../images/img/box-image.jpg';
 import PriceGood from '../images/icons/price-good.svg';
 import Transport from '../images/icons/transport-good.svg';
 import Quality from '../images/icons/quality-good.svg';
@@ -12,7 +12,7 @@ import Footer from '../component/Footer';
 
 
 function App() {
-    return <Chips />;
+    return <Box />;
     return <PriceGood />;
     return <Transport />;
     return <Quality />;
@@ -24,10 +24,42 @@ function App() {
 
   export default function GoodPage() {
 
-    const [content, setContent] = useState('Склад продукту');
+    const [activeTab, setActiveTab] = useState('composition');
 
-    const handleMouseEnter = (section) => {
-        setContent(section);
+    const renderContent = () => {
+      switch (activeTab) {
+        case 'composition':
+          return <div>
+          <p>Інгридієнти: Секрет, проте не містить молока, горіхів та глютену.</p>
+      </div>;
+        case 'information':
+          return <div>
+          <p>Алергени: Містить картоплю. Вироблено на підприємстві, що працює з молоком, соєю та пшеницею.
+              <br/><br/>
+             Поживна цінність (на одну порцію, приблизно 28 г): <br/>Калорії: 150, загальний жир: 9 г, натрій: 180 мг, білок: 2 г.</p>
+      </div>;
+        case 'reviews':
+          return <div>
+          <div className='add-response-button-div'>
+              <button>Залишити відгук <img src={RedPen}></img></button>
+          </div>
+
+          <div className='respose-block'>
+              <h5>Нейлон</h5>
+              <div className='respose-stars'>
+              <img src={StarRespose}></img>
+              <img src={StarRespose}></img>
+              <img src={StarRespose}></img>
+              <img src={StarRespose}></img>
+              <img src={StarRespose}></img>
+              </div>
+              <p>Чіпси зі смаком гострого лобстера – це сміливе поєднання морських делікатесів і пікантності. Хрусткі та смачні, вони подарують яскраві враження, особливо для любителів оригінальних смаків. Справжнє задоволення для гурманів!</p>
+              <img className='img-respose' src={Box}></img>
+          </div>
+      </div>;
+        default:
+          return null;
+      }
     }
 
 
@@ -39,8 +71,8 @@ function App() {
               <main>
             <section className='section-good-page'>
                 <div className='left-good-page'>
-                    <div className='img-good-page'>
-                    <img src={Chips}></img>
+                    <div className='img-good-page img-box-page'>
+                    <img src={Box}></img>
                     </div>
                 </div>
 
@@ -143,58 +175,18 @@ function App() {
 
 <div className="menu-good">
             <div className="tabs-good">
-                <div 
-                    className="tab-good tab-good-left" 
-                    onMouseEnter={() => handleMouseEnter('Склад продукту')}
-                >
-                    Склад продукту
-                </div>
-                <div 
-                    className="tab-good tab-good-center" 
-                    onMouseEnter={() => handleMouseEnter('Інформація')}
-                >
-                    Інформація
-                </div>
-                <div 
-                    className="tab-good tab-good-right" 
-                    onMouseEnter={() => handleMouseEnter('Відгуки')}
-                >
-                    Відгуки (<span>1</span>)
-                </div>
+        <div>
+        <button onClick={() => setActiveTab('composition')} id='button-tabs-good' className={activeTab === 'composition' ? 'active' : ''}>Склад продукту</button>
+        </div>
+        <div>
+        <button onClick={() => setActiveTab('information')} id='button-tabs-good' className={activeTab === 'information' ? 'active' : ''}>Інформація</button>
+        </div>
+        <div>
+        <button onClick={() => setActiveTab('reviews')} id='button-tabs-good' className={activeTab === 'reviews' ? 'active' : ''}>Відгуки (1)</button>
+        </div>
             </div>
             <div className="content-good-page">
-                {content === 'Склад продукту' && (
-                    <div>
-                        <p>Інгридієнти: Секрет, проте не містить молока, горіхів та глютену.</p>
-                    </div>
-                )}
-                {content === 'Інформація' && (
-                    <div>
-                        <p>Алергени: Містить картоплю. Вироблено на підприємстві, що працює з молоком, соєю та пшеницею.
-                            <br/><br/>
-                           Поживна цінність (на одну порцію, приблизно 28 г): <br/>Калорії: 150, загальний жир: 9 г, натрій: 180 мг, білок: 2 г.</p>
-                    </div>
-                )}
-                {content === 'Відгуки' && (
-                    <div>
-                        <div className='add-response-button-div'>
-                            <button>Залишити відгук <img src={RedPen}></img></button>
-                        </div>
-
-                        <div className='respose-block'>
-                            <h5>Нейлон</h5>
-                            <div className='respose-stars'>
-                            <img src={StarRespose}></img>
-                            <img src={StarRespose}></img>
-                            <img src={StarRespose}></img>
-                            <img src={StarRespose}></img>
-                            <img src={StarRespose}></img>
-                            </div>
-                            <p>Чіпси зі смаком гострого лобстера – це сміливе поєднання морських делікатесів і пікантності. Хрусткі та смачні, вони подарують яскраві враження, особливо для любителів оригінальних смаків. Справжнє задоволення для гурманів!</p>
-                            <img className='img-respose' src={Chips}></img>
-                        </div>
-                    </div>
-                )}
+             {renderContent()}
             </div>
         </div>
  

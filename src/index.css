@@ -943,10 +943,6 @@ h1, h2, h3, h4, p{
     height: 400px;
 }
 
-.full-stars{
-    
-}
-
 
 .full-stars .rating-group {
     display: flex;
@@ -969,9 +965,6 @@ h1, h2, h3, h4, p{
     fill: #182531;
     transition: fill 0.3s;
 }
-/* .full-stars input:checked ~ label svg {
-    fill: #BFE2FF;
-} */
 .full-stars .rating-group:hover label svg {
     fill: #182531;
 }
@@ -3896,6 +3889,31 @@ input{
     100% { opacity: 0; transform: translate(-50%, 500px); }
 }
 
+.slider-market {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 1px;
+  background: #647484;
+  border-radius: 5px;
+  outline: none;
+  opacity: 0.7;
+  transition: opacity .2s;
+}
+
+.slider-market:hover {
+  opacity: 1;
+}
+
+.slider-market::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 40px;
+  height: 10px;
+  background: linear-gradient(259deg, rgba(149,23,23,1) 0%, rgba(196,77,77,1) 100%);
+  border-radius: 10px;
+  cursor: pointer;
+}
+
 /* Про нас */
 
 .aboutUs-body{
@@ -4331,6 +4349,171 @@ text-transform: uppercase;
   margin-bottom: 10px;
 }
 
+.modal-good-page-div{
+  width: 1346px;
+  background-color: #EAE5D9;
+  border-radius: 50px;
+  padding-left: 173px;
+  padding-right: 173px;
+  margin: auto;
+}
+
+.close-modal-good-button{
+  left:1170px
+}
+
+.title-modal-good-page h2{
+  text-align: center;
+  font-weight: 600;
+  font-size: 31px;
+  margin-top: 38px;
+}
+
+.pos-neg-button{
+  display: flex;
+  margin-left: 370px;
+  margin-top: 37px;
+}
+
+.pos-neg-button button{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 23px;
+  padding-right: 23px;
+  background-color: transparent;
+  color: #182531;
+  letter-spacing: 1px;
+  font-weight: 500;
+  font-size: 16px;
+  border-radius: 10px;
+}
+
+.pos-button{
+  border: 3px #182531 solid;
+}
+
+.neg-button{
+  border: 3px transparent solid;
+}
+
+.full-stars-good-page .rating-group-good-page {
+  display: flex;
+  margin-top: 29px;
+  width: 349px;
+  margin-left: 300px;
+}
+
+.full-stars-good-page input {
+  position: absolute;
+  left: -9999px;
+}
+.full-stars-good-page label {
+  margin: 0;
+  cursor: pointer;
+}
+.full-stars-good-page label svg {
+  margin-right: 37px;
+  height: 40px;
+  width: 40px;
+  fill: #182531;
+  transition: fill 0.3s;
+}
+
+.full-stars-good-page .rating-group-good-page:hover label svg {
+  fill: #182531;
+}
+.full-stars-good-page .rating-group-good-page input:hover ~ label svg {
+  fill: transparent;
+}
+
+.query-modal-title p{
+  font-weight: 500;
+  font-size: 20px;
+  color: #182531;
+  margin-top: 28px;
+  margin-bottom: 5px;
+}
+
+.block-query-modal textarea{
+  width: 100%;
+  height: 253px;
+  background-color: transparent;
+  border-radius: 10px;
+  border: 1px solid #182531;
+  padding: 10px;
+  color: #182531;
+  font-size: 18px;
+  font-weight: 400;
+  margin-bottom: 20px;
+}
+
+.attach-file-modal{
+  background-color: transparent;
+  border-radius: 10px;
+  width: 100%;
+  height: 81px;
+  border: #182531 dashed 1px;
+  display: flex;
+  padding-top: 26px;
+  padding-bottom: 26px;
+  padding-left: 370px;
+  cursor: pointer;
+  margin-bottom: 5px;
+}
+
+.attach-file-modal img{
+  margin-right: 20px;
+  margin-top: 5px;
+}
+
+.attach-file-modal p{
+  font-weight: 400;
+  font-size: 24px;
+}
+
+.file-format-modal p{
+  font-size: 16px;
+  font-weight: 300;
+  letter-spacing: 0.7px;
+  color: #182531;
+  text-align: center;
+  margin-bottom: 45px;
+}
+
+.button-good-page button{
+  width: 253px;
+  text-align: center;
+  padding-top: 17px;
+  padding-bottom: 17px;
+  background-color: #951717;
+  color: #EAE5D9;
+  border: 3px #951717 solid;
+  font-weight: 500;
+  font-size: 18px;
+  border-radius: 50px;
+  margin-left: 370px;
+  letter-spacing: 1px;
+  margin-bottom: 128px;
+}
+
+.button-good-page button:hover{
+  background-color: transparent;
+  color: #182531;
+  border: 3px #182531 solid;
+}
+
+
+.background-good-modal-div{
+  width: 100%;
+  height: 100%;
+  /* background: rgba(18, 25, 31, 0.3); */
+  background-color: rgba(0, 0, 0, 0.25);
+  /* padding-left: 725px;
+  padding-top: 100px; */
+  overlay: none;
+  zoom: 65%;
+  padding-top: 127px;
+}
 /* Market */
 
 .market-body{
@@ -4378,13 +4561,35 @@ text-transform: uppercase;
   width: 260px;
 }
 
-.checkbox-market{
+.checkbox-market {
+  position: relative;
   width: 20px;
   height: 20px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: transparent;
   border: 1px solid #182531;
+  border-radius: 3px;
   cursor: pointer;
   margin-right: 4px;
   margin-top: 4px;
+}
+
+.checkbox-market:checked {
+  background-color: #182531;
+}
+
+.checkbox-market:checked::after {
+  content: "";
+  position: absolute;
+  left: 6px;
+  top: 1.5px;
+  width: 6px;
+  height: 13px;
+  border: solid #EAE5D9;
+  border-width: 0 3px 3px 0;
+  transform: rotate(45deg);
 }
 
 .market-details > summary::before {
@@ -4652,6 +4857,19 @@ text-transform: uppercase;
 .text-box-page{
   margin-top: 50px;
 }
+
+#button-tabs-good{
+  background-color: transparent;
+  border: 0px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #951717;
+}
+
+#button-tabs-good.active{
+  border-bottom: 4px solid #951717;
+}
+
 
 /* Product tracking */
 
