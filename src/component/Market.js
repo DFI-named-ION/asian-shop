@@ -461,7 +461,7 @@ export default function Market() {
 
                 <div className='subfilter-market'>
                     <p className='price-range'>ЦІНА</p>
-                    <input type='range'></input>
+                    <input type='range' className="slider-market"></input>
                     <div className='menu-range-market'>
                         <div>€3.99</div>
                         <div>€n</div>

@@ -1,5 +1,6 @@
 import React, {useContext, useEffect, useState} from 'react';
 import Cookies from 'js-cookie';
+import Modal from 'react-modal';
 
 import Chips from '../images/img/chips-good.png';
 import PriceGood from '../images/icons/price-good.svg';
@@ -8,6 +9,7 @@ import Quality from '../images/icons/quality-good.svg';
 import RedPen from '../images/icons/redPen.svg';
 import StarRespose from '../images/icons/star-respose.svg';
 import Spread from '../images/icons/spread-order.svg';
+import Attach from '../images/icons/attach.svg';
 import Header from '../component/Header';
 import Footer from '../component/Footer';
 
@@ -19,17 +21,134 @@ function App() {
     return <Quality />;
     return <RedPen />;
     return <StarRespose />;
+    return <Attach />;
     return <Header />;
     return <Footer />;
   }
 
   export default function GoodPage() {
+    const [modalIsOpen_1, setModalIsOpen_1] = useState(false);
+    const openModal_1 = () => {
+        setModalIsOpen_1(true);
+      };
 
-    const [content, setContent] = useState('Склад продукту');
+      const closeModal_1 = () => {
+        setModalIsOpen_1(false);
+      };
 
-    const handleMouseEnter = (section) => {
-        setContent(section);
+    const [activeTab, setActiveTab] = useState('composition');
+
+    const renderContent = () => {
+      switch (activeTab) {
+        case 'composition':
+          return <div>
+          <p>Інгридієнти: Секрет, проте не містить молока, горіхів та глютену.</p>
+      </div>;
+        case 'information':
+          return <div>
+          <p>Алергени: Містить картоплю. Вироблено на підприємстві, що працює з молоком, соєю та пшеницею.
+              <br/><br/>
+             Поживна цінність (на одну порцію, приблизно 28 г): <br/>Калорії: 150, загальний жир: 9 г, натрій: 180 мг, білок: 2 г.</p>
+      </div>;
+        case 'reviews':
+          return <div>
+          <div className='add-response-button-div'>
+              <button onClick={openModal_1}>Залишити відгук <img src={RedPen}></img></button>
+          </div>
+
+          <Modal isOpen={modalIsOpen_1} onRequestClose={closeModal_1} className='background-good-modal-div'>
+                    <div className='modal-good-page-div'> 
+                    <button onClick={closeModal_1} className='close-modal-button close-modal-good-button'></button>
+                    <div className='title-modal-good-page'>
+                        <h2>Ваша думка дуже важлива для нас</h2>
+                    </div>
+
+                    <div className='pos-neg-button'>
+                        <div>
+                        <button className='pos-button'>Відгук</button>
+                        </div>
+
+                        <div>
+                        <button className='neg-button'>Скарга</button>
+                        </div>
+                    </div>
+
+                    <div className='full-stars-good-page'>
+                      <div className='rating-group-good-page'>
+                   <input name="fst" value="0" type="radio" disabled checked />
+            
+                    <label for="fst-1">
+                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"/></svg>
+                   </label>
+                   <input name="fst" id="fst-1" value="1" type="radio" />
+                       
+                   <label for="fst-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" stroke="#182531" stroke-width="30" viewBox="0 0 576 512"><path d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"/></svg>
+                   </label>
+                   <input name="fst" id="fst-2" value="2" type="radio" />
+          
+                   <label for="fst-3">
+                       <svg xmlns="http://www.w3.org/2000/svg" stroke="#182531" stroke-width="30" viewBox="0 0 576 512"><path d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"/></svg>
+                   </label>
+                   <input name="fst" id="fst-3" value="3" type="radio" />
+                         
+                   <label for="fst-4">
+                       <svg xmlns="http://www.w3.org/2000/svg" stroke="#182531" stroke-width="30" viewBox="0 0 576 512"><path d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"/></svg>
+                   </label>
+                   <input name="fst" id="fst-4" value="4" type="radio" />
+                    
+                    <label for="fst-5">
+                        <svg xmlns="http://www.w3.org/2000/svg" stroke="#182531" stroke-width="30" viewBox="0 0 576 512"><path d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"/></svg>
+                    </label>
+                    <input name="fst" id="fst-5" value="5" type="radio" />
+                    </div>
+                    </div>
+
+                    <div className='query-modal-title'>
+                        <p>Ваш відгук</p>
+                    </div>
+
+                    <div className='block-query-modal'>
+                        <textarea/>
+                    </div>
+
+                    <div className='attach-file-modal'>
+                        <div>
+                        <img src={Attach}></img>
+                        </div>
+                        <div>
+                            <p>Прикріпити файл</p>
+                        </div>
+                    </div>
+
+                    <div className='file-format-modal'>
+                        <p>File format: jpg, jpeg, png (maximum size 10 MB)</p>
+                    </div>
+
+                    <div className='button-good-page'>
+                        <button>Відправити</button>
+                    </div>
+                    </div>
+                    </Modal>
+
+          <div className='respose-block'>
+              <h5>Нейлон</h5>
+              <div className='respose-stars'>
+              <img src={StarRespose}></img>
+              <img src={StarRespose}></img>
+              <img src={StarRespose}></img>
+              <img src={StarRespose}></img>
+              <img src={StarRespose}></img>
+              </div>
+              <p>Чіпси зі смаком гострого лобстера – це сміливе поєднання морських делікатесів і пікантності. Хрусткі та смачні, вони подарують яскраві враження, особливо для любителів оригінальних смаків. Справжнє задоволення для гурманів!</p>
+              <img className='img-respose' src={Chips}></img>
+          </div>
+      </div>;
+        default:
+          return null;
+      }
     }
+
     const [cartItems, setCartItems] = useState([]);
         useEffect(() => {
         const savedCartItems = Cookies.get('cart');
@@ -136,62 +255,22 @@ function App() {
 
 <div className="menu-good">
             <div className="tabs-good">
-                <div 
-                    className="tab-good tab-good-left" 
-                    onMouseEnter={() => handleMouseEnter('Склад продукту')}
-                >
-                    Склад продукту
-                </div>
-                <div 
-                    className="tab-good tab-good-center" 
-                    onMouseEnter={() => handleMouseEnter('Інформація')}
-                >
-                    Інформація
-                </div>
-                <div 
-                    className="tab-good tab-good-right" 
-                    onMouseEnter={() => handleMouseEnter('Відгуки')}
-                >
-                    Відгуки (<span>1</span>)
-                </div>
+            <div>
+        <button onClick={() => setActiveTab('composition')} id='button-tabs-good' className={activeTab === 'composition' ? 'active' : ''}>Склад продукту</button>
+        </div>
+        <div>
+        <button onClick={() => setActiveTab('information')} id='button-tabs-good' className={activeTab === 'information' ? 'active' : ''}>Інформація</button>
+        </div>
+        <div>
+        <button onClick={() => setActiveTab('reviews')} id='button-tabs-good' className={activeTab === 'reviews' ? 'active' : ''}>Відгуки (1)</button>
+        </div>
+            </div>
             </div>
             <div className="content-good-page">
-                {content === 'Склад продукту' && (
-                    <div>
-                        <p>Склад: Картопля, рослинна олія, гостра ракова приправа, сіль, натуральні ароматизатори, антиоксиданти.</p>
-                    </div>
-                )}
-                {content === 'Інформація' && (
-                    <div>
-                        <p>Алергени: Містить картоплю. Вироблено на підприємстві, що працює з молоком, соєю та пшеницею.
-                            <br/><br/>
-                           Поживна цінність (на одну порцію, приблизно 28 г): <br/>Калорії: 150, загальний жир: 9 г, натрій: 180 мг, білок: 2 г.</p>
-                    </div>
-                )}
-                {content === 'Відгуки' && (
-                    <div>
-                        <div className='add-response-button-div'>
-                            <button>Залишити відгук <img src={RedPen}></img></button>
-                        </div>
-
-                        <div className='respose-block'>
-                            <h5>Нейлон</h5>
-                            <div className='respose-stars'>
-                            <img src={StarRespose}></img>
-                            <img src={StarRespose}></img>
-                            <img src={StarRespose}></img>
-                            <img src={StarRespose}></img>
-                            <img src={StarRespose}></img>
-                            </div>
-                            <p>Чіпси зі смаком гострого лобстера – це сміливе поєднання морських делікатесів і пікантності. Хрусткі та смачні, вони подарують яскраві враження, особливо для любителів оригінальних смаків. Справжнє задоволення для гурманів!</p>
-                            <img className='img-respose' src={Chips}></img>
-                        </div>
-                    </div>
-                )}
+            {renderContent()}
             </div>
         </div>
- 
-                </div>
+
             </section>
               </main></>
     
