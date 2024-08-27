@@ -11,11 +11,10 @@ namespace AsianStoreWebAPI.Services
 {
     public class FirebaseAuthService
     {
-        private readonly FirestoreService _firestoreService;
         private readonly IConfiguration _config;
 
-        public FirebaseAuthService(FirestoreService service, IConfiguration config)
-        { _firestoreService = service; _config = config; }
+        public FirebaseAuthService(IConfiguration config)
+        { _config = config; }
 
         public async Task<List<UserRecord>> GetAllUsersAsync()
         {
@@ -37,6 +36,11 @@ namespace AsianStoreWebAPI.Services
                 Uid = userId,
                 EmailVerified = true
             });
+        }
+
+        public async Task SetClaims(string userId, Dictionary<string, object> claims)
+        {
+            await FirebaseAuth.DefaultInstance.SetCustomUserClaimsAsync(userId, claims);
         }
 
         public async Task<UserRecord> GetUserByIdAsync(string userId)
@@ -68,7 +72,7 @@ namespace AsianStoreWebAPI.Services
         {
             var user = await GetUserByIdAsync(userId);
 
-            var from = new MailAddress("asian-store@retail.com");
+            var from = new MailAddress("noreply@sakuratails.com");
             var to = new MailAddress(user.Email);
             var subject = "Verification code";
             var body = $@"
@@ -144,7 +148,7 @@ namespace AsianStoreWebAPI.Services
             var user = await GetUserByIdAsync(userId);
 
             var url = $"https://asian-shop.vercel.app/reset-password?secret={code}";
-            var from = new MailAddress("asian-store@retail.com");
+            var from = new MailAddress("noreply@sakuratails.com");
             var to = new MailAddress(user.Email);
             var subject = "Password reset";
             var body = $@"
@@ -213,11 +217,14 @@ namespace AsianStoreWebAPI.Services
 
         private async Task SendEmailAsync(MailAddress from, MailAddress to, string subject, string body)
         {
-            var client = new SmtpClient("sandbox.smtp.mailtrap.io", 2525)
+            var client = new SmtpClient()
             {
+                Host = "mail.privateemail.com",
                 Credentials = new NetworkCredential(_config.GetValue<string>("SMTP:Credentials:user_name"), _config.GetValue<string>("SMTP:Credentials:password")),
-                EnableSsl = true
-            }; ;
+                EnableSsl = true,
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                Port = 587,
+            };
 
             var mailMessage = new MailMessage
             {
