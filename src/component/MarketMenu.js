@@ -57,111 +57,111 @@ export default function MailConfirmation() {
         </div>
         <div class="category-market-menu">
             <h2>Солодощі</h2>
-            <div class="category-item" onClick={() => { handleRedirect("category2", "subCategory1") }}>
+            <div class="category-item" onClick={() => { handleRedirect("category2", "subCategory3") }}>
                 Шоколад
                 <img src={Choko} alt="Шоколад"></img>
             </div>
-            <div class="category-item" onClick={() => { handleRedirect("category2", "subCategory2") }}>
+            <div class="category-item" onClick={() => { handleRedirect("category2", "subCategory4") }}>
                 Моті
                 <img src={Mochi} alt="Моті"></img>
             </div>
-            <div class="category-item" onClick={() => { handleRedirect("category2", "subCategory3") }}>
+            <div class="category-item" onClick={() => { handleRedirect("category2", "subCategory5") }}>
                 Печиво
                 <img src={Cookies} alt="Печиво"></img>
             </div>
-            <div class="category-item" onClick={() => { handleRedirect("category2", "subCategory4") }}>
+            <div class="category-item" onClick={() => { handleRedirect("category2", "subCategory6") }}>
                 Торти
                 <img src={Cakes} alt="Торти"></img>
             </div>
-            <div class="category-item" onClick={() => { handleRedirect("category2", "subCategory5") }}>
+            <div class="category-item" onClick={() => { handleRedirect("category2", "subCategory7") }}>
                 Мармеладки
                 <img src={Gummy} alt="Мармелад"></img>
             </div>
         </div>
         <div class="category-market-menu">
             <h2>Закуски</h2>
-            <div class="category-item" onClick={() => { handleRedirect("category3", "subCategory1") }}>
+            <div class="category-item" onClick={() => { handleRedirect("category3", "subCategory8") }}>
                 Чипси
                 <img src={Chips} alt="Чипси"></img>
             </div>
-            <div class="category-item" onClick={() => { handleRedirect("category3", "subCategory2") }}>
+            <div class="category-item" onClick={() => { handleRedirect("category3", "subCategory9") }}>
                 Крекери
                 <img src={Creckers} alt="Крекери"></img>
             </div>
-            <div class="category-item" onClick={() => { handleRedirect("category3", "subCategory3") }}>
+            <div class="category-item" onClick={() => { handleRedirect("category3", "subCategory10") }}>
                 Горіхи
                 <img src={Nuts} alt="Горіхи"></img>
             </div>
         </div>
         <div class="category-market-menu">
             <h2>Страви</h2>
-            <div class="category-item" onClick={() => { handleRedirect("category4", "subCategory1") }}>
+            <div class="category-item" onClick={() => { handleRedirect("category4", "subCategory11") }}>
                 Гострі
                 <img src={Spicy} alt="Гострі"/>
             </div>
-            <div class="category-item" onClick={() => { handleRedirect("category4", "subCategory2") }}>
+            <div class="category-item" onClick={() => { handleRedirect("category4", "subCategory12") }}>
                 Локшина
                 <img src={Noodles} alt="Локшина"/>
             </div>
-            <div class="category-item" onClick={() => { handleRedirect("category4", "subCategory3") }}>
+            <div class="category-item" onClick={() => { handleRedirect("category4", "subCategory13") }}>
                 Каррі
                 <img src={Cari} alt="Каррі"/>
             </div>
-            <div class="category-item" onClick={() => { handleRedirect("category4", "subCategory4") }}>
+            <div class="category-item" onClick={() => { handleRedirect("category4", "subCategory14") }}>
                 Рис
                 <img src={Rice} alt="Рис"/>
             </div>
-            <div class="category-item" onClick={() => { handleRedirect("category4", "subCategory5") }}>
+            <div class="category-item" onClick={() => { handleRedirect("category4", "subCategory15") }}>
                 Токпоккі
                 <img src={Teokbokki} alt="Токпоккі"/>
             </div>
-            <div class="category-item" onClick={() => { handleRedirect("category4", "subCategory6") }}>
+            <div class="category-item" onClick={() => { handleRedirect("category4", "subCategory16") }}>
                 Місо
                 <img src={Miso} alt="Місо"/>
             </div>
         </div>
         <div class="category-market-menu">
             <h2>Соуси</h2>
-            <div class="category-item" onClick={() => { handleRedirect("category5", "subCategory1") }}>
+            <div class="category-item" onClick={() => { handleRedirect("category5", "subCategory17") }}>
                 Гострі
                 <img src={SpicySouce} alt="Гострі"/>
             </div>
-            <div class="category-item" onClick={() => { handleRedirect("category5", "subCategory2") }}>
+            <div class="category-item" onClick={() => { handleRedirect("category5", "subCategory18") }}>
                 Соєвий
                 <img src={Soy} alt="Шоколад"/>
             </div>
-            <div class="category-item" onClick={() => { handleRedirect("category5", "subCategory3") }}>
+            <div class="category-item" onClick={() => { handleRedirect("category5", "subCategory19") }}>
                 Оцти
                 <img src={Vinegar} alt="Оцти"/>
             </div>
         </div>
         <div class="category-market-menu">
             <h2>Напої</h2>
-            <div class="category-item" onClick={() => { handleRedirect("category6", "subCategory1") }}>
+            <div class="category-item" onClick={() => { handleRedirect("category6", "subCategory20") }}>
                 Газованка
                 <img src={Soda} alt="Газованка"></img>
             </div>
-            <div class="category-item" onClick={() => { handleRedirect("category6", "subCategory2") }}>
+            <div class="category-item" onClick={() => { handleRedirect("category6", "subCategory21") }}>
                 Сік
                 <img src={Juice} alt="Сік"></img>
             </div>
-            <div class="category-item" onClick={() => { handleRedirect("category6", "subCategory3") }}>
+            <div class="category-item" onClick={() => { handleRedirect("category6", "subCategory22") }}>
                 Фітнес
                 <img src={Sport} alt="Фітнес"></img>
             </div>
-            <div class="category-item" onClick={() => { handleRedirect("category6", "subCategory4") }}>
+            <div class="category-item" onClick={() => { handleRedirect("category6", "subCategory23") }}>
                 Вода
                 <img src={Water} alt="Вода"></img>
             </div>
-            <div class="category-item" onClick={() => { handleRedirect("category6", "subCategory5") }}>
+            <div class="category-item" onClick={() => { handleRedirect("category6", "subCategory24") }}>
                 Чай
                 <img src={Tea} alt="Чай"></img>
             </div>
-            <div class="category-item" onClick={() => { handleRedirect("category6", "subCategory6") }}>
+            <div class="category-item" onClick={() => { handleRedirect("category6", "subCategory25") }}>
                 Кава
                 <img src={Coffee} alt="Кава"></img>
             </div>
-            <div class="category-item" onClick={() => { handleRedirect("category6", "subCategory7") }}>
+            <div class="category-item" onClick={() => { handleRedirect("category6", "subCategory26") }}>
                 Молоко
                 <img src={Milk} alt="Молоко"></img>
             </div>

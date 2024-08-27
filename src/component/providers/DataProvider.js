@@ -77,7 +77,7 @@ export const DataProvider = ({ children }) => {
     };
 
     return (
-        <DataContext.Provider value={{ requestData, additional, updateAdditional, clearAdditionalData, requestFields, updateUserInfo, uploadProductImage, removeProductImage, addProduct, updateSellerInfo }}>
+        <DataContext.Provider value={{ dispatch, requestData, additional, updateAdditional, clearAdditionalData, requestFields, updateUserInfo, uploadProductImage, removeProductImage, addProduct, updateSellerInfo }}>
             {children}
         </DataContext.Provider>
     );
