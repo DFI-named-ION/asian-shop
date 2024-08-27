@@ -94,7 +94,7 @@ namespace AsianStoreWebAPI.Services
                 left: 0%;
                 right: 0%;
                 z-index: 2;'>Ласкаво просимо</div>
-                <img src='https://firebasestorage.googleapis.com/v0/b/asianstoreauthtest.appspot.com/o/system%2Fright-message.svg?alt=media&token=4d52365a-3784-4220-a06b-e12ba4a9f144' style='display: block;
+                <img src='https://i.imgur.com/9ONHP0O.png' style='display: block;
                 position: absolute;
                 width: 55%;
                 left: 45%;
@@ -134,7 +134,7 @@ namespace AsianStoreWebAPI.Services
                     padding-left: 12%;
                     padding-right: 10%;'>У разі виникненні запитань, дайте відповідь на цей електронний лист - ми завжди раді вам допомогти.</div>
                 </div>
-                <img src='https://firebasestorage.googleapis.com/v0/b/asianstoreauthtest.appspot.com/o/system%2Fleft-message.svg?alt=media&token=b380723f-e2c8-40cb-b17d-ca8128f37db9' style='position: relative;
+                <img src='https://i.imgur.com/ml33hUx.png' style='position: relative;
                 padding-top: 4%;
                 width: 50%;
                 display: block;
