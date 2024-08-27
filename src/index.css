@@ -944,7 +944,7 @@ h1, h2, h3, h4, p{
 }
 
 
-.full-stars .rating-group {
+.full-stars .rating-group .rating-group-market {
     display: flex;
     margin-top: 20px;
     width: 370px;
@@ -972,7 +972,7 @@ h1, h2, h3, h4, p{
     fill: transparent;
 }
 
-.rating-group label{
+.rating-group .rating-group-market label{
   margin-right: -5px;
 }
 

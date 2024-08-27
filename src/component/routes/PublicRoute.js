@@ -10,13 +10,7 @@ const PublicRoute = () => {
     const { requestFields } = useData();
 
     useEffect(() => {
-        const method = async () => {
-            await requestFields("email;displayName;isSeller;");
-        };
-
-        handleMethod(async () => {
-            await method();
-        });
+        requestFields("email;displayName;isSeller;");
     }, []);
 
     return <Outlet />;
