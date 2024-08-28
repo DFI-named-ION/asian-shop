@@ -10,6 +10,7 @@ import RedPen from '../images/icons/redPen.svg';
 import StarRespose from '../images/icons/star-respose.svg';
 import Spread from '../images/icons/spread-order.svg';
 import Attach from '../images/icons/attach.svg';
+import Arrow from '../images/icons/arrowLeft.svg';
 import Header from '../component/Header';
 import Footer from '../component/Footer';
 
@@ -22,6 +23,7 @@ function App() {
     return <RedPen />;
     return <StarRespose />;
     return <Attach />;
+    return <Arrow />;
     return <Header />;
     return <Footer />;
   }
@@ -32,8 +34,17 @@ function App() {
         setModalIsOpen_1(true);
       };
 
+      const [modalIsOpen_2, setModalIsOpen_2] = useState(false);
+      const openModal_2 = () => {
+          setModalIsOpen_2(true);
+        };
+
       const closeModal_1 = () => {
         setModalIsOpen_1(false);
+      };
+
+      const closeModal_2 = () => {
+        setModalIsOpen_2(false);
       };
 
     const [activeTab, setActiveTab] = useState('composition');
@@ -69,8 +80,171 @@ function App() {
                         </div>
 
                         <div>
-                        <button className='neg-button'>Скарга</button>
+                        <button className='neg-button' onClick={openModal_2}>Скарга</button>
                         </div>
+
+                        <Modal isOpen={modalIsOpen_2} onRequestClose={closeModal_1} className='background-good-modal-div-plus'>
+                    <div className='modal-good-page-div-plus'> 
+                    <button onClick={closeModal_1} className='close-modal-button close-modal-good-button close-modal-good-button-plus'></button>
+                    <div className='left-arrow-good' onClick={closeModal_2}>
+                    <img src={Arrow} id='arrow'></img>
+                    </div>
+                    <div className='title-modal-good-page'>
+                        <h2>Залиште відгук про наш товар</h2>
+                    </div>
+                   
+
+                    <div className='pos-neg-button'>
+                        <div>
+                        <button className='neg-button question-button'>Пропозиція</button>
+                        </div>
+
+                        <div>
+                        <button className='neg-button question-button'>Скарга</button>
+                        </div>
+                    </div>
+
+                    <div className='inform-in-product-modal'>
+                        <p>Інформація про продукт</p>
+                    </div>
+
+                    <div className='input-good-modal'>
+                        <div>
+                            <div>
+                                <p>Назва продукту, вага <span>*</span></p>
+                            </div>
+                            <div>
+                                <input type='text'></input>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div>
+                                <p>Причина скарг</p>
+                            </div>
+                            <div>
+                                <input type='text'></input>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className='input-good-modal'>
+                        <div>
+                            <div>
+                                <p>Час виготовлення</p>
+                            </div>
+                            <div>
+                                <input type='text'></input>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div>
+                                <p>Дата виготовлення продукту</p>
+                            </div>
+                            <div>
+                                <input type='text'></input>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className='input-good-modal'>
+                        <div>
+                            <div>
+                                <p>Дата покупки</p>
+                            </div>
+                            <div>
+                                <input type='text'></input>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div>
+                                <p>Термін придатності</p>
+                            </div>
+                            <div>
+                                <input type='text'></input>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className='input-good-modal'>
+                        <div>
+                            <div>
+                                <p>Хто, крім Вас, їв цей продукт?</p>
+                            </div>
+                            <div>
+                                <input type='text'></input>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div>
+                                <p>Дата споживання</p>
+                            </div>
+                            <div>
+                                <input type='text'></input>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className='input-good-modal-long'>
+                    <div>
+                                <p>Де, в яких умовах і протягом якого періоду часу споживач зберігав продукт?</p>
+                            </div>
+                            <div>
+                                <input type='text'></input>
+                            </div>
+                    </div>
+
+                    <div className='checkbox-good-modal-box'>
+                        <div className='subcheckbox-good-modal'>
+                            <div>
+                                <input type='checkbox' className='checkbox-good-modal'></input>
+                            </div>
+                            <div>
+                            <p>Ви зберегли чек?</p>
+                            </div>
+                        </div>
+
+                        <div className='subcheckbox-good-modal'>
+                        <div>
+                                <input type='checkbox' className='checkbox-good-modal'></input>
+                            </div>
+                            <div>
+                            <p>Чи зберегли ви товар або його частину, упаковку?</p>
+                            </div>
+                        </div>
+                    </div>
+                   
+
+                    <div className='attach-file-modal'>
+                        <div>
+                        <img src={Attach}></img>
+                        </div>
+                        <div>
+                            <p>Прикріпити файл</p>
+                        </div>
+                    </div>
+
+                    <div className='file-format-modal'>
+                        <p>Формат файлу: jpg, jpeg, png (максимальний розмір 10 МБ)</p>
+                    </div>
+
+                    <div className='subcheckbox-good-width'>
+                        <div>
+                                <input type='checkbox' className='checkbox-good-modal'></input>
+                            </div>
+                            <div>
+                            <p>Я даю згоду на обробку персональних даних</p>
+                            </div>
+                        </div>
+
+                    <div className='button-good-page'>
+                        <button>Відправити</button>
+                    </div>
+                    </div>
+                    </Modal>
                     </div>
 
                     <div className='full-stars-good-page'>
@@ -122,11 +296,13 @@ function App() {
                     </div>
 
                     <div className='file-format-modal'>
-                        <p>File format: jpg, jpeg, png (maximum size 10 MB)</p>
+                        <p>Формат файлу: jpg, jpeg, png (максимальний розмір 10 МБ)</p>
                     </div>
 
                     <div className='button-good-page'>
+                        <div>
                         <button>Відправити</button>
+                        </div>
                     </div>
                     </div>
                     </Modal>
