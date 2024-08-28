@@ -605,7 +605,7 @@ export default function Market() {
                             </div>
                         ) : (
                             <div className='mx-auto text-center' style={{marginBottom: "100px"}}>
-                                <button className='subscribe-button' onClick={loadMoreProducts}>Завантажити ще</button>
+                                <button className='loading-good-button' onClick={loadMoreProducts}>Завантажити ще</button>
                             </div>
                         )
                     )}
