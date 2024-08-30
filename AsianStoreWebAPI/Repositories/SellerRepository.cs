@@ -58,36 +58,13 @@ namespace AsianStoreWebAPI.Repositories
                 Height = data["height"].ToString(),
                 Width = data["width"].ToString(),
                 Length = data["length"].ToString(),
-                Weight = data["weight"].ToString(),
+                Weight = Convert.ToDouble(data["weight"]),
                 InStock = 1,
+                Rating = 1,
                 UserId = user.Uid
             };
 
             await _firestoreService.AddRecordAsync<Product>("products", newProduct);
-        }
-
-        public async Task<object> GetPositions(string sessionId, string fields)
-        {
-            if (sessionId is null)
-                throw new Exception("Session Id is null");
-
-            var session = await _firestoreService.GetRecordAsync<Session>("sessions", sessionId);
-            if (session is null)
-                throw new Exception("Session not found");
-            if (session.ExpiresIn < DateTime.UtcNow)
-                throw new Exception("Session is not valid");
-
-            var user = await _firebaseAuthService.GetUserByIdAsync(session.IssuedTo);
-            if (user is null)
-                throw new Exception("User not found");
-
-            var requestedFields = fields.Split(';', StringSplitOptions.RemoveEmptyEntries);
-
-            var data = new Dictionary<string, object>();
-
-            
-
-            return data;
         }
 
         public async Task RemoveProductImageAsync(string sessionId, string token)

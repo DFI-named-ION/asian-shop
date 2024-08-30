@@ -35,8 +35,8 @@ namespace AsianStoreWebAPI
             {
                 options.AddPolicy("CorsPolicy",
                     builder => builder
-                        // .WithOrigins("https://asian-shop.vercel.app")
-                        .WithOrigins("https://localhost:3000")
+                        .WithOrigins("https://asian-shop.vercel.app") // uncomment when ready to publish
+                        // .WithOrigins("https://localhost:3000") // comment when ready to publish
                         .AllowAnyMethod()
                         .AllowAnyHeader()
                         .AllowCredentials());
