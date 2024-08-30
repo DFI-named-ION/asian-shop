@@ -244,10 +244,14 @@ export default function Header (){
                                 <button className='dropdown-border-left-button' onClick={handleSettingsClick}>Налаштування</button>
                                 <button className='dropdown-border-right-button'>Довідка</button>
                             </div>
-                            {user.isSeller && (
-                              <div onClick={handleSellerProfileClick}>
-                                <button className='dropdown-border-bottom-button'><img src={Case} alt="Case" />Кабінет продавця</button>
-                              </div>
+                            {user.isSeller ? (
+                                <div onClick={handleSellerProfileClick}>
+                                    <button className='dropdown-border-bottom-button'><img src={Case} alt="Case" />Кабінет продавця</button>
+                                </div>
+                            ) : (
+                                <div onClick={() => { navigate("/seller/authorization") }}>
+                                    <button className='dropdown-border-bottom-button'><img src={Case} alt="Case" />Стати партнером</button>
+                                </div>
                             )}
                             <div>
                                 <p className='bottom-dropdown'>
