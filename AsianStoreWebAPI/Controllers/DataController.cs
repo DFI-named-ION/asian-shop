@@ -1,6 +1,8 @@
 ﻿using AsianStoreWebAPI.EF.DTO;
+using AsianStoreWebAPI.EF.Models;
 using AsianStoreWebAPI.Repositories;
 using AsianStoreWebAPI.Responses;
+using AsianStoreWebAPI.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AsianStoreWebAPI.Controllers
@@ -12,8 +14,11 @@ namespace AsianStoreWebAPI.Controllers
         private readonly IUserRepository _userRepo;
         private readonly ISellerRepository _sellerRepo;
 
-        public DataController(ISellerRepository sr, IUserRepository ur)
-        { _sellerRepo = sr; _userRepo = ur; }
+        private readonly FirestoreService _firestoreService;
+
+        public DataController(FirestoreService fs, ISellerRepository sr, IUserRepository ur)
+        { _firestoreService = fs; _sellerRepo = sr; _userRepo = ur; }
+
 
         [HttpGet("fetchData")]
         public async Task<IActionResult> FetchDataAsync([FromQuery] string fields)
@@ -24,6 +29,21 @@ namespace AsianStoreWebAPI.Controllers
                 var data = await _userRepo.FetchDataAsync(sessionId, fields);
 
                 return Ok(new ServiceResponses.DataResponse("Success", data));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPost("updateSellerInfo")]
+        public async Task<IActionResult> UpdateSellerInfoAsync([FromBody] JwtTokenDTO token)
+        {
+            try
+            {
+                var sessionId = Request.Cookies["sessionId"];
+                await _userRepo.UpdateSellerInfoAsync(sessionId, token.Token);
+                return Ok();
             }
             catch (Exception ex)
             {
@@ -120,6 +140,31 @@ namespace AsianStoreWebAPI.Controllers
                     default:
                         return BadRequest("add-product-error");
                 }
+            }
+        }
+
+        [HttpPost("getProducts")]
+        public async Task<IActionResult> GetProducts([FromBody] Filter dto, [FromQuery] int pageSize = 8, [FromQuery] int pageNumber = 1)
+        {
+            try
+            {
+                var (products, totalCount, minPrice, maxPrice) = await _firestoreService.GetFilteredRecordsAsync<Product>("products", dto, pageSize, pageNumber);
+
+                var response = new
+                {
+                    Products = products,
+                    TotalCount = totalCount,
+                    PageSize = pageSize,
+                    PageNumber = pageNumber,
+                    MinPrice = minPrice,
+                    MaxPrice = maxPrice
+                };
+
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
             }
         }
     }

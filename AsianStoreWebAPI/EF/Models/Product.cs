@@ -55,7 +55,7 @@ namespace AsianStoreWebAPI.EF.Models
         public string Length { get; set; }
 
         [FirestoreProperty]
-        public string Weight { get; set; }
+        public double Weight { get; set; }
 
         [FirestoreProperty]
         public double Price { get; set; }
@@ -71,6 +71,9 @@ namespace AsianStoreWebAPI.EF.Models
 
         [FirestoreProperty]
         public string Article { get; set; }
+
+        [FirestoreProperty]
+        public double Rating { get; set; }
 
         [FirestoreProperty]
         public int InStock { get; set; }

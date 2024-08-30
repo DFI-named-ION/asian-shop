@@ -1,5 +1,7 @@
 ﻿using AsianStoreWebAPI.EF.DTO;
+using AsianStoreWebAPI.EF.Models;
 using AsianStoreWebAPI.Repositories;
+using AsianStoreWebAPI.Responses;
 using AsianStoreWebAPI.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,10 +12,9 @@ namespace AsianStoreWebAPI.Controllers
     public class AuthController : ControllerBase
     {
         private readonly IUserRepository _userRepo;
-        private readonly JwtService _jwtService;
 
         public AuthController(JwtService js, IUserRepository ur)
-        { _jwtService = js; _userRepo = ur; }
+        { _userRepo = ur; }
 
 
 
@@ -41,6 +42,22 @@ namespace AsianStoreWebAPI.Controllers
             {
                 var sessionId = Request.Cookies["sessionId"];
                 await _userRepo.UpdatePasswordAsync(sessionId, dto.Token);
+                return Ok("Success");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+
+        [HttpPost("updateEmail")]
+        public async Task<IActionResult> UpdateEmailAsync(JwtTokenDTO dto)
+        {
+            try
+            {
+                var sessionId = Request.Cookies["sessionId"];
+                await _userRepo.UpdateEmailAsync(sessionId, dto.Token);
                 return Ok("Success");
             }
             catch (Exception ex)
@@ -104,7 +121,7 @@ namespace AsianStoreWebAPI.Controllers
                 Response.Cookies.Append("sessionId", session.Id, new CookieOptions()
                 {
                     Path = "/",
-                    Domain = "localhost", // comment when ready to publish
+                    // Domain = "localhost", // comment when ready to publish
                     Secure = true,
                     HttpOnly = true,
                     SameSite = SameSiteMode.None,
@@ -128,7 +145,32 @@ namespace AsianStoreWebAPI.Controllers
                 Response.Cookies.Append("sessionId", session.Id, new CookieOptions()
                 {
                     Path = "/",
-                    Domain = "localhost", // comment when ready to publish
+                    // Domain = "localhost", // comment when ready to publish
+                    Secure = true,
+                    HttpOnly = true,
+                    SameSite = SameSiteMode.None,
+                    Expires = session.ExpiresIn
+                });
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+
+        [HttpPost("loginSeller")]
+        public async Task<IActionResult> LoginSellerAsync(JwtTokenDTO dto)
+        {
+            try
+            {
+                var session = await _userRepo.LoginSellerAsync(dto.Token);
+
+                Response.Cookies.Append("sessionId", session.Id, new CookieOptions()
+                {
+                    Path = "/",
+                    // Domain = "localhost", // comment when ready to publish
                     Secure = true,
                     HttpOnly = true,
                     SameSite = SameSiteMode.None,
@@ -153,8 +195,32 @@ namespace AsianStoreWebAPI.Controllers
                 HttpOnly = true,
                 SameSite = SameSiteMode.None
             });
-            // remove session!
+            
             return Ok();
+        }
+
+
+        [HttpGet("removeUserSecret")]
+        public async Task<IActionResult> RemoveUserAsync()
+        {   
+            try
+            {
+                var sessionId = Request.Cookies["sessionId"];
+                await _userRepo.RemoveUserAsync(sessionId);
+
+                Response.Cookies.Delete("sessionId", new CookieOptions()
+                {
+                    Path = "/",
+                    Secure = true,
+                    HttpOnly = true,
+                    SameSite = SameSiteMode.None
+                });
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }
