@@ -13,14 +13,18 @@ export default function Market() {
     const location = useLocation();
     const params = new URLSearchParams(location.search);
 
-    const getArrayParam = (key) => params.getAll(key) || [];
+    const getArrayParam = (key) => {
+        const param = params.get(key);
+        return param ? param.split(',') : [];
+      };
     const getSingleParam = (key) => params.get(key) || "";
 
     const [selectedCategory, setSelectedCategory] = useState(getArrayParam('category'));
     const [selectedSubCategory, setSelectedSubCategory] = useState(getArrayParam('subcategory'));
     const [selectedWeight, setSelectedWeight] = useState(getArrayParam('weight'));
     const [selectedRating, setSelectedRating] = useState(getArrayParam('rating'));
-    const [selectedPriceBottom, setSelectedPriceBottom] = useState(getSingleParam('bottom'));
+    const [minPrice, setMinPrice] = useState(0);
+    const [maxPrice, setMaxPrice] = useState(0);
     const [selectedPriceTop, setSelectedPriceTop] = useState(getSingleParam('top'));
 
     useEffect(() => {
@@ -29,7 +33,7 @@ export default function Market() {
             subcategory: selectedSubCategory,
             weight: selectedWeight,
             rating: selectedRating,
-            bottom: selectedPriceBottom,
+            bottom: minPrice,
             top: selectedPriceTop,
         };
 
@@ -47,7 +51,7 @@ export default function Market() {
         setProductsPortions([{ pending: true, products: [] }]);
         setPageNumber(1);
         setTotalCount(0);
-    }, [selectedCategory, selectedSubCategory, selectedWeight, selectedRating, selectedPriceBottom, selectedPriceTop]);
+    }, [selectedCategory, selectedSubCategory, selectedWeight, selectedRating, selectedPriceTop]);
 
     const [productsPortions, setProductsPortions] = useState([{ pending: true, products: [] }]);
     const [pageNumber, setPageNumber] = useState(1);
@@ -58,7 +62,7 @@ export default function Market() {
         let filter = {
             categories: selectedCategory.length > 0 ? selectedCategory : null,
             subCategories: selectedSubCategory.length > 0 ? selectedSubCategory : null,
-            bottomPrice: selectedPriceBottom || null,
+            bottomPrice: null,
             topPrice: selectedPriceTop || null,
             ratings: selectedRating.length > 0 ? selectedRating : null,
             weights: selectedWeight.length > 0 ? selectedWeight : null
@@ -83,7 +87,7 @@ export default function Market() {
         .catch((err) => {
             console.log("error", err);
         });
-    }, [selectedCategory, selectedSubCategory, selectedPriceBottom, selectedPriceTop, selectedRating, selectedWeight, pageNumber]);
+    }, [selectedCategory, selectedSubCategory, selectedPriceTop, selectedRating, selectedWeight, pageNumber]);
     
     const loadMoreProducts = () => {
         setProductsPortions(prevPortions => [...prevPortions, { pending: true, products: [] }]);
@@ -105,6 +109,7 @@ export default function Market() {
     const handleSubCategoryChange = createFilterHandler(selectedSubCategory, setSelectedSubCategory);
     const handleWeightChange = createFilterHandler(selectedWeight, setSelectedWeight);
     const handleRatingChange = createFilterHandler(selectedRating, setSelectedRating);
+    const handlePriceChange = (e) => { setSelectedPriceTop(e.target.value) };
     
     const handleProductClick = (article) => {
         navigate("/catalog/" + article);
@@ -528,11 +533,11 @@ export default function Market() {
 
                             <div className='subfilter-market'>
                                 <p className='price-range'>ЦІНА</p>
-                                <input type='range' className="slider-market"></input>
+                                <input type='range' className="slider-market" min={minPrice} max={maxPrice} onChange={handlePriceChange} value={selectedPriceTop}></input>
                                 <div className='menu-range-market'>
-                                    <div>€3.99</div>
-                                    <div>€n</div>
-                                    <div>€300.99</div>
+                                    <div>€{minPrice}</div>
+                                    <div>€{selectedPriceTop}</div>
+                                    <div>€{maxPrice}</div>
                                 </div>
                             </div>
                         </div>
@@ -553,11 +558,13 @@ export default function Market() {
                                                         {[1, 2, 3, 4, 5].map(star => {
                                                             let fillPercentage = 0;
 
-                                                            if (product.rating >= star && product.rating < star + 0.25) {
-                                                                fillPercentage = 100;
-                                                            } else if (product.rating >= star + 0.25 && product.rating < star + 0.75) {
+                                                            const rating = product.rating;
+                            
+                                                            if (rating >= star - 0.75 && rating < star - 0.25) {
                                                                 fillPercentage = 50;
-                                                            } else if (product.rating >= star + 0.75) {
+                                                            } else if (rating >= star - 0.25 && rating < star) {
+                                                                fillPercentage = 100;
+                                                            } else if (rating >= star) {
                                                                 fillPercentage = 100;
                                                             }
 
