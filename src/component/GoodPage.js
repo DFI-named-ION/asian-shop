@@ -11,6 +11,7 @@ import StarRespose from '../images/icons/star-respose.svg';
 import Spread from '../images/icons/spread-order.svg';
 import Attach from '../images/icons/attach.svg';
 import Arrow from '../images/icons/arrowLeft.svg';
+import CheckMark from '../images/icons/check-mark-green.svg';
 import Header from '../component/Header';
 import Footer from '../component/Footer';
 
@@ -24,6 +25,7 @@ function App() {
     return <StarRespose />;
     return <Attach />;
     return <Arrow />;
+    return <CheckMark />;
     return <Header />;
     return <Footer />;
   }
@@ -39,12 +41,21 @@ function App() {
           setModalIsOpen_2(true);
         };
 
+         const [modalIsOpen_3, setModalIsOpen_3] = useState(false);
+      const openModal_3 = () => {
+          setModalIsOpen_3(true);
+        };
+
       const closeModal_1 = () => {
         setModalIsOpen_1(false);
       };
 
       const closeModal_2 = () => {
         setModalIsOpen_2(false);
+      };
+
+      const closeModal_3 = () => {
+        setModalIsOpen_3(false);
       };
 
     const [activeTab, setActiveTab] = useState('composition');
@@ -407,8 +418,53 @@ function App() {
                     </div>
 
                     <div>
-                        <button className='add-basket-good-button' onClick={() =>addToCart({ name: 'Good name', price: 1.00, img: "./chips-good.png"})}>Додати до кошику</button>
+                        {/* <button className='add-basket-good-button' onClick={() =>addToCart({ name: 'Good name', price: 1.00, img: "./chips-good.png"})}>Додати до кошику</button> */}
+                        <button className='add-basket-good-button' onClick={openModal_3}>Додати до кошику</button>
                     </div>
+
+                    <Modal isOpen={modalIsOpen_3} onRequestClose={closeModal_3} className='background-good-modal-basket'>
+                    <div className='modal-good-page-basket'> 
+                    <button onClick={closeModal_3} className='close-modal-button close-modal-good-button close-modal-good-button-basket'></button>
+                    <div className='header-modal-basket'>
+                        <div>
+                            <img src={CheckMark}></img>
+                        </div>
+                        <div>
+                            <h2>
+                                Додано до кошику
+                            </h2>
+                        </div>
+                    </div>
+
+                    <div className='main-modal-basket'>
+                        <div className='img-modal-basket'>
+
+                        </div>
+                        <div className='text-modal-basket'>
+                            <div>
+                                <h3>Name</h3>
+                            </div>
+                            <div>
+                                <p>Перші 15 слів опису продукту</p>
+                            </div>
+                            <div>
+                                <p>Кількість: 1</p>
+                            </div>
+                            <div>
+                                <p className='price-modal-basket'>Ціна: <span>$25,6</span></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div className='buttons-modal-basket'>
+                        <div>
+                            <button className='buy-basket-modal' onClick={closeModal_3}>Продовжити покупки</button>
+                        </div>
+                        <div>
+                            <button className='check-basket-modal'>Переглянути корзину</button>
+                        </div>
+                    </div>
+                    </div>
+                    </Modal>
 
                     <div className='advantages-good'>
                         <div className='subadvantages-good'>

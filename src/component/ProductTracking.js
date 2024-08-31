@@ -1,5 +1,6 @@
 import React, {useContext, useEffect, useState} from 'react';
 
+
 import Header from '../component/Header';
 import Footer from '../component/Footer';
 
@@ -21,7 +22,7 @@ function App() {
         }
     };
     return (
-        <body className='tracking-body'>
+        <body className='tracking-body homePage-body'>
         <><><header>
               <Header/>
           </header>
@@ -47,7 +48,7 @@ function App() {
                 {phoneExist ? (
                     <></>
                     ) : (
-                    <>Немає! Ми не знайшли жодного замовлення за таким номером. Можливо, продавець ще не додав ЕН для відстеження замовлення. Спробуйте ще раз трішки пізніше або перевірте за іншим номером.</>
+                    <>Немає! Ми не знайшли жодного замовлення за таким номером. Можливо, продавець ще не додав для відстеження замовлення. Спробуйте ще раз трішки пізніше або перевірте за іншим номером.</>
                 )}
             </p>
               </main></>
