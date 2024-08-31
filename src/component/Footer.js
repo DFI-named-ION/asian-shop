@@ -94,24 +94,7 @@ function App() {
                     </div>
                     <div className='pay-footer-div'>
                         <div className='we-accept-div'>
-                            <h3 className='we-accept'>We accept</h3>
-                        </div>
-                        <div className='inline-pay-div'>
-                            <div className='icon-pay-div'>
-                                <img src={Amex}></img>
-                            </div>
-                            <div className='icon-pay-div'>
-                                <img src={Apple}></img>
-                            </div>
-                            <div className='icon-pay-div'>
-                                <img src={F}></img>
-                            </div>
-                            <div className='icon-pay-div'>
-                                <img src={Discover}></img>
-                            </div>
-                            <div className='icon-pay-div'>
-                                <img src={Google}></img>
-                            </div>
+                            <h3 className='we-accept'>Ми приймаємо</h3>
                         </div>
                         <div className='inline-pay-div'>
                             <div className='icon-pay-div'>
@@ -119,12 +102,6 @@ function App() {
                             </div>
                             <div className='icon-pay-div'>
                                 <img src={Paypal}></img>
-                            </div>
-                            <div className='icon-pay-div'>
-                                <img src={Shop}></img>
-                            </div>
-                            <div className='icon-pay-div'>
-                                <img src={V}></img>
                             </div>
                             <div className='icon-pay-div'>
                                 <img src={Visa}></img>
