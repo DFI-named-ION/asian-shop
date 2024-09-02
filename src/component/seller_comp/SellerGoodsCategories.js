@@ -17,6 +17,11 @@ import SakuraSeller from '../seller_comp/img_seller/sakura-seller.svg';
 import BigGoodsSeller from '../seller_comp/img_seller/big-goods-seller.svg';
 import AddGoods from '../seller_comp/img_seller//add-goods-box-seller.svg';
 import ChipsLeys from '../seller_comp/img_seller/chips-leys.jpg';
+// import RedX from '../seller_comp/img_seller//X-red-seller.svg';
+
+// function App() {
+//     return <RedX />;
+// }
 
 import { useAuth } from '../providers/AuthProvider';
 import { useData } from '../providers/DataProvider';
@@ -286,6 +291,7 @@ export default function SellerGoodsCategories() {
                                         <div className='goods-position-seller-block'>
                                             {filteredProducts.map((product, index) => (
                                                 <div key={index} className='good-position-seller'>
+                                                    {/* <img src={RedX} className='img-del-good'></img> */}
                                                     <img src={product.photoUrls[0]} className='img-position-good' alt={product.title} />
                                                     <h5>{product.title}</h5>
                                                     <p className='text-position-good'>{product.inStock} шт. в наявності</p>
