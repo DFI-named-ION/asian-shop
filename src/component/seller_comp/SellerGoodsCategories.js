@@ -17,6 +17,7 @@ import SakuraSeller from '../seller_comp/img_seller/sakura-seller.svg';
 import BigGoodsSeller from '../seller_comp/img_seller/big-goods-seller.svg';
 import AddGoods from '../seller_comp/img_seller//add-goods-box-seller.svg';
 import ChipsLeys from '../seller_comp/img_seller/chips-leys.jpg';
+import HeaderSeller from '../seller_comp/HeaderSeller';
 // import RedX from '../seller_comp/img_seller//X-red-seller.svg';
 
 // function App() {
