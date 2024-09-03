@@ -16,6 +16,7 @@ import BigOptionSeller from '../seller_comp/img_seller/big-option-seller.svg';
 import SakuraSeller from '../seller_comp/img_seller/sakura-seller.svg';
 import BigGoodsSeller from '../seller_comp/img_seller/big-goods-seller.svg';
 import AddGoods from '../seller_comp/img_seller//add-goods-box-seller.svg';
+import RedX from '../seller_comp/img_seller//X-red-seller.svg';
 import GreyX from '../seller_comp/img_seller/greyX.svg';
 import ChipsLeys from '../seller_comp/img_seller/chips-leys.jpg';
 import { useAuth } from '../providers/AuthProvider';
@@ -38,10 +39,21 @@ function App() {
     return <BigGoodsSeller />;
     return <AddGoods />;
     return <GreyX />;
+    return <RedX />;
     return <ChipsLeys />;
 }
 
 export default function SellerGoodsPosition() {
+
+    const [modalIsOpenProfilePassword, setModalIsOpenProfilePassword] = useState(false);
+  
+    const openModalProfilePassword = () => {
+      setModalIsOpenProfilePassword(true);
+    };
+  
+    const closeModalProfilePassword = () => {
+      setModalIsOpenProfilePassword(false);
+    };
 
     const { user } = useAuth();
 
@@ -256,13 +268,18 @@ export default function SellerGoodsPosition() {
 
                     <div className='goods-position-seller-block'>
                         <div className='good-position-seller'>
-                        <img src={ChipsLeys} className='img-position-good'></img>
-                        <h5>Картопляні чіпси Lay's: Пряні раки</h5>
-                        <p className='text-position-good'>23 шт. в наявності</p>
-                        <p className='price-position-good'><span className='span-small-pos'>€</span>3.49 <span className='span-slash-pos'>/</span>80<span className='span-small-pos'>г.</span></p>
+                        <img src={RedX} className='img-del-good' onClick={openModalProfilePassword}></img>
+                        <Modal isOpen={modalIsOpenProfilePassword} onRequestClose={closeModalProfilePassword} className='background-modal-div background-modal-del-good-div'>
+                      <div className='modal-del-good-div'> 
+                        <h2 className='title-profile-modal title-del-good-modal'>
+                        Ви впевнені що хочете видалити позицію “Назва позиції”
+                        </h2>
+                        <div className='button-profile-div button-profile-modal-div'>
+                          <input className='save-profile-button' type='button' value='Зберегти' onClick={closeModalProfilePassword}/>
+                          <input className='cancel-profile-button' type='button' value='Видалити'/>
                         </div>
-
-                        <div className='good-position-seller'>
+                      </div>
+                    </Modal>
                         <img src={ChipsLeys} className='img-position-good'></img>
                         <h5>Картопляні чіпси Lay's: Пряні раки</h5>
                         <p className='text-position-good'>23 шт. в наявності</p>

@@ -22,11 +22,11 @@ function App() {
         }
     };
     return (
-        <body className='tracking-body homePage-body'>
+        <body className='tracking-body'>
         <><><header>
               <Header/>
           </header>
-              <main>
+              <main className='tracking-main'>
             <h2>
                 Відстеження замовлення
             </h2>
