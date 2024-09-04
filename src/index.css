@@ -2387,11 +2387,13 @@ input{
     font-weight: 600;
     margin-top: 32.5px;
     margin-left: 10px;
+    max-width: 5%;
   }
 
   .quantity-of-goods{
     display: flex;
-    margin-left: 137px;
+    margin-left: auto;
+    margin-right: -5%;
   }
 
   .plus-minus-basket{
@@ -2437,8 +2439,9 @@ input{
   }
 
   .price-basket{
-    margin-left: 35px;
+    margin-left: 8%;
     margin-top: 29px;
+    margin-right: -8%;
   }
 
   .price-basket p{

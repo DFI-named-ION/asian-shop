@@ -345,7 +345,7 @@ function App() {
         }, []);
 
         const addToCart = (item) => {
-        const updatedCart = [...cartItems, { name: item.name, price: item.price, img: item.img, qt: 1}];
+        const updatedCart = [...cartItems, { name: item.name, class: item.class, price: item.price, img: item.img, qt: 1}];
         setCartItems(updatedCart);
             Cookies.set('cart', JSON.stringify(updatedCart), { expires: 7 });
     };

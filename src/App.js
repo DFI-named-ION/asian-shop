@@ -37,6 +37,7 @@ import ReviewsSeller from "./component/ReviewsSeller";
 import OrderHistory from "./component/OrderHistory";
 import ProductTracking from "./component/ProductTracking";
 import GoodPage from "./component/GoodPage";
+import PaymentPage from './component/PaymentPage';
 
 import SellerRoute from "./component/routes/SellerRoute";
 import PrivateRoute from './component/routes/PrivateRoute';
@@ -92,6 +93,7 @@ function App() {
                         <Route path='/reviews-sellers' element={<ReviewsSeller />} />
                         <Route path='/orders-history' element={<OrderHistory />} />
                         <Route path='/tracking' element={<ProductTracking />} />
+                        <Route path='/payment' element={<PaymentPage />} />
 						<Route path='/' element={<HomePage />} />
                     </Route>
                 </Routes>
