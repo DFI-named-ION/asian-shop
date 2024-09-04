@@ -15,6 +15,7 @@ import WolfSeller from '../seller_comp/img_seller/white-trans-wolf.svg';
 import BigOptionSeller from '../seller_comp/img_seller/big-option-seller.svg';
 import BigGoodsSeller from '../seller_comp/img_seller/big-goods-seller.svg';
 import AddImage from '../seller_comp/img_seller/add-image-position-seller.svg';
+import HeaderSeller from '../seller_comp/HeaderSeller';
 
 import { useAuth } from '../providers/AuthProvider';
 import { useData } from '../providers/DataProvider';

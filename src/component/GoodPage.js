@@ -367,7 +367,7 @@ function App() {
                     <div className='nav-top-good'>
                         <p>Каталог<span>/</span>Снеки<span>/</span>Чипси</p>
                     </div>
-                    <div className='full-stars'>
+                    <div className='full-stars-good-page'>
                       <div className='rating-group rating-group-good'>
                       <div className='stars-good-page'>
                    <input name="fst" value="0" type="radio" disabled checked />

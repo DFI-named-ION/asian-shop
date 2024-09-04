@@ -455,10 +455,10 @@ const addToCart = (item) => {
                   <h2 className='title-basis'>Партнери</h2>
                   </div>
                   <div className='img-partners-div'>
-                  <img src={require('../images/partners/one.jpg')} alt='partners'></img>
-                  <img src={require('../images/partners/two.jpg')} alt='partners'></img>
-                  <img src={require('../images/partners/three.jpg')} alt='partners'></img>
-                  <img src={require('../images/partners/four.jpg')} alt='partners'></img>
+                  <img src={require('../images/partners/partner1.png')} alt='partners' className='ITstep'></img>
+                  <img src={require('../images/partners/partner2.png')} alt='partners' className='pacific'></img>
+                  <img src={require('../images/partners/partner3.png')} alt='partners' className='flavors'></img>
+                  <img src={require('../images/partners/partner4.png')} alt='partners' className='roure'></img>
                   </div>
                   </div>
               </section>
