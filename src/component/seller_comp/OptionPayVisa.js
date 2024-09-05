@@ -38,29 +38,7 @@ export default function OptionPayMastercard() {
     
     const navigate = useNavigate();
 
-    const handleCompanyClick = () => {
-        navigate("/seller/company");
-    };
-
-    const handleProfileClick = () => {
-        navigate("/seller/profile");
-    };
-
-    const handlePromotionsClick = () => {
-        navigate("/seller/promotions");
-    };
-
-    const handlePositionsClick = () => {
-        navigate("/seller/positions");
-    };
-
-    const handleCategoriesClick = () => {
-        navigate("/seller/categories");
-    };
-
-    const handleMainClick = () => {
-        navigate("/");
-    };
+    const handleBack = () => { navigate("/seller/payment") };
 
     return (
         <body className='seller-body'>
@@ -90,7 +68,7 @@ export default function OptionPayMastercard() {
             </div>
             <div className='right-seller'>
                     <div className='top-option-company'>
-                        <div className='description-seller-option description-seller-option-delivery'>
+                        <div className='description-seller-option description-seller-option-delivery' onClick={handleBack}>
                         <img src={LeftArrow} className='img-delivery'></img>
                         </div>
                         <div className='information-option'>

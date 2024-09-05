@@ -25,7 +25,14 @@ import OptionDeliveryUkrPost from "./component/seller_comp/OptionDeliveryUkrPost
 import OptionDeliveryRozetka from "./component/seller_comp/OptionDeliveryRozetka";
 import OptionDeliveryNovaPost from "./component/seller_comp/OptionDeliveryNovaPost";
 import SellerOptionPay from "./component/seller_comp/SellerOptionPay";
+import OptionPayMastercard from "./component/seller_comp/OptionPayMastercard";
+import OptionPayCard from "./component/seller_comp/OptionPayCard";
+import OptionPayVisa from "./component/seller_comp/OptionPayVisa";
+import OptionPayPayPal from "./component/seller_comp/OptionPayPayPal";
 import SellerOptionSchedule from "./component/seller_comp/SellerOptionSchedule";
+import SellerClient from "./component/seller_comp/SellerClient";
+import SellerOrder from "./component/seller_comp/SellerOrder";
+import SellerNewOrder from "./component/seller_comp/SellerNewOrder";
 import FAQ from "./component/FAQ";
 import AboutUs from "./component/AboutUs";
 import PrivacyPolicy from "./component/PrivacyPolicy";
@@ -38,6 +45,9 @@ import OrderHistory from "./component/OrderHistory";
 import ProductTracking from "./component/ProductTracking";
 import GoodPage from "./component/GoodPage";
 import Page404 from "./component/Page404";
+import WalletPage from "./component/WalletPage";
+import BonusesPage from "./component/BonusesPage";
+import PaymentPage from "./component/PaymentPage";
 
 import SellerRoute from "./component/routes/SellerRoute";
 import PrivateRoute from './component/routes/PrivateRoute';
@@ -62,16 +72,27 @@ function App() {
                         <Route path='/seller/shipping' element={<SellerOptionDelivery />}/>
                         <Route path='/seller/shipping/novapost' element={<OptionDeliveryNovaPost />}/>
                         <Route path='/seller/shipping/rozetka' element={<OptionDeliveryRozetka />}/>
-                        <Route path='/seller/shipping/urkpost' element={<OptionDeliveryUkrPost />}/>
+                        <Route path='/seller/shipping/ukrpost' element={<OptionDeliveryUkrPost />}/>
                         <Route path='/seller/payment' element={<SellerOptionPay />}/>
+                        <Route path='/seller/payment/mastercard' element={<OptionPayMastercard />}/>
+                        <Route path='/seller/payment/paypal' element={<OptionPayPayPal />}/>
+                        <Route path='/seller/payment/visa' element={<OptionPayVisa />}/>
+                        <Route path='/seller/payment/card' element={<OptionPayCard />}/>
                         <Route path='/seller/schedule' element={<SellerOptionSchedule />}/>
+                        <Route path='/seller/clients' element={<SellerClient />}/>
+                        <Route path='/seller/orders' element={<SellerOrder />}/>
+                        <Route path='/seller/orders/new' element={<SellerNewOrder />}/>
+                        <Route path='/seller/reviews' element={<Seller />}/>
                     </Route>
                     <Route element={<PrivateRoute />}> {/* USER IN SYSTEM AND IS VERIFIED */}
 						{/* // some routes */}
+                        <Route path='/payment' element={<PaymentPage />} />
                     </Route>
                     <Route element={<NotVerifiedRoute />}> {/* USER IN SYSTEM */}
                         <Route path='/profile-settings' element={<ProfilePage />} />
                         <Route path='/confirmation' element={<MailConfirmationPage />} />
+                        <Route path='/bonuses' element={<BonusesPage />} />
+                        <Route path='/wallet' element={<WalletPage />} />
                     </Route>
                     <Route element={<PublicRoute />}> {/* AVAILABLE FOR EVERYONE */}
                         <Route path='/catalog/menu' element={<MarketMenu />} />
