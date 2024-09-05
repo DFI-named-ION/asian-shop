@@ -37,6 +37,7 @@ import ReviewsSeller from "./component/ReviewsSeller";
 import OrderHistory from "./component/OrderHistory";
 import ProductTracking from "./component/ProductTracking";
 import GoodPage from "./component/GoodPage";
+import Page404 from "./component/Page404";
 
 import SellerRoute from "./component/routes/SellerRoute";
 import PrivateRoute from './component/routes/PrivateRoute';
@@ -93,6 +94,7 @@ function App() {
                         <Route path='/orders-history' element={<OrderHistory />} />
                         <Route path='/tracking' element={<ProductTracking />} />
 						<Route path='/' element={<HomePage />} />
+                        <Route path='/*' element={<Page404 />} />
                     </Route>
                 </Routes>
 			</Router>
