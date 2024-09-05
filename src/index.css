@@ -869,7 +869,7 @@ h1, h2, h3, h4, p{
     border-top-left-radius: 10px;
     width: 210px;
     height: 39px;
-    margin-left: 70px;
+    margin-left: 80px;
     padding-left: 52px;
     padding-top: 12px;
     color: rgba(0,0,0,0);
@@ -4659,6 +4659,36 @@ text-transform: uppercase;
 .attach-file-modal img{
   margin-right: 20px;
   margin-top: 5px;
+}
+
+.full-stars-good-page-modal .rating-group-good-page-modal {
+  display: flex;
+  margin-top: 29px;
+  width: 300px;
+  margin-left: 300px;
+}
+
+.full-stars-good-page-modal input {
+  position: absolute;
+  left: -9999px;
+}
+.full-stars-good-page-modal label {
+  margin: 0;
+  cursor: pointer;
+}
+.full-stars-good-page-modal label svg {
+  margin-right: 37px;
+  height: 50px;
+  width: 50px;
+  fill: #182531;
+  transition: fill 0.3s;
+}
+
+.full-stars-good-page-modal .rating-group-good-page-modal:hover label svg {
+  fill: #182531;
+}
+.full-stars-good-page-modal .rating-group-good-page-modal input:hover ~ label svg {
+  fill: transparent;
 }
 
 .attach-file-modal p{

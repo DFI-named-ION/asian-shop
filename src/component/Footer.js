@@ -88,7 +88,7 @@ function App() {
                                 <li className='section-footer'><a className='section-footer' href='/about'>Про нас</a></li>
                                 <li className='section-footer'><a className='section-footer' href='/terms-of-use'>Умови</a></li>
                                 <li className='section-footer'><a className='section-footer' href='/faq'>FAQ</a></li>
-                                <li className='section-footer'><a className='section-footer' href='/delivery-policy'>Політика доставки</a></li>
+                                {/* <li className='section-footer'><a className='section-footer' href='/delivery-policy'>Політика доставки</a></li> */}
                             </ul>
                         </div>
                     </div>
