@@ -2528,6 +2528,11 @@ input{
     min-height: 1080px;
   }
 
+  .right-seller-order{
+    background-color: linear-gradient(111deg, rgba(240,207,202,1) 0%, rgba(255,253,221,1) 100%);
+    width: 100%;
+  }
+
   .logo-seller{
     font-size: 24px;
     color: #EAE5D9;
@@ -2848,13 +2853,15 @@ input{
     margin-bottom: 350px;
   }
 
- 
-
   .select-seller-option-long{
     width: 1114px;
     height: 30px;
     border: 0px;
     background-color: transparent;
+  }
+
+  .new-order-body{
+
   }
 
   select:required:invalid {
@@ -3977,6 +3984,11 @@ input{
 
   .information-option-order{
     margin-left: 80px;
+    width: 1600px;
+  }
+
+  .information-option-order-plus{
+    width: 1600px;
   }
 
   .menu-new-order{
@@ -4002,9 +4014,9 @@ input{
     margin-top: -20px;
   }
 
-  .flex-order{
+  /* .flex-order{
     display: flex;
-  }
+  } */
 
   /* Меню каталог */
 
