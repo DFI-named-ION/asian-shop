@@ -38,29 +38,7 @@ export default function OptionPayMastercard() {
     
     const navigate = useNavigate();
 
-    const handleCompanyClick = () => {
-        navigate("/seller/company");
-    };
-
-    const handleProfileClick = () => {
-        navigate("/seller/profile");
-    };
-
-    const handlePromotionsClick = () => {
-        navigate("/seller/promotions");
-    };
-
-    const handlePositionsClick = () => {
-        navigate("/seller/positions");
-    };
-
-    const handleCategoriesClick = () => {
-        navigate("/seller/categories");
-    };
-
-    const handleMainClick = () => {
-        navigate("/");
-    };
+    
 
     return (
         <body className='seller-body'>
@@ -88,12 +66,12 @@ export default function OptionPayMastercard() {
             <button className='save-seller-button'>Зберегти</button>
             </div>
             </div>
-                    <div className='right-seller'>
+                    <div className='right-seller-order'>
                     <div className='top-option-company'>
                         <div className='description-seller-option description-seller-option-delivery'>
                         <img src={LeftArrow} className='img-delivery'></img>
                         </div>
-                        <div className='information-option'>
+                        <div className='information-option information-option-order-plus'>
                         <div>
                         <p className='title-new-order'>Товари</p>
                         </div>
@@ -103,7 +81,7 @@ export default function OptionPayMastercard() {
                         </div>
                     </div>
 
-                    <div className='right-seller'>
+                    
                     <div className='top-option-company'>
                         <div className='description-seller-option description-seller-option-delivery'>
                        
@@ -122,7 +100,6 @@ export default function OptionPayMastercard() {
                     <input className='order-search' type='search' placeholder='Пошук за поштою'></input>
                     </div>
                     <div className='flex-order'>
-                  
                         <div>
                     <div>
                         <p className='title-new-order title-new-order-plus'>Доставка</p>
@@ -153,16 +130,10 @@ export default function OptionPayMastercard() {
                                  </div>
                     </div>
                     </div>
-               </div>
-                    
-                    
                     <div>
                     <button className='save-seller-button option-seller-save-button save-seller-button-delivery'>Зберегти зміни</button>
                     </div>
-                  
-                  
-            </div>
-            
+               </div>  
             </div>
         </body>
     )

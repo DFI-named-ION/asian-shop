@@ -16,7 +16,7 @@ import Instagram from '../images/socials/instagram.svg';
 import X from '../images/socials/x.svg';
 import Facebook from '../images/socials/facebook.svg';
 import Tiktok from '../images/socials/tiktok.svg';
-import Qr from '../images/pay/qr.svg';
+import Qr from '../images/img/QR.png';
 import WhiteWolf from '../images/logo/white-wolf.svg';
 
 import { useAuth } from './providers/AuthProvider';
@@ -88,7 +88,7 @@ function App() {
                                 <li className='section-footer'><a className='section-footer' href='/about'>Про нас</a></li>
                                 <li className='section-footer'><a className='section-footer' href='/terms-of-use'>Умови</a></li>
                                 <li className='section-footer'><a className='section-footer' href='/faq'>FAQ</a></li>
-                                <li className='section-footer'><a className='section-footer' href='/delivery-policy'>Політика доставки</a></li>
+                                {/* <li className='section-footer'><a className='section-footer' href='/delivery-policy'>Політика доставки</a></li> */}
                             </ul>
                         </div>
                     </div>

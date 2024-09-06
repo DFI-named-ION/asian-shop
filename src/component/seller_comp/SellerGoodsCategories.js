@@ -51,7 +51,7 @@ export default function SellerGoodsCategories() {
 
     useEffect(() => {
         if (selectedCategory && selectedSubCategory) {
-            setFilteredProducts(user.products.filter(p => p.category === selectedCategory && p.subCategory === selectedSubCategory));
+            // setFilteredProducts(user.products.filter(p => p.category === selectedCategory && p.subCategory === selectedSubCategory));
         } else {
             setFilteredProducts([]);
         }
@@ -104,57 +104,7 @@ export default function SellerGoodsCategories() {
                 <input type="search" name="seller-search" className='seller-search' placeholder="Пошук"/>
                 </div>
 
-                <div className='seller-buttons-div seller-buttons-option-company-div'>
-                <div onClick={handleMainClick}>
-                    <button className='left-seller-button'><img src={MainSeller} className='img-seller-left'></img>Головна</button>
-                    </div>
-                    <div>
-                    <button className='left-seller-button'><img src={OrderSeller} className='img-seller-left'></img>Замовлення</button>
-                    </div>
-                    <div>
-                    <details className='seller-details'>
-                    <summary><img src={GoodsSeller} className='img-seller-left'></img>Товари і послуги</summary>
-                    <div onClick={handleCategoriesClick}>
-                    <button className='left-seller-subbutton left-seller-subbutton-open'>Категорії</button>
-                    </div>
-                    <div onClick={handlePositionsClick}>
-                    <button className='left-seller-subbutton'>Позиції</button>
-                    </div>
-                    <div onClick={handlePromotionsClick}>
-                    <button className='left-seller-subbutton'>Акції та промокоди</button>
-                    </div>
-                    </details>
-                    </div>
-                    <div>
-                    <button className='left-seller-button'><img src={PenSeller} className='img-seller-left'></img>Відгуки</button>
-                    </div>
-                    <div>
-                    <button className='left-seller-button'><img src={ClientSeller} className='img-seller-left'></img>Клієнти</button>
-                    </div>
-                    <div>
-                    <details className='seller-details'>
-                    <summary><img src={OptionSeller} className='img-seller-left'></img>Налаштування</summary>
-                    <div onClick={handleCompanyClick}>
-                    <button className='left-seller-subbutton'>Компанія</button>
-                    </div>
-                    <div onClick={handleProfileClick}>
-                    <button className='left-seller-subbutton'>Профіль</button>
-                    </div>
-                    <div>
-                    <button className='left-seller-subbutton'>Менеджери</button>
-                    </div>
-                    <div>
-                    <button className='left-seller-subbutton'>Способи доставки</button>
-                    </div>
-                    <div>
-                    <button className='left-seller-subbutton'>Способи оплати</button>
-                    </div>
-                    <div>
-                    <button className='left-seller-subbutton'>Графік роботи</button>
-                    </div>
-                    </details>
-                    </div>
-                </div>
+                <HeaderSeller />
 
             </div>
             <div className='cabinet-seller-div'>

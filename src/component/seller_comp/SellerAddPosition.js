@@ -107,46 +107,46 @@ export default function SellerAddPosition() {
                     break;
                 case "category2":
                     setSubCategories([
-                        {key: "subCategory1", value: "Шоколад"}, 
-                        {key: "subCategory2", value: "Моті"}, 
-                        {key: "subCategory3", value: "Печиво"}, 
-                        {key: "subCategory4", value: "Торти"}, 
-                        {key: "subCategory5", value: "Мармеладки"}
+                        {key: "subCategory3", value: "Шоколад"}, 
+                        {key: "subCategory4", value: "Моті"}, 
+                        {key: "subCategory5", value: "Печиво"}, 
+                        {key: "subCategory6", value: "Торти"}, 
+                        {key: "subCategory7", value: "Мармеладки"}
                     ]);
                     break;
                 case "category3":
                     setSubCategories([
-                        {key: "subCategory1", value: "Чипси"}, 
-                        {key: "subCategory2", value: "Крекери"}, 
-                        {key: "subCategory3", value: "Горіхи"}
+                        {key: "subCategory8", value: "Чипси"}, 
+                        {key: "subCategory9", value: "Крекери"}, 
+                        {key: "subCategory10", value: "Горіхи"}
                     ]);
                     break;
                 case "category4":
                     setSubCategories([
-                        {key: "subCategory1", value: "Гострі"}, 
-                        {key: "subCategory2", value: "Локшина"}, 
-                        {key: "subCategory3", value: "Каррі"}, 
-                        {key: "subCategory4", value: "Рис"}, 
-                        {key: "subCategory5", value: "Токпоккі"}, 
-                        {key: "subCategory6", value: "Місо"},
+                        {key: "subCategory11", value: "Гострі"}, 
+                        {key: "subCategory12", value: "Локшина"}, 
+                        {key: "subCategory13", value: "Каррі"}, 
+                        {key: "subCategory14", value: "Рис"}, 
+                        {key: "subCategory15", value: "Токпоккі"}, 
+                        {key: "subCategory16", value: "Місо"},
                     ]);
                     break;
                 case "category5":
                     setSubCategories([
-                        {key: "subCategory1", value: "Гострі"}, 
-                        {key: "subCategory2", value: "Соєвий"}, 
-                        {key: "subCategory3", value: "Оцти"}
+                        {key: "subCategory17", value: "Гострі"}, 
+                        {key: "subCategory18", value: "Соєвий"}, 
+                        {key: "subCategory19", value: "Оцти"}
                     ]);
                     break;
                 case "category6":
                     setSubCategories([
-                        {key: "subCategory1", value: "Газованка"}, 
-                        {key: "subCategory2", value: "Сік"}, 
-                        {key: "subCategory3", value: "Фітнес"}, 
-                        {key: "subCategory4", value: "Вода"}, 
-                        {key: "subCategory5", value: "Чай"}, 
-                        {key: "subCategory6", value: "Кава"},
-                        {key: "subCategory7", value: "Молоко"},
+                        {key: "subCategory20", value: "Газованка"}, 
+                        {key: "subCategory21", value: "Сік"}, 
+                        {key: "subCategory22", value: "Фітнес"}, 
+                        {key: "subCategory23", value: "Вода"}, 
+                        {key: "subCategory24", value: "Чай"}, 
+                        {key: "subCategory25", value: "Кава"},
+                        {key: "subCategory26", value: "Молоко"},
                     ]);
                     break;
                 default:
@@ -256,63 +256,13 @@ export default function SellerAddPosition() {
                     <h1 className='logo-seller'>SakuraTails</h1>
                     <div className='name-id-seller'>
                         <h3>{user.sellerFirstName} {user.sellerLastName}</h3>
-                        <p>Ваш ID: 0000001</p>
+                        <p>Ваш ID: {user.sellerId}</p>
                     </div>
                     <div className='seller-search-div'>
                         <input type="search" name="seller-search" className='seller-search' placeholder="Пошук"/>
                     </div>
 
-                    <div className='seller-buttons-div seller-buttons-option-company-div'>
-                        <div onClick={handleMainClick}>
-                            <button className='left-seller-button'><img src={MainSeller} className='img-seller-left'></img>Головна</button>
-                        </div>
-                        <div>
-                            <button className='left-seller-button'><img src={OrderSeller} className='img-seller-left'></img>Замовлення</button>
-                        </div>
-                        <div>
-                            <details className='seller-details'>
-                                <summary><img src={GoodsSeller} className='img-seller-left'></img>Товари і послуги</summary>
-                                <div onClick={handleCategoriesClick}>
-                                    <button className='left-seller-subbutton'>Категорії</button>
-                                </div>
-                                <div onClick={handlePositionsClick}>
-                                    <button className='left-seller-subbutton left-seller-subbutton-open'>Позиції</button>
-                                </div>
-                                <div onClick={handlePromotionsClick}>
-                                    <button className='left-seller-subbutton'>Акції та промокоди</button>
-                                </div>
-                            </details>
-                        </div>
-                        <div>
-                            <button className='left-seller-button'><img src={PenSeller} className='img-seller-left'></img>Відгуки</button>
-                        </div>
-                        <div>
-                    <button className='left-seller-button'><img src={ClientSeller} className='img-seller-left'></img>Клієнти</button>
-                    </div>
-                        <div>
-                            <details className='seller-details'>
-                                <summary><img src={OptionSeller} className='img-seller-left'></img>Налаштування</summary>
-                                <div onClick={handleCompanyClick}>
-                                    <button className='left-seller-subbutton'>Компанія</button>
-                                </div>
-                                <div onClick={handleProfileClick}>
-                                    <button className='left-seller-subbutton'>Профіль</button>
-                                </div>
-                                <div>
-                                    <button className='left-seller-subbutton'>Менеджери</button>
-                                </div>
-                                <div>
-                                    <button className='left-seller-subbutton'>Способи доставки</button>
-                                </div>
-                                <div>
-                                    <button className='left-seller-subbutton'>Способи оплати</button>
-                                </div>
-                                <div>
-                                    <button className='left-seller-subbutton'>Графік роботи</button>
-                                </div>
-                            </details>
-                        </div>
-                    </div>
+                    <HeaderSeller />
                 </div>
                 <div className='cabinet-seller-div'>
                     <div className='head-seller'>

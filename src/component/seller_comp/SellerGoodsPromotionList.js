@@ -48,33 +48,7 @@ export default function SellerGoodsPosition() {
     const { user } = useAuth();
     const navigate = useNavigate();
 
-    const handleCompanyClick = () => {
-        navigate("/seller/company");
-    };
-
-    const handleProfileClick = () => {
-        navigate("/seller/profile");
-    };
-
-    const handlePromotionsClick = () => {
-        navigate("/seller/promotions");
-    };
-
-    const handlePositionsClick = () => {
-        navigate("/seller/positions");
-    };
-
-    const handleAddPositionClick = () => {
-        navigate("/seller/positions/add");
-    };
-
-    const handleCategoriesClick = () => {
-        navigate("/seller/categories");
-    };
-
-    const handleMainClick = () => {
-        navigate("/");
-    };
+    const handleAddPromotion = () => { navigate("/seller/promotions/add") };
 
     return (
         <body className='seller-body'>
@@ -99,7 +73,7 @@ export default function SellerGoodsPosition() {
             <p>Акції та промокоди</p>
             </div>
             <div className='save-seller-button-div save-seller-button-div-pos'>
-            <button className='save-seller-button' onClick={handleAddPositionClick}>Додати акцію</button>
+            <button className='save-seller-button' onClick={handleAddPromotion}>Додати акцію</button>
             </div>
             </div>
             

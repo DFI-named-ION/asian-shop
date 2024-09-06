@@ -48,6 +48,14 @@ export default function Header (){
 
     const handleSettingsClick = () => { navigate("/profile-settings") };
     
+    const handleBonusesClick = () => { navigate("/bonuses") };
+
+    const handleWalletClick = () => { navigate("/wallet") };
+
+    const handlePaymentClick = () => { navigate("/payment") };
+
+    const handleInfoClick = () => { navigate("/terms-of-use") };
+
     const handleLogoutClick = () => {
         handleMethod(async () => {
             await logout();
@@ -145,7 +153,7 @@ export default function Header (){
               </div>
             </div>
 
-            <button className='pay-basket-button' href="/payment">Сплатити</button>
+            <button className='pay-basket-button' onClick={handlePaymentClick}>Сплатити</button>
           </div>
       );
       else{
@@ -231,10 +239,10 @@ export default function Header (){
                             <div onClick={handleReviewsClick}>
                                 <button className='dropdown-button'><img src={Pen} alt="Pen" />Мої відгуки</button>
                             </div>
-                            <div>
+                            <div onClick={handleWalletClick}>
                                 <button className='dropdown-button'><img src={Wallet} alt="Wallet" />Мій гаманець</button>
                             </div>
-                            <div>
+                            <div onClick={handleBonusesClick}>
                                 <button className='dropdown-border-bottom-button'><img src={Procent} alt="Procent" />Знижки та бонуси</button>
                             </div>
                             <div>
@@ -242,7 +250,7 @@ export default function Header (){
                             </div>
                             <div>
                                 <button className='dropdown-border-left-button' onClick={handleSettingsClick}>Налаштування</button>
-                                <button className='dropdown-border-right-button'>Довідка</button>
+                                <button className='dropdown-border-right-button' onClick={handleInfoClick}>Довідка</button>
                             </div>
                             {user.isSeller ? (
                                 <div onClick={handleSellerProfileClick}>

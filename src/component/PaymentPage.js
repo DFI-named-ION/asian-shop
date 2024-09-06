@@ -8,6 +8,7 @@ import Mastercard from '../images/icons/mastercard-big.svg';
 import Header from '../component/Header';
 import Footer from '../component/Footer';
 import Cookies from 'js-cookie';
+import { useNavigate } from 'react-router-dom';
 
 
 function App() {
@@ -19,7 +20,7 @@ function App() {
     return <Header />;
     return <Footer />;
   }
-  
+
   let assetsPath = require.context('../images/img', false, /\.(png|jpe?g|svg)$/); 
   const Cart = () => {
     const [cartItems, setCartItems] = useState([]);
@@ -107,7 +108,13 @@ function App() {
   };
 
 
-  export default function PaymentPage() {
+
+  export default function GoodPage() {
+
+    const navigate = useNavigate();
+
+    const handleBack = () => { navigate("/catalog") };
+
     return (
         <body className='payment-body'>
         <><><header>
@@ -119,7 +126,7 @@ function App() {
                   <div className='title-payment'><h2>Оплата</h2></div>
 
                   <div className='subtitle-payment'>
-                    <div>
+                    <div onClick={handleBack}>
                     <a>
                     <img src={ArrowLeft} className='img-arrow-payment'></img>
                     </a>
