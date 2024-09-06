@@ -3127,6 +3127,10 @@ input{
     margin-top: 20px;
  }
 
+ .radio-goods-seller-plus{
+  margin-right: 5px;
+ }
+
  /* .radio-goods-seller{
     width: 20px;
     margin-right: 21px;
@@ -3454,6 +3458,9 @@ input{
     font-weight: 600;
     /* margin-top: 349px; */
     margin-left: 243px;
+    padding-top: 300px;
+    padding-bottom: 300px;
+    text-align: center;
   }
 
   .select-subcategory-seller{
@@ -3462,6 +3469,8 @@ input{
     font-weight: 600;
     margin-top: 349px;
     margin-left: 190px;
+    padding-bottom: 300px;
+    text-align: center;
   }
 
   .img-goods-categories{
@@ -3475,6 +3484,7 @@ input{
     font-size: 36px;
     font-weight: 600;
     color: #647484;
+    padding-bottom: 300px;
   }
 
   .information-categories a{
