@@ -548,7 +548,7 @@ export default function Market() {
                                 </details>
                             </div>
 
-                            <div className='subfilter-market'>
+                            {/* <div className='subfilter-market'>
                                 <p className='price-range'>ЦІНА</p>
                                 <input type='range' className="slider-market" min={minPrice} max={maxPrice} onChange={handlePriceChange} value={selectedPriceTop}></input>
                                 <div className='menu-range-market'>
@@ -556,7 +556,7 @@ export default function Market() {
                                     <div>€{selectedPriceTop}</div>
                                     <div>€{maxPrice}</div>
                                 </div>
-                            </div>
+                            </div> */}
                         </div>
 
                         <div className='catalog-market'>
