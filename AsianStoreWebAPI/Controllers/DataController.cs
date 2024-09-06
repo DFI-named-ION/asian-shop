@@ -15,9 +15,10 @@ namespace AsianStoreWebAPI.Controllers
         private readonly ISellerRepository _sellerRepo;
 
         private readonly FirestoreService _firestoreService;
+        private readonly FirebaseAuthService _firebaseAuthService;
 
-        public DataController(FirestoreService fs, ISellerRepository sr, IUserRepository ur)
-        { _firestoreService = fs; _sellerRepo = sr; _userRepo = ur; }
+        public DataController(FirebaseAuthService fas, FirestoreService fs, ISellerRepository sr, IUserRepository ur)
+        {_firebaseAuthService = fas; _firestoreService = fs; _sellerRepo = sr; _userRepo = ur; }
 
 
         [HttpGet("fetchData")]
@@ -59,7 +60,8 @@ namespace AsianStoreWebAPI.Controllers
                 var sessionId = Request.Cookies["sessionId"];
                 await _userRepo.UpdateUserAsync(sessionId, token.Token);
                 return Ok();
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
@@ -166,6 +168,155 @@ namespace AsianStoreWebAPI.Controllers
             {
                 return BadRequest(ex.Message);
             }
+        }
+
+
+        [HttpGet("getProduct/{article}")]
+        public async Task<IActionResult> GetProduct([FromRoute] string article)
+        {
+            try
+            {
+                var product = (await _firestoreService.GetRecordsByFieldAsync<Product>("products", "Article", article)).FirstOrDefault();
+                if (product == null)
+                    throw new Exception("not-found");
+
+                var category = "";
+                switch (product.Category)
+                {
+                    case "category1":
+                        category = "Заморожені";
+                        break;
+                    case "category2":
+                        category = "Солодощі";
+                        break;
+                    case "category3":
+                        category = "Закуски";
+                        break;
+                    case "category4":
+                        category = "Страви";
+                        break;
+                    case "category5":
+                        category = "Соуси";
+                        break;
+                    case "category6":
+                        category = "Напої";
+                        break;
+                };
+
+                var subCategory = "";
+                switch (product.SubCategory)
+                {
+                    case "subCategory1":
+                        subCategory = "Морепродукти";
+                        break;
+                    case "subCategory2":
+                        subCategory = "Випічка";
+                        break;
+                    case "subCategory3":
+                        subCategory = "Шоколад";
+                        break;
+                    case "subCategory4":
+                        subCategory = "Моті";
+                        break;
+                    case "subCategory5":
+                        subCategory = "Печиво";
+                        break;
+                    case "subCategory6":
+                        subCategory = "Торти";
+                        break;
+                    case "subCategory7":
+                        subCategory = "Мармеладки";
+                        break;
+                    case "subCategory8":
+                        subCategory = "Чипси";
+                        break;
+                    case "subCategory9":
+                        subCategory = "Крекери";
+                        break;
+                    case "subCategory10":
+                        subCategory = "Горіхи";
+                        break;
+                    case "subCategory11":
+                        subCategory = "Гострі";
+                        break;
+                    case "subCategory12":
+                        subCategory = "Локшина";
+                        break;
+                    case "subCategory13":
+                        subCategory = "Каррі";
+                        break;
+                    case "subCategory14":
+                        subCategory = "Рис";
+                        break;
+                    case "subCategory15":
+                        subCategory = "Токпоккі";
+                        break;
+                    case "subCategory16":
+                        subCategory = "Місо";
+                        break;
+                    case "subCategory17":
+                        subCategory = "Гострі";
+                        break;
+                    case "subCategory18":
+                        subCategory = "Соєвий";
+                        break;
+                    case "subCategory19":
+                        subCategory = "Оцти";
+                        break;
+                    case "subCategory20":
+                        subCategory = "Газованка";
+                        break;
+                    case "subCategory21":
+                        subCategory = "Сік";
+                        break;
+                    case "subCategory22":
+                        subCategory = "Фітнес";
+                        break;
+                    case "subCategory23":
+                        subCategory = "Вода";
+                        break;
+                    case "subCategory24":
+                        subCategory = "Чай";
+                        break;
+                    case "subCategory25":
+                        subCategory = "Кава";
+                        break;
+                    case "subCategory26":
+                        subCategory = "Молоко";
+                        break;
+                };
+
+                var data = product.GetType()
+                    .GetProperties(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance)
+                    .ToDictionary(prop => prop.Name.ToLower(), prop => prop.GetValue(product));
+
+                data.Remove("id");
+                data.Remove("userid");
+                data.Remove("visibility");
+
+                data.Remove("category");
+                data.Add("category", category);
+                data.Remove("subcategory");
+                data.Add("subcategory", subCategory);
+
+                return Ok(data);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+
+        [HttpGet("beSeller")]
+        public async Task<IActionResult> BeSeller()
+        {
+            var user = await _firebaseAuthService.GetUserByIdAsync("CfY9X9LHSqfsCpkybtFqHH6hqfS2");
+            await _firebaseAuthService.SetClaims(user.Uid, new Dictionary<string, object>
+            {
+                { "role", "seller" }
+            });
+            return Ok();
         }
     }
 }

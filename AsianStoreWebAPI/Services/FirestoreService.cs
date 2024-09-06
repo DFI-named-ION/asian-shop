@@ -1,4 +1,5 @@
 ﻿using Google.Cloud.Firestore;
+using Google.Protobuf.WellKnownTypes;
 
 namespace AsianStoreWebAPI.Services
 {
@@ -27,8 +28,6 @@ namespace AsianStoreWebAPI.Services
             var collection = _firestoreDb.Collection(collectionName);
             Query query = collection;
 
-            // query = query.WhereEqualTo("Visibility", "Published"); // crashes for some reason
-
             if (filter.Categories != null && filter.Categories.Length > 0)
             {
                 query = query.WhereIn("Category", filter.Categories);
@@ -39,35 +38,23 @@ namespace AsianStoreWebAPI.Services
                 query = query.WhereIn("SubCategory", filter.SubCategories);
             }
 
-            if (filter.Weights != null && filter.Weights.Length > 0)
+            if (filter.Weight != null && filter.Weight.Length > 0)
             {
-                foreach (var option in filter.Weights)
+                switch (filter.Weight)
                 {
-                    switch (option)
-                    {
-                        case "option1":
-                            query = query.WhereLessThanOrEqualTo("Weight", 100);
-                            break;
-                        case "option2":
-                            query = query.WhereLessThanOrEqualTo("Weight", 250);
-                            break;
-                        case "option3":
-                            query = query.WhereLessThanOrEqualTo("Weight", 500);
-                            break;
-                        case "option4":
-                            query = query.WhereLessThanOrEqualTo("Weight", 1000);
-                            break;
-                    }
+                    case "option1":
+                        query = query.WhereLessThanOrEqualTo("Weight", 100);
+                        break;
+                    case "option2":
+                        query = query.WhereLessThanOrEqualTo("Weight", 250);
+                        break;
+                    case "option3":
+                        query = query.WhereLessThanOrEqualTo("Weight", 500);
+                        break;
+                    case "option4":
+                        query = query.WhereLessThanOrEqualTo("Weight", 1000);
+                        break;
                 }
-            }
-
-            if (!string.IsNullOrEmpty(filter.BottomPrice))
-            {
-                query = query.WhereGreaterThanOrEqualTo("Price", double.Parse(filter.BottomPrice));
-            }
-            if (!string.IsNullOrEmpty(filter.TopPrice))
-            {
-                query = query.WhereLessThanOrEqualTo("Price", double.Parse(filter.TopPrice));
             }
 
             List<DocumentSnapshot> allDocuments = new List<DocumentSnapshot>();
