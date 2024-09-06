@@ -22,7 +22,7 @@ function App() {
         <><><header>
              <Header/>
           </header>
-              <main>
+              <main className='reviews-main'>
                 <div className='title-reviews-div'>
             <div>
             <h2>

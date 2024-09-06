@@ -168,11 +168,11 @@ export default function SellerGoodsPromotion() {
                             <div>
                                 <h4 className='title-radio-checkbox-promotion-seller'>Акція діє <span>*</span></h4>
                                 <div className='radio-goods-seller-div'>
-                                <input className='radio-goods-seller' type="radio"></input>
+                                <input className='radio-goods-seller-plus' type="radio"></input>
                                 <p className='radio-goods-seller-text'>На всі товари</p>
                                 </div>
                                 <div className='radio-goods-seller-div'>
-                                <input className='radio-goods-seller' type="radio" value="1"></input>
+                                <input className='radio-goods-seller-plus' type="radio" value="1"></input>
                                 <p className='radio-goods-seller-text'>На обраний тип позиції</p>
                                 </div>
                                 <div class="radio-select-seller-div" id='block-1'>
@@ -205,7 +205,7 @@ export default function SellerGoodsPromotion() {
                                  </select>
                                  </div>
                                 <div className='radio-goods-seller-div'>
-                                <input className='radio-goods-seller' type="radio" value="2"></input>
+                                <input className='radio-goods-seller-plus' type="radio" value="2"></input>
                                 <p className='radio-goods-seller-text'>На обрану позицію</p>
                                 </div>
                                 <div class="radio-select-seller-div" id='block-2'>
