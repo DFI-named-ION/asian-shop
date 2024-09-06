@@ -7,6 +7,7 @@ import Header from '../component/Header';
 import Footer from '../component/Footer';
 
 import { useAuth } from './providers/AuthProvider';
+import { useNavigate } from 'react-router-dom';
 
 function App() {
     return <StarRespose />;
@@ -17,6 +18,11 @@ function App() {
   }
 
   export default function ReviewsSeller() {
+
+    const navigate = useNavigate();
+
+    const handleCatalgClick = () => { navigate("/catalog") };
+
     return (
         <body className='reviews-body'>
         <><><header>
@@ -33,7 +39,7 @@ function App() {
 
                 <h1 className='h1-reviews'>Для вас поки що немає<br/> знижок на бонусів</h1>
 
-                <button className='button-bonuses'>Каталог</button>
+                <button className='button-bonuses' onClick={handleCatalgClick}>Каталог</button>
                 
               </main></>
     
