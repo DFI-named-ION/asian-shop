@@ -47,33 +47,7 @@ export default function SellerGoodsPosition() {
 
     const navigate = useNavigate();
 
-    const handleCompanyClick = () => {
-        navigate("/seller/company");
-    };
-
-    const handleProfileClick = () => {
-        navigate("/seller/profile");
-    };
-
-    const handlePromotionsClick = () => {
-        navigate("/seller/promotions");
-    };
-
-    const handlePositionsClick = () => {
-        navigate("/seller/positions");
-    };
-
-    const handleAddPositionClick = () => {
-        navigate("/seller/positions/add");
-    };
-
-    const handleCategoriesClick = () => {
-        navigate("/seller/categories");
-    };
-
-    const handleMainClick = () => {
-        navigate("/");
-    };
+    const handleNewOrderClick = () => { navigate("/seller/orders/new") };
 
     return (
         <body className='seller-body'>
@@ -98,7 +72,7 @@ export default function SellerGoodsPosition() {
             <p>Замовлення</p>
             </div>
             <div className='save-seller-button-div save-seller-button-div-pos'>
-            <button className='save-seller-button' onClick={handleAddPositionClick}>Додати замовлення</button>
+            <button className='save-seller-button' onClick={handleNewOrderClick}>Додати замовлення</button>
             </div>
             </div>
             

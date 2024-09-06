@@ -40,29 +40,11 @@ export default function SellerOptionCompany() {
     const { user } = useAuth();
     const navigate = useNavigate();
 
-    const handleCompanyClick = () => {
-        navigate("/seller/company");
-    };
+    const handleNovaPostClick = () => { navigate("/seller/shipping/novapost") };
 
-    const handleProfileClick = () => {
-        navigate("/seller/profile");
-    };
-
-    const handlePromotionsClick = () => {
-        navigate("/seller/promotions");
-    };
-
-    const handlePositionsClick = () => {
-        navigate("/seller/positions");
-    };
-
-    const handleCategoriesClick = () => {
-        navigate("/seller/categories");
-    };
-
-    const handleMainClick = () => {
-        navigate("/");
-    };
+    const handleRozetkaClick = () => { navigate("/seller/shipping/rozetka") };
+    
+    const handleUkrPostClick = () => { navigate("/seller/shipping/ukrpost") };
 
     return (
         <body className='seller-body'>
@@ -108,7 +90,7 @@ export default function SellerOptionCompany() {
                                 </div>
 
                                 <div className='subblock-delivery'>
-                                <div><img src={BigPen} className='img-delivery-pen'></img></div>
+                                <div onClick={handleNovaPostClick}><img src={BigPen} className='img-delivery-pen'></img></div>
                                 <div><label class="checkbox-container-delivery"> 
                                     <input type="checkbox"/>
                                 <span class="checkmark-delivery"/>
@@ -124,7 +106,7 @@ export default function SellerOptionCompany() {
                                 </div>
 
                                 <div className='subblock-delivery'>
-                                <div><img src={BigPen} className='img-delivery-pen'></img></div>
+                                <div onClick={handleRozetkaClick}><img src={BigPen} className='img-delivery-pen'></img></div>
                                 <div><label class="checkbox-container-delivery"> 
                                     <input type="checkbox"/>
                                 <span class="checkmark-delivery"/>
@@ -140,7 +122,7 @@ export default function SellerOptionCompany() {
                                 </div>
 
                                 <div className='subblock-delivery'>
-                                <div><img src={BigPen} className='img-delivery-pen'></img></div>
+                                <div onClick={handleUkrPostClick}><img src={BigPen} className='img-delivery-pen'></img></div>
                                 <div><label class="checkbox-container-delivery"> 
                                     <input type="checkbox"/>
                                 <span class="checkmark-delivery"/>

@@ -21,7 +21,7 @@ export default function Market() {
 
     const [selectedCategory, setSelectedCategory] = useState(getArrayParam('category'));
     const [selectedSubCategory, setSelectedSubCategory] = useState(getArrayParam('subcategory'));
-    const [selectedWeight, setSelectedWeight] = useState(getArrayParam('weight'));
+    const [selectedWeight, setSelectedWeight] = useState(getSingleParam('weight'));
     const [selectedRating, setSelectedRating] = useState(getArrayParam('rating'));
     const [minPrice, setMinPrice] = useState(0);
     const [maxPrice, setMaxPrice] = useState(0);
@@ -65,7 +65,7 @@ export default function Market() {
             bottomPrice: null,
             topPrice: selectedPriceTop || null,
             ratings: selectedRating.length > 0 ? selectedRating : null,
-            weights: selectedWeight.length > 0 ? selectedWeight : null
+            weight: selectedWeight.length > 0 ? selectedWeight : null
         };
 
         axios.post(`${process.env.REACT_APP_WEB_API_BASE_URL}/Data/getProducts`, filter, {
@@ -85,7 +85,11 @@ export default function Market() {
             setTotalCount(response.data.totalCount);
         })
         .catch((err) => {
-            console.log("error", err);
+            if (err.response.status === 400) {
+                console.log(err.response.data);
+            } else {
+                console.log("error", err);
+            }
         });
     }, [selectedCategory, selectedSubCategory, selectedPriceTop, selectedRating, selectedWeight, pageNumber]);
     
@@ -102,12 +106,17 @@ export default function Market() {
         setState(updatedValues);
     };
 
-    const createFilterHandler = (selectedValues, setState) => (e, val) =>
-        handleFilterChange(e, val, selectedValues, setState);
+    const createFilterHandler = (selectedValues, setState) => (e, val) => handleFilterChange(e, val, selectedValues, setState);
 
     const handleCategoryChange = createFilterHandler(selectedCategory, setSelectedCategory);
     const handleSubCategoryChange = createFilterHandler(selectedSubCategory, setSelectedSubCategory);
-    const handleWeightChange = createFilterHandler(selectedWeight, setSelectedWeight);
+    const handleWeightChange = (e, val) => {
+        if (e.target.checked) {
+            setSelectedWeight(val);
+        } else {
+            setSelectedWeight('');
+        }
+    };
     const handleRatingChange = createFilterHandler(selectedRating, setSelectedRating);
     const handlePriceChange = (e) => { setSelectedPriceTop(e.target.value) };
     
@@ -439,38 +448,46 @@ export default function Market() {
                                     <div>
                                         <div className='checkbox-market-block'>
                                             <div>
-                                                <input type='checkbox' className='checkbox-market' onChange={(e) => handleWeightChange(e, "option1")} checked={selectedWeight.includes("option1")}></input>
+                                                <input 
+                                                    type='checkbox' 
+                                                    className='checkbox-market' 
+                                                    onChange={(e) => handleWeightChange(e, "option1")} 
+                                                    checked={selectedWeight === "option1"} />
                                             </div>
-                                            <div>
-                                                <p>До 100 г.</p>
-                                            </div>
+                                            <div><p>До 100 г.</p></div>
                                         </div>
 
                                         <div className='checkbox-market-block'>
                                             <div>
-                                                <input type='checkbox' className='checkbox-market' onChange={(e) => handleWeightChange(e, "option2")} checked={selectedWeight.includes("option2")}></input>
+                                                <input 
+                                                    type='checkbox' 
+                                                    className='checkbox-market' 
+                                                    onChange={(e) => handleWeightChange(e, "option2")} 
+                                                    checked={selectedWeight === "option2"} />
                                             </div>
-                                            <div>
-                                                <p>До 250 г.</p>
-                                            </div>
+                                            <div><p>До 250 г.</p></div>
                                         </div>
 
                                         <div className='checkbox-market-block'>
                                             <div>
-                                                <input type='checkbox' className='checkbox-market' onChange={(e) => handleWeightChange(e, "option3")} checked={selectedWeight.includes("option3")}></input>
+                                                <input 
+                                                    type='checkbox' 
+                                                    className='checkbox-market' 
+                                                    onChange={(e) => handleWeightChange(e, "option3")} 
+                                                    checked={selectedWeight === "option3"} />
                                             </div>
-                                            <div>
-                                                <p>До 500 г.</p>
-                                            </div>
+                                            <div><p>До 500 г.</p></div>
                                         </div>
 
                                         <div className='checkbox-market-block'>
                                             <div>
-                                                <input type='checkbox' className='checkbox-market' onChange={(e) => handleWeightChange(e, "option4")} checked={selectedWeight.includes("option4")}></input>
+                                                <input 
+                                                    type='checkbox' 
+                                                    className='checkbox-market' 
+                                                    onChange={(e) => handleWeightChange(e, "option4")} 
+                                                    checked={selectedWeight === "option4"} />
                                             </div>
-                                            <div>
-                                                <p>До 1 кг.</p>
-                                            </div>
+                                            <div><p>До 1 кг.</p></div>
                                         </div>
                                     </div>
                                 </details>

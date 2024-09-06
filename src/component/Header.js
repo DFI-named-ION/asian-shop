@@ -48,6 +48,12 @@ export default function Header (){
 
     const handleSettingsClick = () => { navigate("/profile-settings") };
     
+    const handleBonusesClick = () => { navigate("/bonuses") };
+
+    const handleWalletClick = () => { navigate("/wallet") };
+
+    const handlePaymentClick = () => { navigate("/payment") };
+
     const handleLogoutClick = () => {
         handleMethod(async () => {
             await logout();
@@ -145,7 +151,7 @@ export default function Header (){
               </div>
             </div>
 
-            <button className='pay-basket-button'>Сплатити</button>
+            <button className='pay-basket-button' onClick={handlePaymentClick}>Сплатити</button>
           </div>
       );
 
@@ -231,10 +237,10 @@ export default function Header (){
                             <div onClick={handleReviewsClick}>
                                 <button className='dropdown-button'><img src={Pen} alt="Pen" />Мої відгуки</button>
                             </div>
-                            <div>
+                            <div onClick={handleWalletClick}>
                                 <button className='dropdown-button'><img src={Wallet} alt="Wallet" />Мій гаманець</button>
                             </div>
-                            <div>
+                            <div onClick={handleBonusesClick}>
                                 <button className='dropdown-border-bottom-button'><img src={Procent} alt="Procent" />Знижки та бонуси</button>
                             </div>
                             <div>
