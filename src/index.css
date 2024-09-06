@@ -111,6 +111,7 @@ h1, h2, h3, h4, p{
 .button-carousel{
     width: 10%;
     height: 40%;
+    cursor: pointer;
 }
 
 .carousel-indicators {
@@ -1986,6 +1987,110 @@ input{
     border-radius: 10px;
     /* position: absolute; */
     margin: auto;
+}
+
+.modal-reviews-div{
+  background-color: #EAE5D9;
+  width: 555px;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  padding-left: 65px;
+  padding-right: 65px;
+  border-radius: 10px;
+  /* position: absolute; */
+  margin: auto;
+}
+
+.top-modal-review{
+  display: flex;
+  justify-content: space-between;
+}
+
+.stars-reviews{
+  width: 140px;
+  display: flex;
+  justify-content: space-between;
+  margin-top: -30px;
+}
+
+.text-reviews-seller{
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.text-reviews-seller p{
+  color: #647484;
+  font-size: 15px;
+  font-weight: 400;
+}
+
+.img-reviews-seller{
+  margin-bottom: 15px;
+  display: flex;
+}
+
+.img-reviews-seller div{
+  width: 150px;
+  height: 150px;
+  background-color: #D9D9D9;
+  border: 0;
+  margin-right: 15px;
+}
+
+.block-reviews-seller{
+  width: 650px;
+  height: 100px;
+  border: 3px #647484 solid;
+  border-radius: 10px;
+  padding-left: 24px;
+  padding-top: 21px;
+  padding-bottom: 24px;
+  padding-right: 24px;
+  margin-right: 13px;
+  margin-bottom: 1100px;
+}
+
+.main-reviews-seller{
+  margin: 30px;
+  display: flex;
+}
+
+.name-block-reviews p{
+  font-size: 20px;
+  font-weight: 500;
+  color: #182531;
+}
+
+.subblock-reviews-seller{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 11px;
+}
+
+.stars-block-reviews{
+  width: 60px;
+  display: flex;
+  height: 12px;
+}
+
+.block-reviews-seller:hover{
+  border: #182531 solid 3px;
+
+  .name-block-reviews p{
+    font-weight: 700;
+  }
+
+  .text-block-reviews p{
+    font-weight: 600;
+  }
+}
+
+
+
+.text-block-reviews{
+  font-size: 16px;
+  font-weight: 400;
+  color: #182531;
 }
 
 .modal-del-good-div{
