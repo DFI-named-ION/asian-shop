@@ -440,9 +440,9 @@ const addToCart = (item) => {
                   <a href='#subcribtion-section'>
                       <input className='subscribe-button' type='button' value='Підписатись' />
                   </a>
-                  <div className='gift-div'>
+                  {/* <div className='gift-div'>
                   <a className='gift' href='#'>Подарувати</a>
-                  </div>
+                  </div> */}
                   </div>
                   <div className='right-box-div right-box-woman'>
                   <img className='woman-img' src={require('../images/img/japanese.png')} alt='woman'></img>

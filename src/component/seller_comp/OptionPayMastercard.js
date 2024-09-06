@@ -119,7 +119,7 @@ export default function OptionPayMastercard() {
                     </div>
                     
                     <div>
-                    <button className='save-seller-button option-seller-save-button save-seller-button-delivery'>Зберегти зміни</button>
+                    <button className='save-seller-button option-seller-save-button save-seller-button-delivery save-seller-button-pay'>Зберегти зміни</button>
                     </div>
                   </div>
                   
