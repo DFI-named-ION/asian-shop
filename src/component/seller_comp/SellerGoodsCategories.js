@@ -51,7 +51,7 @@ export default function SellerGoodsCategories() {
 
     useEffect(() => {
         if (selectedCategory && selectedSubCategory) {
-            setFilteredProducts(user.products.filter(p => p.category === selectedCategory && p.subCategory === selectedSubCategory));
+            // setFilteredProducts(user.products.filter(p => p.category === selectedCategory && p.subCategory === selectedSubCategory));
         } else {
             setFilteredProducts([]);
         }
