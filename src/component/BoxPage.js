@@ -247,8 +247,8 @@ function App() {
                     </Modal>
                     </div>
 
-                    <div className='full-stars-good-page'>
-                      <div className='rating-group-good-page'>
+                    <div className='full-stars-good-page-modal'>
+                      <div className='rating-group-good-page-modal'>
                    <input name="fst" value="0" type="radio" disabled checked />
             
                     <label for="fst-1">
