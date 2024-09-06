@@ -3478,6 +3478,11 @@ input{
     margin-left: 478px;
   }
 
+  .img-good-page{
+    height: 600px;
+    width: 600px;
+  }
+
   .add-goods-categories-seller{
     margin-top: 15px;
     margin-left: 447px;
