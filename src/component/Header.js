@@ -54,6 +54,8 @@ export default function Header (){
 
     const handlePaymentClick = () => { navigate("/payment") };
 
+    const handleInfoClick = () => { navigate("/terms-of-use") };
+
     const handleLogoutClick = () => {
         handleMethod(async () => {
             await logout();
@@ -248,7 +250,7 @@ export default function Header (){
                             </div>
                             <div>
                                 <button className='dropdown-border-left-button' onClick={handleSettingsClick}>Налаштування</button>
-                                <button className='dropdown-border-right-button'>Довідка</button>
+                                <button className='dropdown-border-right-button' onClick={handleInfoClick}>Довідка</button>
                             </div>
                             {user.isSeller ? (
                                 <div onClick={handleSellerProfileClick}>
