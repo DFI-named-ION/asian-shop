@@ -33,6 +33,7 @@ import SellerOptionSchedule from "./component/seller_comp/SellerOptionSchedule";
 import SellerClient from "./component/seller_comp/SellerClient";
 import SellerOrder from "./component/seller_comp/SellerOrder";
 import SellerNewOrder from "./component/seller_comp/SellerNewOrder";
+import SellerReviews from "./component/seller_comp/SellerReviews";
 import FAQ from "./component/FAQ";
 import AboutUs from "./component/AboutUs";
 import PrivacyPolicy from "./component/PrivacyPolicy";
@@ -82,7 +83,7 @@ function App() {
                         <Route path='/seller/clients' element={<SellerClient />}/>
                         <Route path='/seller/orders' element={<SellerOrder />}/>
                         <Route path='/seller/orders/new' element={<SellerNewOrder />}/>
-                        <Route path='/seller/reviews' element={<Seller />}/>
+                        <Route path='/seller/reviews' element={<SellerReviews />}/>
                     </Route>
                     <Route element={<PrivateRoute />}> {/* USER IN SYSTEM AND IS VERIFIED */}
 						{/* // some routes */}
