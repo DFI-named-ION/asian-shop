@@ -108,7 +108,7 @@ export default function Header (){
         Cookies.set('cart', JSON.stringify(updatedItems)); // Обновляем cookie
         calculateTotal(updatedItems); // Пересчитываем сумму
       };
-
+      if(total!=0)
       return (
         <div className='boxes-basket'>
           {cartItems.map((item, index) => (
@@ -156,6 +156,15 @@ export default function Header (){
             <button className='pay-basket-button' onClick={handlePaymentClick}>Сплатити</button>
           </div>
       );
+      else{
+        return(
+          <div className='boxes-basket'>
+            <h2 className='basket-zero'>Кошик порожній</h2>
+            <h4>Подивись наш каталог, обов'язково щось знайдеш</h4>
+            <button className='market-basket-button'>Каталог</button>
+          </div>
+        );
+      }
 
     };
     
@@ -188,15 +197,6 @@ export default function Header (){
                     </a>
                     <div className="dropdown-basket-header">
                       <h2>Кошик</h2>
-
-                      {/* Пустий кошик */}
-
-                      {/* <h2 className='basket-zero'>Кошик порожній</h2>
-                      <h4>Подивись наш каталог, обов'язково щось знайдеш</h4>
-                      <button className='market-basket-button'>Каталог</button> */}
-
-                      {/* Повний кошик */}
-
                       <Cart/>
                     </div>
                 </div>

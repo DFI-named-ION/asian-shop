@@ -115,6 +115,7 @@ function App() {
                         <Route path='/reviews-sellers' element={<ReviewsSeller />} />
                         <Route path='/orders-history' element={<OrderHistory />} />
                         <Route path='/tracking' element={<ProductTracking />} />
+                        <Route path='/payment' element={<PaymentPage />} />
 						<Route path='/' element={<HomePage />} />
                         <Route path='/*' element={<Page404 />} />
                     </Route>

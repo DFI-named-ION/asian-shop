@@ -7,6 +7,7 @@ import PayPal from '../images/icons/paypal-big.svg';
 import Mastercard from '../images/icons/mastercard-big.svg';
 import Header from '../component/Header';
 import Footer from '../component/Footer';
+import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -19,6 +20,94 @@ function App() {
     return <Header />;
     return <Footer />;
   }
+
+  let assetsPath = require.context('../images/img', false, /\.(png|jpe?g|svg)$/); 
+  const Cart = () => {
+    const [cartItems, setCartItems] = useState([]);
+    const [total, setTotal] = useState(0);
+    useEffect(() => {
+      const intervalId = setInterval(() => {
+        const savedCartItems = Cookies.get('cart');
+        if (savedCartItems) {
+          setCartItems(JSON.parse(savedCartItems));
+          calculateTotal(JSON.parse(savedCartItems));
+        }
+      }, 1000);
+      return () => clearInterval(intervalId);
+    }, []);
+
+    const calculateTotal = (items) => {
+      const totalSum = items.reduce((acc, item) => acc + item.price * item.qt, 0);
+      setTotal(totalSum.toFixed(2));
+    };
+
+    const increaseQuantity = (index) => {
+      const updatedItems = [...cartItems];
+      updatedItems[index].qt += 1;
+      setCartItems(updatedItems);
+      Cookies.set('cart', JSON.stringify(updatedItems)); // Обновляем cookie
+      calculateTotal(updatedItems); // Пересчитываем сумму
+    };
+  
+    const decreaseQuantity = (index) => {
+      const updatedItems = [...cartItems];
+      if (updatedItems[index].qt > 1) {
+        updatedItems[index].qt -= 1;
+        setCartItems(updatedItems);
+        Cookies.set('cart', JSON.stringify(updatedItems)); // Обновляем cookie
+        calculateTotal(updatedItems); // Пересчитываем сумму
+      }
+    };
+  
+    const removeItem = (index) => {
+      const updatedItems = [...cartItems];
+      updatedItems.splice(index, 1);
+      setCartItems(updatedItems);
+      Cookies.set('cart', JSON.stringify(updatedItems)); // Обновляем cookie
+      calculateTotal(updatedItems); // Пересчитываем сумму
+    };
+    return (
+      <div className='goods-payment'>
+        {cartItems.map((item, index) => (
+          <div className='good-payment'>
+          <div className='good-payment-plus-left'>
+              <img className='img-payment-good' src={assetsPath(item.img)}s></img>
+              <div>
+                  <h4 className='title-good-payment'>{item.name}</h4>
+                  <p>{item.class}</p>
+              </div>
+          </div>
+
+            <div className='good-payment-plus-right'>
+              <div className='plus-minus-payment' onClick={() => increaseQuantity(index)}>
+                <p>
+                +
+                </p>
+              </div>
+              <div className='number-good-payment'>
+                <input type='number' value={item.qt} readOnly>
+                </input>
+              </div>
+              <div className='plus-minus-payment' onClick={() => decreaseQuantity(index)}>
+                <p>
+                  -
+                </p>
+              </div>
+              <div className='price-payment'>
+                <p>€{item.price.toFixed(2)}</p>
+              </div>
+              <div className='dump-payment' onClick={() => removeItem(index)}>
+              <img src={Basket}></img>
+            </div>
+           
+          </div>
+      </div>
+          ))}
+        </div>
+    );
+  };
+
+
 
   export default function GoodPage() {
 
@@ -49,142 +138,8 @@ function App() {
                     </div>
                   </div>
 
-                  <div className='goods-payment'>
-                    <div className='good-payment'>
-                        <div className='good-payment-plus-left'>
-                            <div className='img-payment-good'></div>
-                            <div>
-                                <h4 className='title-good-payment'>Чипси</h4>
-                                <p>Снеки</p>
-                            </div>
-                        </div>
-
-                        <div className='good-payment-plus-right'>
-                            <div className='plus-minus-payment'>
-                              <p>
-                              +
-                              </p>
-                            </div>
-                            <div className='number-good-payment'>
-                              <input type='number' value="1">
-                              </input>
-                            </div>
-                            <div className='plus-minus-payment'>
-                            <p>
-                              -
-                              </p>
-                              </div>
-                              <div className='price-payment'>
-                            <p>€25.60</p>
-                          </div>
-                          <div className='dump-payment'>
-                          <img src={Basket}></img>
-                          </div>
-                         
-                        </div>
-                    </div>
-
-                    <div className='good-payment'>
-                        <div className='good-payment-plus-left'>
-                            <div className='img-payment-good'></div>
-                            <div>
-                                <h4 className='title-good-payment'>Чипси</h4>
-                                <p>Снеки</p>
-                            </div>
-                        </div>
-
-                        <div className='good-payment-plus-right'>
-                            <div className='plus-minus-payment'>
-                              <p>
-                              +
-                              </p>
-                            </div>
-                            <div className='number-good-payment'>
-                              <input type='number' value="1">
-                              </input>
-                            </div>
-                            <div className='plus-minus-payment'>
-                            <p>
-                              -
-                              </p>
-                              </div>
-                              <div className='price-payment'>
-                            <p>€25.60</p>
-                          </div>
-                          <div className='dump-payment'>
-                          <img src={Basket}></img>
-                          </div>
-                         
-                        </div>
-                    </div>
-
-                    <div className='good-payment'>
-                        <div className='good-payment-plus-left'>
-                            <div className='img-payment-good'></div>
-                            <div>
-                                <h4 className='title-good-payment'>Чипси</h4>
-                                <p>Снеки</p>
-                            </div>
-                        </div>
-
-                        <div className='good-payment-plus-right'>
-                            <div className='plus-minus-payment'>
-                              <p>
-                              +
-                              </p>
-                            </div>
-                            <div className='number-good-payment'>
-                              <input type='number' value="1">
-                              </input>
-                            </div>
-                            <div className='plus-minus-payment'>
-                            <p>
-                              -
-                              </p>
-                              </div>
-                              <div className='price-payment'>
-                            <p>€25.60</p>
-                          </div>
-                          <div className='dump-payment'>
-                          <img src={Basket}></img>
-                          </div>
-                         
-                        </div>
-                    </div>
-
-                    <div className='good-payment'>
-                        <div className='good-payment-plus-left'>
-                            <div className='img-payment-good'></div>
-                            <div>
-                                <h4 className='title-good-payment'>Чипси</h4>
-                                <p>Снеки</p>
-                            </div>
-                        </div>
-
-                        <div className='good-payment-plus-right'>
-                            <div className='plus-minus-payment'>
-                              <p>
-                              +
-                              </p>
-                            </div>
-                            <div className='number-good-payment'>
-                              <input type='number' value="1">
-                              </input>
-                            </div>
-                            <div className='plus-minus-payment'>
-                            <p>
-                              -
-                              </p>
-                              </div>
-                              <div className='price-payment'>
-                            <p>€25.60</p>
-                          </div>
-                          <div className='dump-payment'>
-                          <img src={Basket}></img>
-                          </div>
-                        </div>
-                    </div>
-                  </div>
+                  <Cart/>
+                  
                 </div>
 
                 <div className='right-payment-page'>
