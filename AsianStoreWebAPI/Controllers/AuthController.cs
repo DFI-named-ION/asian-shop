@@ -121,7 +121,7 @@ namespace AsianStoreWebAPI.Controllers
                 Response.Cookies.Append("sessionId", session.Id, new CookieOptions()
                 {
                     Path = "/",
-                    // Domain = "localhost", // comment when ready to publish
+                    Domain = "localhost", // comment when ready to publish
                     Secure = true,
                     HttpOnly = true,
                     SameSite = SameSiteMode.None,
@@ -145,7 +145,7 @@ namespace AsianStoreWebAPI.Controllers
                 Response.Cookies.Append("sessionId", session.Id, new CookieOptions()
                 {
                     Path = "/",
-                    // Domain = "localhost", // comment when ready to publish
+                    Domain = "localhost", // comment when ready to publish
                     Secure = true,
                     HttpOnly = true,
                     SameSite = SameSiteMode.None,
@@ -170,7 +170,7 @@ namespace AsianStoreWebAPI.Controllers
                 Response.Cookies.Append("sessionId", session.Id, new CookieOptions()
                 {
                     Path = "/",
-                    // Domain = "localhost", // comment when ready to publish
+                    Domain = "localhost", // comment when ready to publish
                     Secure = true,
                     HttpOnly = true,
                     SameSite = SameSiteMode.None,
