@@ -173,7 +173,7 @@ export default function ShopRegistration() {
                                 <></>
                             )}
                         </p>
-                        <div className="Captcha-div-shop">
+                        <div className="Captcha-div">
                                 <ReCaptcha className="Captcha"
                                     sitekey="6Le0QA8qAAAAAHq5xgAIIBAuZfy7oNG1bDazdwQF"
                                     onChange={handleTokenChange}/>
