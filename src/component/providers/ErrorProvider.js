@@ -365,6 +365,12 @@ export const ErrorProvider = ({ children }) => {
                 isForUser = true;
                 tags.push("overlay");
                 break;
+            case "company-format-error":
+                short = "Invalid company name";
+                long = "The lenght of the company name cannot be less then 5 symbols";
+                isForUser = true;
+                tags.push("company-field");
+                break;
             default:
                 short = "Unexpected error";
                 long = "You encountered unexpected error.";
