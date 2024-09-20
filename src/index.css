@@ -26,7 +26,7 @@ body{
     box-sizing: border-box;
     width: 100%;
     height: 100%;
-    background-image: url(./images/img/background.png);
+    background-image: linear-gradient(0deg, #002C46 0%, rgba(0, 44, 70, 0) 48.5%), url(./images/img/background.png);
     background-size: cover;
     padding-top: 163px;
     background-repeat: no-repeat;
@@ -1147,8 +1147,7 @@ h1, h2, h3, h4, p{
 }
 
 .right-auth{
-    /* background: radial-gradient(circle, rgba(186,33,33,0.1) 0%, rgba(255,250,120,0.1) 100%); */
-    background: linear-gradient(0deg, #002C46 0%, rgba(0, 44, 70, 0) 48.5%);
+    background: radial-gradient(circle, rgba(186,33,33,0.1) 0%, rgba(255,250,120,0.1) 100%);
     backdrop-filter: blur(10px); 
     border-radius: 40px;
     width: 664px;
@@ -1163,8 +1162,7 @@ h1, h2, h3, h4, p{
 }
 
 .right-auth-reg{
-    /* background: radial-gradient(circle, rgba(186,33,33,0.1) 0%, rgba(255,250,120,0.1) 100%); */
-    background: linear-gradient(0deg, #002C46 0%, rgba(0, 44, 70, 0) 48.5%);
+    background: radial-gradient(circle, rgba(186,33,33,0.1) 0%, rgba(255,250,120,0.1) 100%);
     backdrop-filter: blur(10px); 
     border-radius: 40px;
     width: 664px;
@@ -3551,6 +3549,10 @@ input{
   .Captcha-div-shop{
     text-align: center;
     margin-top: 4%;
+  }
+
+  .Captcha-div-shop-reg{
+    margin-right: 250px;
   }
   .Captcha{
     display: inline-block;
