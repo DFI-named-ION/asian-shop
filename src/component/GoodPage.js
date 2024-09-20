@@ -46,6 +46,7 @@ function App() {
          const [modalIsOpen_3, setModalIsOpen_3] = useState(false);
       const openModal_3 = () => {
           setModalIsOpen_3(true);
+          addToCart({ name: product.title, class: product.class, price: product.price, img: product.photourls[0]})
         };
 
       const closeModal_1 = () => {
